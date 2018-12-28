@@ -176,7 +176,7 @@ $(document).keydown(function(event) {
         $.each($(".car"),function(i){
 
             id = $(this).attr("id");
-            car.push({"plateNo":$("#plateNo_"+id).val(),"brand":$("#brand_"+id).val(),"system":$("#system_"+id).val(),"buytime":$("#buytime_"+id).val(),"hasCheck":$("#hasCheck_"+id).val(),"notCheck":$("#notCheck_"+id).val()});
+            car.push({"plateNo":$("#plateNo_"+id).val(),"brand":$("#brand_"+id).val(),"system":$("#system_"+id).val(),"buytime":$("#buytime_"+id).val(),"annual":$("#annual_"+id).val(),"shape":$("#shape_"+id).val()});
 
         });
 
