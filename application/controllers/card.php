@@ -7,9 +7,17 @@ class Card extends CI_Controller {
     //储值卡列表
     public function index() {
         $user = $this->session->userdata('jxcsys');
-
+        if ($user['orgLevel'] == 3){
+            $where = "orgid =".$user['orgId']." OR orgid =".$user['midId'];
+        }else if($user['orgLevel'] == 2){
+            $where = "midId =".$user['midId'];
+        }else if($user['orgLevel'] == 1){
+            $where = "topId =".$user['topId'];
+        }else if($user['orgLevel'] == 0){
+            $where = "";
+        }
         $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
-        $data = $this->db->get('ci_storedcard')->result();
+        $data = $this->db->where($where)->get('ci_storedcard')->result();
 
         $this->load->view('/settings/stored_value_card',['org'=>$org,'orgid'=>$user['midId'],'data'=>$data]);
     }

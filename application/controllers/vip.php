@@ -23,11 +23,14 @@ class Vip extends CI_Controller {
 
         foreach ($data as $k=>$v){
 
+            $data[$k]->content = json_decode($v->content);
+
             if ($v->time != 0 && $v->time<time() && $v->status == 0){
                 $this->db->update('ci_vipcard',array('status'=>2),array('id'=>$v->id));
                 $data[$k]->status = 2 ;
             }
         }
+
         $this->load->view('/settings/vip_card',['data'=>$data]);
     }
 
@@ -66,16 +69,22 @@ class Vip extends CI_Controller {
         $user = $this->session->userdata('jxcsys');
         $total = [];
         $t = 0 ;
+
         foreach ($data['data'] as $k=>$v){
            $meal = $this->db->where('id',$v['id'])->get('ci_meal')->row();
-            $total[$t] = $meal->content;
+            $total[$t]['id'] = $meal->id;
+            $total[$t]['name'] = $meal->name;
+            $total[$t]['price'] = $meal->price;
+            $total[$t]['content'] = $meal->content;
             $t++;
         }
+
         if($data['time'] == 0){
             $time = 0;
         }else{
             $time = strtotime("+".$data['time']." months",time());
         }
+
         $add =array(
             'name'=>$data['name'],
             'price'=>$data['price'],
@@ -99,6 +108,63 @@ class Vip extends CI_Controller {
         }else{
             $res['code'] = 1;
             $res['text'] = "添加失败";
+            die(json_encode($res));
+        }
+
+    }
+
+    //VIP卡修改页面
+    public function edit(){
+        $id = str_enhtml($this->input->get('id',TRUE));
+        $data = $this->db->where(['id'=>$id])->get('ci_vipcard')->row();
+
+        $user = $this->session->userdata('jxcsys');
+
+        $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
+
+        if ($user['orgLevel'] == 3) {
+            $array = array('lowId' => $user['orgId']);
+        } elseif ($user['orgLevel'] == 2) {
+            $array = array('midId' => $user['orgId']);
+        } elseif ($user['orgLevel'] == 1) {
+            $array = array('topId' => $user['orgId']);
+        }
+        $meal = $this->db->where($array)->get('ci_meal')->result();
+        $arr = '';
+
+        foreach ($meal as $k=>$v){
+
+            foreach (json_decode($v->content) as $key=>$value){
+                $arr .= $value->name.':'.$value->number.'次'.';    ';
+            }
+            $meal[$k]->content = $arr;
+            $arr = '';
+        }
+        $this->load->view('/settings/vip_card_add',['meal'=>$meal,'data'=>$data,'org'=>$org,'orgid'=>$user['midId']]);
+    }
+
+
+    //执行修改操作
+    public function doedit(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+        $total = [];
+        $t = 0 ;
+        foreach ($data['data'] as $k=>$v){
+            $meal = $this->db->where('id',$v['id'])->get('ci_meal')->row();
+            $total[$t]['id'] = $meal->id;
+            $total[$t]['name'] = $meal->name;
+            $total[$t]['price'] = $meal->price;
+            $total[$t]['content'] = $meal->content;
+            $t++;
+        }
+        $edit = $this->db->update('ci_vipcard',array('status'=>$data['status'],'username'=>$data['username'],'phone'=>$data['phone'], 'content'=>json_encode($total),),array('id'=>$data['id']));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "修改成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
             die(json_encode($res));
         }
 
