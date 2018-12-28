@@ -217,71 +217,6 @@
         padding: 0;
         height: 90%;
     }
-    #page{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: #f1f1f1;
-        line-height: 30px;
-    }
-    #page>div{
-        float: left;
-        width: 33.333%;
-        text-align: center;
-    }
-    #page>div:first-child{
-        width: 25%;
-    }
-    #page>div:nth-child(2){
-        width: 40%;
-    }
-    #page>div:last-child{
-        text-align: right;
-    }
-    .page_center>div{
-        float: left;
-        margin-left: 10px;
-    }
-    .page_center>div:first-child{
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -48px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(2){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -16px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(3){
-        width: 42px;
-        height: 18px;
-    }
-    .page_center>div:nth-child(3)>input{
-        width: 100%;
-        height: 100%;
-    }
-    .page_center>div:nth-child(5){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: 0px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(6){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -32px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
     .item{
         width: 100%;
         margin-top: 2%;
@@ -462,15 +397,15 @@
         <ul class="mod-form-rows base-form clearfix customer_information" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="name">客户姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="phone">手机号:</label></div>
-                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number"></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="company">工作单位:</label></div>
@@ -1109,8 +1044,8 @@
     </div>
 
 <!--弹框-->
-<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
-<div id="add" style="display: none;">
+<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;"></div>
+<div id="add" style="">
     <div id="add_header" class="clearfix">
         <div id="add_title">编辑客户</div>
         <div id="add_close" class="close_add">&times;</div>
@@ -1119,36 +1054,13 @@
         <div class="mod-search cf">
             <div class="fl">
                 <ul class="ul-inline">
-                    <li>
-                        <span id="catorage"></span>
-                    </li>
-                    <li>
-                        <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
-                    </li>
-                    <li><a class="ui-btn mrb" id="search">查询</a></li>
                 </ul>
             </div>
         </div>
         <div class="grid-wrap tankuang">
             <div class="table">
                 <table>
-                    <thead>
-                    <tr>
-                        <th>手机号</th>
-                        <th>客户姓名</th>
-                        <th>车牌号</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="phone"></span></td>
-                            <td><span class="name"></span></td>
-                            <td><span class="number"></span></td>
-                        </tr>
-<!--                        <tr>-->
-<!--                            <td colspan="3">暂无记录</td>-->
-<!--                        </tr>-->
-                    </tbody>
+
                 </table>
             </div>
         </div>
@@ -1162,22 +1074,6 @@
         </td>
     </div>
 </div>
-
-    <li class="item_item upload_image">
-        <input type="file" name="li_img" id="li_img" accept="image/*" hidden="">
-        <span class="upload_image_click">
-                    <span>+</span>
-                    <span>上传照片</span>
-                </span>
-        <span class="show_image_span">
-            <img src="blob:http://www.erpii.com/583a1b17-7eb5-41dd-9f6a-3ef1d60bc6b5" class="show_image">
-            <a href="javascript:void(0);" class="del_img" onclick="delImage('blob:http://www.erpii.com/583a1b17-7eb5-41dd-9f6a-3ef1d60bc6b5')"></a>
-        </span>
-        <span class="show_image_span">
-            <img src="blob:http://www.erpii.com/809b03d5-352f-4177-96b1-137e06863325" class="show_image">
-            <a href="javascript:void(0);" class="del_img" onclick="delImage('blob:http://www.erpii.com/809b03d5-352f-4177-96b1-137e06863325')"></a>
-        </span>
-    </li>
 
 
 <script>
