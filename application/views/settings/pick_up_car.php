@@ -371,6 +371,7 @@
     .item .upload_img span img{
         position: relative;
         width: 100%;
+        height: 100%;
     }
     .item .upload_img span .del_img{
         position: absolute;
@@ -391,6 +392,7 @@
     }
     .upload_image_click{
         display: inline-block;
+        float: left;
         width: 120px;
         height: 120px;
         margin: 10px;
@@ -425,6 +427,7 @@
     .upload_image .show_image_span .show_image{
         position: relative;
         width: 100%;
+        height: 100%;
     }
     .upload_image .show_image_span .del_img{
         position: absolute;
@@ -700,13 +703,13 @@
         </ul>
 
         <ul class="main_title car_photo" style="display: none">实录照片</ul>
-        <ul class="mod-form-rows base-form clearfix car_photo" style="" id="base-form">
-            <li class="item_item upload_image">
+        <ul class="mod-form-rows base-form clearfix car_photo" style="display: none;" id="base-form">
+            <li class="item_item upload_image clearfix">
+                <input type="file" name="li_img" id="li_img" accept="image/*" hidden>
                 <span class="upload_image_click">
                     <span>+</span>
                     <span>上传照片</span>
                 </span>
-                <input type="file" name="li_img" id="li_img" accept="image/*" hidden>
             </li>
         </ul>
 
@@ -1160,6 +1163,22 @@
     </div>
 </div>
 
+    <li class="item_item upload_image">
+        <input type="file" name="li_img" id="li_img" accept="image/*" hidden="">
+        <span class="upload_image_click">
+                    <span>+</span>
+                    <span>上传照片</span>
+                </span>
+        <span class="show_image_span">
+            <img src="blob:http://www.erpii.com/583a1b17-7eb5-41dd-9f6a-3ef1d60bc6b5" class="show_image">
+            <a href="javascript:void(0);" class="del_img" onclick="delImage('blob:http://www.erpii.com/583a1b17-7eb5-41dd-9f6a-3ef1d60bc6b5')"></a>
+        </span>
+        <span class="show_image_span">
+            <img src="blob:http://www.erpii.com/809b03d5-352f-4177-96b1-137e06863325" class="show_image">
+            <a href="javascript:void(0);" class="del_img" onclick="delImage('blob:http://www.erpii.com/809b03d5-352f-4177-96b1-137e06863325')"></a>
+        </span>
+    </li>
+
 
 <script>
     $(function () {
@@ -1288,9 +1307,22 @@
 
     // 车检报告删除照片
     function delImg(upload_file_name,url) {
-        url_arr[upload_file_name].splice($.inArray('b',url),1);
+        url_arr[upload_file_name].splice($.inArray(url,url_arr[upload_file_name]),1);
         var items = $('#'+upload_file_name).parent().find('span');
-        $.each(items,function (key,val) {
+        $.each(items,function () {
+            if ($(this).find('img').attr('src') == url){
+                $(this).remove();
+                return false;
+            }
+
+        })
+    }
+
+    // 删除实录照片
+    function delImage(url) {
+        url_arr['li_img'].splice($.inArray(url,url_arr['li_img']),1);
+        var items = $('.show_image_span');
+        $.each(items,function () {
             if ($(this).find('img').attr('src') == url){
                 $(this).remove();
                 return false;
