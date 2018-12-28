@@ -217,71 +217,6 @@
         padding: 0;
         height: 90%;
     }
-    #page{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: #f1f1f1;
-        line-height: 30px;
-    }
-    #page>div{
-        float: left;
-        width: 33.333%;
-        text-align: center;
-    }
-    #page>div:first-child{
-        width: 25%;
-    }
-    #page>div:nth-child(2){
-        width: 40%;
-    }
-    #page>div:last-child{
-        text-align: right;
-    }
-    .page_center>div{
-        float: left;
-        margin-left: 10px;
-    }
-    .page_center>div:first-child{
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -48px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(2){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -16px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(3){
-        width: 42px;
-        height: 18px;
-    }
-    .page_center>div:nth-child(3)>input{
-        width: 100%;
-        height: 100%;
-    }
-    .page_center>div:nth-child(5){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: 0px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(6){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -32px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
     .item{
         width: 100%;
         margin-top: 2%;
@@ -371,8 +306,65 @@
     .item .upload_img span img{
         position: relative;
         width: 100%;
+        height: 100%;
     }
     .item .upload_img span .del_img{
+        position: absolute;
+        display: block;
+        z-index: 555;
+        height: 29px;
+        width: 29px;
+        background: url(<?php echo base_url()?>statics/css/img/img_close.png) no-repeat;
+        text-decoration: none;
+        right: -13px;
+        top: -13px;
+    }
+    /*实录照片*/
+    .upload_image{
+        width: 100%;
+        height: 0%;
+        border: 1px solid #bdbdbd;
+    }
+    .upload_image_click{
+        display: inline-block;
+        float: left;
+        width: 120px;
+        height: 120px;
+        margin: 10px;
+        border: 1px solid #bdbdbd;
+        text-align: center;
+        background-color: #ecf0f3;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+    .upload_image_click>span{
+        display: inline-block;
+        width: 100%;
+        height: 50%;
+        font-size: 20px;
+    }
+    .upload_image_click>span:first-child{
+        font-size: 80px;
+        line-height: 40px;
+        box-sizing: border-box;
+        padding-top: 20px;
+    }
+    .upload_image .show_image_span{
+        position: relative;
+        display: inline-block;
+        height: 120px;
+        width: 120px;
+        box-sizing: border-box;
+        padding: 5px;
+        margin: 10px;
+        border: 1px solid #bdbdbd;
+    }
+    .upload_image .show_image_span .show_image{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .upload_image .show_image_span .del_img{
         position: absolute;
         display: block;
         z-index: 555;
@@ -405,15 +397,15 @@
         <ul class="mod-form-rows base-form clearfix customer_information" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="name">客户姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="phone">手机号:</label></div>
-                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number"></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="company">工作单位:</label></div>
@@ -474,151 +466,190 @@
         </ul>
 
         <ul class="main_title car_information" style="display: none">车辆信息</ul>
-        <ul class="mod-form-rows base-form clearfix car_information" style="display: none" id="base-form">
+        <ul class="mod-form-rows base-form clearfix car_information" style="display: none;" id="base-form">
             <li class="row-item">
-                <div class="label-wrap"><label for="name">客户姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
+                <div class="label-wrap"><label for="brand">品牌:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="brand" id="brand"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="phone">手机号:</label></div>
-                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="label-wrap"><label for="vin">VIN码:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="vin" id="vin"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="number">车牌号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="company">工作单位:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="reception">接待人员:</label></div>
+                <div class="label-wrap"><label for="insureCompany">投保公司:</label></div>
                 <div class="ctn-wrap">
-                    <select name="reception" id="reception" class="sel">
-                        <option value="1" selected>待确定</option>
-                        <option value="2">已确定</option>
-                        <option value="3">已取消</option>
+                    <select name="insureCompany" id="insureCompany" class="sel">
+                        <option value="1" selected>太平洋车险</option>
+                        <option value="2">平安车险</option>
+                        <option value="3">人保车险</option>
+                        <option value="4">中国人寿财险</option>
+                        <option value="5">中华联合车险</option>
+                        <option value="6">大地车险</option>
+                        <option value="7">阳光车险</option>
+                        <option value="8">太平车险</option>
+                        <option value="9">华安车险</option>
+                        <option value="10">天安车险</option>
+                        <option value="11">英大泰和车险</option>
+                        <option value="12">安盛天平车险</option>
+                        <option value="13">安心车险</option>
+                        <option value="14">紫金车险</option>
+                        <option value="15">合众车险</option>
+                        <option value="16">利宝车险</option>
+                        <option value="17">其他</option>
                     </select>
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="service">服务性质:</label></div>
+                <div class="label-wrap"><label for="system">车系:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="system" id="system"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="notice">公告号	:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="notice" id="notice"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="insuranceEndTime">保险到期	:</label></div>
+                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="insuranceEndTime" id="insuranceEndTime"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="shape">车型年款:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="shape" id="shape"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="lastMileage">上次里程:</label></div>
+                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="lastMileage" id="lastMileage"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="annualEndTime">年审到期:</label></div>
+                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="annualEndTime" id="annualEndTime"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="carShape">车型:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carShape" id="carShape"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="useMileage">行驶里程:</label></div>
+                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="useMileage" id="useMileage"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="suggestedMaintenanceTime">	建议保养时间:</label></div>
+                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="suggestedMaintenanceTime" id="suggestedMaintenanceTime"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="carName">车主姓名:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carName" id="carName"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="engineNumber">发动机号:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="engineNumber" id="engineNumber"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="suggestedMaintenance">建议保养里程:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="suggestedMaintenance" id="suggestedMaintenance"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="idNumber">身份证号:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="idNumber" id="idNumber"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="carColor">车辆颜色:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carColor" id="carColor"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="carPrice">车辆价格:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carPrice" id="carPrice"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="carAddress">车主地址 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carAddress" id="carAddress"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="registedTime">注册时间 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="registedTime" id="registedTime"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="natureUsage">使用性质:</label></div>
                 <div class="ctn-wrap">
-                    <select name="service" id="service" class="sel">
-                        <option value="1" selected>正常服务</option>
-                        <option value="2">保险</option>
-                        <option value="3">返工</option>
-                        <option value="3">索赔</option>
-                        <option value="3">免单</option>
-                        <option value="3">公务车</option>
+                    <select name="natureUsage" id="natureUsage" class="sel">
+                        <option value="1" selected>营运</option>
+                        <option value="2">非营运</option>
                     </select>
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
+                <div class="label-wrap"><label for="frontWheelType">前轮型号 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="frontWheelType" id="frontWheelType"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="songCarRenPhone">送修人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
+                <div class="label-wrap"><label for="backWheelType">后轮型号 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="backWheelType" id="backWheelType"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="source">客户来源:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>
-            </li>
-            <li class="row-item" style="width: 100% ;">
-                <div class="label-wrap"><label for="address">顾客地址:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="startTime">开工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="startTime" id="startTime"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="estimateTime">预计完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="estimateTime" id="estimateTime"></div>
+                <div class="label-wrap"><label for="carType">车辆类型:</label></div>
+                <div class="ctn-wrap">
+                    <select name="carType" id="carType" class="sel">
+                        <option value="1" selected>小型轿车</option>
+                        <option value="2">大型汽车</option>
+                        <option value="2">专用汽车</option>
+                        <option value="2">特种车</option>
+                        <option value="2">三轮摩托车</option>
+                    </select>
+                </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="endTime">完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="endTime" id="endTime"></div>
+                <div class="label-wrap"><label for="transmission">变速箱型号 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="transmission" id="transmission"></div>
             </li>
-
+            <li class="row-item">
+                <div class="label-wrap"><label for="carRmarks">车辆备注 :</label></div>
+                <div class="ctn-wrap">
+                    <input type="text" value="" class="ui-input normal" name="carRmarks" id="carRmarks">
+<!--                    <textarea class="ui-input" name="carRmarks" id="carRmarks"></textarea>-->
+                </div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="displacement">排量 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="displacement" id="displacement"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="displacement">排量 :</label></div>
+                <div class="ctn-wrap clearfix">
+                    <input type="radio" value="1" class="ui-input normal" name="displacement" id="displacement" checked="checked" style="width: 25%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -10%">良好</span>
+                    <input type="radio" value="2" class="ui-input normal" name="displacement" id="displacement" style="width: 25%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -10%">不正常</span>
+                </div>
+            </li>
+            <li class="row-item" style="width: 50%;">
+                <div class="label-wrap"><label for="oilVolume">剩余油量 :</label></div>
+                <div class="ctn-wrap clearfix">
+                    <input type="radio" value="1" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -5%">0</span>
+                    <input type="radio" value="2" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -5%">1/4</span>
+                    <input type="radio" value="3" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -5%">1/2</span>
+                    <input type="radio" value="4" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -5%">3/4</span>
+                    <input type="radio" value="5" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                    <span style="float:left;margin-left: -5%">1</span>
+                </div>
+            </li>
         </ul>
 
         <ul class="main_title car_photo" style="display: none">实录照片</ul>
-        <ul class="mod-form-rows base-form clearfix car_photo" style="display: none" id="base-form">
-            <li class="row-item">
-                <div class="label-wrap"><label for="name">客户姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
+        <ul class="mod-form-rows base-form clearfix car_photo" style="display: none;" id="base-form">
+            <li class="item_item upload_image clearfix">
+                <input type="file" name="li_img" id="li_img" accept="image/*" hidden>
+                <span class="upload_image_click">
+                    <span>+</span>
+                    <span>上传照片</span>
+                </span>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="phone">手机号:</label></div>
-                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="number">车牌号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="company">工作单位:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="reception">接待人员:</label></div>
-                <div class="ctn-wrap">
-                    <select name="reception" id="reception" class="sel">
-                        <option value="1" selected>待确定</option>
-                        <option value="2">已确定</option>
-                        <option value="3">已取消</option>
-                    </select>
-                </div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="service">服务性质:</label></div>
-                <div class="ctn-wrap">
-                    <select name="service" id="service" class="sel">
-                        <option value="1" selected>正常服务</option>
-                        <option value="2">保险</option>
-                        <option value="3">返工</option>
-                        <option value="3">索赔</option>
-                        <option value="3">免单</option>
-                        <option value="3">公务车</option>
-                    </select>
-                </div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="songCarRenPhone">送修人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="source">客户来源:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>
-            </li>
-            <li class="row-item" style="width: 100% ;">
-                <div class="label-wrap"><label for="address">顾客地址:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="startTime">开工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="startTime" id="startTime"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="estimateTime">预计完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="estimateTime" id="estimateTime"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="endTime">完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="endTime" id="endTime"></div>
-            </li>
-
         </ul>
 
         <ul class="main_title car_report" style="display: none">车检报告</ul>
-        <ul class="mod-form-rows base-form clearfix car_report" style="" id="base-form">
+        <ul class="mod-form-rows base-form clearfix car_report" style="display: none;" id="base-form">
             <li class="row-item" style="width: 100% ;">
                 <div class="label-wrap"><label for="examination_advice">体检建议:</label></div>
                 <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="examination_advice" id="examination_advice" style="width: 83.1%;height: 100%;"></textarea></div>
@@ -691,7 +722,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li1_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li1_img" id="li1_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -751,7 +782,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li2_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li2_img" id="li2_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -805,7 +836,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li3_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li3_img" id="li3_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -841,7 +872,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li4_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li4_img" id="li4_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -883,7 +914,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li5_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li5_img" id="li5_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -913,7 +944,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li6_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li6_img" id="li6_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -937,7 +968,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li8_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li7_img" id="li7_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -979,7 +1010,7 @@
                         <input type="hidden" name="" value="0">
                     </li>
                     <li class="item_item upload_img">
-                        <input type="file" name="li9_img" class="file" accept="image/*" hidden>
+                        <input type="file" name="li8_img" id="li8_img" class="file" accept="image/*" hidden>
                     </li>
                 </ul>
             </li>
@@ -1012,9 +1043,9 @@
         </ul>
     </div>
 
-
-<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
-<div id="add" style="display: none;">
+<!--弹框-->
+<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;"></div>
+<div id="add" style="">
     <div id="add_header" class="clearfix">
         <div id="add_title">编辑客户</div>
         <div id="add_close" class="close_add">&times;</div>
@@ -1023,36 +1054,13 @@
         <div class="mod-search cf">
             <div class="fl">
                 <ul class="ul-inline">
-                    <li>
-                        <span id="catorage"></span>
-                    </li>
-                    <li>
-                        <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
-                    </li>
-                    <li><a class="ui-btn mrb" id="search">查询</a></li>
                 </ul>
             </div>
         </div>
         <div class="grid-wrap tankuang">
             <div class="table">
                 <table>
-                    <thead>
-                    <tr>
-                        <th>手机号</th>
-                        <th>客户姓名</th>
-                        <th>车牌号</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="phone"></span></td>
-                            <td><span class="name"></span></td>
-                            <td><span class="number"></span></td>
-                        </tr>
-<!--                        <tr>-->
-<!--                            <td colspan="3">暂无记录</td>-->
-<!--                        </tr>-->
-                    </tbody>
+
                 </table>
             </div>
         </div>
@@ -1133,8 +1141,8 @@
             }
         });
 
-        // 上传照片
-        var url_arr = new Array();
+        // 车检报告上传照片
+        window.url_arr = new Array();
         url_arr['li1_img'] = new Array();
         url_arr['li2_img'] = new Array();
         url_arr['li3_img'] = new Array();
@@ -1143,7 +1151,7 @@
         url_arr['li6_img'] = new Array();
         url_arr['li7_img'] = new Array();
         url_arr['li8_img'] = new Array();
-        url_arr['li9_img'] = new Array();
+        url_arr['li_img'] = new Array();//实录照片
         $('.item_title_photo').on('click',function () {
             var img1 = '<span><img src="';
             var img2 = '" class="show_img"><a href="javascript:void(0);" class="del_img" onclick="delImg(\'';
@@ -1156,10 +1164,27 @@
                 if (this.files[0]){
                     var url = getObjectURL(this.files[0]);
                     url_arr[upload_file_name].push(url);
-                    var img = img1 + url + img2 + url + img3;
+                    var img = img1 + url + img2 + upload_file_name + "','" + url + img3;
                     upload_img.append(img);
                 }
                 upload_file.val('');
+            })
+        });
+
+        // 实录照片上传照片
+        $('.upload_image_click').on('click',function () {
+            var img1 = '<span class="show_image_span"><img src="';
+            var img2 = '" class="show_image"><a href="javascript:void(0);" class="del_img" onclick="delImage(\'';
+            var img3 = '\')"></span>';
+            $('#li_img').click();
+            $('#li_img').on('change',function () {
+                if (this.files[0]){
+                    var url = getObjectURL(this.files[0]);
+                    url_arr['li_img'].push(url);
+                    var img = img1 + url + img2 + url + img3;
+                    $('.upload_image').append(img);
+                }
+                $('#li_img').val('');
             })
         });
         // 获取图片路径
@@ -1176,9 +1201,30 @@
         }
     });
 
-    // 删除照片
-    function delImg(url) {
+    // 车检报告删除照片
+    function delImg(upload_file_name,url) {
+        url_arr[upload_file_name].splice($.inArray(url,url_arr[upload_file_name]),1);
+        var items = $('#'+upload_file_name).parent().find('span');
+        $.each(items,function () {
+            if ($(this).find('img').attr('src') == url){
+                $(this).remove();
+                return false;
+            }
 
+        })
+    }
+
+    // 删除实录照片
+    function delImage(url) {
+        url_arr['li_img'].splice($.inArray(url,url_arr['li_img']),1);
+        var items = $('.show_image_span');
+        $.each(items,function () {
+            if ($(this).find('img').attr('src') == url){
+                $(this).remove();
+                return false;
+            }
+
+        })
     }
 </script>
 <script>
