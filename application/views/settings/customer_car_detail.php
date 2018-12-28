@@ -98,115 +98,147 @@ $(document).keydown(function(event) {
             <div class="grid-wrap mb10" id="acGridWrap">
                 <form id="manage-form" action="">
                     <ul style="font-size: 20px;font-weight: bold">基本信息</ul>
+                    <input type="hidden" id="user_id" value="<?php echo $data->user_id ?>">
+                    <input type="hidden" id="id" value="<?php echo $id ?>">
                     <ul class="mod-form-rows base-form clearfix item" id="base-form">
                         <li class="row-item">
                             <div class="label-wrap"><label for="number">车牌号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="number" id="number"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->plateNo ?>" class="ui-input" name="plateNo" id="plateNo"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="vin">VIN码:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="vin" id="vin"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->vin ?>" class="ui-input" name="vin" id="vin"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="name">车主姓名:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->username ?>" class="ui-input" name="username" id="username"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="brand">品牌:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="brand" id="brand"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->brand ?>" class="ui-input" name="brand" id="brand"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="notice">公告号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="notice" id="notice"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->notice ?>" class="ui-input" name="notice" id="notice"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="tel">车主电话:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="tel" id="tel"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->tel ?>" class="ui-input" name="tel" id="tel"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="system">车系:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="system" id="system"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->system ?>" class="ui-input" name="system" id="system"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="engine">发动机号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="engine" id="engine"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->engine ?>" class="ui-input" name="engine" id="engine"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="id">身份证号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="id" id="id"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->people_id ?>" class="ui-input" name="people_id" id="people_id"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="annual">车型年款:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="annual" id="annual"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->annual ?>" class="ui-input" name="annual" id="annual"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="color">车辆颜色:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="color" id="color"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->color ?>" class="ui-input" name="color" id="color"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="address">车主地址:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="address" id="address"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->address ?>" class="ui-input" name="address" id="address"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="shape">车型:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="shape" id="shape"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->shape ?>" class="ui-input" name="shape" id="shape"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="price">车辆价格:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="price" id="price"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->price ?>" class="ui-input" name="price" id="price"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="type">车辆类型:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="type" class="selectItem" id="type">
-                                    <option value="1" selected>小型轿车</option>
-                                    <option value="2">大型汽车</option>
-                                    <option value="3">专用汽车</option>
-                                    <option value="4">特种车</option>
-                                    <option value="5">三轮摩托车</option>
+                                    <?php if($data->type == 1):?>
+                                        <option value="1" selected>小型轿车</option>
+                                    <?php else:?>
+                                        <option value="1">小型轿车</option>
+                                    <?php endif ;?>
+                                    <?php if($data->type == 2):?>
+                                        <option value="2" selected>大型汽车</option>
+                                    <?php else:?>
+                                        <option value="2">大型汽车</option>
+                                    <?php endif ;?>
+                                    <?php if($data->type == 3):?>
+                                        <option value="3" selected>专用汽车</option>
+                                    <?php else:?>
+                                        <option value="3">专用汽车</option>
+                                    <?php endif ;?>
+                                    <?php if($data->type == 4):?>
+                                        <option value="4" selected>特种车</option>
+                                    <?php else:?>
+                                        <option value="4">特种车</option>
+                                    <?php endif ;?>
+                                    <?php if($data->type == 5):?>
+                                        <option value="5" selected>三轮摩托车</option>
+                                    <?php else:?>
+                                        <option value="5">三轮摩托车</option>
+                                    <?php endif ;?>
+
                                 </select>
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="registration">注册时间:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="registration" id="registration"></div>
+                            <div class="ctn-wrap"><input type="date" value="<?php echo $data->registration ?>" class="ui-input" name="registration" id="registration"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="review">年审到期:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="review" id="review"></div>
+                            <div class="ctn-wrap"><input type="date" value="<?php echo $data->review ?>" class="ui-input" name="review" id="review"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="nature">使用性质:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="nature" class="selectItem" id="nature">
-                                    <option value="1" selected>营运</option>
-                                    <option value="2">非营运</option>
+                                    <?php if($data->nature == 1):?>
+                                        <option value="1" selected>营运</option>
+                                    <?php else:?>
+                                        <option value="1">营运</option>
+                                    <?php endif ;?>
+                                    <?php if($data->nature == 2):?>
+                                        <option value="2" selected>非营运</option>
+                                    <?php else:?>
+                                        <option value="2">非营运</option>
+                                    <?php endif ;?>
+
                                 </select>
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="administrator">车辆管理者:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="administrator" id="administrator"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->administrator ?>" class="ui-input" name="administrator" id="administrator"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="phone">管理者电话:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="phone" id="phone"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->phone ?>" class="ui-input" name="phone" id="phone"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="displacement">排量:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="displacement" id="displacement"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->displacement ?>" class="ui-input" name="displacement" id="displacement"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="front">前轮型号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="front" id="front"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->front ?>" class="ui-input" name="front" id="front"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="rear">后轮型号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="rear" id="rear"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->rear ?>" class="ui-input" name="rear" id="rear"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="transmission">变速箱型号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="transmission" id="transmission"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->transmission ?>" class="ui-input" name="transmission" id="transmission"></div>
                         </li>
                     </ul>
 
@@ -215,15 +247,15 @@ $(document).keydown(function(event) {
                     <ul class="mod-form-rows base-form clearfix item" id="base-form">
                         <li class="row-item">
                             <div class="label-wrap"><label for="currentMileage">当前里程(KM):</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="currentMileage" id="currentMileage"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->currentMileage ?>" class="ui-input" name="currentMileage" id="currentMileage"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="adviceMileage">建议保养里程(KM):</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="adviceMileage" id="adviceMileage"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->adviceMileage ?>" class="ui-input" name="adviceMileage" id="adviceMileage"></div>
                         </li>
                         <li class="row-item">
-                            <div class="label-wrap"><label for="adviceTime">建议保养时间(KM):</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="adviceTime" id="adviceTime"></div>
+                            <div class="label-wrap"><label for="adviceTime">建议保养时间:</label></div>
+                            <div class="ctn-wrap"><input type="date" value="<?php echo $data->adviceTime ?>" class="ui-input" name="adviceTime" id="adviceTime"></div>
                         </li>
                     </ul>
 
@@ -232,89 +264,234 @@ $(document).keydown(function(event) {
                     <ul class="mod-form-rows base-form clearfix item" id="base-form">
                         <li class="row-item">
                             <div class="label-wrap"><label for="compulsoryTime">交强险到期时间:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="compulsoryTime" id="compulsoryTime"></div>
+                            <div class="ctn-wrap"><input type="date" value="<?php echo $data->compulsoryTime ?>" class="ui-input" name="compulsoryTime" id="compulsoryTime"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="compulsoryNo">交强险保单号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="compulsoryNo" id="compulsoryNo"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->compulsoryNo ?>" class="ui-input" name="compulsoryNo" id="compulsoryNo"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="compulsoryCompany">交强险保险公司:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="compulsoryCompany" class="selectItem" id="compulsoryCompany">
-                                    <option value="0" selected>---请选择交强险公司---</option>
-                                    <option value="1">太平洋车险</option>
-                                    <option value="1">平安车险</option>
-                                    <option value="1">人保车险</option>
-                                    <option value="1">中国人寿财险</option>
-                                    <option value="1">中华联合车险</option>
-                                    <option value="1">大地车险</option>
-                                    <option value="1">阳光车险</option>
-                                    <option value="1">太平车险</option>
-                                    <option value="1">华安车险</option>
-                                    <option value="1">天安车险</option>
-                                    <option value="1">英大泰和车险</option>
-                                    <option value="1">安盛天平车险</option>
-                                    <option value="1">安心车险</option>
-                                    <option value="1">紫金车险</option>
-                                    <option value="1">合众车险</option>
-                                    <option value="1">利保车险</option>
-                                    <option value="1">其他</option>
+                                    <?php if($data->compulsoryCompany == 0):?>
+                                        <option value="0" selected>---请选择交强险公司---</option>
+                                    <?php else:?>
+                                        <option value="0">---请选择交强险公司---</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 1):?>
+                                        <option value="1" selected>太平洋车险</option>
+                                    <?php else:?>
+                                        <option value="1">太平洋车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 2):?>
+                                        <option value="2" selected>平安车险</option>
+                                    <?php else:?>
+                                        <option value="2">平安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 3):?>
+                                        <option value="3" selected>人保车险</option>
+                                    <?php else:?>
+                                        <option value="3">人保车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 4):?>
+                                        <option value="4" selected>中国人寿财险</option>
+                                    <?php else:?>
+                                        <option value="4">中国人寿财险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 5):?>
+                                        <option value="5" selected>中华联合车险</option>
+                                    <?php else:?>
+                                        <option value="5">中华联合车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 6):?>
+                                        <option value="6" selected>大地车险</option>
+                                    <?php else:?>
+                                        <option value="6">大地车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 7):?>
+                                        <option value="7" selected>阳光车险</option>
+                                    <?php else:?>
+                                        <option value="7">阳光车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 8):?>
+                                        <option value="8" selected>太平车险</option>
+                                    <?php else:?>
+                                        <option value="8">太平车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 9):?>
+                                        <option value="9" selected>华安车险</option>
+                                    <?php else:?>
+                                        <option value="9">华安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 10):?>
+                                        <option value="10" selected>天安车险</option>
+                                    <?php else:?>
+                                        <option value="10">天安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 11):?>
+                                        <option value="11" selected>英大泰和车险</option>
+                                    <?php else:?>
+                                        <option value="11">英大泰和车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 12):?>
+                                        <option value="12" selected>安盛天平车险</option>
+                                    <?php else:?>
+                                        <option value="12">安盛天平车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 13):?>
+                                        <option value="13" selected>安心车险</option>
+                                    <?php else:?>
+                                        <option value="13">安心车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 14):?>
+                                        <option value="14" selected>紫金车险</option>
+                                    <?php else:?>
+                                        <option value="14">紫金车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 15):?>
+                                        <option value="15" selected>合众车险</option>
+                                    <?php else:?>
+                                        <option value="15">合众车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 16):?>
+                                        <option value="16" selected>利保车险</option>
+                                    <?php else:?>
+                                        <option value="16">利保车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->compulsoryCompany == 17):?>
+                                        <option value="17" selected>其他</option>
+                                    <?php else:?>
+                                        <option value="17">其他</option>
+                                    <?php endif ;?>
+
                                 </select>
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="compulsorySale">交强险销售人员:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="compulsorySale" id="compulsorySale"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->compulsorySale ?>" class="ui-input" name="compulsorySale" id="compulsorySale"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="commercialTime">商业险到期时间:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="commercialTime" id="commercialTime"></div>
+                            <div class="ctn-wrap"><input type="date" value="<?php echo $data->commercialTime ?>" class="ui-input" name="commercialTime" id="commercialTime"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="commercialCompany">商业险保险公司:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="commercialCompany" class="selectItem" id="commercialCompany">
-                                    <option value="0" selected>---请选择商业险公司---</option>
-                                    <option value="1">太平洋车险</option>
-                                    <option value="1">平安车险</option>
-                                    <option value="1">人保车险</option>
-                                    <option value="1">中国人寿财险</option>
-                                    <option value="1">中华联合车险</option>
-                                    <option value="1">大地车险</option>
-                                    <option value="1">阳光车险</option>
-                                    <option value="1">太平车险</option>
-                                    <option value="1">华安车险</option>
-                                    <option value="1">天安车险</option>
-                                    <option value="1">英大泰和车险</option>
-                                    <option value="1">安盛天平车险</option>
-                                    <option value="1">安心车险</option>
-                                    <option value="1">紫金车险</option>
-                                    <option value="1">合众车险</option>
-                                    <option value="1">利保车险</option>
-                                    <option value="1">其他</option>
+                                    <?php if($data->commercialCompany == 0):?>
+                                        <option value="0" selected>---请选择交强险公司---</option>
+                                    <?php else:?>
+                                        <option value="0">---请选择交强险公司---</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 1):?>
+                                        <option value="1" selected>太平洋车险</option>
+                                    <?php else:?>
+                                        <option value="1">太平洋车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 2):?>
+                                        <option value="2" selected>平安车险</option>
+                                    <?php else:?>
+                                        <option value="2">平安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 3):?>
+                                        <option value="3" selected>人保车险</option>
+                                    <?php else:?>
+                                        <option value="3">人保车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 4):?>
+                                        <option value="4" selected>中国人寿财险</option>
+                                    <?php else:?>
+                                        <option value="4">中国人寿财险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 5):?>
+                                        <option value="5" selected>中华联合车险</option>
+                                    <?php else:?>
+                                        <option value="5">中华联合车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 6):?>
+                                        <option value="6" selected>大地车险</option>
+                                    <?php else:?>
+                                        <option value="6">大地车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 7):?>
+                                        <option value="7" selected>阳光车险</option>
+                                    <?php else:?>
+                                        <option value="7">阳光车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 8):?>
+                                        <option value="8" selected>太平车险</option>
+                                    <?php else:?>
+                                        <option value="8">太平车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 9):?>
+                                        <option value="9" selected>华安车险</option>
+                                    <?php else:?>
+                                        <option value="9">华安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 10):?>
+                                        <option value="10" selected>天安车险</option>
+                                    <?php else:?>
+                                        <option value="10">天安车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 11):?>
+                                        <option value="11" selected>英大泰和车险</option>
+                                    <?php else:?>
+                                        <option value="11">英大泰和车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 12):?>
+                                        <option value="12" selected>安盛天平车险</option>
+                                    <?php else:?>
+                                        <option value="12">安盛天平车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 13):?>
+                                        <option value="13" selected>安心车险</option>
+                                    <?php else:?>
+                                        <option value="13">安心车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 14):?>
+                                        <option value="14" selected>紫金车险</option>
+                                    <?php else:?>
+                                        <option value="14">紫金车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 15):?>
+                                        <option value="15" selected>合众车险</option>
+                                    <?php else:?>
+                                        <option value="15">合众车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 16):?>
+                                        <option value="16" selected>利保车险</option>
+                                    <?php else:?>
+                                        <option value="16">利保车险</option>
+                                    <?php endif ;?>
+                                    <?php if($data->commercialCompany == 17):?>
+                                        <option value="17" selected>其他</option>
+                                    <?php else:?>
+                                        <option value="17">其他</option>
+                                    <?php endif ;?>
                                 </select>
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="commercialNo">商业险保单号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="commercialNo" id="commercialNo"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->commercialNo ?>" class="ui-input" name="commercialNo" id="commercialNo"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="commercialSale">商业险销售人员:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="commercialSale" id="commercialSale"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->commercialSale ?>" class="ui-input" name="commercialSale" id="commercialSale"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="policyHolder">投保人:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="policyHolder" id="policyHolder"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->policyHolder ?>" class="ui-input" name="policyHolder" id="policyHolder"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="insured">被保险人:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="insured" id="insured"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->insured ?>" class="ui-input" name="insured" id="insured"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="remarks">保险备注:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="remarks" id="remarks"></div>
+                            <div class="ctn-wrap"><input type="text" value="<?php echo $data->remarks ?>" class="ui-input" name="remarks" id="remarks"></div>
                         </li>
                     </ul>
                 </form>
@@ -329,53 +506,99 @@ $(document).keydown(function(event) {
 </body>
 <script>
     $("#submit").click(function () {
-        var name = $("#name").val();
-        var birthday = $("#birthday").val();
-        var gender = $("#gender").val();
+        var plateNo = $("#plateNo").val();
+        var brand = $("#brand").val();
+        var system = $("#system").val();
+        var annual = $("#annual").val();
+        var shape = $("#shape").val();
+        var vin = $("#vin").val();
+        var username = $("#username").val();
+        var notice = $("#notice").val();
         var tel = $("#tel").val();
-        var company = $("#company").val();
-        var source = $("#source").val();
-        var adviser = $("#adviser").val();
-        var record = $("#record").val();
+        var engine = $("#engine").val();
+        var people_id = $("#people_id").val();
+        var color = $("#color").val();
         var address = $("#address").val();
-
-        // if(!name){
-        //     alert("姓名不能为空");
-        // }
-
-        var car = new Array();
-
-        $.each($(".car"),function(i){
-
-            id = $(this).attr("id");
-            car.push({"plateNo":$("#plateNo_"+id).val(),"brand":$("#brand_"+id).val(),"system":$("#system_"+id).val(),"buytime":$("#buytime_"+id).val(),"hasCheck":$("#hasCheck_"+id).val(),"notCheck":$("#notCheck_"+id).val()});
-
-        });
-
-        var cars = JSON.stringify(car);//专业能力数组用JSON序列化
-console.log(cars);
+        var price = $("#price").val();
+        var type = $("#type").val();
+        var registration = $("#registration").val();
+        var review = $("#review").val();
+        var nature = $("#nature").val();
+        var administrator = $("#administrator").val();
+        var phone = $("#phone").val();
+        var displacement = $("#displacement").val();
+        var front = $("#front").val();
+        var rear = $("#rear").val();
+        var transmission = $("#transmission").val();
+        var currentMileage = $("#currentMileage").val();
+        var adviceMileage = $("#adviceMileage").val();
+        var adviceTime = $("#adviceTime").val();
+        var compulsoryTime = $("#compulsoryTime").val();
+        var compulsoryNo = $("#compulsoryNo").val();
+        var compulsorySale = $("#compulsorySale").val();
+        var compulsoryCompany = $("#compulsoryCompany").val();
+        var commercialTime = $("#commercialTime").val();
+        var commercialCompany = $("#commercialCompany").val();
+        var commercialNo = $("#commercialNo").val();
+        var commercialSale = $("#commercialSale").val();
+        var policyHolder = $("#policyHolder").val();
+        var insured = $("#insured").val();
+        var remarks = $("#remarks").val();
+        var user_id = $("#user_id").val();
+        var id = $("#id").val();
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('customer/add');?>",
-            traditional: true,
+            url: "<?php echo site_url('customer/caradd');?>",
+            traditional: false,
             data: {
-                name: name,
-                birthday: birthday,
-                gender:gender,
-                tel:tel,
-                company:company,
-                source:source,
-                adviser:adviser,
-                record:record,
-                address:address,
-                car:cars,
+                    plateNo : plateNo,
+                    brand : brand,
+                    system : system,
+                    annual : annual,
+                    shape : shape,
+                    vin : vin,
+                    username : username,
+                    notice : notice,
+                    tel : tel,
+                    engine : engine,
+                    people_id : people_id,
+                    color : color,
+                    address : address,
+                    price :price,
+                    type : type,
+                    registration : registration,
+                    review : review,
+                    nature : nature,
+                    administrator : administrator,
+                    phone : phone,
+                    displacement : displacement,
+                    front : front,
+                    rear : rear,
+                    transmission : transmission,
+                    currentMileage : currentMileage,
+                    adviceMileage : adviceMileage,
+                    adviceTime : adviceTime,
+                    compulsoryTime : compulsoryTime,
+                    compulsoryNo : compulsoryNo,
+                    compulsoryCompany : compulsoryCompany,
+                    commercialTime : commercialTime,
+                    commercialCompany : commercialCompany,
+                    commercialNo : commercialNo,
+                    commercialSale :commercialSale,
+                    policyHolder : policyHolder,
+                    insured : insured,
+                    remarks : remarks,
+                    compulsorySale:compulsorySale,
+                    id:id,
+                    user_id:user_id,
             },
             dataType: "json",
 
             success: function (data) {
+
                 if(data.code == 0){
                     alert(data.text);
-                    location.href = "<?php echo site_url('customer')?>";
+                    location.href = "<?php echo site_url('customer/car?id=')?>"+id;
                 }else if (data.code == 1){
                     alert(data.text);
                 } else{

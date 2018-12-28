@@ -315,6 +315,105 @@ $(document).keydown(function(event) {
             </ul>
 
 
+<!--        储值卡-->
+        <ul style="font-size: 20px;font-weight: bold">储值卡</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>卡号</th>
+                    <th>卡名称</th>
+                    <th>卡号</th>
+                    <th>绑定车辆</th>
+                    <th>余额</th>
+                    <th>现金账户</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>所属门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        VIP卡-->
+        <ul style="font-size: 20px;font-weight: bold">VIP卡</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>卡名称</th>
+                    <th>卡类型</th>
+                    <th>卡号</th>
+                    <th>绑定车辆</th>
+                    <th>售价</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>开卡门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        套餐-->
+        <ul style="font-size: 20px;font-weight: bold">套餐</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>套餐名称</th>
+                    <th>套餐价格</th>
+                    <th>套餐内容</th>
+                    <th>剩余</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>所属门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
 <!--        车辆信息-->
         <ul style="font-size: 20px;font-weight: bold">车辆信息</ul>
         <div class="table item">
@@ -324,27 +423,26 @@ $(document).keydown(function(event) {
                         <th>车牌号</th>
                         <th>车型</th>
                         <th>车主姓名</th>
-                        <th>车主电话</th>
-                        <th>交强险到期时间</th>
+                        <th>保险到期时间</th>
                         <th>下次保养时间</th>
                         <th>当前里程</th>
+                        <th>VIN码</th>
+                        <th>车辆价格</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($cars as $k=>$v):?>
                     <tr>
-                        <td><span><?php echo $v->plateNo ?></span></td>
-                        <td><span><?php echo $v->shape ?> </span></td>
-                        <td><span><?php echo $v->username ?></span></td>
-                        <td><span><?php echo $v->tel ?></span></td>
-                        <td><span><?php echo $v->compulsoryTime ?></span></td>
-                        <td><span><?php echo $v->adviceTime ?></span></td>
-                        <td><span><?php echo $v->currentMileage ?></span></td>
-                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/car?id='.$v->id)?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
                     </tr>
-                <?php endforeach;?>
-
                 </tbody>
             </table>
         </div>

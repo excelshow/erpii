@@ -21,11 +21,11 @@ $(function () {
             '                        </li>\n' +
             '                        <li class="row-item">\n' +
             '                            <div class="label-wrap"><label for="hasCheck">年款:</label></div>\n' +
-            '                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="hasCheck" id="hasCheck_ul_' + id + '"></div>\n' +
+            '                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="annual" id="annual_ul_' + id + '"></div>\n' +
             '                        </li>\n' +
             '                        <li class="row-item">\n' +
             '                            <div class="label-wrap"><label for="notCheck">车型:</label></div>\n' +
-            '                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="notCheck" id="notCheck_ul_' + id + '"></div>\n' +
+            '                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="shape" id="shape_ul_' + id + '"></div>\n' +
             '                        </li>\n' +
             '                        <button type="button" class="btn btn_cel" onclick="cel(&apos;' + id +'&apos;)" id="' + id + '">取消</button>\n' +
             '                    </ul>';

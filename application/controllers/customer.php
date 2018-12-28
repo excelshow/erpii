@@ -48,8 +48,8 @@ class Customer extends CI_Controller {
                     'plateNo'=>$v['plateNo'],
                     'brand'=>$v['brand'],
                     'system'=>$v['system'],
-                    'hasCheck'=>$v['hasCheck'],
-                    'notCheck'=>$v['notCheck'],
+                    'annual'=>$v['annual'],
+                    'shape'=>$v['shape'],
                     'buytime'=>$v['buytime'],
                 );
                 if(!$this->db->insert('ci_car',$singer)){
@@ -68,8 +68,8 @@ class Customer extends CI_Controller {
         $id = $this->input->get('id');
 
         $data = $this->db->where('id',$id)->get('ci_customer')->row();
-
-        $this->load->view('/settings/customer_detail',['data'=>$data,'id'=>$id]);
+        $cars = $this->db->where('user_id',$id)->get('ci_car')->result();
+        $this->load->view('/settings/customer_detail',['data'=>$data,'id'=>$id,'cars'=>$cars]);
 
     }
 
@@ -101,6 +101,69 @@ class Customer extends CI_Controller {
         }else{
             $res['code'] = 1;
             $res['text'] = "添加失败";
+            die(json_encode($res));
+        }
+    }
+
+    public function car(){
+        $id = $this->input->get('id');
+        $data = $this->db->where('id',$id)->get('ci_car')->row();
+        $this->load->view('/settings/customer_car_detail',['data'=>$data,'id'=>$id]);
+    }
+
+    public function caradd(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+
+        $add = array(
+            'plateNo'=>$data['plateNo'],
+            'brand'=>$data['brand'],
+            'system'=>$data['system'],
+            'annual'=>$data['annual'],
+            'shape'=>$data['shape'],
+            'vin'=>$data['vin'],
+            'username'=>$data['username'],
+            'notice'=>$data['notice'],
+            'tel'=>$data['tel'],
+            'engine'=>$data['engine'],
+            'people_id'=>$data['people_id'],
+            'color'=>$data['color'],
+            'address'=>$data['address'],
+            'price'=>$data['price'],
+            'type'=>$data['type'],
+            'registration'=>$data['registration'],
+            'review'=>$data['review'],
+            'nature'=>$data['nature'],
+            'administrator'=>$data['administrator'],
+            'phone'=>$data['phone'],
+            'displacement'=>$data['displacement'],
+            'front'=>$data['front'],
+            'rear'=>$data['rear'],
+            'transmission'=>$data['transmission'],
+            'currentMileage'=>$data['currentMileage'],
+            'adviceMileage'=>$data['adviceMileage'],
+            'adviceTime'=>$data['adviceTime'],
+            'compulsoryTime'=>$data['compulsoryTime'],
+            'compulsoryNo'=>$data['compulsoryNo'],
+            'compulsorySale'=>$data['compulsorySale'],
+            'compulsoryCompany'=>$data['compulsoryCompany'],
+            'commercialTime'=>$data['commercialTime'],
+            'commercialCompany'=>$data['commercialCompany'],
+            'commercialNo'=>$data['commercialNo'],
+            'commercialSale'=>$data['commercialSale'],
+            'policyHolder'=>$data['policyHolder'],
+            'insured'=>$data['insured'],
+            'remarks'=>$data['remarks'],
+        );
+
+        $car_res = $this->db->update('ci_car',$add,array('id'=>$data['id']));
+
+        if($car_res){
+            $res['code'] = 0;
+            $res['text'] = "修改成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
             die(json_encode($res));
         }
     }
