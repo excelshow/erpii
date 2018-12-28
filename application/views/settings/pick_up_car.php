@@ -375,6 +375,42 @@
         right: -13px;
         top: -13px;
     }
+    .province{
+        width: 600px;
+        height: 150px;
+        border: 1px solid #ddd;
+        position: absolute;
+        top: 108px;
+        left: 70px;
+        /*display: none;*/
+    }
+    .province>.province_li{
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        float: left;
+        text-align: center;
+        box-sizing: border-box;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+    }
+    .province>.province_li:nth-child(12n){
+        border-right: none;
+    }
+    .province>.province_li:nth-child(25),
+    .province>.province_li:nth-child(26),
+    .province>.province_li:nth-child(27),
+    .province>.province_li:nth-child(28),
+    .province>.province_li:nth-child(29),
+    .province>.province_li:nth-child(30),
+    .province>.province_li:nth-child(31),
+    .province>.province_li:nth-child(32){
+        border-bottom: none;
+    }
+    .province>.province_li:hover{
+        background-color: #eee;
+    }
 </style>
 </head>
 <body>
@@ -1044,26 +1080,59 @@
     </div>
 
 <!--弹框-->
-<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;"></div>
-<div id="add" style="">
+<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
+<div id="add" style="display: none;">
     <div id="add_header" class="clearfix">
-        <div id="add_title">编辑客户</div>
+        <div id="add_title">添加客户/车辆</div>
         <div id="add_close" class="close_add">&times;</div>
     </div>
     <div id="add_content">
-        <div class="mod-search cf">
-            <div class="fl">
-                <ul class="ul-inline">
-                </ul>
-            </div>
-        </div>
-        <div class="grid-wrap tankuang">
-            <div class="table">
-                <table>
-
-                </table>
-            </div>
-        </div>
+        <ul class="content_main clearfix" style="position: relative;">
+            <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
+            <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
+            <li>
+                <span>车牌号:</span>
+                <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
+                    <span id="show_province" style="padding-left: 5px">粤</span>
+                    <i style="width: 20px;height: 20px;background: url(<?php echo base_url()?>statics/css/img/ssxljt.png) no-repeat;position: absolute;top: 5px;right: 2px;"></i>
+                </span>
+                <input type="text" name="carNumberLast" id="carNumberLast" style="width: 50%;height: 30px;margin-left: -5px">
+            </li>
+            <ul class="province clearfix" hidden>
+                <li class="province_li">粤</li>
+                <li class="province_li">浙</li>
+                <li class="province_li">京</li>
+                <li class="province_li">沪</li>
+                <li class="province_li">苏</li>
+                <li class="province_li">津</li>
+                <li class="province_li">渝</li>
+                <li class="province_li">冀</li>
+                <li class="province_li">豫</li>
+                <li class="province_li">云</li>
+                <li class="province_li">辽</li>
+                <li class="province_li">黑</li>
+                <li class="province_li">甘</li>
+                <li class="province_li">晋</li>
+                <li class="province_li">蒙</li>
+                <li class="province_li">陕</li>
+                <li class="province_li">吉</li>
+                <li class="province_li">皖</li>
+                <li class="province_li">鲁</li>
+                <li class="province_li">新</li>
+                <li class="province_li">赣</li>
+                <li class="province_li">川</li>
+                <li class="province_li">湘</li>
+                <li class="province_li">鄂</li>
+                <li class="province_li">桂</li>
+                <li class="province_li">闽</li>
+                <li class="province_li">贵</li>
+                <li class="province_li">青</li>
+                <li class="province_li">藏</li>
+                <li class="province_li">宁</li>
+                <li class="province_li">琼</li>
+                <li class="province_li">WJ</li>
+            </ul>
+        </ul>
     </div>
     <div id="add_footer">
         <td colspan="2">
@@ -1078,10 +1147,20 @@
 
 <script>
     $(function () {
+        // 弹框
         $('#save').on('click',function () {
+            $('#ldg_lockmask').css('display','none');
+            $('#add').css('display','none');
 
+            $('#phone').val($('#userPhone').val());
+            $('#name').val($('#userName').val());
+            $('#number').val($('#show_province').html()+$('#carNumberLast').val());
+
+            $('#userPhone').val('');
+            $('#userName').val('');
+            $('#carNumberLast').val('');
+            $('#show_province').html('粤');
         });
-
         $('#name,#phone,#number').on('focus',function () {
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
@@ -1199,6 +1278,15 @@
             }
             return url ;
         }
+
+
+        // 选择车牌号省份
+        $('.change').on('click',function () {
+            $('.province').toggle();
+        });
+        $('.province_li').on('click',function () {
+            $('#show_province').html($(this).html());
+        })
     });
 
     // 车检报告删除照片
