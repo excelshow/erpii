@@ -25,32 +25,41 @@ class Card extends CI_Controller {
     //添加储值卡
     public function add() {
         $data = str_enhtml($this->input->post(NULL,TRUE));
-
+        $user = $this->session->userdata('jxcsys');
         $res = [];
-
-        $card = array(
-            'car_num'=>$data['car_num'],
-            'car_name'=>$data['car_name'],
-            'sale'=>$data['sale'],
-            'validity'=>$data['validity'],
-            'present'=>$data['present'],
-            'status'=>$data['status'],
-            'hour_discount'=>$data['hour_discount'],
-            'parts_discount'=>$data['parts_discount'],
-            'addtime'=>time(),
-            'orgid'=> $data['orgid'],
-            'orgname'=>$data['orgname'],
-        );
-        $card_res = $this->db->insert('ci_storedcard',$card);
-        if($card_res){
-            $res['code'] = 0;
-            $res['text'] = "添加成功";
+        if ($user['orgWhere'] != 'lowId='.$user['lowId']){
+            $res['code'] = 1;
+            $res['text'] = "您尚未在组织中，添加失败！";
             die(json_encode($res));
         }else{
-            $res['code'] = 1;
-            $res['text'] = "添加失败";
-            die(json_encode($res));
+            $card = array(
+                'car_num'=>$data['car_num'],
+                'car_name'=>$data['car_name'],
+                'sale'=>$data['sale'],
+//            'validity'=>$data['validity'],
+                'present'=>$data['present'],
+                'status'=>$data['status'],
+                'hour_discount'=>$data['hour_discount'],
+                'parts_discount'=>$data['parts_discount'],
+                'addtime'=>time(),
+                'orgid'=> $data['orgid'],
+                'orgname'=>$data['orgname'],
+                'topId'=>$user['topId'],
+                'midId'=>$user['midId'],
+                'lowId'=>$user['lowId'],
+            );
+            $card_res = $this->db->insert('ci_storedcard',$card);
+            if($card_res){
+                $res['code'] = 0;
+                $res['text'] = "添加成功";
+                die(json_encode($res));
+            }else{
+                $res['code'] = 1;
+                $res['text'] = "添加失败";
+                die(json_encode($res));
+            }
         }
+
     }
 
     //修改储值卡

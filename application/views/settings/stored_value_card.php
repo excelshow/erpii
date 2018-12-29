@@ -277,7 +277,7 @@ $(document).keydown(function(event) {
                             <th>卡号</th>
                             <th>实际售价</th>
                             <th>赠送金额</th>
-                            <th>有效期</th>
+<!--                            <th>有效期</th>-->
                             <th>工时折扣</th>
                             <th>配件折扣</th>
                             <th>状态</th>
@@ -296,11 +296,11 @@ $(document).keydown(function(event) {
                             <td><span><?php echo $v->car_num ?></span></td>
                             <td><span><?php echo $v->sale ?>元</span></td>
                             <td><span><?php echo $v->present ?>元</span></td>
-                            <?php if($v->validity == 13):?>
-                                <td><span>永久</span></td>
-                            <?php else : ?>
-                                <td><span><?php echo $v->validity ?>个月</span></td>
-                            <?php endif; ?>
+<!--                            --><?php //if($v->validity == 13):?>
+<!--                                <td><span>永久</span></td>-->
+<!--                            --><?php //else : ?>
+<!--                                <td><span>--><?php //echo $v->validity ?><!--个月</span></td>-->
+<!--                            --><?php //endif; ?>
                             <td><span><?php echo $v->hour_discount ?>%</span></td>
                             <td><span><?php echo $v->parts_discount ?>%</span></td>
                             <?php if($v->status == 0):?>
@@ -355,7 +355,7 @@ $(document).keydown(function(event) {
             <li><span>储值卡名称:</span><input type="text" id="car_name"></li>
             <li><span>卡号:</span><input type="text" id="car_num"></li>
             <li><span>实际售价:</span><input type="text" id="sale"></li>
-            <li><span>有效期:</span><input type="number" min="0" step="1" id="validity"> 月 (0代表永久)</li>
+<!--            <li><span>有效期:</span><input type="number" min="0" step="1" id="validity"> 月 (0代表永久)</li>-->
 
             <li><span>赠送金额:</span><input type="text" id="present"></li>
             <li>
@@ -413,7 +413,7 @@ $("#save").click(function(){
     var car_name = $("#car_name").val();
     var car_num = $("#car_num").val();
     var sale = $("#sale").val();
-    var validity = $("#validity").val();
+    // var validity = $("#validity").val();
     var present = $("#present").val();
     var status = $("#status").val();
     var hour_discount = $("#hour_discount").val();
@@ -440,7 +440,7 @@ $("#save").click(function(){
                 car_name: car_name,
                 car_num: car_num,
                 sale:sale,
-                validity:validity,
+                // validity:validity,
                 present:present,
                 status:status,
                 hour_discount:hour_discount,
@@ -452,7 +452,7 @@ $("#save").click(function(){
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 if(data.code == 0){
                     alert(data.text);
                     location.href = "<?php echo site_url('card')?>";

@@ -5,7 +5,7 @@ class Customer extends CI_Controller {
 
 
     public function index() {
-
+        $user = $this->session->userdata('jxcsys');
         $data = $this->db->get('ci_customer')->result();
 
         $this->load->view('/settings/customer',['data'=>$data]);
@@ -30,6 +30,9 @@ class Customer extends CI_Controller {
             'service'=>$data['adviser'],
             'time'=>$data['record'],
             'org_name'=>$org[0]->name,
+            'topId'=>$user['topId'],
+            'midId'=>$user['midId'],
+            'lowId'=>$user['lowId'],
         );
 
         $customer_res = $this->db->insert('ci_customer',$customer);
@@ -168,3 +171,31 @@ class Customer extends CI_Controller {
         }
     }
 }
+//'topId' => int 1
+//  'midId' => int -1
+//  'lowId' => int -1
+//  'orgId' => int 1
+//  'orgLevel' => int 1
+//  'orgName' => string '中华区' (length=9)
+//  'orgWhere' => string 'topId=1' (length=7)
+//  'orgMidWhere' => string 'topId=1' (length=7)
+
+
+//'topId' => int 1
+//  'midId' => int 2
+//  'lowId' => int -1
+//  'orgId' => int 1
+//  'orgLevel' => int 1
+//  'orgName' => string '上海' (length=6)
+//  'orgWhere' => string 'midId=2' (length=7)
+//  'orgMidWhere' => string 'midId=2' (length=7)
+
+
+//'topId' => int 1
+//  'midId' => int 2
+//  'lowId' => int 3
+//  'orgId' => int 1
+//  'orgLevel' => int 1
+//  'orgName' => string '普陀' (length=6)
+//  'orgWhere' => string 'lowId=3' (length=7)
+//  'orgMidWhere' => string 'midId=2' (length=7)
