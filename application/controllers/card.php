@@ -95,5 +95,11 @@ class Card extends CI_Controller {
         die(json_encode($res));
     }
 
+    //购买储值卡
+
+    public function buycard(){
+        $phone = str_enhtml($this->input->post('phone',TRUE));
+        $this->load->view('/settings/buy_stored_value_card');
+    }
 
 }

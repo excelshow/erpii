@@ -196,7 +196,7 @@ var dataReflush, list = {
 	},
 	sales14: {
 		name: "购买储值卡",
-		href: "../settings/buy_stored_value_card",
+		href: "../card/buycard",
 		dataRight: "",
 		target: "sales1"
 	},

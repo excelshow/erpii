@@ -99,7 +99,7 @@ $(document).keydown(function(event) {
                     <ul style="font-size: 20px;font-weight: bold;">基本信息</ul>
                     <ul class="mod-form-rows base-form clearfix" id="base-form" style="border-bottom: 1px solid #ddd;margin-bottom: 10px;margin-top: 20px">
                         <li class="row-item" style="width: 100%;">
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name" placeholder="  手机号 / 用户名 / 车牌号" style="width: 250px;margin-bottom: 10px"></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name" placeholder="手机号" style="width: 250px;margin-bottom: 10px"></div>
                             <input type="hidden" name="userId" id="userId"><!--放id-->
                         </li>
                         <li class="row-item">
