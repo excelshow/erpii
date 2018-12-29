@@ -98,8 +98,23 @@ class Card extends CI_Controller {
     //购买储值卡
 
     public function buycard(){
-        $phone = str_enhtml($this->input->post('phone',TRUE));
-        $this->load->view('/settings/buy_stored_value_card');
+        $user = $this->session->userdata('jxcsys');
+        $mobile = str_enhtml($this->input->post('mobile',TRUE));
+        $cardNumber = str_enhtml($this->input->post('cardNumber',TRUE));
+        if($mobile){
+
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'mobile'=>$mobile);
+            $data =  $this->db->where($where)->get('ci_customer')->row();
+            die(json_encode($data));
+        }elseif ($cardNumber){
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'car_num'=>$cardNumber);
+            $data =  $this->db->where($where)->get('ci_storedcard')->row();
+            die(json_encode($data));
+        }else{
+            $this->load->view('/settings/buy_stored_value_card');
+        }
+
+
     }
 
 }
