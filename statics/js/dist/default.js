@@ -200,6 +200,12 @@ var dataReflush, list = {
 		dataRight: "",
 		target: "sales1"
 	},
+	sales16: {
+		name: "储值卡充值",
+		href: "../settings/recharge_stored_value_card",
+		dataRight: "",
+		target: "sales1"
+	},
 	sales15: {
 		name: "分销列表",
 		href: "../scm/invPu?action=initPur",

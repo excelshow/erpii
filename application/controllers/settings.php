@@ -140,6 +140,13 @@ class Settings extends CI_Controller {
         $this->load->view('settings/buy_stored_value_card');
     }
 
+    /**
+     * 充值储值卡
+     */
+    public function recharge_stored_value_card(){
+        $this->load->view('settings/recharge_stored_value_card');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}
