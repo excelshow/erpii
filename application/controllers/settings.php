@@ -133,6 +133,13 @@ class Settings extends CI_Controller {
         $this->load->view('settings/pick_up_car');
     }
 
+    /**
+     * 购买储值卡
+     */
+    public function buy_stored_value_card(){
+        $this->load->view('settings/buy_stored_value_card');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}

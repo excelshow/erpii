@@ -195,11 +195,10 @@ var dataReflush, list = {
 		list: "../scm/invPu?action=initPurList"
 	},
 	sales14: {
-		name: "储值卡",
-		href: "../scm/invPu?action=initPur",
+		name: "购买储值卡",
+		href: "../settings/buy_stored_value_card",
 		dataRight: "",
-		target: "sales1",
-		list: "../scm/invPu?action=initPurList"
+		target: "sales1"
 	},
 	sales15: {
 		name: "分销列表",
