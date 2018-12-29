@@ -423,7 +423,7 @@ $("#save").click(function(){
     var id = $("#id").val();
 
     // alert(orgname);
-    if(!car_name || !car_num || !sale || !validity || !present || !status || !hour_discount || !parts_discount || !orgid){
+    if(!car_name || !car_num || !sale || !present || !status || !hour_discount || !parts_discount || !orgid){
         alert("请填写全卡信息！")
     }else{
         if($("#add_title").text() == "修改储值卡"){
@@ -524,12 +524,12 @@ $("#save").click(function(){
             $("#car_name").val('');
             $("#car_num").val('');
             $("#sale").val('');
-            $("#validity").val('');
+            // $("#validity").val('');
             $("#present").val('');
-            $("#status").find("option[value = 0").attr("selected",true);
+            // $("#status").find("option[value = 0").attr("selected",true);
             $("#parts_discount").val('');
             $("#hour_discount").val('');
-            $("#orgid").find("option[value = 0]").attr("selected",true);
+            // $("#orgid").find("option[value = 0]").attr("selected",true);
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
