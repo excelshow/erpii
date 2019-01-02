@@ -163,7 +163,7 @@ var dataReflush, list = {
 	},
 	sales1: {
 		name: "接车开单",
-		href: "../settings/pick_up_car",
+		href: "../billing/index",
 		dataRight: "",
 		target: "sales",
         list: "../settings/pick_up_car_list"
