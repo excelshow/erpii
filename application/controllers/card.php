@@ -128,4 +128,17 @@ class Card extends CI_Controller {
             die(json_encode($res));
         }
     }
+
+
+    public function recharge(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+        if($data){
+            $edit_1 = $this->db->update('ci_storedcard',array('recharge_id'=>$data['userId'],'recharge_name'=>$data['username'],'recharge_time'=>time()),array('id'=>$data['cardId']));
+            $balance = $this->db->where('id',$data['userId'])->get('ci_customer')->row();
+            $edit_2 = $this->db->update('ci_customer',array('balance'=>$data['balance']+$balance->balance),array('id'=>$data['userId']));
+            die(json_encode($data));
+        }else{
+            $this->load->view('/settings/recharge_stored_value_card');
+        }
+    }
 }
