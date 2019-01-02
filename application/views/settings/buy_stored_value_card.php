@@ -103,11 +103,13 @@ $(document).keydown(function(event) {
                     <ul class="mod-form-rows base-form clearfix" id="base-form" style="border-bottom: 1px solid #ddd;margin-bottom: 10px;margin-top: 20px">
                         <li class="row-item" style="width: 100%;">
                             <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="mobile" id="mobile" placeholder="手机号" style="width: 250px;margin-bottom: 10px" onblur="phone()"><input style="border: none;color: red;" type="text" id="username" value="" readonly></div>
-                            <input type="hidden" name="userId" id="userId"><!--放id-->
+                            <input type="hidden" name="userId" id="userId" value=""><!--放用户id-->
+
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="cardNumber">卡号:</label></div>
                             <div class="ctn-wrap"><input type="text" value="" onblur="card()" class="input" name="cardNumber" id="cardNumber"><input style="border: none;color: red;" type="text" id="card" value="" readonly></div>
+                            <input type="hidden" name="cardId" id="cardId" value=""><!--放储值卡id-->
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="cardType">卡名称:</label></div>
@@ -142,18 +144,18 @@ $(document).keydown(function(event) {
                             <div class="label-wrap"><label for="receiptsMoney">实收金额:</label></div>
                             <div class="ctn-wrap"><input type="text" value="" class="input" name="receiptsMoney" id="receiptsMoney" readonly><span style="margin-left: 5px">元</span></div>
                         </li>
-                        <li class="row-item">
-                            <div class="label-wrap"><label for="salesman">销售人员:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="salesman" id="salesman"></div>
-                        </li>
+<!--                        <li class="row-item">-->
+<!--                            <div class="label-wrap"><label for="salesman">销售人员:</label></div>-->
+<!--                            <div class="ctn-wrap"><input type="text" value="" class="input" name="salesman" id="salesman"></div>-->
+<!--                        </li>-->
                         <li class="row-item">
                             <div class="label-wrap"><label for="payee">收款人:</label></div>
                             <div class="ctn-wrap"><input type="text" value="" class="input" name="payman" id="payman"></div>
                         </li>
-                        <li class="row-item">
-                            <div class="label-wrap"><label for="collectionTime">收款时间:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="input" name="collectionTime" id="collectionTime"></div>
-                        </li>
+<!--                        <li class="row-item">-->
+<!--                            <div class="label-wrap"><label for="collectionTime">收款时间:</label></div>-->
+<!--                            <div class="ctn-wrap"><input type="date" value="" class="input" name="collectionTime" id="collectionTime"></div>-->
+<!--                        </li>-->
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap"><label for="collectionRemarks">收款备注:</label></div>
                             <div class="ctn-wrap">
@@ -164,7 +166,11 @@ $(document).keydown(function(event) {
                             <div class="label-wrap"><label for="source">收款方式:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="source" id="source">
-                                    <option value="1"></option>
+                                    <option value="0">现金</option>
+                                    <option value="1">支付宝</option>
+                                    <option value="2">微信</option>
+                                    <option value="3">银行卡</option>
+                                    <option value="4">其他</option>
                                 </select>
                             </div>
                         </li>
@@ -191,9 +197,10 @@ $(document).keydown(function(event) {
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+
                 if(data.length != 0){
                     $("#username").val(data.name);
+                    $("#userId").val(data.id);
                 }else{
                     $("#username").val("无此账号");
                 }
@@ -213,13 +220,14 @@ $(document).keydown(function(event) {
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+
                 if(data.length != 0){
                     $("#cardName").val(data.car_name);
                     $("#addMoney").val(data.sale);
                     $("#giveMoney").val(data.present);
                     $("#total_num").val(parseFloat(data.sale)+parseFloat(data.present));
                     $("#amount").text(data.sale);
+                    $("#cardId").val(data.id);
                 }else{
                     $("#card").val("无此卡号");
                     $("#cardName").val('');
@@ -237,6 +245,41 @@ $(document).keydown(function(event) {
     }
     
     $("#submit").click(function () {
+        var receiptsMoney = $("#receiptsMoney").val();
+        var payman = $("#payman").val();
+        var collectionRemarks = $("#collectionRemarks").val();
+        var source = $("#source").val();
+        var userId = $("#userId").val();
+        var cardId = $("#cardId").val();
+        var username = $("#username").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/dobuycard');?>",
+            data: {
+                receiptsMoney: receiptsMoney,
+                payman:payman,
+                collectionRemarks:collectionRemarks,
+                source:source,
+                userId:userId,
+                cardId:cardId,
+                username:username,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                //if(data.code == 0){
+                //    alert(data.text);
+                //    location.href = "<?php //echo site_url('card')?>//";
+                //}else if (data.code == 1){
+                //    alert(data.text);
+                //} else{
+                //    alert("未知错误");
+                //}
+
+            },
+        });
 
     });
 </script>
