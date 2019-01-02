@@ -88,6 +88,9 @@ $(document).keydown(function(event) {
         width: 180px;
         border: 1px solid #ddd;
     }
+    .grid-wrap>ul>li>div>input{
+        text-align: center;
+    }
 </style>
 </head>
 <body>
@@ -95,23 +98,25 @@ $(document).keydown(function(event) {
         <span id="config" class="ui-icon ui-state-default ui-icon-config"></span>
         <div class="bills">
             <div class="grid-wrap mb10" id="acGridWrap">
-                <form id="manage-form" action="">
+
                     <ul style="font-size: 20px;font-weight: bold;">基本信息</ul>
                     <ul class="mod-form-rows base-form clearfix" id="base-form" style="border-bottom: 1px solid #ddd;margin-bottom: 10px;margin-top: 20px">
                         <li class="row-item" style="width: 100%;">
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name" placeholder="手机号" style="width: 250px;margin-bottom: 10px"></div>
-                            <input type="hidden" name="userId" id="userId"><!--放id-->
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="mobile" id="mobile" placeholder="手机号" style="width: 250px;margin-bottom: 10px" onblur="phone()"><input style="border: none;color: red;" type="text" id="username" value="" readonly></div>
+                            <input type="hidden" name="userId" id="userId" value=""><!--放用户id-->
+
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="cardNumber">卡号:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="cardNumber" id="cardNumber"></div>
+                            <div class="ctn-wrap"><input type="text" value="" onblur="card()" class="input" name="cardNumber" id="cardNumber"><input style="border: none;color: red;" type="text" id="card" value="" readonly></div>
+                            <input type="hidden" name="cardId" id="cardId" value=""><!--放储值卡id-->
                         </li>
                         <li class="row-item">
-                            <div class="label-wrap"><label for="cardType">卡类型:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="cardType" id="cardType" readonly></div>
+                            <div class="label-wrap"><label for="cardType">卡名称:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="input" name="cardName" id="cardName" readonly></div>
                         </li>
                         <li class="row-item">
-                            <div class="label-wrap"><label for="addMoney">充值金额:</label></div>
+                            <div class="label-wrap"><label for="addMoney">储值卡金额:</label></div>
                             <div class="ctn-wrap"><input type="text" value="" class="input" name="addMoney" id="addMoney" readonly><span style="margin-left: 5px">元</span></div>
                         </li>
                         <li class="row-item">
@@ -120,7 +125,7 @@ $(document).keydown(function(event) {
                         </li>
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap" style="width: 80px;"><label for="freeMoney">账面金额总计:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name" style="width: 180px;margin-bottom: 10px"><span style="margin-left: 5px">元</span></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="total_num" id="total_num" style="width: 180px;margin-bottom: 10px"><span style="margin-left: 5px">元</span></div>
                             <input type="hidden" name="userId" id="userId"><!--放id-->
                         </li>
                     </ul>
@@ -128,29 +133,29 @@ $(document).keydown(function(event) {
                     <ul class="mod-form-rows base-form clearfix" id="base-form">
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap" style="width: 80px;"><label for="freeMoney">待收金额:</label></div>
-                            <div class="ctn-wrap"><span style="color: red;font-size: 20px">0.00</span><span style="margin-left: 5px">元</span></div>
+                            <div class="ctn-wrap"><span style="color: red;font-size: 20px" id="amount">0.00</span><span style="margin-left: 5px">元</span></div>
                             <input type="hidden" name="userId" id="userId"><!--放id-->
                         </li>
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap"><label for="freeMoney">优惠金额:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="freeMoney" id="freeMoney"><span style="margin-left: 5px">元</span></div>
+                            <div class="ctn-wrap"><input type="text" value="0" onblur="actually()" class="input" name="freeMoney" id="freeMoney"><span style="margin-left: 5px">元</span></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="receiptsMoney">实收金额:</label></div>
                             <div class="ctn-wrap"><input type="text" value="" class="input" name="receiptsMoney" id="receiptsMoney" readonly><span style="margin-left: 5px">元</span></div>
                         </li>
-                        <li class="row-item">
-                            <div class="label-wrap"><label for="salesman">销售人员:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="salesman" id="salesman"></div>
-                        </li>
+<!--                        <li class="row-item">-->
+<!--                            <div class="label-wrap"><label for="salesman">销售人员:</label></div>-->
+<!--                            <div class="ctn-wrap"><input type="text" value="" class="input" name="salesman" id="salesman"></div>-->
+<!--                        </li>-->
                         <li class="row-item">
                             <div class="label-wrap"><label for="payee">收款人:</label></div>
-                            <div class="ctn-wrap"><input type="text" value="" class="input" name="payee" id="payee"></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="input" name="payman" id="payman"></div>
                         </li>
-                        <li class="row-item">
-                            <div class="label-wrap"><label for="collectionTime">收款时间:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="input" name="collectionTime" id="collectionTime"></div>
-                        </li>
+<!--                        <li class="row-item">-->
+<!--                            <div class="label-wrap"><label for="collectionTime">收款时间:</label></div>-->
+<!--                            <div class="ctn-wrap"><input type="date" value="" class="input" name="collectionTime" id="collectionTime"></div>-->
+<!--                        </li>-->
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap"><label for="collectionRemarks">收款备注:</label></div>
                             <div class="ctn-wrap">
@@ -161,12 +166,16 @@ $(document).keydown(function(event) {
                             <div class="label-wrap"><label for="source">收款方式:</label></div>
                             <div class="ctn-wrap sel">
                                 <select name="source" id="source">
-                                    <option value="1"></option>
+                                    <option value="0">现金</option>
+                                    <option value="1">支付宝</option>
+                                    <option value="2">微信</option>
+                                    <option value="3">银行卡</option>
+                                    <option value="4">其他</option>
                                 </select>
                             </div>
                         </li>
                     </ul>
-                </form>
+
                 <div style="height: 30px;text-align: center;">
                     <button type="button" class="btn" id="submit" style="border: 1px solid #3279a0;background: -webkit-gradient(linear,0 0,0 100%,from(#4994be),to(#337fa9));color: #fff;">确认购买</button>
                 </div>
@@ -176,7 +185,104 @@ $(document).keydown(function(event) {
 
 
 </body>
+<script>
+    function phone() {
+        var mobile =$("#mobile").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/buycard');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
 
+            success: function (data) {
+
+                if(data.length != 0){
+                    $("#username").val(data.name);
+                    $("#userId").val(data.id);
+                }else{
+                    $("#username").val("无此账号");
+                }
+
+            },
+        });
+    }
+
+    function card() {
+        var cardNumber =$("#cardNumber").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/buycard');?>",
+            data: {
+                cardNumber:cardNumber,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.length != 0){
+                    $("#cardName").val(data.car_name);
+                    $("#addMoney").val(data.sale);
+                    $("#giveMoney").val(data.present);
+                    $("#total_num").val(parseFloat(data.sale)+parseFloat(data.present));
+                    $("#amount").text(data.sale);
+                    $("#cardId").val(data.id);
+                }else{
+                    $("#card").val("无此卡号");
+                    $("#cardName").val('');
+                    $("#addMoney").val('');
+                    $("#giveMoney").val('');
+                    $("#total_num").val('');
+                }
+
+            },
+        });
+    }
+    function actually(){
+
+        $("#receiptsMoney").val($("#amount").text() - $("#freeMoney").val());
+    }
+    
+    $("#submit").click(function () {
+        var receiptsMoney = $("#receiptsMoney").val();
+        var payman = $("#payman").val();
+        var collectionRemarks = $("#collectionRemarks").val();
+        var source = $("#source").val();
+        var userId = $("#userId").val();
+        var cardId = $("#cardId").val();
+        var username = $("#username").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/dobuycard');?>",
+            data: {
+                receiptsMoney: receiptsMoney,
+                payman:payman,
+                collectionRemarks:collectionRemarks,
+                source:source,
+                userId:userId,
+                cardId:cardId,
+                username:username,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                //if(data.code == 0){
+                //    alert(data.text);
+                //    location.href = "<?php //echo site_url('card')?>//";
+                //}else if (data.code == 1){
+                //    alert(data.text);
+                //} else{
+                //    alert("未知错误");
+                //}
+
+            },
+        });
+
+    });
+</script>
 </html>
 
 

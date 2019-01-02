@@ -98,8 +98,47 @@ class Card extends CI_Controller {
     //购买储值卡
 
     public function buycard(){
-        $phone = str_enhtml($this->input->post('phone',TRUE));
-        $this->load->view('/settings/buy_stored_value_card');
+        $user = $this->session->userdata('jxcsys');
+        $mobile = str_enhtml($this->input->post('mobile',TRUE));
+        $cardNumber = str_enhtml($this->input->post('cardNumber',TRUE));
+        if($mobile){
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'mobile'=>$mobile);
+            $data =  $this->db->where($where)->get('ci_customer')->row();
+            die(json_encode($data));
+        }elseif ($cardNumber){
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'car_num'=>$cardNumber);
+            $data =  $this->db->where($where)->get('ci_storedcard')->row();
+            die(json_encode($data));
+        }else{
+            $this->load->view('/settings/buy_stored_value_card');
+        }
+
+    }
+    public function dobuycard(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+
+        $edit = $this->db->update('ci_storedcard',array('name'=>$data['username'],'actually_price'=>$data['receiptsMoney'],'payman'=>$data['payman'],'collectionTime'=>time(),'collectionRemarks'=>$data['collectionRemarks'],'source'=>$data['source'],'buy_id'=>$data['userId'],'status_sale'=>1),array('id'=>$data['cardId']));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "购买成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "购买失败";
+            die(json_encode($res));
+        }
     }
 
+
+    public function recharge(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+        if($data){
+            $edit_1 = $this->db->update('ci_storedcard',array('recharge_id'=>$data['userId'],'recharge_name'=>$data['username'],'recharge_time'=>time()),array('id'=>$data['cardId']));
+            $balance = $this->db->where('id',$data['userId'])->get('ci_customer')->row();
+            $edit_2 = $this->db->update('ci_customer',array('balance'=>$data['balance']+$balance->balance),array('id'=>$data['userId']));
+            die(json_encode($data));
+        }else{
+            $this->load->view('/settings/recharge_stored_value_card');
+        }
+    }
 }

@@ -203,7 +203,7 @@ var dataReflush, list = {
 	},
 	sales16: {
 		name: "储值卡充值",
-		href: "../settings/recharge_stored_value_card",
+		href: "../card/recharge",
 		dataRight: "",
 		target: "sales1"
 	},
