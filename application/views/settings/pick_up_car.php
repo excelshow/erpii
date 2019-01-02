@@ -56,7 +56,7 @@
         cursor: pointer;
         border: none;
     }
-    #add{
+    .add{
         position: fixed;
         width: 770px;
         height: 500px;
@@ -68,13 +68,13 @@
         border-radius: 3px;
         z-index: 1998;
     }
-    #add>#add_header{
+    .add>#add_header{
         background-color: #f5f5f5;
         height: 32px;
         width: 100%;
         border-radius: 3px;
     }
-    #add>#add_header>#add_title{
+    .add>#add_header>#add_title{
         float: left;
         height: 32px;
         line-height: 32px;
@@ -82,7 +82,7 @@
         font-weight: 700;
         margin-left: 10px;
     }
-    #add>#add_header>#add_close{
+    .add>#add_header>#add_close{
         float: right;
         height: 32px;
         line-height: 32px;
@@ -91,49 +91,49 @@
         width: 20px;
         cursor: pointer;
     }
-    #add>#add_content{
+    .add>#add_content{
         width: 100%;
         height: 435px;
         box-sizing: border-box;
         padding: 25px;
     }
-    #add>#add_content>.content_title{
+    .add>#add_content>.content_title{
         height: 18px;
         width: 100%;
         border-bottom: 1px solid #ccc;
     }
-    #add>#add_content>.content_main{
+    .add>#add_content>.content_main{
         width: 100%;
         box-sizing: border-box;
         padding: 20px 0;
     }
-    #add>#add_content>.content_main:first-child{
+    .add>#add_content>.content_main:first-child{
         height: 50%;
     }
-    #add>#add_content>.content_main:last-child{
+    .add>#add_content>.content_main:last-child{
         height: 20%;
     }
-    #add>#add_content>.content_main>li{
+    .add>#add_content>.content_main>li{
         width: 50%;
         float: left;
         margin-bottom: 5px;
     }
-    #add>#add_content>.content_main>li>span{
+    .add>#add_content>.content_main>li>span{
         display: inline-block;
         width: 70px;
         height: 30px;
     }
-    #add>#add_content>.content_main>li>input{
+    .add>#add_content>.content_main>li>input{
         width: 140px;
         height: 24px;
         border: 1px solid #ddd;
     }
-    #add>#add_content>.content_main>li>span>select{
+    .add>#add_content>.content_main>li>span>select{
         border: none;
         width: 100%;
         height: 100%;
     }
-    #add>#add_content>.content_main>li>.sel{
+    .add>#add_content>.content_main>li>.sel{
         display: inline-block;
         border: 1px solid #ddd;
         height: 24px;
@@ -142,7 +142,7 @@
         margin-left: -3px;
         outline: none;
     }
-    #add_footer{
+    .add_footer{
         position: absolute;
         width: 770px;
         height: 33px;
@@ -194,7 +194,7 @@
     }
     .table th,td{
         border: 1px solid #e2e2e2;
-        width: 30%;
+        /*width: 30%;*/
         height: 33px;
         text-align: center;
     }
@@ -410,6 +410,83 @@
     }
     .province>.province_li:hover{
         background-color: #eee;
+    }
+
+    /*服务项目*/
+    .table_add{
+        height: 40px;
+        width: 100%;
+        line-height: 40px;
+        background-color: #f1f1f1;
+        margin: 10px 0;
+        text-align: center;
+    }
+    .table_add span{
+        display: inline-block;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
+    .table_add span:first-child{
+        float: left;
+        margin: 5px 20px 0 10px;
+        font-size: 18px;
+    }
+    .table_add span:last-child{
+        width: 70px;
+        color: #fff;
+        background-color: #578ccd;
+        border-radius: 20px;
+        margin-left: -336px;
+        cursor: pointer;
+    }
+    .table_total .table_total_l{
+        float: left;
+        margin-left: 10px;
+    }
+    .table_total .table_total_l span:nth-child(2){
+        color: red;
+        display: inline-block;
+        width: 50px;
+        height: 25px;
+        border: 1px solid #dcdcdc;
+        border-radius: 15px;
+        text-align: left;
+        box-sizing: border-box;
+        padding: 0 5px;
+    }
+    .table_total .table_total_l span:nth-child(2) i{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #ededed;
+        border-radius: 20px;
+        background: #ededed;
+        margin-top: 3px;
+        transition: all .3s linear;
+    }
+    .table_total .table_total_l span:nth-child(2) .check{
+        background: #28aaff;
+        border: 1px #28aaff solid;
+        transform: translateX(20px);
+    }
+    .table_total .table_total_r{
+        float: right;
+        width: 70%;
+    }
+    .table_total .table_total_r table{
+        width: 100%;
+    }
+    .table_total .table_total_r table td{
+        width: 14.5%;
+        font-weight: bold;
+        border: none;
+    }
+    .table_total .table_total_r table td span{
+        color: #21c064;
+    }
+    .table_total .table_total_r table td:last-child span{
+        color: #ff6600;
     }
 </style>
 </head>
@@ -1055,10 +1132,6 @@
 
         <ul class="main_title car_service" style="display: none">服务项目</ul>
         <ul class="mod-form-rows base-form clearfix car_service" style="display: none;" id="base-form">
-<!--            <li class="row-item" style="width: 100%;">-->
-<!--                <a class="ui-btn ui-btn-sp choose_inspect">全面检查</a>-->
-<!--                <a class="ui-btn choose_inspect">基础检查</a>-->
-<!--            </li>-->
             <li class="row-item" style="width: 100%;border: 1px solid #ddd;">
                 <div class="table">
                     <table style="width: 100%;">
@@ -1094,6 +1167,37 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="table_add clearfix">
+                    <span>
+                        质检员:
+                        <select name="inspector" id="inspector" class="sel">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </span>
+                    <span id="add_working_btn">选择工时</span>
+                </div>
+                <div class="table_total clearfix">
+                    <div class="table_total_l">
+                        <span>发票：</span>
+                        <span id="change"><i></i></span>
+                        <span id="shifou">否</span>
+                    </div>
+                    <div class="table_total_r">
+                        <table>
+                            <tr>
+                                <td>工时费：  <span>9490.00</span></td>
+                                <td>配件费：  <span>65.00</span></td>
+                                <td>附加费：	 <span>0.00</span></td>
+                                <td>减免：   <span>0.00</span></td>
+                                <td>管理费： <span>0.00</span></td>
+                                <td>税费：   <span>0.00</span></td>
+                                <td>总费用： <span>9555.00</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </li>
         </ul>
 
@@ -1124,9 +1228,11 @@
         </ul>
     </div>
 
-<!--弹框-->
+
 <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
-<div id="add" style="display: none;">
+
+<!--选择顾客弹框-->
+<div id="add" class="add" style="display: none;">
     <div id="add_header" class="clearfix">
         <div id="add_title">添加客户/车辆</div>
         <div id="add_close" class="close_add">&times;</div>
@@ -1189,6 +1295,28 @@
     </div>
 </div>
 
+<!--选择工时弹窗-->
+<div id="add_working" class="add" style="display: none;">
+    <div id="add_header" class="clearfix">
+        <div id="add_title">选择工时</div>
+        <div id="add_close" class="close_add">&times;</div>
+    </div>
+    <div id="add_content">
+        <ul class="content_main clearfix" style="position: relative;">
+            <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
+            <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
+
+        </ul>
+    </div>
+    <div id="add_footer">
+        <td colspan="2">
+            <div class="ui_buttons">
+                <input type="button" id="save" value="确定" class="ui_state_highlight" />
+                <input type="button" class="close_add" value="关闭" />
+            </div>
+        </td>
+    </div>
+</div>
 
 <script>
     $(function () {
@@ -1213,6 +1341,7 @@
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
+            $('#add_working').css('display','none');
         });
 
         // 两个切换
@@ -1341,6 +1470,22 @@
         });
         $('.province_li').on('click',function () {
             $('#show_province').html($(this).html());
+        });
+
+        //是否有发票
+        $('#change').on('click',function () {
+            $('#change i').toggleClass('check');
+            if ($('#shifou').html() == '是'){
+                $('#shifou').html('否');
+            } else{
+                $('#shifou').html('是');
+            }
+        });
+
+        //添加选择工时
+        $('#add_working_btn').on('click',function () {
+            $('#ldg_lockmask').css('display','');
+            $('#add_working').css('display','');
         })
     });
 
