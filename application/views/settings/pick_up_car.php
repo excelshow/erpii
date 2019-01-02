@@ -421,12 +421,13 @@
             <a class="ui-btn choose">车辆信息</a>
             <a class="ui-btn choose">实录照片</a>
             <a class="ui-btn choose">车检报告</a>
+            <a class="ui-btn choose">服务项目</a>
         </div>
         <div class="fr">
-            <a id="save_all" class="ui-btn ui-btn-sp mrb">保存</a>
+            <a id="save_all" class="ui-btn ui-btn-sp mrb">施工</a>
         </div>
     </div>
-<!--    信息-->
+<!--信息-->
     <div class="grid-wrap">
         <span id="config" class="ui-icon ui-state-default ui-icon-config"></span>
         <ul class="main_title customer_information">顾客信息</ul>
@@ -1052,6 +1053,50 @@
             </li>
         </ul>
 
+        <ul class="main_title car_service" style="display: none">服务项目</ul>
+        <ul class="mod-form-rows base-form clearfix car_service" style="display: none;" id="base-form">
+<!--            <li class="row-item" style="width: 100%;">-->
+<!--                <a class="ui-btn ui-btn-sp choose_inspect">全面检查</a>-->
+<!--                <a class="ui-btn choose_inspect">基础检查</a>-->
+<!--            </li>-->
+            <li class="row-item" style="width: 100%;border: 1px solid #ddd;">
+                <div class="table">
+                    <table style="width: 100%;">
+                        <thead style="width: 100%;">
+                            <tr style="width: 100%;">
+                            <th style="width: 10%;">名称</th>
+                            <th style="width: 10%;">项目类型</th>
+                            <th style="width: 10%;">收费类型</th>
+                            <th style="width: 10%;">单价</th>
+                            <th style="width: 10%;">数量</th>
+                            <th style="width: 10%;">折扣</th>
+                            <th style="width: 10%;">金额</th>
+                            <th style="width: 10%;">减免</th>
+                            <th style="width: 10%;">施工员</th>
+                            <th style="width: 10%;">销售员</th>
+                            <th style="width: 5%;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td><span>1</span></td>
+                            <td><span>2</span></td>
+                            <td><span>3</span></td>
+                            <td><span>4</span></td>
+                            <td><span>5</span></td>
+                            <td><span>6</span></td>
+                            <td><span>7</span></td>
+                            <td><span>8</span></td>
+                            <td><span>9</span></td>
+                            <td><span>10</span></td>
+                            <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" style="margin: 0;">删除</a></span></td><!--放id-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+
         <ul class="main_title"></ul>
         <ul class="mod-form-rows base-form clearfix" id="base-form">
             <li class="row-item" style="width: 45% ;">
@@ -1179,21 +1224,31 @@
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
+                $('.car_service').css('display','none');
             }else if ($(this).html() == '车辆信息') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
+                $('.car_service').css('display','none');
             }else if ($(this).html() == '实录照片'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','');
                 $('.car_report').css('display','none');
+                $('.car_service').css('display','none');
             }else if ($(this).html() == '车检报告'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','');
+                $('.car_service').css('display','none');
+            }else if ($(this).html() == '服务项目') {
+                $('.customer_information').css('display','none');
+                $('.car_information').css('display','none');
+                $('.car_photo').css('display','none');
+                $('.car_report').css('display','none');
+                $('.car_service').css('display','');
             }
         });
         $('.choose_inspect').on('click',function () {

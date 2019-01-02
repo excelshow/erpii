@@ -134,6 +134,13 @@ class Settings extends CI_Controller {
     }
 
     /**
+     * 接车开单列表
+     */
+    public function pick_up_car_list(){
+        $this->load->view('settings/pick_up_car_list');
+    }
+
+    /**
      * 购买储值卡
      */
     public function buy_stored_value_card(){
