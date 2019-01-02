@@ -488,6 +488,74 @@
     .table_total .table_total_r table td:last-child span{
         color: #ff6600;
     }
+
+    /*选择工时弹窗*/
+    .add>#add_content .add_content_title{
+        background-color: #f1f1f1;
+        height: 30px;
+        width: 100%;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .add>#add_content .add_content_ul{
+        height: 355px;
+        overflow-y: auto;
+    }
+    .add>#add_content .add_content_li{
+        height: 30px;
+        width: 100%;
+        line-height: 30px;
+        text-align: center;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .add>#add_content .add_content_li:hover{
+        background-color: #f8ff94;
+    }
+    .add>#add_content .add_content_l{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: left;
+        border-right: none;
+    }
+    .add>#add_content .add_content_l .add_content_ul .add_content_li span{
+        display: inline-block;
+        width: 48%;
+    }
+    .add>#add_content .add_content_l .add_content_ul .add_content_li span:last-child{
+        text-align: right;
+        font-size: 18px;
+    }
+    .add>#add_content .add_content_c{
+        height: 100%;
+        width: 45%;
+        border: 1px solid #ddd;
+        float: left;
+    }
+    .add>#add_content .add_content_c .add_content_title li{
+        width: 48%;
+        display: inline-block;
+    }
+    .add>#add_content .add_content_c .add_content_ul .add_content_li span{
+        display: inline-block;
+        width: 48%;
+    }
+    .add>#add_content .add_content_r{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: right;
+    }
+    .add>#add_content .add_content_r .add_content_ul .add_content_li span{
+        display: inline-block;
+        width: 48%;
+    }
+    .add>#add_content .add_content_r .add_content_ul .add_content_li .delete{
+        height: 20px;
+        background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
+        background-position:center bottom;
+    }
 </style>
 </head>
 <body>
@@ -1137,15 +1205,15 @@
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
-                            <th style="width: 10%;">名称</th>
+                            <th style="width: 20%;">名称</th>
                             <th style="width: 10%;">项目类型</th>
                             <th style="width: 10%;">收费类型</th>
                             <th style="width: 10%;">单价</th>
-                            <th style="width: 10%;">数量</th>
+                            <th style="width: 5%;">数量</th>
                             <th style="width: 10%;">折扣</th>
                             <th style="width: 10%;">金额</th>
-                            <th style="width: 10%;">减免</th>
-                            <th style="width: 10%;">施工员</th>
+                            <th style="width: 5%;">减免</th>
+                            <th style="width: 5%;">施工员</th>
                             <th style="width: 10%;">销售员</th>
                             <th style="width: 5%;">操作</th>
                         </tr>
@@ -1185,7 +1253,7 @@
                         <span id="shifou">否</span>
                     </div>
                     <div class="table_total_r">
-                        <table>
+                        <table class="table_new">
                             <tr>
                                 <td>工时费：  <span>9490.00</span></td>
                                 <td>配件费：  <span>65.00</span></td>
@@ -1229,93 +1297,152 @@
     </div>
 
 
-<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
+    <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
 
-<!--选择顾客弹框-->
-<div id="add" class="add" style="display: none;">
+    <!--选择顾客弹框-->
+    <div id="add" class="add" style="display: none;">
+        <div id="add_header" class="clearfix">
+            <div id="add_title">添加客户/车辆</div>
+            <div id="add_close" class="close_add">&times;</div>
+        </div>
+        <div id="add_content">
+            <ul class="content_main clearfix" style="position: relative;">
+                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
+                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
+                <li>
+                    <span>车牌号:</span>
+                    <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
+                        <span id="show_province" style="padding-left: 5px">粤</span>
+                        <i style="width: 20px;height: 20px;background: url(<?php echo base_url()?>statics/css/img/ssxljt.png) no-repeat;position: absolute;top: 5px;right: 2px;"></i>
+                    </span>
+                    <input type="text" name="carNumberLast" id="carNumberLast" style="width: 50%;height: 30px;margin-left: -5px">
+                </li>
+                <ul class="province clearfix" hidden>
+                    <li class="province_li">粤</li>
+                    <li class="province_li">浙</li>
+                    <li class="province_li">京</li>
+                    <li class="province_li">沪</li>
+                    <li class="province_li">苏</li>
+                    <li class="province_li">津</li>
+                    <li class="province_li">渝</li>
+                    <li class="province_li">冀</li>
+                    <li class="province_li">豫</li>
+                    <li class="province_li">云</li>
+                    <li class="province_li">辽</li>
+                    <li class="province_li">黑</li>
+                    <li class="province_li">甘</li>
+                    <li class="province_li">晋</li>
+                    <li class="province_li">蒙</li>
+                    <li class="province_li">陕</li>
+                    <li class="province_li">吉</li>
+                    <li class="province_li">皖</li>
+                    <li class="province_li">鲁</li>
+                    <li class="province_li">新</li>
+                    <li class="province_li">赣</li>
+                    <li class="province_li">川</li>
+                    <li class="province_li">湘</li>
+                    <li class="province_li">鄂</li>
+                    <li class="province_li">桂</li>
+                    <li class="province_li">闽</li>
+                    <li class="province_li">贵</li>
+                    <li class="province_li">青</li>
+                    <li class="province_li">藏</li>
+                    <li class="province_li">宁</li>
+                    <li class="province_li">琼</li>
+                    <li class="province_li">WJ</li>
+                </ul>
+            </ul>
+        </div>
+        <div id="add_footer">
+            <td colspan="2">
+                <div class="ui_buttons">
+                    <input type="button" id="save" value="确定" class="ui_state_highlight" />
+                    <input type="button" class="close_add" value="关闭" />
+                </div>
+            </td>
+        </div>
+    </div>
+
+    <!--选择工时弹窗-->
+    <div id="add_working" class="add" style="display: none;">
     <div id="add_header" class="clearfix">
-        <div id="add_title">添加客户/车辆</div>
+        <div id="add_title">选择工时</div>
         <div id="add_close" class="close_add">&times;</div>
     </div>
     <div id="add_content">
-        <ul class="content_main clearfix" style="position: relative;">
-            <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
-            <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
-            <li>
-                <span>车牌号:</span>
-                <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
-                    <span id="show_province" style="padding-left: 5px">粤</span>
-                    <i style="width: 20px;height: 20px;background: url(<?php echo base_url()?>statics/css/img/ssxljt.png) no-repeat;position: absolute;top: 5px;right: 2px;"></i>
-                </span>
-                <input type="text" name="carNumberLast" id="carNumberLast" style="width: 50%;height: 30px;margin-left: -5px">
-            </li>
-            <ul class="province clearfix" hidden>
-                <li class="province_li">粤</li>
-                <li class="province_li">浙</li>
-                <li class="province_li">京</li>
-                <li class="province_li">沪</li>
-                <li class="province_li">苏</li>
-                <li class="province_li">津</li>
-                <li class="province_li">渝</li>
-                <li class="province_li">冀</li>
-                <li class="province_li">豫</li>
-                <li class="province_li">云</li>
-                <li class="province_li">辽</li>
-                <li class="province_li">黑</li>
-                <li class="province_li">甘</li>
-                <li class="province_li">晋</li>
-                <li class="province_li">蒙</li>
-                <li class="province_li">陕</li>
-                <li class="province_li">吉</li>
-                <li class="province_li">皖</li>
-                <li class="province_li">鲁</li>
-                <li class="province_li">新</li>
-                <li class="province_li">赣</li>
-                <li class="province_li">川</li>
-                <li class="province_li">湘</li>
-                <li class="province_li">鄂</li>
-                <li class="province_li">桂</li>
-                <li class="province_li">闽</li>
-                <li class="province_li">贵</li>
-                <li class="province_li">青</li>
-                <li class="province_li">藏</li>
-                <li class="province_li">宁</li>
-                <li class="province_li">琼</li>
-                <li class="province_li">WJ</li>
+        <div class="add_content_l">
+            <ul class="add_content_title">类型</ul>
+            <ul class="add_content_ul">
+                <li class="add_content_li">
+                    <span>1</span>
+                    <span>&gt;</span>
+                </li>
+                <li class="add_content_li">
+                    <span>1</span>
+                    <span>&gt;</span>
+                </li>
+                <li class="add_content_li">
+                    <span>1</span>
+                    <span>&gt;</span>
+                </li>
+                <li class="add_content_li">
+                    <span>1</span>
+                    <span>&gt;</span>
+                </li>
+                <li class="add_content_li">
+                    <span>1</span>
+                    <span>&gt;</span>
+                </li>
             </ul>
-        </ul>
+        </div>
+        <div class="add_content_c">
+            <ul class="add_content_title">
+                <li>名称</li>
+                <li>售价</li>
+            </ul>
+            <ul class="add_content_ul">
+                <li class="add_content_li add_content_c_li">
+                    <span>1</span>
+                    <span>2</span>
+                    <input type="hidden" value="1">
+                </li>
+                <li class="add_content_li add_content_c_li">
+                    <span>2</span>
+                    <span>2</span>
+                    <input type="hidden" value="2">
+                </li>
+                <li class="add_content_li add_content_c_li">
+                    <span>3</span>
+                    <span>2</span>
+                    <input type="hidden" value="3">
+                </li>
+                <li class="add_content_li add_content_c_li">
+                    <span>4</span>
+                    <span>2</span>
+                    <input type="hidden" value="4">
+                </li>
+                <li class="add_content_li add_content_c_li">
+                    <span>5</span>
+                    <span>2</span>
+                    <input type="hidden" value="5">
+                </li>
+            </ul>
+        </div>
+        <div class="add_content_r">
+            <ul class="add_content_title">已选工时</ul>
+            <ul class="add_content_ul"></ul>
+        </div>
     </div>
     <div id="add_footer">
         <td colspan="2">
             <div class="ui_buttons">
-                <input type="button" id="save" value="确定" class="ui_state_highlight" />
+                <input type="button" id="add_working_val" value="确定" class="ui_state_highlight" />
                 <input type="button" class="close_add" value="关闭" />
             </div>
         </td>
     </div>
 </div>
 
-<!--选择工时弹窗-->
-<div id="add_working" class="add" style="display: none;">
-    <div id="add_header" class="clearfix">
-        <div id="add_title">选择工时</div>
-        <div id="add_close" class="close_add">&times;</div>
-    </div>
-    <div id="add_content">
-        <ul class="content_main clearfix" style="position: relative;">
-            <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
-            <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
-
-        </ul>
-    </div>
-    <div id="add_footer">
-        <td colspan="2">
-            <div class="ui_buttons">
-                <input type="button" id="save" value="确定" class="ui_state_highlight" />
-                <input type="button" class="close_add" value="关闭" />
-            </div>
-        </td>
-    </div>
 </div>
 
 <script>
@@ -1482,10 +1609,38 @@
             }
         });
 
-        //添加选择工时
+        //添加选择工时弹框
         $('#add_working_btn').on('click',function () {
             $('#ldg_lockmask').css('display','');
             $('#add_working').css('display','');
+        });
+
+        //添加工时，选中工时
+        $('.add_content_c_li').on('click',function () {
+            var val = $(this).find('span:first-child').html();
+            var id = $(this).find('input').val();
+            var str1 = '<li class="add_content_li add_content_r_li add_content_r_li_';
+            var str2 = '"><span>';
+            var str3 = '</span><span class="delete" onclick="delLi(';
+            var str4 = ')"></span><input type="hidden" value="';
+            var str5 = '"> </li>';
+            var str = str1 + id + str2 + val + str3 + id + str4 + id + str5;
+            $('.add_content_r .add_content_ul').append(str);
+        });
+
+        //添加工时，添加工时
+        $('#add_working_val').on('click',function () {
+            $('#ldg_lockmask').css('display','none');
+            $('#add_working').css('display','none');
+            var input = $('.add_content_r_li input');
+            var arr = new Array();
+            $.each(input,function () {
+                arr.append($(this).val());
+            });
+            // $.ajax({
+            //
+            // });
+            $('.add_content_r_li').remove();
         })
     });
 
@@ -1513,6 +1668,11 @@
             }
 
         })
+    }
+
+    // 删除已选工时
+    function delLi(id) {
+        $('.add_content_r_li_' + id).remove();
     }
 </script>
 <script>
