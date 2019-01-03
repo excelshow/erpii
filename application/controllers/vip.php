@@ -3,7 +3,10 @@
 
 class Vip extends CI_Controller {
 
-
+    public function __construct(){
+        parent::__construct();
+        $this->common_model->checkpurview(303);
+    }
 
 //    VIP卡列表
     public function index(){
