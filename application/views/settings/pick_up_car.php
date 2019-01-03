@@ -1874,7 +1874,7 @@
             upload_file.on('change',function () {
                 if (this.files[0]){
                     var url = getObjectURL(this.files[0]);
-                    url_arr[upload_file_name].push(url);
+                    url_arr[upload_file_name].push(this.files[0]);
                     var img = img1 + url + img2 + upload_file_name + "','" + url + img3;
                     upload_img.append(img);
                 }
@@ -1891,7 +1891,7 @@
             $('#li_img').on('change',function () {
                 if (this.files[0]){
                     var url = getObjectURL(this.files[0]);
-                    url_arr['li_img'].push(url);
+                    url_arr['li_img'].push(this.files[0]);
                     var img = img1 + url + img2 + url + img3;
                     $('.upload_image').append(img);
                 }
