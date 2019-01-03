@@ -2,11 +2,10 @@
 
 
 class Billing extends CI_Controller {
-
     public function __construct(){
-    parent::__construct();
-    $this->common_model->checkpurview(302);
-   }
+        parent::__construct();
+        $this->common_model->checkpurview(302);
+    }
 
     //开单页面
     public function index(){

@@ -3,6 +3,10 @@
 
 class Customer extends CI_Controller {
 
+    public function __construct(){
+        parent::__construct();
+        $this->common_model->checkpurview(305);
+    }
 
     public function index() {
         $user = $this->session->userdata('jxcsys');

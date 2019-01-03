@@ -3,6 +3,10 @@
 
 class Card extends CI_Controller {
 
+    public function __construct(){
+        parent::__construct();
+        $this->common_model->checkpurview(304);
+    }
 
     //储值卡列表
     public function index() {
