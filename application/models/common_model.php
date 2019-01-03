@@ -17,7 +17,8 @@ class Common_model extends CI_Model{
 	public function checkpurview($id=0) { 
 	    !$this->jxcsys && redirect(site_url('login'));
 		if ($id>0) {
-			$data = $this->get_admin(); 
+			$data = $this->get_admin();
+//		var_dump($id);
 			if (count($data)>0) {  
 			    if ($data['roleid']==0) return true;
 				if (in_array($id,explode(',',$data['lever']))) return true; 	
