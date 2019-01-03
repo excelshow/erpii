@@ -1680,6 +1680,10 @@
         var  carRmarks = $("#carRmarks").val();  //车辆备注
         var  displacement = $("#displacement").val();  //排量
         var  oilVolume = $("#oilVolume").val();  //油量
+        console.log(url_arr['li_img'][0]);
+        var image = new FormData();
+        image.append('a',url_arr['li_img'][0]);
+        console.log(image);
 
         $.ajax({
             type: "POST",
@@ -1687,15 +1691,16 @@
             traditional: false,
             dataType: "json",
             data: {
-                li_img:url_arr['li_img'],   //实录照片
-                li1_img:url_arr['li1_img'],  //发动机部分照片
-                li2_img:url_arr['li2_img'],  //底盘部分照片
-                li3_img:url_arr['li3_img'],   //电气设备照片
-                li4_img:url_arr['li4_img'],   //轮胎部分照片
-                li5_img:url_arr['li5_img'],    //刹车系统照片
-                li6_img:url_arr['li6_img'],    //油水部分照片
-                li7_img:url_arr['li7_img'],     //电脑检测照片
-                li8_img:url_arr['li8_img'],     //外观检测照片
+                // li_img:url_arr['li_img'],   //实录照片
+                // li1_img:url_arr['li1_img'],  //发动机部分照片
+                // li2_img:url_arr['li2_img'],  //底盘部分照片
+                // li3_img:url_arr['li3_img'],   //电气设备照片
+                // li4_img:url_arr['li4_img'],   //轮胎部分照片
+                // li5_img:url_arr['li5_img'],    //刹车系统照片
+                // li6_img:url_arr['li6_img'],    //油水部分照片
+                // li7_img:url_arr['li7_img'],     //电脑检测照片
+                // li8_img:url_arr['li8_img'],     //外观检测照片
+                image:image,
             },
             success: function (data) {
                 console.log(data);
@@ -1745,6 +1750,9 @@
             },
         });
     });
+
+
+
 </script>
 <script>
     $(function () {

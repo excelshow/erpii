@@ -36,19 +36,21 @@ class Billing extends CI_Controller {
 
     public function start(){
         $data = $this->input->post(NULL,TRUE);
-        file_put_contents('a.txt',file_get_contents('https://wx1.sinaimg.cn/mw690/006OBeunly1fygh06e99nj31hc0u01ky.jpg'));
+
+        die(json_encode($data));
+
+
 //        $this->get_image_byurl('https://wx1.sinaimg.cn/mw690/006OBeunly1fygh06e99nj31hc0u01ky.jpg');
 //        die(json_encode($data));
         foreach ($data['li_img'] as $k=>$v){
 
-            $url = $v;  //要保存图片的地址
-            $img = 'flower.jpg';  //保存到本地的name,可以是保存地址+图片名称
 //            file_put_contents($img, file_get_contents($url));
 //            $this->get_image_byurl($v);
 
         }
 
     }
+
 
     function get_image_byurl($url, $filename="") {
 
