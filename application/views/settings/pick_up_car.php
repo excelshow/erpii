@@ -68,13 +68,13 @@
         border-radius: 3px;
         z-index: 1998;
     }
-    .add>#add_header{
+    .add>.add_header{
         background-color: #f5f5f5;
         height: 32px;
         width: 100%;
         border-radius: 3px;
     }
-    .add>#add_header>#add_title{
+    .add>.add_header>.add_title{
         float: left;
         height: 32px;
         line-height: 32px;
@@ -82,7 +82,7 @@
         font-weight: 700;
         margin-left: 10px;
     }
-    .add>#add_header>#add_close{
+    .add>.add_header>.add_close{
         float: right;
         height: 32px;
         line-height: 32px;
@@ -91,49 +91,49 @@
         width: 20px;
         cursor: pointer;
     }
-    .add>#add_content{
+    .add>.add_content{
         width: 100%;
         height: 435px;
         box-sizing: border-box;
         padding: 25px;
     }
-    .add>#add_content>.content_title{
+    .add>.add_content>.content_title{
         height: 18px;
         width: 100%;
         border-bottom: 1px solid #ccc;
     }
-    .add>#add_content>.content_main{
+    .add>.add_content>.content_main{
         width: 100%;
         box-sizing: border-box;
         padding: 20px 0;
     }
-    .add>#add_content>.content_main:first-child{
+    .add>.add_content>.content_main:first-child{
         height: 50%;
     }
-    .add>#add_content>.content_main:last-child{
+    .add>.add_content>.content_main:last-child{
         height: 20%;
     }
-    .add>#add_content>.content_main>li{
+    .add>.add_content>.content_main>li{
         width: 50%;
         float: left;
         margin-bottom: 5px;
     }
-    .add>#add_content>.content_main>li>span{
+    .add>.add_content>.content_main>li>span{
         display: inline-block;
         width: 70px;
         height: 30px;
     }
-    .add>#add_content>.content_main>li>input{
+    .add>.add_content>.content_main>li>input{
         width: 140px;
         height: 24px;
         border: 1px solid #ddd;
     }
-    .add>#add_content>.content_main>li>span>select{
+    .add>.add_content>.content_main>li>span>select{
         border: none;
         width: 100%;
         height: 100%;
     }
-    .add>#add_content>.content_main>li>.sel{
+    .add>.add_content>.content_main>li>.sel{
         display: inline-block;
         border: 1px solid #ddd;
         height: 24px;
@@ -203,7 +203,7 @@
     }
     .table td>span{
         display: inline-block;
-        width: 100px;
+        width: 100%;
         height: 33px;
         line-height: 33px;
         margin-bottom: -6px;
@@ -490,7 +490,7 @@
     }
 
     /*选择工时弹窗*/
-    .add>#add_content .add_content_title{
+    .add>.add_content .add_content_title{
         background-color: #f1f1f1;
         height: 30px;
         width: 100%;
@@ -498,63 +498,168 @@
         line-height: 30px;
         font-size: 18px;
     }
-    .add>#add_content .add_content_ul{
+    .add>.add_content .add_content_ul{
         height: 355px;
         overflow-y: auto;
     }
-    .add>#add_content .add_content_li{
+    .add>.add_content .add_content_li{
         height: 30px;
         width: 100%;
         line-height: 30px;
         text-align: center;
         border-bottom: 1px solid #f1f1f1;
     }
-    .add>#add_content .add_content_li:hover{
+    .add>.add_content .add_content_li:hover{
         background-color: #f8ff94;
     }
-    .add>#add_content .add_content_l{
+    .add>.add_content .add_content_l{
         height: 100%;
         width: 25%;
         border: 1px solid #ddd;
         float: left;
         border-right: none;
     }
-    .add>#add_content .add_content_l .add_content_ul .add_content_li span{
+    .add>.add_content .add_content_l .add_content_ul .add_content_li span{
         display: inline-block;
         width: 48%;
     }
-    .add>#add_content .add_content_l .add_content_ul .add_content_li span:last-child{
+    .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
         text-align: right;
         font-size: 18px;
     }
-    .add>#add_content .add_content_c{
+    .add>.add_content .add_content_c{
         height: 100%;
         width: 45%;
         border: 1px solid #ddd;
         float: left;
     }
-    .add>#add_content .add_content_c .add_content_title li{
+    .add>.add_content .add_content_c .add_content_title li{
         width: 48%;
         display: inline-block;
     }
-    .add>#add_content .add_content_c .add_content_ul .add_content_li span{
+    .add>.add_content .add_content_c .add_content_ul .add_content_li span{
         display: inline-block;
         width: 48%;
     }
-    .add>#add_content .add_content_r{
+    .add>.add_content .add_content_r{
         height: 100%;
         width: 25%;
         border: 1px solid #ddd;
         float: right;
     }
-    .add>#add_content .add_content_r .add_content_ul .add_content_li span{
+    .add>.add_content .add_content_r .add_content_ul .add_content_li span{
         display: inline-block;
         width: 48%;
     }
-    .add>#add_content .add_content_r .add_content_ul .add_content_li .delete{
+    .add>.add_content .add_content_r .add_content_ul .add_content_li .delete{
         height: 20px;
         background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
         background-position:center bottom;
+    }
+
+    /*配件按钮*/
+    .table table tbody .name>span{
+        width: 47%;
+    }
+    .table table tbody .name>.parts{
+        width: 70px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 20px;
+        border: 1px solid #578ccd;
+        background-color: #578ccd;
+        color: #fff;
+        transition: all .3s linear;
+        cursor: pointer;
+        margin-bottom: -3px;
+    }
+    .table table tbody .name>.parts>.parts_logo{
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 20px;
+        background-color: #99b6d9;
+        float: left;
+        margin-left: 2px;
+        font-size: 18px;
+        transition: all .3s linear;
+    }
+    .table table tbody .name>.parts>.parts_text{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .table table tbody .name>.parts:hover{
+        background-color: #dc0000;
+        border-color: #dc0000;
+    }
+    .table table tbody .name>.parts:hover>.parts_logo{
+        color: #dc0000;
+        background-color: #fff;
+    }
+
+    /*配件弹框*/
+    #add_parts .add_content .parts_l{
+        float: left;
+        height: 100%;
+        width: 69%;
+        border: 1px solid #f1f1f1;
+        overflow-y: auto;
+    }
+    #add_parts .add_content .parts_l table{
+        /*height: 99.99%;*/
+        width: 99.99%;
+    }
+    #add_parts .add_content .parts_l table thead tr{
+        /*width: 453px;*/
+        width: 100%;
+        height: 40px;
+        background-color: #ddd;
+        /*position: fixed;*/
+        /*top: 57px;*/
+    }
+    #add_parts .add_content .parts_l table tbody tr:hover{
+        background-color: #f8ff94;
+    }
+    #add_parts .add_content .parts_l table tbody tr td{
+        width: 11.111%;
+        height: 30px;
+        border: none;
+        border-bottom: 1px solid #f1f1f1;
+        border-right: 1px solid #f1f1f1;
+    }
+    #add_parts .add_content .parts_r{
+        float: right;
+        height: 100%;
+        width: 30%;
+        border: 1px solid #f1f1f1;
+        overflow-y: auto;
+    }
+    .add_parts_title{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background-color: #ddd;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .parts_r .add_parts_ul .parts_li{
+        height: 30px;
+        width: 100%;
+    }
+    .parts_r .add_parts_ul .parts_li span{
+        display: inline-block;
+        width: 48%;
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        text-align: center;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .parts_r .add_parts_ul .parts_li .del_parts{
+        height: 30px;
+        background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
+        background-position:center center;
     }
 </style>
 </head>
@@ -569,7 +674,7 @@
             <a class="ui-btn choose">服务项目</a>
         </div>
         <div class="fr">
-            <a id="save_all" class="ui-btn ui-btn-sp mrb">施工</a>
+            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: none">施工</a>
         </div>
     </div>
 <!--信息-->
@@ -1205,33 +1310,39 @@
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
-                            <th style="width: 20%;">名称</th>
-                            <th style="width: 10%;">项目类型</th>
-                            <th style="width: 10%;">收费类型</th>
-                            <th style="width: 10%;">单价</th>
-                            <th style="width: 5%;">数量</th>
-                            <th style="width: 10%;">折扣</th>
-                            <th style="width: 10%;">金额</th>
-                            <th style="width: 5%;">减免</th>
-                            <th style="width: 5%;">施工员</th>
-                            <th style="width: 10%;">销售员</th>
-                            <th style="width: 5%;">操作</th>
-                        </tr>
+                                <th style="width: 20%;">名称</th>
+                                <th style="width: 10%;">项目类型</th>
+                                <th style="width: 10%;">收费类型</th>
+                                <th style="width: 10%;">单价</th>
+                                <th style="width: 5%;">数量</th>
+                                <th style="width: 10%;">折扣</th>
+                                <th style="width: 10%;">金额</th>
+                                <th style="width: 5%;">减免</th>
+                                <th style="width: 5%;">施工员</th>
+                                <th style="width: 10%;">销售员</th>
+                                <th style="width: 5%;">操作</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td><span>1</span></td>
-                            <td><span>2</span></td>
-                            <td><span>3</span></td>
-                            <td><span>4</span></td>
-                            <td><span>5</span></td>
-                            <td><span>6</span></td>
-                            <td><span>7</span></td>
-                            <td><span>8</span></td>
-                            <td><span>9</span></td>
-                            <td><span>10</span></td>
-                            <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" style="margin: 0;">删除</a></span></td><!--放id-->
-                        </tr>
+                            <tr class="serviceItem_1">
+                                <td class="name">
+                                    <span>1</span>
+                                    <span class="parts clearfix">
+                                        <span class="parts_logo">+</span>
+                                        <span class="parts_text">配件</span>
+                                    </span>
+                                </td>
+                                <td><span>2</span></td>
+                                <td><span>3</span></td>
+                                <td><span>4</span></td>
+                                <td><span>5</span></td>
+                                <td><span>6</span></td>
+                                <td><span>7</span></td>
+                                <td><span>8</span></td>
+                                <td><span>9</span></td>
+                                <td><span>10</span></td>
+                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(1)" style="margin: 0;">删除</a></span></td><!--放id-->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1301,11 +1412,11 @@
 
     <!--选择顾客弹框-->
     <div id="add" class="add" style="display: none;">
-        <div id="add_header" class="clearfix">
-            <div id="add_title">添加客户/车辆</div>
-            <div id="add_close" class="close_add">&times;</div>
+        <div class="add_header clearfix">
+            <div class="add_title">添加客户/车辆</div>
+            <div class="add_close close_add">&times;</div>
         </div>
-        <div id="add_content">
+        <div class="add_content">
             <ul class="content_main clearfix" style="position: relative;">
                 <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
                 <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
@@ -1353,7 +1464,7 @@
                 </ul>
             </ul>
         </div>
-        <div id="add_footer">
+        <div class="add_footer">
             <td colspan="2">
                 <div class="ui_buttons">
                     <input type="button" id="save" value="确定" class="ui_state_highlight" />
@@ -1365,11 +1476,11 @@
 
     <!--选择工时弹窗-->
     <div id="add_working" class="add" style="display: none;">
-    <div id="add_header" class="clearfix">
-        <div id="add_title">选择工时</div>
-        <div id="add_close" class="close_add">&times;</div>
+    <div class="add_header clearfix">
+        <div class="add_title">选择工时</div>
+        <div class="add_close close_add">&times;</div>
     </div>
-    <div id="add_content">
+    <div class="add_content">
         <div class="add_content_l">
             <ul class="add_content_title">类型</ul>
             <ul class="add_content_ul">
@@ -1433,7 +1544,7 @@
             <ul class="add_content_ul"></ul>
         </div>
     </div>
-    <div id="add_footer">
+    <div class="add_footer">
         <td colspan="2">
             <div class="ui_buttons">
                 <input type="button" id="add_working_val" value="确定" class="ui_state_highlight" />
@@ -1442,6 +1553,60 @@
         </td>
     </div>
 </div>
+
+    <!--选择配件弹框-->
+    <div id="add_parts" class="add" style="display: none;">
+        <div class="add_header clearfix">
+            <div class="add_title">选择配件</div>
+            <div class="add_close close_add">&times;</div>
+        </div>
+        <div class="add_content clearfix">
+            <div class="parts_l">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>规格/型号</th>
+                            <th>品牌</th>
+                            <th>编码</th>
+                            <th>OEM</th>
+                            <th>仓位</th>
+                            <th>库存</th>
+                            <th>适用车型</th>
+                            <th>售价</th>
+                        </tr>
+                    </thead>
+                    <tbody class="parts_main">
+                        <tr class="parts_tr">
+                            <td class="parts_td">111</td>
+                            <td class="parts_td">2</td>
+                            <td class="parts_td">3</td>
+                            <td class="parts_td">4</td>
+                            <td class="parts_td">5</td>
+                            <td class="parts_td">6</td>
+                            <td class="parts_td">7</td>
+                            <td class="parts_td">8</td>
+                            <td class="parts_td">9</td>
+                            <input type="hidden" value="1">
+                        </tr>
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="parts_r">
+                <ul class="add_parts_title">已选工时</ul>
+                <ul class="add_parts_ul"></ul>
+            </div>
+        </div>
+        <div class="add_footer">
+            <td colspan="2">
+                <div class="ui_buttons">
+                    <input type="button" id="add_parts_val" value="确定" class="ui_state_highlight" />
+                    <input type="button" class="close_add" value="关闭" />
+                </div>
+            </td>
+        </div>
+    </div>
 
 </div>
 
@@ -1469,6 +1634,7 @@
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
             $('#add_working').css('display','none');
+            $('#add_parts').css('display','none');
         });
 
         // 两个切换
@@ -1481,30 +1647,35 @@
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '车辆信息') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '实录照片'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '车检报告'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '服务项目') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','');
+                $('#save_all').css('display','');
             }
         });
         $('.choose_inspect').on('click',function () {
@@ -1635,12 +1806,47 @@
             var input = $('.add_content_r_li input');
             var arr = new Array();
             $.each(input,function () {
-                arr.append($(this).val());
+                arr.push($(this).val());
+            });
+            $('.add_content_r_li').remove();
+            // $.ajax({
+            //
+            // });
+        });
+
+        //添加选择配件弹框
+        $('.parts').on('click',function () {
+            $('#ldg_lockmask').css('display','');
+            $('#add_parts').css('display','');
+        });
+
+        //添加配件，选中配件
+        $('.parts_tr').on('click',function () {
+            var id = $(this).find('input').val();
+            var name = $(this).find('td:first-child').html();
+            var str = '';
+            var str1 = '<li onclick="delParts(';
+            var str2 = ')" class="parts_li parts_tr_';
+            var str3 = '"><span>';
+            var str4 = '</span><span class="del_parts"></span><input type="hidden" value="';
+            var str5 = '"></li>';
+            str = str1 + id + str2 + id + str3 + name + str4 + id + str5;
+            $('.add_parts_ul').append(str);
+        });
+
+        //添加配件,添加配件
+        $('#add_parts_val').on('click',function () {
+            $('#ldg_lockmask').css('display','none');
+            $('#add_parts').css('display','none');
+            var input = $('.parts_li input');
+            var arr = new Array();
+            $.each(input,function () {
+                arr.push($(this).val());
             });
             // $.ajax({
             //
             // });
-            $('.add_content_r_li').remove();
+            $('.parts_li').remove();
         })
     });
 
@@ -1674,6 +1880,17 @@
     function delLi(id) {
         $('.add_content_r_li_' + id).remove();
     }
+
+    //删除已选配件
+    function delParts(id) {
+        $('.parts_tr_' + id).remove();
+    }
+
+    //删除以显示服务项目
+    function delItem(id) {
+        $('.serviceItem_' + id).remove();
+    }
+
 </script>
 <script>
     Public.pageTab();
