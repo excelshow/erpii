@@ -168,6 +168,13 @@ var dataReflush, list = {
 		target: "sales",
         list: "../settings/pick_up_car_list"
 	},
+	sales19: {
+		name: "结算",
+		href: "../settings/settlement",
+		dataRight: "",
+		target: "sales",
+		list: "../settings/pick_up_car_list"
+	},
 	sales3: {
 		name: "车况检测",
 		href: "../scm/invPu?action=initPur",
