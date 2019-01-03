@@ -39,7 +39,6 @@ $(document).keydown(function(event) {
     }
     .grid-wrap{
         background-color: #fff;
-        border: 1px solid #ddd;
         height: 800px;
         width: 100%;
         overflow: auto;
@@ -247,100 +246,99 @@ $(document).keydown(function(event) {
 </head>
 <body>
 <div class="wrapper">
-	<div class="mod-search cf">
-	    <div class="fl">
-	      <ul class="ul-inline">
-	      	<li>
-	        	<span id="catorage"></span>
-	        </li>
-	        <li>
-	          <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
-	        </li>
-	        <li><a class="ui-btn mrb" id="search">查询</a></li>
-	      </ul>
-	    </div>
-	    <div class="fr">
-            <a href="javascript:void(0);" id="new" class="ui-btn ui-btn-sp mrb">新增</a>
-            <a href="javascript:void(0);" class="ui-btn" id="btn-batchDel">删除</a>
-        </div>
-	  </div>
-    <div class="grid-wrap">
-        <div class="table">
-            <form action="">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 20px;">
-                                <input type="checkbox" id="all">
-                            </th>
-                            <th>储值卡名称</th>
-                            <th>卡号</th>
-                            <th>实际售价</th>
-                            <th>赠送金额</th>
-<!--                            <th>有效期</th>-->
-                            <th>工时折扣</th>
-                            <th>配件折扣</th>
-                            <th>状态</th>
-                            <th>适用门店</th>
-                            <th>添加时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($data as $k=>$v): ?>
-                        <tr>
-                            <td class="check">
-                                <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
-                            </td>
-                            <td><span><?php echo $v->car_name ?></span></td>
-                            <td><span><?php echo $v->car_num ?></span></td>
-                            <td><span><?php echo $v->sale ?>元</span></td>
-                            <td><span><?php echo $v->present ?>元</span></td>
-<!--                            --><?php //if($v->validity == 13):?>
-<!--                                <td><span>永久</span></td>-->
-<!--                            --><?php //else : ?>
-<!--                                <td><span>--><?php //echo $v->validity ?><!--个月</span></td>-->
-<!--                            --><?php //endif; ?>
-                            <td><span><?php echo $v->hour_discount ?>%</span></td>
-                            <td><span><?php echo $v->parts_discount ?>%</span></td>
-                            <?php if($v->status == 0):?>
-                                <td><span>正常</span></td>
-                            <?php else : ?>
-                                <td><span>停用</span></td>
-                            <?php endif; ?>
-                            <td><span><?php echo $v->orgname ?></span></td>
-                            <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
-                            <input type="hidden" id="type" value="add">
-                            <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修改</a></span></td><!--放id-->
-                        </tr>
-                    <?php endforeach ?>
-
-                    </tbody>
-                </table>
-            </form>
-        </div>
-	    <div id="page">
-            <div class="page_left">&nbsp;</div>
-            <div class="page_center">
-                <div></div>
-                <div></div>
-                <div>
-                    <input type="text" value="1">
-                </div>
-                <div>共 1 页</div>
-                <div></div>
-                <div></div>
-                <div>
-                    <select name="pages" id="pages">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                    </select>
-                </div>
+    <form action="<?php echo site_url('card/index');?>" method="post" id="form">
+        <div class="mod-search cf">
+            <div class="fl">
+              <ul class="ul-inline">
+                <li>
+                    <span id="catorage"></span>
+                </li>
+                <li>
+                    <?php if ($like) :?>
+                        <input type="text" id="matchCon"  name="matchCon" class="ui-input ui-input-ph matchCon" value ="<?php echo $like ?>" style="width: 280px;">
+                    <?php else:?>
+                        <input type="text" id="matchCon"  name="matchCon" class="ui-input ui-input-ph matchCon" placeholder="输入卡号" style="width: 280px;">
+                    <?php endif; ?>
+                </li>
+                <li><a class="ui-btn mrb" id="search" >查询</a></li>
+              </ul>
             </div>
-            <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+            <div class="fr">
+                <a href="javascript:void(0);" id="new" class="ui-btn ui-btn-sp mrb">新增</a>
+                <a href="javascript:void(0);" class="ui-btn" id="btn-batchDel">删除</a>
+            </div>
+          </div>
+        <div class="grid-wrap">
+            <div class="table">
+                    <table style="width: 100%;">
+                        <thead >
+                            <tr>
+                                <th style="width: 20px;">
+                                    <input type="checkbox" id="all">
+                                </th>
+                                <th>卡号</th>
+                                <th>储值卡名称</th>
+                                <th>储值卡面值</th>
+                                <th>赠送金额</th>
+                                <th>工时折扣</th>
+                                <th>配件折扣</th>
+                                <th>状态</th>
+                                <th>适用门店</th>
+                                <th>添加时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($data as $k=>$v): ?>
+                            <tr>
+                                <td class="check">
+                                    <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+                                </td>
+                                <td><span><?php echo $v->car_num ?></span></td>
+                                <td><span><?php echo $v->car_name ?></span></td>
+                                <td><span><?php echo $v->sale ?>元</span></td>
+                                <td><span><?php echo $v->present ?>元</span></td>
+                                <td><span><?php echo $v->hour_discount ?>%</span></td>
+                                <td><span><?php echo $v->parts_discount ?>%</span></td>
+                                <?php if($v->status == 0):?>
+                                    <td><span>正常</span></td>
+                                <?php else : ?>
+                                    <td><span>停用</span></td>
+                                <?php endif; ?>
+                                <td><span><?php echo $v->orgname ?></span></td>
+                                <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
+                                <input type="hidden" id="type" value="add">
+                                <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修改</a></span></td><!--放id-->
+                            </tr>
+                        <?php endforeach ?>
+
+                        </tbody>
+                    </table>
+            </div>
+            <div id="page">
+
+                <div class="page_left">&nbsp;</div>
+                <div class="page_center">
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <input type="text" value="1">
+                    </div>
+                    <div>共 1 页</div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <select name="pages" id="pages">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
@@ -355,8 +353,6 @@ $(document).keydown(function(event) {
             <li><span>储值卡名称:</span><input type="text" id="car_name"></li>
             <li><span>卡号:</span><input type="text" id="car_num"></li>
             <li><span>实际售价:</span><input type="text" id="sale"></li>
-<!--            <li><span>有效期:</span><input type="number" min="0" step="1" id="validity"> 月 (0代表永久)</li>-->
-
             <li><span>赠送金额:</span><input type="text" id="present"></li>
             <li>
                 <span>状态:</span>
@@ -413,7 +409,6 @@ $("#save").click(function(){
     var car_name = $("#car_name").val();
     var car_num = $("#car_num").val();
     var sale = $("#sale").val();
-    // var validity = $("#validity").val();
     var present = $("#present").val();
     var status = $("#status").val();
     var hour_discount = $("#hour_discount").val();
@@ -440,7 +435,6 @@ $("#save").click(function(){
                 car_name: car_name,
                 car_num: car_num,
                 sale:sale,
-                // validity:validity,
                 present:present,
                 status:status,
                 hour_discount:hour_discount,
@@ -535,6 +529,10 @@ $("#save").click(function(){
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
         });
+
+        $("#search").click(function () {
+            $("#form").submit();
+        });
     });
     // 修改
     function edit(id) {
@@ -548,19 +546,19 @@ $("#save").click(function(){
                 id: id,
             },
             dataType: "json",
-            success: function (data) {
-                console.log(data);
-                if(data){
-                    $("#id").val(data.id);
-                    $("#car_name").val(data.car_name);
-                    $("#car_num").val(data.car_num);
-                    $("#sale").val(data.sale);
-                    $("#validity").val(data.validity);
-                    $("#present").val(data.present);
-                    $("#status").find("option[value = "+data.status +"]").attr("selected",true);
-                    $("#parts_discount").val(data.parts_discount);
-                    $("#hour_discount").val(data.hour_discount);
-                    $("#orgid").find("option[value = "+data.orgid +"]").attr("selected",true);
+            success: function (res) {
+                console.log(res);
+                if(res){
+                    $("#id").val(res.data.id);
+                    $("#car_name").val(res.data.car_name);
+                    $("#car_num").val(res.data.car_num);
+                    $("#sale").val(res.data.sale);
+                    $("#validity").val(res.data.validity);
+                    $("#present").val(res.data.present);
+                    $("#status").find("option[value = "+res.data.status +"]").attr("selected",true);
+                    $("#parts_discount").val(res.data.parts_discount);
+                    $("#hour_discount").val(res.data.hour_discount);
+                    $("#orgid").find("option[value = "+res.data.orgid +"]").attr("selected",true);
                 } else{
                     alert("未知错误");
                 }
@@ -589,6 +587,7 @@ $("#save").click(function(){
     var goodsCombo = Business.goodsCombo($('#goodsAuto'), {
         extraListHtml: ''
     });
+
 </script>
 </body>
 </html>
