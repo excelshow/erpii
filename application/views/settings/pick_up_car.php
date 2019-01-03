@@ -694,19 +694,28 @@
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="company">工作单位:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="reception">接待人员:</label></div>-->
+<!--                <div class="ctn-wrap">-->
+<!--                    <select name="reception" id="reception" class="sel">-->
+<!--                        <option value="1" selected>待确定</option>-->
+<!--                        <option value="2">已确定</option>-->
+<!--                        <option value="3">已取消</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </li>-->
+
             <li class="row-item">
-                <div class="label-wrap"><label for="company">工作单位:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>
+                <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="reception">接待人员:</label></div>
-                <div class="ctn-wrap">
-                    <select name="reception" id="reception" class="sel">
-                        <option value="1" selected>待确定</option>
-                        <option value="2">已确定</option>
-                        <option value="3">已取消</option>
-                    </select>
-                </div>
+                <div class="label-wrap"><label for="songCarRenPhone">送修人电话:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="service">服务性质:</label></div>
@@ -721,22 +730,14 @@
                     </select>
                 </div>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="songCarRenPhone">送修人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="source">客户来源:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>
-            </li>
-            <li class="row-item" style="width: 100% ;">
-                <div class="label-wrap"><label for="address">顾客地址:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>
-            </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="source">客户来源:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item" style="width: 100% ;">-->
+<!--                <div class="label-wrap"><label for="address">顾客地址:</label></div>-->
+<!--                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>-->
+<!--            </li>-->
             <li class="row-item">
                 <div class="label-wrap"><label for="startTime">开工时间:</label></div>
                 <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="startTime" id="startTime"></div>
@@ -898,15 +899,15 @@
                 <div class="label-wrap"><label for="displacement">排量 :</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="displacement" id="displacement"></div>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="displacement">排量 :</label></div>
-                <div class="ctn-wrap clearfix">
-                    <input type="radio" value="1" class="ui-input normal" name="displacement" id="displacement" checked="checked" style="width: 25%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -10%">良好</span>
-                    <input type="radio" value="2" class="ui-input normal" name="displacement" id="displacement" style="width: 25%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -10%">不正常</span>
-                </div>
-            </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="displacement">排量 :</label></div>-->
+<!--                <div class="ctn-wrap clearfix">-->
+<!--                    <input type="radio" value="1" class="ui-input normal" name="displacement" id="displacement" checked="checked" style="width: 25%;float:left;margin-top: 8px">-->
+<!--                    <span style="float:left;margin-left: -10%">良好</span>-->
+<!--                    <input type="radio" value="2" class="ui-input normal" name="displacement" id="displacement" style="width: 25%;float:left;margin-top: 8px">-->
+<!--                    <span style="float:left;margin-left: -10%">不正常</span>-->
+<!--                </div>-->
+<!--            </li>-->
             <li class="row-item" style="width: 50%;">
                 <div class="label-wrap"><label for="oilVolume">剩余油量 :</label></div>
                 <div class="ctn-wrap clearfix">
@@ -1418,8 +1419,11 @@
         </div>
         <div class="add_content">
             <ul class="content_main clearfix" style="position: relative;">
-                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号/客户姓名进行搜索"></li>
-                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;"></li>
+                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号进行搜索" onblur="phone()"></li>
+
+                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;">
+                    <input type="hidden" value="" id="userId">
+                </li>
                 <li>
                     <span>车牌号:</span>
                     <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
@@ -1609,17 +1613,155 @@
     </div>
 
 </div>
+<script>
+    function phone(){
+        var mobile =$("#userPhone").val();
 
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/phone');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.length != 0){
+                    $("#userName").val(data.name);
+                    $("#userId").val(data.id);
+                }else{
+                    $("#userName").val("无此账号");
+                }
+
+            },
+        });
+    }
+    $("#save_all").click(function () {
+        var describe = $("#describe").text(); //故障描述
+        var advice = $("#advice").text();   //维修建议
+        var report = $("#report").text();  //出车报告
+        var request = $("#request").text();  //顾客要求
+        var remarks = $("#remarks").text();  //备注
+        var  name = $("#name").val();  //客户用户名
+        var  phone = $("#phone").val();  //客户电话
+        var  number = $("#number").val();  //车牌
+        var  songCarRen = $("#songCarRen").val();  //送修人名字
+        var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
+        var  startTime = $("#startTime").val();  //开工时间
+        var  estimateTime = $("#estimateTime").val();  //预计完工时间
+        var  endTime = $("#endTime").val();  //完工时间
+
+        var  brand = $("#brand").val();   //品牌
+        var  vin = $("#vin").val();  //vin
+        var  insureCompany = $("#insureCompany").val();   //交强险保险公司
+        var  system = $("#system").val();  //车系
+        var  notice = $("#notice").val();  //公告号
+        var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
+        var  shape = $("#shape").val();  //车型年款
+        var  lastMileage = $("#lastMileage").val();  //上次里程
+        var  annualEndTime = $("#annualEndTime").val();  //年审到期
+        var  carShape = $("#carShape").val();   //车型
+        var  useMileage = $("#useMileage").val();  //行驶里程
+        var  suggestedMaintenanceTime = $("#suggestedMaintenanceTime").val();  //建议保养时间
+        var  carName = $("#carName").val();  //车主姓名
+        var  engineNumber = $("#engineNumber").val();   //发动机号
+        var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
+        var  idNumber = $("#idNumber").val();   //身份证号
+        var  carColor = $("#carColor").val();  //车辆颜色
+        var  carPrice = $("#carPrice").val();  //车辆价格
+        var  carAddress = $("#carAddress").val();  //车主地址
+        var  registedTime = $("#registedTime").val();   //注册时间
+        var  natureUsage = $("#natureUsage").val(); //使用性质
+        var  frontWheelType = $("#frontWheelType").val(); //前轮型号
+        var  backWheelType = $("#backWheelType").val(); //后轮型号
+        var  carType = $("#carType").val();  //车辆类型
+        var  transmission = $("#transmission").val();  //变速箱型号
+        var  carRmarks = $("#carRmarks").val();  //车辆备注
+        var  displacement = $("#displacement").val();  //排量
+        var  oilVolume = $("#oilVolume").val();  //油量
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/start');?>",
+            traditional: false,
+            dataType: "json",
+            data: {
+                li_img:url_arr['li_img'],   //实录照片
+                li1_img:url_arr['li1_img'],  //发动机部分照片
+                li2_img:url_arr['li2_img'],  //底盘部分照片
+                li3_img:url_arr['li3_img'],   //电气设备照片
+                li4_img:url_arr['li4_img'],   //轮胎部分照片
+                li5_img:url_arr['li5_img'],    //刹车系统照片
+                li6_img:url_arr['li6_img'],    //油水部分照片
+                li7_img:url_arr['li7_img'],     //电脑检测照片
+                li8_img:url_arr['li8_img'],     //外观检测照片
+            },
+            success: function (data) {
+                console.log(data);
+
+            },
+        });
+
+    });
+
+    $('#save').click(function () {
+        var  car_number = $("#number").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/car');?>",
+            data: {
+                car_number:car_number,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.length != 0){
+                    $("#brand").val(data.brand);
+                    $("#vin").val(data.vin);
+                    $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
+                    $("#system").val(data.system);
+                    $("#notice").val(data.notice);
+                    $("#insuranceEndTime").val(data.compulsoryTime);
+                    $("#shape").val(data.annual);
+                    $("#annualEndTime").val(data.review);
+                    $("#carShape").val(data.shape);
+                    $("#carName").val(data.username);
+                    $("#engineNumber").val(data.engine);
+                    $("#idNumber").val(data.people_id);
+                    $("#carColor").val(data.color);
+                    $("#carPrice").val(data.price);
+                    $("#carAddress").val(data.address);
+                    $("#registedTime").val(data.registration);
+                    $("#frontWheelType").val(data.front);
+                    $("#backWheelType").val(data.rear);
+                    $("#carType").find("option[value = "+data.type +"]").attr("selected",true);
+                    $("#transmission").val(data.transmission);
+                    $("#displacement").val(data.displacement);
+                    $("#natureUsage").find("option[value = "+data.nature +"]").attr("selected",true);
+                }
+
+            },
+        });
+    });
+</script>
 <script>
     $(function () {
         // 弹框
         $('#save').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
+            if($('#userName').val() == "无此账号"){
+                $('#phone').val("");
+                $('#name').val("");
+                $('#number').val("");
+            }else{
+                $('#phone').val($('#userPhone').val());
+                $('#name').val($('#userName').val());
+                $('#number').val($('#show_province').html()+$('#carNumberLast').val());
+            }
 
-            $('#phone').val($('#userPhone').val());
-            $('#name').val($('#userName').val());
-            $('#number').val($('#show_province').html()+$('#carNumberLast').val());
 
             $('#userPhone').val('');
             $('#userName').val('');
