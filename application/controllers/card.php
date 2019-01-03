@@ -11,19 +11,14 @@ class Card extends CI_Controller {
     //储值卡列表
     public function index() {
         $user = $this->session->userdata('jxcsys');
-        if ($user['orgLevel'] == 3){
-            $where = "orgid =".$user['orgId']." OR orgid =".$user['midId'];
-        }else if($user['orgLevel'] == 2){
-            $where = "midId =".$user['midId'];
-        }else if($user['orgLevel'] == 1){
-            $where = "topId =".$user['topId'];
-        }else if($user['orgLevel'] == 0){
-            $where = "";
-        }
-        $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
-        $data = $this->db->where($where)->get('ci_storedcard')->result();
 
-        $this->load->view('/settings/stored_value_card',['org'=>$org,'orgid'=>$user['midId'],'data'=>$data]);
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+
+        $like = array('car_num' => $this->input->post('matchCon'));
+
+        $data = $this->db->where($where)->like($like)->get('ci_storedcard')->result();
+
+        $this->load->view('/settings/stored_value_card',['data'=>$data,'like'=>$this->input->post('matchCon')]);
     }
 
     //添加储值卡
@@ -70,7 +65,16 @@ class Card extends CI_Controller {
     public function edit() {
         $id = str_enhtml($this->input->post('id',TRUE));
         $data = $this->db->where('id',$id)->get('ci_storedcard')->row();
-        die(json_encode($data));
+        $org = $this->db->where(['id'=>$data->orgid])->get('ci_org')->row();
+        $res = [];
+        if($org->level == 3){
+            $org_data = $this->db->where(['parentId'=>$org->parentId])->get('ci_org')->result();
+        }else{
+            $org_data = $this->db->where(['parentId'=>$org->orgid])->get('ci_org')->result();
+        }
+        $res['data'] = $data;
+        $res['org_data'] = $org_data;
+        die(json_encode($res));
     }
 
     //执行修改储值卡
