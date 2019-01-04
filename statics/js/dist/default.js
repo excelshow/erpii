@@ -680,8 +680,13 @@ var dataReflush, list = {
 		href: "../vip?action=index",
 		dataRight: "",
 		target: "setting"
+	},
+	qr: {
+		name: "门店二维码",
+		href: "../qr?action=index",
+		dataRight: "",
+		target: "setting"
 	}
-
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../settings/backup",
