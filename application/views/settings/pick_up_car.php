@@ -599,10 +599,6 @@
         padding-left: 5px;
         width: 100%;
     }
-    .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
-        text-align: right;
-        font-size: 18px;
-    }
     .add>.add_content .add_content_c{
         height: 100%;
         width: 45%;
@@ -736,6 +732,75 @@
         height: 30px;
         background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
         background-position:center center;
+    }
+
+    /*选择套餐弹窗*/
+    .add>.add_content .content_title{
+        background-color: #f1f1f1;
+        height: 30px;
+        width: 100%;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .add>.add_content .content_ul{
+        height: 355px;
+        overflow-y: auto;
+    }
+    .add>.add_content .content_li{
+        height: 30px;
+        width: 100%;
+        line-height: 30px;
+        text-align: center;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .add>.add_content .content_li:hover{
+        background-color: #f8ff94;
+    }
+    .add>.add_content .content_l{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: left;
+        border-right: none;
+    }
+    .add>.add_content .content_l_hover{
+        background-color: #ddd;
+    }
+    .add>.add_content .content_l .content_ul .content_li span{
+        display: inline-block;
+        box-sizing: border-box;
+        padding-left: 5px;
+        width: 100%;
+    }
+    .add>.add_content .content_c{
+        height: 100%;
+        width: 45%;
+        border: 1px solid #ddd;
+        float: left;
+    }
+    .add>.add_content .content_c .content_title li{
+        width: 32%;
+        display: inline-block;
+    }
+    .add>.add_content .content_c .content_ul .content_li span{
+        display: inline-block;
+        width: 32%;
+    }
+    .add>.add_content .content_r{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: right;
+    }
+    .add>.add_content .content_r .content_ul .content_li span{
+        display: inline-block;
+        width: 48%;
+    }
+    .add>.add_content .content_r .content_ul .content_li .delete{
+        height: 20px;
+        background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
+        background-position:center bottom;
     }
 </style>
 </head>
@@ -1694,66 +1759,28 @@
             <div class="add_close close_add">&times;</div>
         </div>
         <div class="add_content">
-            <div class="mod-search cf">
-                <div class="fl">
-                    <ul class="ul-inline">
-                        <li>
-                            <span id="catorage"></span>
-                        </li>
-                        <li>
-                            <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入名称" style="width: 280px;">
-                        </li>
-                        <li><a class="ui-btn mrb" id="search">查询</a></li>
-                    </ul>
-                </div>
+            <div class="content_l">
+                <ul class="content_title">套餐名称</ul>
+                <ul class="content_ul">
+                    <li class="content_li">
+                        <span>1</span>
+                    </li>
+                </ul>
             </div>
-            <div class="grid-wrap tankuang">
-                <div class="table">
-                    <table style="width: 100%;">
-                        <thead style="width: 100%;">
-                        <tr style="width: 100%;">
-                            <th style="width: 5%;">
-                                <input type="checkbox" id="all">
-                            </th>
-                            <th style="width: 15%;">套餐名称</th>
-                            <th style="width: 70%;">套餐项目</th>
-                            <th style="width: 10%;">金额(元)</th>
-                        </tr>
-                        </thead>
-                        <tbody id="meal_all">
-                            <tr>
-                                <td class="check" style="width: 5%;">
-                                    <input type="checkbox" class="check_child" value="1"><!--放id-->
-
-                                </td>
-                                <td><span class="taocan_name">1</span></td>
-                                <td><span class="taocan_item">2</span></td>
-                                <td><span class="taocan_price">3</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="page">
-                    <div class="page_left">&nbsp;</div>
-                    <div class="page_center">
-                        <div></div>
-                        <div></div>
-                        <div>
-                            <input type="text" value="1">
-                        </div>
-                        <div>共 1 页</div>
-                        <div></div>
-                        <div></div>
-                        <div>
-                            <select name="pages" id="pages">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
-                </div>
+            <div class="content_c">
+                <ul class="add_content_title">
+                    <li>套餐项目</li>
+                </ul>
+                <ul class="content_ul">
+                    <li class="content_li content_c_li">
+                        <span>1</span>
+                        <input type="hidden" value="1">
+                    </li>
+                </ul>
+            </div>
+            <div class="content_r">
+                <ul class="content_title">已选项目</ul>
+                <ul class="content_ul"></ul>
             </div>
         </div>
         <div class="add_footer">
@@ -1966,27 +1993,6 @@
         });
     });
 
-    $(".addMeal").click(function () {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/meal');?>",
-            data: {
-                userId:userId,
-            },
-            dataType: "json",
-
-            success: function (data) {
-                console.log(data);
-            },
-        });
-
-        var userId = $("#userId").val();
-        if(userId){
-            alert("请先选择客户！");
-        }else{
-
-        }
-    });
 
 </script>
 <script>
@@ -2260,13 +2266,16 @@
 
         //添加套餐
         $('.addMeal').on('click',function () {
-            var vipNumber = $('#VIPNumber').val();
+            var userId = $("#userId").val();
             $.ajax({
-               url: "",
-               data: {},
-               type: "",
-               datatype: "",
+                type: "POST",
+                url: "<?php echo site_url('billing/meal');?>",
+                data: {
+                    userId:userId,
+                },
+                dataType: "json",
                success: function (data) {
+                    console.log(data);
                    var str1 = '<tr><td class="check" style="width: 5%;"><input type="checkbox" class="check_child" value="';
                    var str2 = '"></td><td><span class="taocan_name">';
                    var str3 = '</span></td><td><span class="taocan_item">';
