@@ -10,8 +10,34 @@ class Billing extends CI_Controller {
     public function index(){
         $user = $this->session->userdata('jxcsys');
 
-//var_dump($user);
-        $this->load->view('/settings/pick_up_car');
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+        $goods = $this->db->where($where)->get('ci_goods')->result();
+        $service = $this->db->where($where)->get('ci_service')->result();
+        $where_serve = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'level'=>1);
+        $one = $this->db->where($where_serve)->get('ci_serve')->result();
+        $t = 0;
+        $serve = [];
+        foreach ($one as $k=>$v){
+            $serve[$t]['id']= $v->id;
+            $serve[$t]['name']= $v->name;
+            $two = $this->db->where(['parentId'=>$v->id])->get('ci_serve')->result();
+            $m = 0;
+            foreach ($two as $key => $value){
+                $serve[$t]['child'][$m]['id']= $value->id;
+                $serve[$t]['child'][$m]['name']= $value->name;
+                $three = $this->db->where(['parentId'=>$value->id])->get('ci_serve')->result();
+                $n = 0;
+                foreach ($three as $a=>$b){
+                    $serve[$t]['child'][$m]['child'][$n]['id']= $b->id;
+                    $serve[$t]['child'][$m]['child'][$n]['name']= $b->name;
+                    $n ++;
+                }
+                $m ++;
+            }
+            $t ++;
+        }
+
+        $this->load->view('/settings/pick_up_car',['goods'=>$goods,'service'=>$service,'serve'=>$serve]);
     }
 
     public function phone(){
@@ -44,7 +70,7 @@ class Billing extends CI_Controller {
         $image = $_FILES;
         $number = $this->input->post('number');
         $checks = $this->input->post('checks');
-        die(json_encode($checks));
+//        die(json_encode($checks));
         if($image){
             foreach ($image as $k=>$v){
 
@@ -59,70 +85,78 @@ class Billing extends CI_Controller {
             }
         }
 
-
-
-
-
-
-
-
-
     }
 
+    public function service(){
+        $serve_id = str_enhtml($this->input->post('serve_id',TRUE));
 
-    function get_image_byurl($url, $filename="") {
+        $serve = $this->db->where(['id'=>$serve_id])->get('ci_serve')->row();
+        if($serve -> level == 3){
+            $service = $this->db->where(['category_id'=>$serve_id])->get('ci_service')->result();
+        }elseif ($serve -> level == 2){
+            $service =[];
+            $t = 0;
+            $service_one = $this->db->where(['category_id'=>$serve_id])->get('ci_service')->result();
+            foreach ($service_one as $k=>$v){
+                $service[$t]['id'] = $v->id;
+                $service[$t]['name'] = $v->name;
+                $service[$t]['price'] = $v->price;
+                $service[$t]['vip_price'] = $v->vip_price;
+                $service[$t]['working'] = $v->working;
+                $t++;
+            }
+            $one = $this->db->where(['parentId'=>$serve_id])->get('ci_serve')->result();
 
-        if ($url == "") { return false; }
-
-        $ext = strrchr($url, ".");  //得到图片的扩展名
-
-        if($ext != ".gif" && $ext != ".jpg" && $ext != ".bmp") { $ext = ".jpg"; }
-
-        if($filename == "") { $filename = time() . $ext; }  //以时间另起名，在此可指定相对目录 ，未指定则表示同php脚本执行的当前目录
-
-        //以流的形式保存图片
-
-        $write_fd = @fopen($filename,"a");
-
-        @fwrite($write_fd, $this->CurlGet($url));  //将采集来的远程数据写入本地文件
-
-        @fclose($write_fd);
-
-        return($filename);  //返回文件名
+            foreach ($one as $key=>$val){
+                $service_two = $this->db->where(['category_id'=>$val->id])->get('ci_service')->result();
+                foreach ($service_two as $k=>$v){
+                    $service[$t]['id'] = $v->id;
+                    $service[$t]['name'] = $v->name;
+                    $service[$t]['price'] = $v->price;
+                    $service[$t]['vip_price'] = $v->vip_price;
+                    $service[$t]['working'] = $v->working;
+                    $t++;
+                }
+            }
+        }elseif ($serve -> level == 1){
+            $service =[];
+            $t = 0;
+            $service_one = $this->db->where(['category_id'=>$serve_id])->get('ci_service')->result();
+            foreach ($service_one as $k=>$v){
+                $service[$t]['id'] = $v->id;
+                $service[$t]['name'] = $v->name;
+                $service[$t]['price'] = $v->price;
+                $service[$t]['vip_price'] = $v->vip_price;
+                $service[$t]['working'] = $v->working;
+                $t++;
+            }
+            $one = $this->db->where(['parentId'=>$serve_id])->get('ci_serve')->result();
+            foreach ($one as $k1=>$v1){
+                $service_two = $this->db->where(['category_id'=>$v1->id])->get('ci_service')->result();
+                foreach ($service_two as $k2=>$v2){
+                    $service[$t]['id'] = $v2->id;
+                    $service[$t]['name'] = $v2->name;
+                    $service[$t]['price'] = $v2->price;
+                    $service[$t]['vip_price'] = $v2->vip_price;
+                    $service[$t]['working'] = $v2->working;
+                    $t++;
+                }
+                $two = $this->db->where(['parentId'=>$v1->id])->get('ci_serve')->result();
+                foreach ($two as $k3=>$v3){
+                    $service_two = $this->db->where(['category_id'=>$v3->id])->get('ci_service')->result();
+                    foreach ($service_two as $k4=>$v4){
+                        $service[$t]['id'] = $v4->id;
+                        $service[$t]['name'] = $v4->name;
+                        $service[$t]['price'] = $v4->price;
+                        $service[$t]['vip_price'] = $v4->vip_price;
+                        $service[$t]['working'] = $v4->working;
+                        $t++;
+                    }
+                }
+            }
+        }
+        die(json_encode($service));
 
     }
-
-
-//远程获取
-
-    function CurlGet($url){
-
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-
-            curl_setopt($curl, CURLOPT_URL, $url);
-
-            curl_setopt($curl, CURLOPT_HEADER, false);
-
-            //curl_setopt($curl, CURLOPT_REFERER,$url);
-            curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; SeaPort/1.2; Windows NT 5.1; SV1; InfoPath.2)");  //模拟浏览器访问
-
-            curl_setopt($curl, CURLOPT_COOKIEJAR, 'cookie.txt');
-
-            curl_setopt($curl, CURLOPT_COOKIEFILE, 'cookie.txt');
-
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 0);
-
-            $values = curl_exec($curl);
-
-            curl_close($curl);
-
-            return($values);
-
-    }
-
 
 }

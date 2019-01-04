@@ -593,7 +593,7 @@
     }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span{
         display: inline-block;
-        width: 48%;
+        width: 100%;
     }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
         text-align: right;
@@ -1425,12 +1425,12 @@
                 </div>
                 <div class="table_add clearfix">
                     <span>
-                        质检员:
-                        <select name="inspector" id="inspector" class="sel">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+<!--                        质检员:-->
+<!--                        <select name="inspector" id="inspector" class="sel">-->
+<!--                            <option value="1">1</option>-->
+<!--                            <option value="2">2</option>-->
+<!--                            <option value="3">3</option>-->
+<!--                        </select>-->
                     </span>
                     <span id="add_working_btn">选择工时</span>
                 </div>
@@ -1594,26 +1594,30 @@
         <div class="add_content_l">
             <ul class="add_content_title">类型</ul>
             <ul class="add_content_ul">
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
+                <?php foreach ($serve as $key=>$val) :?>
+                    <li class="add_content_li serve" style="text-align: left;">
+                        <span><?php echo $val['name'] ?></span>
+                        <input type="hidden" value="<?php echo $val['id'] ?>" >
+                        <?php if($val['child']) :?>
+                            <?php foreach ($val['child'] as $key1=>$val1) :?>
+                            <li class="add_content_li serve" style="text-align: left;">
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></span>
+                                <input type="hidden" value="<?php echo $val1['id'] ?>">
+                                <?php if($val1['child']) :?>
+                                    <?php foreach ($val1['child'] as $key2=>$val2) :?>
+                                    <li class="add_content_li serve" style="text-align: left;">
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></span>
+                                        <input type="hidden" value="<?php echo $val2['id'] ?>">
+                                    </li>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+                            </li>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                    </li>
+                <?php endforeach;?>
+
+
             </ul>
         </div>
         <div class="add_content_c">
@@ -1672,33 +1676,36 @@
         </div>
         <div class="add_content clearfix">
             <div class="parts_l">
+
                 <table>
                     <thead>
                         <tr>
+                            <th>配件编码</th>
                             <th>名称</th>
                             <th>规格/型号</th>
-                            <th>品牌</th>
-                            <th>编码</th>
-                            <th>OEM</th>
+                            <th>配件类别</th>
+                            <th>单位</th>
                             <th>仓位</th>
                             <th>库存</th>
-                            <th>适用车型</th>
-                            <th>售价</th>
+                            <th>零售价</th>
+                            <th>VIP价</th>
                         </tr>
                     </thead>
                     <tbody class="parts_main">
+                    <?php foreach ($goods as $k=>$v) :?>
                         <tr class="parts_tr">
-                            <td class="parts_td">111</td>
-                            <td class="parts_td">2</td>
-                            <td class="parts_td">3</td>
-                            <td class="parts_td">4</td>
-                            <td class="parts_td">5</td>
-                            <td class="parts_td">6</td>
-                            <td class="parts_td">7</td>
-                            <td class="parts_td">8</td>
-                            <td class="parts_td">9</td>
+                            <td class="parts_td"><?php echo $v->number ?></td>
+                            <td class="parts_td"><?php echo $v->name ?></td>
+                            <td class="parts_td"><?php echo $v->spec ?></td>
+                            <td class="parts_td"><?php echo $v->categoryName ?></td>
+                            <td class="parts_td"><?php echo $v->unitName ?></td>
+                            <td class="parts_td"><?php echo $v->locationName ?></td>
+                            <td class="parts_td"><?php echo $v->vipPrice ?></td>
+                            <td class="parts_td"><?php echo $v->salePrice ?></td>
+                            <td class="parts_td"><?php echo $v->vipPrice ?></td>
                             <input type="hidden" value="1">
                         </tr>
+                    <?php endforeach;?>
                     </tbody>
                     </thead>
                 </table>
@@ -1822,6 +1829,31 @@
             },
         });
     }
+    
+    $(".serve").click(function () {
+        var serve_id = $(this).find('input').val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/service');?>",
+            data: {
+                serve_id:serve_id,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                // if(data.length != 0){
+                //     $("#userName").val(data.name);
+                //     $("#userId").val(data.id);
+                // }else{
+                //     $("#userName").val("无此账号");
+                // }
+
+            },
+        });
+
+    });
     $("#save_all").click(function () {
         var describe = $("#describe").text(); //故障描述
         var advice = $("#advice").text();   //维修建议
