@@ -596,6 +596,8 @@
     }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span{
         display: inline-block;
+        box-sizing: border-box;
+        padding-left: 5px;
         width: 100%;
     }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
@@ -2203,7 +2205,7 @@
         });
 
         //添加选择配件弹框
-        $('.parts').on('click',function () {
+        $('#serve_position').on('click','.parts',function () {
             $('#ldg_lockmask').css('display','');
             $('#add_parts').css('display','');
         });
