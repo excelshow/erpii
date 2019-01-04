@@ -591,8 +591,13 @@
         float: left;
         border-right: none;
     }
+    .add>.add_content .add_content_l_hover{
+        background-color: #ddd;
+    }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span{
         display: inline-block;
+        box-sizing: border-box;
+        padding-left: 5px;
         width: 100%;
     }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
@@ -606,12 +611,12 @@
         float: left;
     }
     .add>.add_content .add_content_c .add_content_title li{
-        width: 48%;
+        width: 32%;
         display: inline-block;
     }
     .add>.add_content .add_content_c .add_content_ul .add_content_li span{
         display: inline-block;
-        width: 48%;
+        width: 32%;
     }
     .add>.add_content .add_content_r{
         height: 100%;
@@ -1387,39 +1392,23 @@
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
-                                <th style="width: 20%;">名称</th>
-                                <th style="width: 10%;">项目类型</th>
-                                <th style="width: 10%;">收费类型</th>
-                                <th style="width: 10%;">单价</th>
-                                <th style="width: 5%;">数量</th>
-                                <th style="width: 10%;">折扣</th>
-                                <th style="width: 10%;">金额</th>
-                                <th style="width: 5%;">减免</th>
-                                <th style="width: 5%;">施工员</th>
-                                <th style="width: 10%;">销售员</th>
+                                <th style="width: 40%;">名称</th>
+<!--                                <th style="width: 10%;">项目类型</th>-->
+<!--                                <th style="width: 10%;">收费类型</th>-->
+                                <th style="width: 20%;">单价</th>
+                                <th style="width: 20%;">VIP单价</th>
+                                <th style="width: 15%;">工时</th>
+<!--                                <th style="width: 5%;">数量</th>-->
+<!--                                <th style="width: 10%;">折扣</th>-->
+<!--                                <th style="width: 10%;">金额</th>-->
+<!--                                <th style="width: 5%;">减免</th>-->
+<!--                                <th style="width: 5%;">施工员</th>-->
+<!--                                <th style="width: 10%;">销售员</th>-->
                                 <th style="width: 5%;">操作</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="serviceItem_1">
-                                <td class="name">
-                                    <span>1</span>
-                                    <span class="parts clearfix">
-                                        <span class="parts_logo">+</span>
-                                        <span class="parts_text">配件</span>
-                                    </span>
-                                </td>
-                                <td><span>2</span></td>
-                                <td><span>3</span></td>
-                                <td><span>4</span></td>
-                                <td><span>5</span></td>
-                                <td><span>6</span></td>
-                                <td><span>7</span></td>
-                                <td><span>8</span></td>
-                                <td><span>9</span></td>
-                                <td><span>10</span></td>
-                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(1)" style="margin: 0;">删除</a></span></td><!--放id-->
-                            </tr>
+                        <tbody id="serve_position">
+
                         </tbody>
                     </table>
                 </div>
@@ -1455,11 +1444,11 @@
                     </div>
                 </div>
             </li>
-            <li class="row-item type_meal" style="display: none; width: 50%;">
-                <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="VIPNumber" id="VIPNumber"></div>
-            </li>
-            <li class="row-item type_meal" style="display: none; width: 50%;text-align: right">
+<!--            <li class="row-item type_meal" style="display: none; width: 50%;">-->
+<!--                <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="VIPNumber" id="VIPNumber"></div>-->
+<!--            </li>-->
+            <li class="row-item type_meal" style="display: none; width: 100%;text-align: left">
                 <a href="javascript:void(0);" class="ui-btn mrb addMeal" style="margin: 0;">添加套餐</a>
             </li>
             <li class="row-item type_meal" style="display: none; width: 100%;">
@@ -1593,7 +1582,7 @@
     <div class="add_content">
         <div class="add_content_l">
             <ul class="add_content_title">类型</ul>
-            <ul class="add_content_ul">
+            <ul class="add_content_ul serve_type">
                 <?php foreach ($serve as $key=>$val) :?>
                     <li class="add_content_li serve" style="text-align: left;">
                         <span><?php echo $val['name'] ?></span>
@@ -1616,41 +1605,15 @@
                         <?php endif;?>
                     </li>
                 <?php endforeach;?>
-
-
             </ul>
         </div>
         <div class="add_content_c">
             <ul class="add_content_title">
                 <li>名称</li>
                 <li>售价</li>
+                <li>VIP售价</li>
             </ul>
-            <ul class="add_content_ul">
-                <li class="add_content_li add_content_c_li">
-                    <span>1</span>
-                    <span>2</span>
-                    <input type="hidden" value="1">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>2</span>
-                    <span>2</span>
-                    <input type="hidden" value="2">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>3</span>
-                    <span>2</span>
-                    <input type="hidden" value="3">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>4</span>
-                    <span>2</span>
-                    <input type="hidden" value="4">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>5</span>
-                    <span>2</span>
-                    <input type="hidden" value="5">
-                </li>
+            <ul class="add_content_ul" id="serve_level2">
             </ul>
         </div>
         <div class="add_content_r">
@@ -1829,10 +1792,10 @@
             },
         });
     }
-    
-    $(".serve").click(function () {
+    $('.serve_type').on('click','.serve',function () {
         var serve_id = $(this).find('input').val();
-
+        $('.add_content_l_hover').removeClass('add_content_l_hover');
+        $(this).addClass('add_content_l_hover');
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('billing/service');?>",
@@ -1842,14 +1805,16 @@
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
-                // if(data.length != 0){
-                //     $("#userName").val(data.name);
-                //     $("#userId").val(data.id);
-                // }else{
-                //     $("#userName").val("无此账号");
-                // }
-
+                var str = '';
+                var str1 = '<li class="add_content_li add_content_c_li"><span>';
+                var str2 = '</span><span>';
+                var str3 = '</span><input type="hidden" value="';
+                var str4 = '"><span style="display: none;">';
+                var str5 = '</span></li>';
+                $.each(data,function ($k,$v) {
+                    str += str1 + $v.name + str2 + $v.price + str2 + $v.vip_price + str3 + $v.id + str4 + $v.working + str5;
+                });
+                $('#serve_level2').html(str);
             },
         });
 
@@ -2200,15 +2165,19 @@
         });
 
         //添加工时，选中工时
-        $('.add_content_c_li').on('click',function () {
-            var val = $(this).find('span:first-child').html();
+        $('#serve_level2').on('click','.add_content_c_li',function () {
+            var name = $(this).find('span:first-child').html();
+            var price = $(this).find('span:nth-child(2)').html();
+            var vip_price = $(this).find('span:nth-child(3)').html();
+            var working = $(this).find('span:last-child').html();
             var id = $(this).find('input').val();
             var str1 = '<li class="add_content_li add_content_r_li add_content_r_li_';
             var str2 = '"><span>';
-            var str3 = '</span><span class="delete" onclick="delLi(';
-            var str4 = ')"></span><input type="hidden" value="';
-            var str5 = '"> </li>';
-            var str = str1 + id + str2 + val + str3 + id + str4 + id + str5;
+            var str3 = '</span><span style="display: none;">';
+            var str4 = '</span><span class="delete" onclick="delLi(';
+            var str5 = ')"></span><input type="hidden" value="';
+            var str6 = '"> </li>';
+            var str = str1 + id + str2 + name + str3 + price + str3 + vip_price + str3 + working + str4 + id + str5 + id + str6;
             $('.add_content_r .add_content_ul').append(str);
         });
 
@@ -2216,19 +2185,27 @@
         $('#add_working_val').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add_working').css('display','none');
-            var input = $('.add_content_r_li input');
+            var all = $('.add_content_r_li');
             var arr = new Array();
-            $.each(input,function () {
-                arr.push($(this).val());
+
+            var str = '';
+            var str1 = '<tr class="serviceItem_';
+            var str2 = '"><td class="name"><span>';
+            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>';
+            var str4 = '</span></td><td><span>';
+            var str5 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(';
+            var str6 = ')" style="margin: 0;">删除</a></span></td></tr>';
+            $.each(all,function () {
+                str += str1 + $(this).find('input').val() + str2 + $(this).find('span:nth-child(1)').html() + str3 + $(this).find('span:nth-child(2)').html() + str4 + $(this).find('span:nth-child(3)').html() + str4 + $(this).find('span:nth-child(4)').html() + str5 + $(this).find('input').val() + str6;
             });
             $('.add_content_r_li').remove();
-            // $.ajax({
-            //
-            // });
+            $('#serve_level2').html('');
+            $('.add_content_l_hover').removeClass('add_content_l_hover');
+            $('#serve_position').append(str);
         });
 
         //添加选择配件弹框
-        $('.parts').on('click',function () {
+        $('#serve_position').on('click','.parts',function () {
             $('#ldg_lockmask').css('display','');
             $('#add_parts').css('display','');
         });
