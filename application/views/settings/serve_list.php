@@ -395,14 +395,22 @@
                 dataType: "JSON",
                 success:function (res) {
                     if (res.code == 0){
-                        alert('删除成功！');
+                        parent.Public.tips({
+                            content:'删除成功！'
+                        });
                     } else{
-                        alert('删除失败！');
+                        parent.Public.tips({
+                            type:1,
+                            content:'删除失败！'
+                        });
                     }
 
                 },
                 error:function () {
-                    alert('出错啦！')
+                    parent.Public.tips({
+                        type:1,
+                        content:'出错啦！'
+                    });
                 }
             });
             location.reload();
@@ -470,16 +478,24 @@
                     success:function (res) {
 
                         if (res.code == 0){
-                            alert(res.text);
+                            parent.Public.tips({
+                                content:res.text
+                            });
                             location.href = "<?php echo site_url('serve/servicelist')?>";
                         } else{
-                            alert(res.text);
+                            parent.Public.tips({
+                                type:1,
+                                content:res.text
+                            });
                         }
 
                     },
                     error:function (res) {
                         console.log(res);
-                        alert('出错啦！');
+                        parent.Public.tips({
+                            type:1,
+                            content:'出错啦！'
+                        });
                     }
                 });
             }

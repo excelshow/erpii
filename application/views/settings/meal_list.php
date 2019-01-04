@@ -318,15 +318,23 @@
                 success:function (res) {
 
                     if (res.code == 0){
-                        alert(res.text);
+                        parent.Public.tips({
+                            content:res.text
+                        });
                         location.href = "<?php echo site_url('meal')?>";
                     } else{
-                        alert(res.text);
+                        parent.Public.tips({
+                            type:1,
+                            content:res.text
+                        });
                     }
 
                 },
                 error:function () {
-                    alert('出错啦！')
+                    parent.Public.tips({
+                        type:1,
+                        content:"出错啦！"
+                    });
                 }
             });
 
