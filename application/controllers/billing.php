@@ -163,8 +163,8 @@ class Billing extends CI_Controller {
         $userId = str_enhtml($this->input->post('userId',TRUE));
         $user = $this->session->userdata('jxcsys');
         $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
-        $data = $this->db->where($where)->get('ci_vipcard')->result();
-
+        $data = $this->db->where($where)->get('ci_vipcard')->row();
+//        $data['content'] = json_decode($data['content']);
         die(json_encode($data));
     }
 
