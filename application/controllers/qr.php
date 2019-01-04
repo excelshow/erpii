@@ -14,10 +14,10 @@ class Qr extends CI_Controller {
         }
         if(file_exists("image/qr/".$user['lowId'].'/'.$user['lowId'].'.jpg')){
             var_dump("图片已存在");exit;
+
         }
         $appid = "wx753a3c4c7a501de8";
         $appsecret = "7237bb051936fca47440cb9c545dba96";
-//        var_dump($user);exit;
 
         //当session没有值 或 过期时间到 则重新付值
         if(!isset($_SESSION['access_tokens']) || $_SESSION['access_tokens']['expire_time'] < time()){
