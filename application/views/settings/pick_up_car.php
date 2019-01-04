@@ -149,6 +149,78 @@
         bottom: 0;
         right: 0;
     }
+    .tankuang{
+        padding: 0;
+        height: 90%;
+    }
+    #page{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        line-height: 30px;
+    }
+    #page>div{
+        float: left;
+        width: 33.333%;
+        text-align: center;
+    }
+    #page>div:first-child{
+        width: 25%;
+    }
+    #page>div:nth-child(2){
+        width: 40%;
+    }
+    #page>div:last-child{
+        text-align: right;
+    }
+    .page_center>div{
+        float: left;
+        margin-left: 10px;
+    }
+    .page_center>div:first-child{
+        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
+        background-repeat: no-repeat;
+        background-position: -48px 0px;
+        width: 16px;
+        height: 16px;
+        margin-top: 8px;
+    }
+    .page_center>div:nth-child(2){
+        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
+        background-repeat: no-repeat;
+        background-position: -16px 0px;
+        width: 16px;
+        height: 16px;
+        margin-top: 8px;
+    }
+    .page_center>div:nth-child(3){
+        width: 42px;
+        height: 18px;
+    }
+    .page_center>div:nth-child(3)>input{
+        width: 100%;
+        height: 100%;
+    }
+    .page_center>div:nth-child(5){
+        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        width: 16px;
+        height: 16px;
+        margin-top: 8px;
+    }
+    .page_center>div:nth-child(6){
+        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
+        background-repeat: no-repeat;
+        background-position: -32px 0px;
+        width: 16px;
+        height: 16px;
+        margin-top: 8px;
+    }
+    .row-item >.label-wrap{
+        width:80px;
+    }
     .base-form{
         border-bottom: 1px solid #ddd;
         margin-bottom: 20px;
@@ -1306,7 +1378,11 @@
 
         <ul class="main_title car_service" style="display: none">服务项目</ul>
         <ul class="mod-form-rows base-form clearfix car_service" style="display: none;" id="base-form">
-            <li class="row-item" style="width: 100%;border: 1px solid #ddd;">
+            <li class="row-item" style="width: 100%;margin-top: 10px">
+                <a class="ui-btn ui-btn-sp choose_type">标准工时</a>
+                <a class="ui-btn choose_type">VIP套餐</a>
+            </li>
+            <li class="row-item type_standard" style="width: 100%;border: 1px solid #ddd;">
                 <div class="table">
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
@@ -1379,6 +1455,36 @@
                     </div>
                 </div>
             </li>
+            <li class="row-item type_meal" style="display: none; width: 50%;">
+                <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="VIPNumber" id="VIPNumber"></div>
+            </li>
+            <li class="row-item type_meal" style="display: none; width: 50%;text-align: right">
+                <a href="javascript:void(0);" class="ui-btn mrb addMeal" style="margin: 0;">添加套餐</a>
+            </li>
+            <li class="row-item type_meal" style="display: none; width: 100%;">
+                <div class="table">
+                    <table style="width: 100%;">
+                        <thead style="width: 100%;">
+                            <tr style="width: 100%;">
+                                <th style="width: 25%;">名称</th>
+                                <th style="width: 10%;">售价</th>
+                                <th style="width: 60%;">套餐内容</th>
+                                <th style="width: 5%;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taocan_all">
+                            <tr class="mealItem_2">
+                                <td><span>1</span></td>
+                                <td><span>3</span></td>
+                                <td><span>4</span></td>
+                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal(2)" style="margin: 0;">删除</a></span></td><!--放id-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <input type="hidden" value="" id="taocan_id"> <!--存放套餐ID-->
         </ul>
 
         <ul class="main_title"></ul>
@@ -1612,6 +1718,85 @@
         </div>
     </div>
 
+    <!--选择套餐弹框-->
+    <div id="add_meal" class="add" style="display: none;">
+        <div class="add_header clearfix">
+            <div class="add_title">选择套餐</div>
+            <div class="add_close close_add">&times;</div>
+        </div>
+        <div class="add_content">
+            <div class="mod-search cf">
+                <div class="fl">
+                    <ul class="ul-inline">
+                        <li>
+                            <span id="catorage"></span>
+                        </li>
+                        <li>
+                            <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入名称" style="width: 280px;">
+                        </li>
+                        <li><a class="ui-btn mrb" id="search">查询</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid-wrap tankuang">
+                <div class="table">
+                    <table style="width: 100%;">
+                        <thead style="width: 100%;">
+                        <tr style="width: 100%;">
+                            <th style="width: 5%;">
+                                <input type="checkbox" id="all">
+                            </th>
+                            <th style="width: 15%;">套餐名称</th>
+                            <th style="width: 70%;">套餐项目</th>
+                            <th style="width: 10%;">金额(元)</th>
+                        </tr>
+                        </thead>
+                        <tbody id="meal_all">
+                            <tr>
+                                <td class="check" style="width: 5%;">
+                                    <input type="checkbox" class="check_child" value="1"><!--放id-->
+
+                                </td>
+                                <td><span class="taocan_name">1</span></td>
+                                <td><span class="taocan_item">2</span></td>
+                                <td><span class="taocan_price">3</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="page">
+                    <div class="page_left">&nbsp;</div>
+                    <div class="page_center">
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <input type="text" value="1">
+                        </div>
+                        <div>共 1 页</div>
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <select name="pages" id="pages">
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+                </div>
+            </div>
+        </div>
+        <div class="add_footer">
+            <td colspan="2">
+                <div class="ui_buttons">
+                    <input type="button" id="add_meal_btn" value="确定" class="ui_state_highlight" />
+                    <input type="button" class="close_add" value="关闭" />
+                </div>
+            </td>
+        </div>
+    </div>
+
 </div>
 <script>
     function phone(){
@@ -1819,9 +2004,10 @@
             $('#add').css('display','none');
             $('#add_working').css('display','none');
             $('#add_parts').css('display','none');
+            $('#add_meal').css('display','none');
         });
 
-        // 两个切换
+        // 切换
         $('.choose').on('click',function () {
             $('.choose').removeClass('ui-btn-sp');
             $(this).addClass('ui-btn-sp');
@@ -1869,6 +2055,17 @@
                 $('.base').css('display','none');
             } else{
                 $('.base').css('display','');
+            }
+        });
+        $('.choose_type').on('click',function () {
+            $('.choose_type').removeClass('ui-btn-sp');
+            $(this).addClass('ui-btn-sp');
+            if ($(this).html() == '标准工时'){
+                $('.type_standard').css('display','');
+                $('.type_meal').css('display','none');
+            } else{
+                $('.type_standard').css('display','none');
+                $('.type_meal').css('display','');
             }
         });
 
@@ -2031,7 +2228,105 @@
             //
             // });
             $('.parts_li').remove();
-        })
+        });
+
+        //添加套餐
+        $('.addMeal').on('click',function () {
+            var vipNumber = $('#VIPNumber').val();
+            $.ajax({
+               url: "",
+               data: {},
+               type: "",
+               datatype: "",
+               success: function (data) {
+                   var str1 = '<tr><td class="check" style="width: 5%;"><input type="checkbox" class="check_child" value="';
+                   var str2 = '"></td><td><span class="taocan_name">';
+                   var str3 = '</span></td><td><span class="taocan_item">';
+                   var str4 = '</span></td><td><span class="taocan_price">';
+                   var str5 = '</span></td></tr>';
+                   var str = '';
+                   $.each(data,function () {
+                       str += str1 + this.id + str2 + this.name + str3 + this.item + str4 + this.price + str5;
+                   });
+                   $('#meal_all').append(str);
+               } ,
+                error:function () {
+
+                }
+            });
+            $('#ldg_lockmask').css('display','');
+            $('#add_meal').css('display','');
+        });
+
+        //添加套餐，单选框
+        $('#all').on('click',function () {
+            var thisChecked = $(this).prop('checked');
+            $('.check_child').prop('checked',thisChecked);
+
+        });
+        $('.check_child').on('click',function(){
+            var totalNum =  $('.check_child').length;
+            var checkedNum =  $('.check_child:checked').length;
+            $('#all').prop('checked',totalNum==checkedNum);
+        });
+
+        //添加套餐，添加套餐
+        $('#add_meal_btn').on('click',function () {
+            var checkitems = new Array();
+            var checkvalues = new Array();
+            $.each($('.check_child:checked'),function(){
+                var biaoji = $(this);
+                var num = 0;
+                if ($('.biaoji').val() != null) {
+                    $.each($('.biaoji'),function () {
+                        if ($(this).val() == biaoji.val()){
+                            num = num + 1;
+                        }
+                    });
+                    if (num <= 0){
+                        checkitems.push($(this).val());
+                        var value1 = '<tr class="mealItem_';
+                        var value2 = '"><input type="hidden" class="biaoji" value="';
+                        var value3 = '"><td><span>'
+                        var value4 = '</span></td>\n' +
+                            '                    <td><span>';
+                        var value5 = '</span></td>\n' +
+                            '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
+                        var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
+                            '                </tr>';
+                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+
+                        checkvalues.push(value);
+                    }
+                }else{
+                    checkitems.push($(this).val());
+                    var value1 = '<tr class="mealItem_';
+                    var value2 = '"><input type="hidden" class="biaoji" value="';
+                    var value3 = '"><td ><span>'
+                    var value4 = '</span></td>\n' +
+                        '                    <td><span>';
+                    var value5 = '</span></td>\n' +
+                        '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
+                    var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
+                        '                </tr>';
+                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
+
+                    checkvalues.push(value);
+                }
+
+            });
+            if (checkitems != ''){
+                $('#taocan_id').val(checkitems);
+                $.each(checkvalues, function (key,value) {
+                    $('#taocan_all').append(value);
+                });
+                $('#ldg_lockmask').css('display','none');
+                $('#add_meal').css('display','none');
+            }else{
+                $('#ldg_lockmask').css('display','none');
+                $('#add_meal').css('display','none');
+            }
+        });
     });
 
     // 车检报告删除照片
@@ -2073,6 +2368,11 @@
     //删除以显示服务项目
     function delItem(id) {
         $('.serviceItem_' + id).remove();
+    }
+
+    //删除以显示套餐
+    function delMeal(id) {
+        $('.mealItem_' + id).remove();
     }
 
 </script>
