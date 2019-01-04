@@ -154,12 +154,6 @@ class Settings extends CI_Controller {
         $this->load->view('settings/recharge_stored_value_card');
     }
 
-    /**
-     * 借车开单结算
-     */
-    public function settlement(){
-        $this->load->view('settings/settlement');
-    }
 
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
