@@ -448,12 +448,20 @@ $("#save").click(function(){
             success: function (data) {
                 // console.log(data);
                 if(data.code == 0){
-                    alert(data.text);
+                    parent.Public.tips({
+                        content:data.text
+                    });
                     location.href = "<?php echo site_url('card')?>";
                 }else if (data.code == 1){
-                    alert(data.text);
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text
+                    });
                 } else{
-                    alert("未知错误");
+                    parent.Public.tips({
+                        type:1,
+                        content:"未知错误"
+                    });
                 }
 
             },
@@ -493,19 +501,30 @@ $("#save").click(function(){
                     success: function (data) {
                         console.log(data);
                         if(data){
-                            alert("删除成功");
+                            parent.Public.tips({
+                                content:"删除成功"
+                            });
                             location.href = "<?php echo site_url('card')?>";
                         } else{
-                            alert("删除失败");
+                            parent.Public.tips({
+                                type:1,
+                                content:"删除失败"
+                            });
                         }
 
                     },
                     error:function () {
-                        alert('出错啦！')
+                        parent.Public.tips({
+                            type:1,
+                            content:"出错啦！"
+                        });
                     }
                 })
             } else{
-                alert('未选择要删除的项！');
+                parent.Public.tips({
+                    type:2,
+                    content:"未选择要删除的项！"
+                });
             }
         });
 
@@ -560,7 +579,10 @@ $("#save").click(function(){
                     $("#hour_discount").val(res.data.hour_discount);
                     $("#orgid").find("option[value = "+res.data.orgid +"]").attr("selected",true);
                 } else{
-                    alert("未知错误");
+                    parent.Public.tips({
+                        type:1,
+                        content:"未知错误"
+                    });
                 }
 
             },

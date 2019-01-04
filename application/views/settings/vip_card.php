@@ -434,18 +434,29 @@ $(document).keydown(function(event) {
                     dataType: "JSON",
                     success:function (res) {
                         if (res == 1){
-                            alert('删除成功！');
+                            parent.Public.tips({
+                                content:"删除成功！"
+                            });
                         } else{
-                            alert('删除失败！');
+                            parent.Public.tips({
+                                type:1,
+                                content:"删除失败！"
+                            });
                         }
 
                     },
                     error:function () {
-                        alert('出错啦！')
+                        parent.Public.tips({
+                            type:1,
+                            content:"出错啦！"
+                        });
                     }
                 })
             } else{
-                alert('未选择要删除的项！');
+                parent.Public.tips({
+                    type:2,
+                    content:"未选择要删除的项！"
+                });
             }
         });
 

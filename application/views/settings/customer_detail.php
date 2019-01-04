@@ -505,9 +505,15 @@ $(document).keydown(function(event) {
                     $('.normal').attr('readonly',true);
                     $('.normal select').attr('disabled',true);
                 }else if (data.code == 1){
-                    alert(data.text);
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text
+                    });
                 } else{
-                    alert("未知错误");
+                    parent.Public.tips({
+                        type:1,
+                        content:"未知错误"
+                    });
                 }
 
             },
@@ -554,9 +560,15 @@ $(document).keydown(function(event) {
                     $('.normal1').attr('readonly',true);
                     $('.normal1 select').attr('disabled',true);
                 }else if (data.code == 1){
-                    alert(data.text);
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text
+                    });
                 } else{
-                    alert("未知错误");
+                    parent.Public.tips({
+                        type:1,
+                        content:"未知错误"
+                    });
                 }
 
             },

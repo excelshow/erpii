@@ -406,15 +406,23 @@
                 success:function (res) {
 console.log(res);
                     if (res.code == 0){
-                        alert(res.text);
+                        parent.Public.tips({
+                            content:res.text
+                        });
                         location.href = "<?php echo site_url('serve')?>";
                     } else{
-                        alert(res.text);
+                        parent.Public.tips({
+                            type:1,
+                            content:res.text
+                        });
                     }
 
                 },
                 error:function () {
-                    alert('出错啦！')
+                    parent.Public.tips({
+                        type:1,
+                        content:'出错啦！'
+                    });
                 }
             });
             location.reload();
@@ -461,16 +469,24 @@ console.log(res);
                 success:function (res) {
                     console.log(res);
                     if (res.code == 0){
-                        alert(res.text);
+                        parent.Public.tips({
+                            content:res.text
+                        });
                         location.href = "<?php echo site_url('serve')?>";
                     } else{
-                        alert(res.text);
+                        parent.Public.tips({
+                            type:1,
+                            content:res.text
+                        });
                     }
 
                 },
                 error:function (res) {
                     console.log(res);
-                    alert('出错啦！');
+                    parent.Public.tips({
+                        type:1,
+                        content:'出错啦！'
+                    });
                 }
             });
         });
