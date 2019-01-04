@@ -509,7 +509,6 @@
         color: #fff;
         background-color: #578ccd;
         border-radius: 20px;
-        margin-left: -336px;
         cursor: pointer;
     }
     .table_total .table_total_l{
