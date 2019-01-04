@@ -1,6 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class Billing extends CI_Controller {
     public function __construct(){
         parent::__construct();
@@ -35,19 +34,38 @@ class Billing extends CI_Controller {
     }
 
     public function start(){
-        $data = $this->input->post(NULL,TRUE);
-
-        die(json_encode($data));
-
-
-//        $this->get_image_byurl('https://wx1.sinaimg.cn/mw690/006OBeunly1fygh06e99nj31hc0u01ky.jpg');
-//        die(json_encode($data));
-        foreach ($data['li_img'] as $k=>$v){
-
-//            file_put_contents($img, file_get_contents($url));
-//            $this->get_image_byurl($v);
-
+        $user = $this->session->userdata('jxcsys');
+        $res =[];
+        if ($user['orgWhere'] != 'lowId='.$user['lowId']){
+            $res['code'] = 1;
+            $res['text'] = "您尚未在组织中，添加失败！";
+            die(json_encode($res));
         }
+        $image = $_FILES;
+        $number = $this->input->post('number');
+        $checks = $this->input->post('checks');
+        die(json_encode($checks));
+        if($image){
+            foreach ($image as $k=>$v){
+
+                $dir = iconv("UTF-8", "GBK", "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7));
+                if (!file_exists($dir)){
+                    mkdir ($dir,0777,true);
+                }
+                $strs="QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
+                $name = substr(str_shuffle($strs),mt_rand(0,strlen($strs)-33),32);
+                move_uploaded_file($v['tmp_name'],iconv("utf-8","gb2312","image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg'));
+
+            }
+        }
+
+
+
+
+
+
+
+
 
     }
 

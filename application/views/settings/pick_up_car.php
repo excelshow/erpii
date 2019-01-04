@@ -928,7 +928,7 @@
         <ul class="main_title car_photo" style="display: none">实录照片</ul>
         <ul class="mod-form-rows base-form clearfix car_photo" style="display: none;" id="base-form">
             <li class="item_item upload_image clearfix">
-                <input type="file" name="li_img" id="li_img" accept="image/*" hidden>
+                <input type="file" name="li0_img" id="li0_img" accept="image/*" hidden>
                 <span class="upload_image_click">
                     <span>+</span>
                     <span>上传照片</span>
@@ -947,7 +947,7 @@
                 <a class="ui-btn choose_inspect">基础检查</a>
             </li>
             <li class="row-item" style="width: 100%;border: 1px solid #ddd;">
-                <ul class="item clearfix">
+                <ul class="item clearfix" >
                     <li class="item_title">
                         <span class="item_title_text">发动机部分</span>
                         <span class="item_title_photo">
@@ -956,58 +956,58 @@
                         </span>
                     </li>
                     <li class="item_item base">
-                        <span class="item_name">1.   着车检查发动机有无异响</span>
+                        <span class="item_name" >1.   着车检查发动机有无异响</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="1" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item base">
                         <span class="item_name">2.   检查正时皮带是否老化或磨损（建议每3年或7万公里更换）</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="2" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">3.   检查风扇、空调、助力泵皮带的有无异响、老化、裂纹</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="3" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">4.   清洁或更换空气格、空调格</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="4" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">5.   检查气门垫片是否漏油</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="5" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">6.   检查火花塞、点火线圈是否漏电</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="6" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">7.   检查上、下水管有无老化、膨胀、漏水现象</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="7" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">8.   检查碳罐是否堵塞（建议每3年或8万公里更换）</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="8" value="0">
                     </li>
                     <li class="item_item base">
                         <span class="item_name">9.   检查节气门是否脏、堵塞</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="9" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li1_img" id="li1_img" class="file" accept="image/*" hidden>
@@ -1025,49 +1025,49 @@
                         <span class="item_name">10.   紧固底盘螺丝</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="10" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">11.   检查离合器是否有打滑现象</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="11" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">12.   检查变速器紧固情况，油平面及有无漏油现象</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="12" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">13.   检查悬挂各球头是否松动或胶套漏油现象</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="13" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">14.   检查前、后减震器是否漏油或变形</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="14" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">15.   检查前、后桥是否碰撞变形</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="15" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">16.   检查排气管是否变形或吊胶脱落</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="16" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">17.   检查油箱固定螺丝是否紧固</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="17" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li2_img" id="li2_img" class="file" accept="image/*" hidden>
@@ -1085,43 +1085,43 @@
                         <span class="item_name">18.   检查蓄电池电压是否正常</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="18" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">19.   检查发电机是否供电正常</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="19" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">20.   检查内部灯光是否正常、仪表指示灯、室内阅读灯</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="20" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">21.   检查外部灯光是否正常、大灯、小灯、前后雾灯、牌照灯、制动灯等</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="21" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">22.   检查喇叭是否沙哑、单音等故障</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="22" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">23.   检查四门玻璃升降是否正常</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="23" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">24.   检查空调温度是否制冷正常</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="24" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li3_img" id="li3_img" class="file" accept="image/*" hidden>
@@ -1139,25 +1139,25 @@
                         <span class="item_name">25.   检查前、后轮胎和备用胎是否漏气、老化、磨损</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="25" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">26.   检查前后轮磨损情况是否需要对调动平衡（建议半年更换1次）</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="26" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">27.   清理胎纹石子用袋子装好展示给客户</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="27" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">28.   紧固轮胎螺丝</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="28" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li4_img" id="li4_img" class="file" accept="image/*" hidden>
@@ -1175,31 +1175,31 @@
                         <span class="item_name">29.   检查刹车软管是否漏油、老化（建议3年更换1次）</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="29" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">30.   检查刹车分泵是否卡死或漏油</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="30" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">31.   检查手刹工作情况</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="31" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">32.   检查刹车皮厚度是否正常</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="32" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">33.   检查刹车碟是否平整</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="33" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li5_img" id="li5_img" class="file" accept="image/*" hidden>
@@ -1217,19 +1217,19 @@
                         <span class="item_name">34.   检查或更换机油、机油格</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="34" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">35.   检查或更换方向机油、变速箱油、刹车油（建议2年或4万公里更换）</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="35" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">36.   补充或更换雨刮水、防冻液，建议2年或4万公里更换防冻液</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="36" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li6_img" id="li6_img" class="file" accept="image/*" hidden>
@@ -1247,13 +1247,13 @@
                         <span class="item_name">37.   电脑检测读取故障码</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="37" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">38.   保养机油灯复位归零</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="38" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li7_img" id="li7_img" class="file" accept="image/*" hidden>
@@ -1271,31 +1271,31 @@
                         <span class="item_name">39.   左侧车身</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="39" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">40.   右侧车身</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="40" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">41.   车顶</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0"><!-- 0正常1不正常-->
+                        <input type="hidden" class = "checks" name="41" value="0"><!-- 0正常1不正常-->
                     </li>
                     <li class="item_item">
                         <span class="item_name">42.   车前部</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="42" value="0">
                     </li>
                     <li class="item_item">
                         <span class="item_name">43.   车后部</span>
                         <span class="item_discribe">正常</span>
                         <span class="item_icon"></span>
-                        <input type="hidden" name="" value="0">
+                        <input type="hidden" class = "checks" name="43" value="0">
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li8_img" id="li8_img" class="file" accept="image/*" hidden>
@@ -1680,28 +1680,62 @@
         var  carRmarks = $("#carRmarks").val();  //车辆备注
         var  displacement = $("#displacement").val();  //排量
         var  oilVolume = $("#oilVolume").val();  //油量
-        console.log(url_arr['li_img'][0]);
-        var image = new FormData();
-        image.append('a',url_arr['li_img'][0]);
-        console.log(image);
 
+        var image = new FormData();
+
+        //实录照片
+        $.each(url_arr['li0_img'],function ($key,$val) {
+            image.append('li0_img'+$key,$val);
+        });
+        //发动机部分照片
+        $.each(url_arr['li1_img'],function ($key,$val) {
+            image.append('li1_img'+$key,$val);
+        });
+        //底盘部分照片
+        $.each(url_arr['li2_img'],function ($key,$val) {
+            image.append('li2_img'+$key,$val);
+        });
+        //电气设备照片
+        $.each(url_arr['li3_img'],function ($key,$val) {
+            image.append('li3_img'+$key,$val);
+        });
+        //轮胎部分照片
+        $.each(url_arr['li4_img'],function ($key,$val) {
+            image.append('li4_img'+$key,$val);
+        });
+        //刹车系统照片
+        $.each(url_arr['li5_img'],function ($key,$val) {
+            image.append('li5_img'+$key,$val);
+        });
+        //油水部分照片
+        $.each(url_arr['li6_img'],function ($key,$val) {
+            image.append('li6_img'+$key,$val);
+        });
+        //电脑检测照片
+        $.each(url_arr['li7_img'],function ($key,$val) {
+            image.append('li7_img'+$key,$val);
+        });
+        //外观检测照片
+        $.each(url_arr['li8_img'],function ($key,$val) {
+            image.append('li8_img'+$key,$val);
+        });
+        image.append('number',number);
+
+        var checks = new Array();
+
+        $(".checks").each(function($key,$val){
+            checks.push($val.value);
+        });
+        image.append('checks',checks);
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('billing/start');?>",
             traditional: false,
             dataType: "json",
-            data: {
-                // li_img:url_arr['li_img'],   //实录照片
-                // li1_img:url_arr['li1_img'],  //发动机部分照片
-                // li2_img:url_arr['li2_img'],  //底盘部分照片
-                // li3_img:url_arr['li3_img'],   //电气设备照片
-                // li4_img:url_arr['li4_img'],   //轮胎部分照片
-                // li5_img:url_arr['li5_img'],    //刹车系统照片
-                // li6_img:url_arr['li6_img'],    //油水部分照片
-                // li7_img:url_arr['li7_img'],     //电脑检测照片
-                // li8_img:url_arr['li8_img'],     //外观检测照片
-                image:image,
-            },
+            processData :false,
+            contentType :false,
+            data:image,
+
             success: function (data) {
                 console.log(data);
 
@@ -1862,7 +1896,7 @@
         url_arr['li6_img'] = new Array();
         url_arr['li7_img'] = new Array();
         url_arr['li8_img'] = new Array();
-        url_arr['li_img'] = new Array();//实录照片
+        url_arr['li0_img'] = new Array();//实录照片
         $('.item_title_photo').on('click',function () {
             var img1 = '<span><img src="';
             var img2 = '" class="show_img"><a href="javascript:void(0);" class="del_img" onclick="delImg(\'';
@@ -1887,15 +1921,15 @@
             var img1 = '<span class="show_image_span"><img src="';
             var img2 = '" class="show_image"><a href="javascript:void(0);" class="del_img" onclick="delImage(\'';
             var img3 = '\')"></span>';
-            $('#li_img').click();
-            $('#li_img').on('change',function () {
+            $('#li0_img').click();
+            $('#li0_img').on('change',function () {
                 if (this.files[0]){
                     var url = getObjectURL(this.files[0]);
-                    url_arr['li_img'].push(this.files[0]);
+                    url_arr['li0_img'].push(this.files[0]);
                     var img = img1 + url + img2 + url + img3;
                     $('.upload_image').append(img);
                 }
-                $('#li_img').val('');
+                $('#li0_img').val('');
             })
         });
         // 获取图片路径
@@ -2015,7 +2049,7 @@
 
     // 删除实录照片
     function delImage(url) {
-        url_arr['li_img'].splice($.inArray(url,url_arr['li_img']),1);
+        url_arr['li0_img'].splice($.inArray(url,url_arr['li0_img']),1);
         var items = $('.show_image_span');
         $.each(items,function () {
             if ($(this).find('img').attr('src') == url){
