@@ -1966,7 +1966,27 @@
         });
     });
 
+    $(".addMeal").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/meal');?>",
+            data: {
+                userId:userId,
+            },
+            dataType: "json",
 
+            success: function (data) {
+                console.log(data);
+            },
+        });
+
+        var userId = $("#userId").val();
+        if(userId){
+            alert("请先选择客户！");
+        }else{
+
+        }
+    });
 
 </script>
 <script>

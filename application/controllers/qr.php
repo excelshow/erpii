@@ -2,7 +2,7 @@
 
 
 class Qr extends CI_Controller {
-    
+
 
 //   门店二维码
     public function index(){
