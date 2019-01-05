@@ -298,7 +298,7 @@ $(document).keydown(function(event) {
 
             <?php if($data->id ):?>
                 <li class="row-item">
-                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="label-wrap"><label for="name">卡名称:</label></div>
                     <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name" readonly></div>
                 </li>
                 <li class="row-item">
@@ -319,7 +319,7 @@ $(document).keydown(function(event) {
                 </li>
             <?php else:?>
                 <li class="row-item">
-                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="label-wrap"><label for="name">卡名称:</label></div>
                     <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name"></div>
                 </li>
                 <li class="row-item">
@@ -390,12 +390,17 @@ $(document).keydown(function(event) {
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap" ><label for="number">持卡人姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="<?php echo $data->username ?>" class="ui-input normal" name="username" id="username"></div>
+                <div class="label-wrap" ><label for="number">手机号:</label></div>
+                <div class="ctn-wrap"><input type="text" oninput="phone();" value="<?php echo $data->phone ?>" class="ui-input normal" name="phone" id="phone"></div>
+                <input type="hidden" id="user_id" value="<?php echo $data->user_id ?>" >
             </li>
             <li class="row-item">
-                <div class="label-wrap" ><label for="number">持卡人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="<?php echo $data->phone ?>" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="label-wrap" ><label for="number">用户名:</label></div>
+                <div class="ctn-wrap"><input type="text" readonly value="<?php echo $data->username ?>" class="ui-input normal" name="username" id="username" placeholder="输入手机号可自动查询"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap" ><label for="number">微信昵称:</label></div>
+                <div class="ctn-wrap"><input type="text" readonly value="<?php echo $data->wechat ?>" class="ui-input normal" name="wechat" id="wechat" placeholder="输入手机号可自动查询"></div>
             </li>
         </ul>
 
@@ -642,7 +647,6 @@ $(document).keydown(function(event) {
 <script>
     //新增和修改
 
-
     $("#save_all").click(function () {
         var name = $("#name").val();
         var price = $("#price").val();
@@ -653,6 +657,7 @@ $(document).keydown(function(event) {
         var orgname = $("#"+orgid).val();
         var username = $("#username").val();
         var phone = $("#phone").val();
+        var wechat = $("#wechat").val();
         var data = new Array();
 
         $.each($('.taocanselect'),function(){
@@ -686,6 +691,7 @@ $(document).keydown(function(event) {
                 username:username,
                 phone:phone,
                 id:id,
+                wechat:wechat,
             },
 
             dataType: "json",
@@ -712,6 +718,33 @@ $(document).keydown(function(event) {
             },
         });
     });
+
+    function phone() {
+        var mobile =$("#phone").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('vip/phone');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.code == 1){
+                    $("#phone").val('');
+                }else if (data.code == 0) {
+                    $("#username").val(data.text.name);
+                    $("#user_id").val(data.text.id);
+                    $("#wechat").val(data.text.wechat);
+                }else{
+                    $("#username").val("无此账号");
+                    $("#wechat").val("无此账号");
+                    $("#user_id").val('');
+                }
+            },
+        });
+    }
 </script>
 </body>
 </html>

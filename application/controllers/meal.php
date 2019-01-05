@@ -10,14 +10,8 @@ class Meal extends CI_Controller
     {
         $user = $this->session->userdata('jxcsys');
 
-        if ($user['orgLevel'] == 3) {
-            $array = array('lowId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 2) {
-            $array = array('midId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 1) {
-            $array = array('topId' => $user['orgId']);
-        }
-        $data = $this->db->where($array)->get('ci_meal')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+        $data = $this->db->where($where)->get('ci_meal')->result();
         $arr = '';
 
         foreach ($data as $k=>$v){
@@ -37,14 +31,9 @@ class Meal extends CI_Controller
     {
         $user = $this->session->userdata('jxcsys');
 
-        if ($user['orgLevel'] == 3) {
-            $array = array('lowId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 2) {
-            $array = array('midId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 1) {
-            $array = array('topId' => $user['orgId']);
-        }
-        $data = $this->db->where($array)->get('ci_service')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+
+        $data = $this->db->where($where)->get('ci_service')->result();
 
         $this->load->view('/settings/meal_add', ['data' => $data]);
     }
@@ -54,10 +43,14 @@ class Meal extends CI_Controller
         $res = [];
         $user = $this->session->userdata('jxcsys');
         $data = str_enhtml($this->input->post(NULL, TRUE));
+        if ($user['orgWhere'] != 'lowId='.$user['lowId']){
+            $res['code'] = 1;
+            $res['text'] = "您尚未在组织中，添加失败！";
+            die(json_encode($res));
+        }
 
         $add = array(
             'name'=>$data['name'],
-            'price'=>$data['price'],
             'content'=>json_encode($data['data']),
               'topId'=>$user['topId'],
             'midId'=>$user['midId'],
@@ -101,14 +94,9 @@ class Meal extends CI_Controller
     {
         $user = $this->session->userdata('jxcsys');
 
-        if ($user['orgLevel'] == 3) {
-            $array = array('lowId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 2) {
-            $array = array('midId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 1) {
-            $array = array('topId' => $user['orgId']);
-        }
-        $data = $this->db->where($array)->get('ci_service')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+
+        $data = $this->db->where($where)->get('ci_service')->result();
 
         $id = str_enhtml($this->input->get('id', TRUE));
 

@@ -12,17 +12,14 @@ class Vip extends CI_Controller {
     public function index(){
         $user = $this->session->userdata('jxcsys');
 
-        if ($user['orgLevel'] == 3){
-            $where = "orgid =".$user['orgId']." OR orgid =".$user['midId'];
-        }else if($user['orgLevel'] == 2){
-            $where = "midId =".$user['midId'];
-        }else if($user['orgLevel'] == 1){
-            $where = "topId =".$user['topId'];
-        }else if($user['orgLevel'] == 0){
-            $where = "";
+        if($user['orgWhere'] == 'lowId='.$user['lowId']){
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $orgids = array($user['lowId'], $user['midId']);
+            $data = $this->db->where($where)->where_in('orgid',$orgids)->get('ci_vipcard')->result();
+        }else{
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $data = $this->db->where($where)->get('ci_vipcard')->result();
         }
-
-        $data = $this->db->where($where)->get('ci_vipcard')->result();
 
         foreach ($data as $k=>$v){
 
@@ -42,16 +39,15 @@ class Vip extends CI_Controller {
 
         $user = $this->session->userdata('jxcsys');
 
+        if ($user['orgWhere'] != 'lowId='.$user['lowId']){
+            die("您尚未在组织中，添加失败！");
+        }
+
         $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
 
-        if ($user['orgLevel'] == 3) {
-            $array = array('lowId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 2) {
-            $array = array('midId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 1) {
-            $array = array('topId' => $user['orgId']);
-        }
-        $meal = $this->db->where($array)->get('ci_meal')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+        $meal = $this->db->where($where)->get('ci_meal')->result();
+
         $arr = '';
 
         foreach ($meal as $k=>$v){
@@ -98,6 +94,7 @@ class Vip extends CI_Controller {
             'orgname'=>$data['orgname'],
             'username' =>$data['username'],
             'phone' =>$data['phone'],
+            'wechat' =>$data['wechat'],
             'content'=>json_encode($total),
             'topId'=>$user['topId'],
             'midId'=>$user['midId'],
@@ -125,14 +122,8 @@ class Vip extends CI_Controller {
 
         $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
 
-        if ($user['orgLevel'] == 3) {
-            $array = array('lowId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 2) {
-            $array = array('midId' => $user['orgId']);
-        } elseif ($user['orgLevel'] == 1) {
-            $array = array('topId' => $user['orgId']);
-        }
-        $meal = $this->db->where($array)->get('ci_meal')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+        $meal = $this->db->where($where)->get('ci_meal')->result();
         $arr = '';
 
         foreach ($meal as $k=>$v){
@@ -160,7 +151,7 @@ class Vip extends CI_Controller {
             $total[$t]['content'] = $meal->content;
             $t++;
         }
-        $edit = $this->db->update('ci_vipcard',array('status'=>$data['status'],'username'=>$data['username'],'phone'=>$data['phone'], 'content'=>json_encode($total),),array('id'=>$data['id']));
+        $edit = $this->db->update('ci_vipcard',array('status'=>$data['status'],'username'=>$data['username'],'phone'=>$data['phone'], 'content'=>json_encode($total),'wechat'=>$data['wechat']),array('id'=>$data['id']));
         if($edit){
             $res['code'] = 0;
             $res['text'] = "修改成功";
@@ -168,6 +159,32 @@ class Vip extends CI_Controller {
         }else{
             $res['code'] = 1;
             $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
+
+    }
+
+
+    public function phone(){
+        $user = $this->session->userdata('jxcsys');
+        $mobile = str_enhtml($this->input->post('mobile',TRUE));
+        $res =[];
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'mobile'=>$mobile);
+        $data = $this->db->where($where)->get('ci_customer')->row();
+        $vip = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'status'=>0,'user_id'=>$data->id);
+        $vip_data =  $this->db->where($vip)->get('ci_vipcard')->row();
+        if($vip_data){
+            $res['code'] = 1;
+            $res['text'] = "此账号已有正在使用的VIP卡，请先停用再创建新的。";
+            die(json_encode($res));
+        }elseif($data){
+            $res['code'] = 0;
+            $res['text'] = $data;
+            die(json_encode($res));
+
+        }else{
+            $res['code'] = 2;
+            $res['text'] = '';
             die(json_encode($res));
         }
 
