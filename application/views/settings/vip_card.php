@@ -372,9 +372,9 @@ $(document).keydown(function(event) {
                 <table style="width: 100%;">
                     <thead style="width: 100%;">
                     <tr style="width: 100%;">
-                        <th style="width: 15%;">套餐名称</th>
-                        <th style="width: 70%;">套餐项目</th>
-                        <th style="width: 10%;">金额(元)</th>
+                        <th style="width: 20%;">套餐名称</th>
+                        <th style="width: 80%;">套餐项目</th>
+
                     </tr>
                     </thead>
 
@@ -388,7 +388,7 @@ $(document).keydown(function(event) {
                                             <?php echo $v1->name ?>:<?php echo $v1->number ?>次;
                                         <?php endforeach;?>
                                     </span></td>
-                                    <td><span class="taocan_price"><?php echo $value->price ?></span></td>
+
                                 </tr>
                             <?php endforeach;?>
                         <?php endforeach;?>

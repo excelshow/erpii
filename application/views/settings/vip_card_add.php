@@ -417,7 +417,6 @@ $(document).keydown(function(event) {
                 <thead style="width: 100%;">
                 <tr style="width: 100%;">
                     <th style="width: 20%;">套餐名称</th>
-                    <th style="width: 10%;">套餐价格</th>
                     <th style="width: 60%;">套餐项目</th>
                     <th style="width: 10%;">操作</th>
                 </tr>
@@ -428,7 +427,7 @@ $(document).keydown(function(event) {
                         <tr class="taocanselect" id="taocan_<?php echo $v->id ?>">
                             <input type="hidden" class="biaoji" value="<?php echo $v->id ?>" >
                             <td><span class="taocan_name"><?php echo $v->name ?></span></td>
-                            <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+
                             <td><span class="taocan_item">
                                 <?php foreach (json_decode($v->content) as $k1=>$v1) :?>
                                     <?php echo $v1->name ?>:<?php echo $v1->number ?>次;
@@ -473,9 +472,8 @@ $(document).keydown(function(event) {
                         <th style="width: 5%;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th style="width: 15%;">套餐名称</th>
-                        <th style="width: 70%;">套餐项目</th>
-                        <th style="width: 10%;">金额(元)</th>
+                        <th style="width: 20%;">套餐名称</th>
+                        <th style="width: 80%;">套餐项目</th>
                     </tr>
                     </thead>
                     <?php if ($meal):?>
@@ -488,7 +486,7 @@ $(document).keydown(function(event) {
 
                                 <td><span class="taocan_name"><?php echo $v->name ?></span></td>
                                 <td><span class="taocan_item"><?php echo $v->content ?></span></td>
-                                <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+
                             </tr>
                         <?php endforeach;?>
                     <?php else:?>
@@ -571,7 +569,7 @@ $(document).keydown(function(event) {
                             '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
                         var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                             '                </tr>';
-                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html()  +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
 
                         checkvalues.push(value);
                     }
@@ -586,7 +584,7 @@ $(document).keydown(function(event) {
                         '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
                     var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                         '                </tr>';
-                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
+                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
 
                     checkvalues.push(value);
                 }
