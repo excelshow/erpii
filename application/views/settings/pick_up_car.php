@@ -1520,19 +1520,13 @@
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
-                                <th style="width: 25%;">名称</th>
-                                <th style="width: 10%;">售价</th>
-                                <th style="width: 60%;">套餐内容</th>
+                                <th style="width: 25%;">套餐名称</th>
+                                <th style="width: 60%;">已选服务</th>
                                 <th style="width: 5%;">操作</th>
                             </tr>
                         </thead>
                         <tbody id="taocan_all">
-                            <tr class="mealItem_2">
-                                <td><span>1</span></td>
-                                <td><span>3</span></td>
-                                <td><span>4</span></td>
-                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal(2)" style="margin: 0;">删除</a></span></td><!--放id-->
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -1730,7 +1724,7 @@
                             <td class="parts_td"><?php echo $v->vipPrice ?></td>
                             <td class="parts_td"><?php echo $v->salePrice ?></td>
                             <td class="parts_td"><?php echo $v->vipPrice ?></td>
-                            <input type="hidden" value="1">
+                            <input type="hidden" value="<?php echo $v->id ?>">
                         </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -1738,7 +1732,7 @@
                 </table>
             </div>
             <div class="parts_r">
-                <ul class="add_parts_title">已选工时</ul>
+                <ul class="add_parts_title">已选配件</ul>
                 <ul class="add_parts_ul"></ul>
             </div>
         </div>
@@ -1761,26 +1755,19 @@
         <div class="add_content">
             <div class="content_l">
                 <ul class="content_title">套餐名称</ul>
-                <ul class="content_ul">
-                    <li class="content_li">
-                        <span>1</span>
-                    </li>
+                <ul class="content_ul content_l_ul">
                 </ul>
             </div>
             <div class="content_c">
                 <ul class="add_content_title">
                     <li>套餐项目</li>
                 </ul>
-                <ul class="content_ul">
-                    <li class="content_li content_c_li">
-                        <span>1</span>
-                        <input type="hidden" value="1">
-                    </li>
+                <ul class="content_ul content_c_ul">
                 </ul>
             </div>
             <div class="content_r">
                 <ul class="content_title">已选项目</ul>
-                <ul class="content_ul"></ul>
+                <ul class="content_ul content_r_ul"></ul>
             </div>
         </div>
         <div class="add_footer">
@@ -2191,37 +2178,58 @@
 
         //添加工时，选中工时
         $('#serve_level2').on('click','.add_content_c_li',function () {
+            var all = $('.add_content_r_li');
+            var num = 0;
             var name = $(this).find('span:first-child').html();
             var price = $(this).find('span:nth-child(2)').html();
             var vip_price = $(this).find('span:nth-child(3)').html();
             var working = $(this).find('span:last-child').html();
             var id = $(this).find('input').val();
+            var str = '';
             var str1 = '<li class="add_content_li add_content_r_li add_content_r_li_';
             var str2 = '"><span>';
             var str3 = '</span><span style="display: none;">';
             var str4 = '</span><span class="delete" onclick="delLi(';
             var str5 = ')"></span><input type="hidden" value="';
             var str6 = '"> </li>';
-            var str = str1 + id + str2 + name + str3 + price + str3 + vip_price + str3 + working + str4 + id + str5 + id + str6;
-            $('.add_content_r .add_content_ul').append(str);
+            $.each(all,function () {
+                if ($(this).find('input').val() == id){
+                    num++;
+                }
+            });
+            if (num <= 0){
+                str = str1 + id + str2 + name + str3 + price + str3 + vip_price + str3 + working + str4 + id + str5 + id + str6;
+                $('.add_content_r .add_content_ul').append(str);
+            }
         });
 
         //添加工时，添加工时
         $('#add_working_val').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add_working').css('display','none');
+            var serviceItem = $('.serviceItem');
+            var num = 0;
+            var id = '';
             var all = $('.add_content_r_li');
-            var arr = new Array();
-
             var str = '';
-            var str1 = '<tr class="serviceItem_';
+            var str1 = '<tr class="serviceItem serviceItem_';
             var str2 = '"><td class="name"><span>';
             var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>';
             var str4 = '</span></td><td><span>';
             var str5 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(';
-            var str6 = ')" style="margin: 0;">删除</a></span></td></tr>';
+            var str6 = ')" style="margin: 0;">删除</a></span></td><input type="hidden" value="';
+            var str7 = '"></tr>';
             $.each(all,function () {
-                str += str1 + $(this).find('input').val() + str2 + $(this).find('span:nth-child(1)').html() + str3 + $(this).find('span:nth-child(2)').html() + str4 + $(this).find('span:nth-child(3)').html() + str4 + $(this).find('span:nth-child(4)').html() + str5 + $(this).find('input').val() + str6;
+                id = $(this).find('input').val();
+                $.each(serviceItem,function () {
+                   if ($(this).find('input').val() == id){
+                       num++;
+                   }
+                });
+                if (num <= 0){
+                    str += str1 + $(this).find('input').val() + str2 + $(this).find('span:nth-child(1)').html() + str3 + $(this).find('span:nth-child(2)').html() + str4 + $(this).find('span:nth-child(3)').html() + str4 + $(this).find('span:nth-child(4)').html() + str5 + $(this).find('input').val() + str6 + $(this).find('input').val() + str7;
+                }
+
             });
             $('.add_content_r_li').remove();
             $('#serve_level2').html('');
@@ -2237,16 +2245,32 @@
 
         //添加配件，选中配件
         $('.parts_tr').on('click',function () {
+            var all = $('.parts_li');
+            var num = 0;
             var id = $(this).find('input').val();
-            var name = $(this).find('td:first-child').html();
+            var name = $(this).find('td:nth-child(2)').html();
+            var unitName = $(this).find('td:nth-child(5)').html();
+            var price = $(this).find('td:nth-child(8)').html();
+            var vipprice = $(this).find('td:nth-child(9)').html();
             var str = '';
             var str1 = '<li onclick="delParts(';
             var str2 = ')" class="parts_li parts_tr_';
             var str3 = '"><span>';
-            var str4 = '</span><span class="del_parts"></span><input type="hidden" value="';
-            var str5 = '"></li>';
-            str = str1 + id + str2 + id + str3 + name + str4 + id + str5;
-            $('.add_parts_ul').append(str);
+            var str4 = '</span><span class="del_parts"></span><input type="hidden" class="parts_id" value="';
+            var str5 = '"><input type="hidden" class="parts_unitName" value="';
+            var str6 = '"><input type="hidden" class="parts_price" value="';
+            var str7 = '"><input type="hidden" class="parts_vipprice" value="';
+            var str8 = '"></li>';
+            $.each(all,function () {
+               if ($(this).find('.parts_id').val() == id){
+                   num++;
+               }
+            });
+            if (num <= 0){
+                str = str1 + id + str2 + id + str3 + name + str4 + id + str5 + unitName + str6 + price + str7 + vipprice + str8;
+                $('.add_parts_ul').append(str);
+            }
+
         });
 
         //添加配件,添加配件
@@ -2275,17 +2299,35 @@
                 },
                 dataType: "json",
                success: function (data) {
-                    console.log(data);
-                   var str1 = '<tr><td class="check" style="width: 5%;"><input type="checkbox" class="check_child" value="';
-                   var str2 = '"></td><td><span class="taocan_name">';
-                   var str3 = '</span></td><td><span class="taocan_item">';
-                   var str4 = '</span></td><td><span class="taocan_price">';
-                   var str5 = '</span></td></tr>';
+                   var contentName = JSON.parse(data.content);
+                   var str1 = '<li class="content_li" id="content_l_';
+                   var str2 = '"><span>';
+                   var str3 = '</span></li>';
                    var str = '';
-                   $.each(data,function () {
-                       str += str1 + this.id + str2 + this.name + str3 + this.item + str4 + this.price + str5;
+                   $.each(contentName,function () {
+                       str += str1 + this.id + str2 + this.name + str3;
                    });
-                   $('#meal_all').append(str);
+                   $('.content_l_ul').html(str);
+
+                   var string = '';
+                   var string1 = '<li class="content_li content_c_li content_c_';
+                   var string2 = '" style="display:none"><span>';
+                   var string3 = '</span><span style="display:none">' ;
+                   var string4 = '</span><input type="hidden" class="serveId" value="';
+                   var string5 = '"><input type="hidden" class="mealId" value="';
+                   var string6 = '"></li>';
+                   var mealId = '';
+                   var mealName = '';
+                   $.each(contentName,function () {
+                       mealId = this.id;
+                       mealName = this.name;
+                       $.each(JSON.parse(this.content),function () {
+                           if (parseInt(this.number) > 0){
+                               string += string1 + mealId + string2 + this.name + string3 + mealName + string4 + this.id + string5 + mealId + string6;
+                           }
+                       });
+                   });
+                   $('.content_c_ul').html(string);
                } ,
                 error:function () {
 
@@ -2295,74 +2337,76 @@
             $('#add_meal').css('display','');
         });
 
-        //添加套餐，单选框
-        $('#all').on('click',function () {
-            var thisChecked = $(this).prop('checked');
-            $('.check_child').prop('checked',thisChecked);
-
+        //添加套餐,点击选择套餐名称
+        $('.content_l_ul').on('click','.content_li',function () {
+            $('.content_c_li').css('display','none');
+            $('.content_l_hover').removeClass('content_l_hover');
+            $(this).addClass('content_l_hover');
+            $('.' + $(this).attr('id').replace('_l_','_c_')).css('display','');
         });
-        $('.check_child').on('click',function(){
-            var totalNum =  $('.check_child').length;
-            var checkedNum =  $('.check_child:checked').length;
-            $('#all').prop('checked',totalNum==checkedNum);
+
+        //添加套餐，点击选中服务
+        $('.content_c_ul').on('click','.content_c_li',function () {
+            var all = $('.content_r_li');
+            var num = 0;
+            var name = $(this).find('span:first-child').html();
+            var mealName = $(this).find('span:nth-child(2)').html();
+            var mealId = $(this).find('.mealId').val();
+            var serveId = $(this).find('.serveId').val();
+            var str = '';
+            var str1 = '<li class="content_li content_r_li content_r_li_';
+            var str2 = '"><span>';
+            var str3 = '</span><span class="delete" onclick="delserve(';
+            var str4 = ')"></span><input type="hidden" class="serve_r_id" value="';
+            var str5 = '"><input type="hidden" class="meal_r_id" value="';
+            var str6 = '"><input type="hidden" class="mealName" value="';
+            var str7 = '"></li>';
+            $.each(all,function () {
+                if ($(this).find('.meal_r_id').val() == mealId && $(this).find('.serve_r_id').val() == serveId) {
+                    num++;
+                }
+            });
+            if (num <= 0){
+                str = str1 + serveId + str2 + name + str3 + serveId + str4 + serveId + str5 + mealId + str6 + mealName + str7;
+                $('.content_r_ul').append(str);
+            }
         });
 
         //添加套餐，添加套餐
         $('#add_meal_btn').on('click',function () {
-            var checkitems = new Array();
-            var checkvalues = new Array();
-            $.each($('.check_child:checked'),function(){
-                var biaoji = $(this);
-                var num = 0;
-                if ($('.biaoji').val() != null) {
-                    $.each($('.biaoji'),function () {
-                        if ($(this).val() == biaoji.val()){
-                            num = num + 1;
-                        }
-                    });
-                    if (num <= 0){
-                        checkitems.push($(this).val());
-                        var value1 = '<tr class="mealItem_';
-                        var value2 = '"><input type="hidden" class="biaoji" value="';
-                        var value3 = '"><td><span>'
-                        var value4 = '</span></td>\n' +
-                            '                    <td><span>';
-                        var value5 = '</span></td>\n' +
-                            '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
-                        var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
-                            '                </tr>';
-                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+            var mealItem = $('.mealItem');
+            var num = 0;
+            var serveID = '';
+            var mealID = '';
+            $('#ldg_lockmask').css('display','none');
+            $('#add_meal').css('display','none');
+            var all = $('.content_r_li');
+            var str = '';
+            var str1 = '<tr class="mealItem mealItem_';
+            var str2 = '"><td><span>';
+            var str3 = '</span></td><td><span>';
+            var str4 = '</span><input type="hidden" class="mealID" value="';
+            var str5 = '"><input type="hidden" class="serveID" value="';
+            var str6 = '"></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal(\'';
+            var str7 = '\')" style="margin: 0;">删除</a></span></td></tr>';
+            $.each(all,function () {
+                mealID = $(this).find('.meal_r_id').val();
+                serveID = $(this).find('.serve_r_id').val();
 
-                        checkvalues.push(value);
+                $.each(mealItem,function () {
+                    if ($(this).find('.mealID').val() == mealID && $(this).find('.serveID').val() == serveID) {
+                        num++;
                     }
-                }else{
-                    checkitems.push($(this).val());
-                    var value1 = '<tr class="mealItem_';
-                    var value2 = '"><input type="hidden" class="biaoji" value="';
-                    var value3 = '"><td ><span>'
-                    var value4 = '</span></td>\n' +
-                        '                    <td><span>';
-                    var value5 = '</span></td>\n' +
-                        '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
-                    var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
-                        '                </tr>';
-                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
-
-                    checkvalues.push(value);
+                });
+                if (num <=0){
+                    str += str1 + $(this).find('.meal_r_id').val() + '_' + $(this).find('.serve_r_id').val() + str2 + $(this).find('.mealName').val() + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.meal_r_id').val() + str5 + $(this).find('.serve_r_id').val() + str6 + $(this).find('.meal_r_id').val() + '_' + $(this).find('.serve_r_id').val() + str7;
                 }
 
             });
-            if (checkitems != ''){
-                $('#taocan_id').val(checkitems);
-                $.each(checkvalues, function (key,value) {
-                    $('#taocan_all').append(value);
-                });
-                $('#ldg_lockmask').css('display','none');
-                $('#add_meal').css('display','none');
-            }else{
-                $('#ldg_lockmask').css('display','none');
-                $('#add_meal').css('display','none');
-            }
+            $('#taocan_all').append(str);
+            $('.content_r_li').remove();
+            $('.content_r_li').css('display','none');
+            $('.content_l_hover').removeClass('content_l_hover');
         });
     });
 
@@ -2405,6 +2449,11 @@
     //删除以显示服务项目
     function delItem(id) {
         $('.serviceItem_' + id).remove();
+    }
+
+    //删除已选套餐服务
+    function delserve(id) {
+        $('.content_r_li_' + id).remove();
     }
 
     //删除以显示套餐
