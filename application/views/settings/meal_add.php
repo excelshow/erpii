@@ -297,10 +297,10 @@
                 <input type="hidden" value="<?php echo $edit->id ?>" id="edit_id">
                 <div class="ctn-wrap"><input type="text" value="<?php echo $edit->name ?>" class="ui-input normal" name="name" id="name"></div>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="price">金额:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="<?php echo $edit->price ?>" class="ui-input normal" name="price" id="price"></div>
-            </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="price">金额:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="--><?php //echo $edit->price ?><!--" class="ui-input normal" name="price" id="price"></div>-->
+<!--            </li>-->
 
         </ul>
 
@@ -540,7 +540,7 @@
 
     $("#save_all").click(function () {
         var name = $("#name").val();
-        var price = $("#price").val();
+        // var price = $("#price").val();
         var data = new Array();
 
         $.each($('.fuwuselect'),function(){
@@ -549,7 +549,7 @@
 
        });
 
-        if(data.length == 0 || !name || !price){
+        if(data.length == 0 || !name){
             alert("请补充完信息！");
 
         }else{
@@ -567,7 +567,7 @@
                 data: {
                     data:data,
                     name:name,
-                    price:price,
+                    // price:price,
                     id:id,
                 },
                 dataType: "json",

@@ -298,7 +298,7 @@ $(document).keydown(function(event) {
 
             <?php if($data->id ):?>
                 <li class="row-item">
-                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="label-wrap"><label for="name">卡名称:</label></div>
                     <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name" readonly></div>
                 </li>
                 <li class="row-item">
@@ -319,7 +319,7 @@ $(document).keydown(function(event) {
                 </li>
             <?php else:?>
                 <li class="row-item">
-                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="label-wrap"><label for="name">卡名称:</label></div>
                     <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name"></div>
                 </li>
                 <li class="row-item">
@@ -390,12 +390,17 @@ $(document).keydown(function(event) {
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap" ><label for="number">持卡人姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="<?php echo $data->username ?>" class="ui-input normal" name="username" id="username"></div>
+                <div class="label-wrap" ><label for="number">手机号:</label></div>
+                <div class="ctn-wrap"><input type="text" oninput="phone();" value="<?php echo $data->phone ?>" class="ui-input normal" name="phone" id="phone"></div>
+                <input type="hidden" id="user_id" value="<?php echo $data->user_id ?>" >
             </li>
             <li class="row-item">
-                <div class="label-wrap" ><label for="number">持卡人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="<?php echo $data->phone ?>" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="label-wrap" ><label for="number">用户名:</label></div>
+                <div class="ctn-wrap"><input type="text" readonly value="<?php echo $data->username ?>" class="ui-input normal" name="username" id="username" placeholder="输入手机号可自动查询"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap" ><label for="number">微信昵称:</label></div>
+                <div class="ctn-wrap"><input type="text" readonly value="<?php echo $data->wechat ?>" class="ui-input normal" name="wechat" id="wechat" placeholder="输入手机号可自动查询"></div>
             </li>
         </ul>
 
@@ -412,7 +417,6 @@ $(document).keydown(function(event) {
                 <thead style="width: 100%;">
                 <tr style="width: 100%;">
                     <th style="width: 20%;">套餐名称</th>
-                    <th style="width: 10%;">套餐价格</th>
                     <th style="width: 60%;">套餐项目</th>
                     <th style="width: 10%;">操作</th>
                 </tr>
@@ -423,7 +427,7 @@ $(document).keydown(function(event) {
                         <tr class="taocanselect" id="taocan_<?php echo $v->id ?>">
                             <input type="hidden" class="biaoji" value="<?php echo $v->id ?>" >
                             <td><span class="taocan_name"><?php echo $v->name ?></span></td>
-                            <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+
                             <td><span class="taocan_item">
                                 <?php foreach (json_decode($v->content) as $k1=>$v1) :?>
                                     <?php echo $v1->name ?>:<?php echo $v1->number ?>次;
@@ -468,9 +472,8 @@ $(document).keydown(function(event) {
                         <th style="width: 5%;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th style="width: 15%;">套餐名称</th>
-                        <th style="width: 70%;">套餐项目</th>
-                        <th style="width: 10%;">金额(元)</th>
+                        <th style="width: 20%;">套餐名称</th>
+                        <th style="width: 80%;">套餐项目</th>
                     </tr>
                     </thead>
                     <?php if ($meal):?>
@@ -483,7 +486,7 @@ $(document).keydown(function(event) {
 
                                 <td><span class="taocan_name"><?php echo $v->name ?></span></td>
                                 <td><span class="taocan_item"><?php echo $v->content ?></span></td>
-                                <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+
                             </tr>
                         <?php endforeach;?>
                     <?php else:?>
@@ -566,7 +569,7 @@ $(document).keydown(function(event) {
                             '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
                         var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                             '                </tr>';
-                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html()  +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
 
                         checkvalues.push(value);
                     }
@@ -581,7 +584,7 @@ $(document).keydown(function(event) {
                         '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
                     var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                         '                </tr>';
-                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
+                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
 
                     checkvalues.push(value);
                 }
@@ -642,7 +645,6 @@ $(document).keydown(function(event) {
 <script>
     //新增和修改
 
-
     $("#save_all").click(function () {
         var name = $("#name").val();
         var price = $("#price").val();
@@ -653,6 +655,7 @@ $(document).keydown(function(event) {
         var orgname = $("#"+orgid).val();
         var username = $("#username").val();
         var phone = $("#phone").val();
+        var wechat = $("#wechat").val();
         var data = new Array();
 
         $.each($('.taocanselect'),function(){
@@ -686,6 +689,7 @@ $(document).keydown(function(event) {
                 username:username,
                 phone:phone,
                 id:id,
+                wechat:wechat,
             },
 
             dataType: "json",
@@ -712,6 +716,33 @@ $(document).keydown(function(event) {
             },
         });
     });
+
+    function phone() {
+        var mobile =$("#phone").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('vip/phone');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.code == 1){
+                    $("#phone").val('');
+                }else if (data.code == 0) {
+                    $("#username").val(data.text.name);
+                    $("#user_id").val(data.text.id);
+                    $("#wechat").val(data.text.wechat);
+                }else{
+                    $("#username").val("无此账号");
+                    $("#wechat").val("无此账号");
+                    $("#user_id").val('');
+                }
+            },
+        });
+    }
 </script>
 </body>
 </html>

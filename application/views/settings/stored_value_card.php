@@ -280,11 +280,11 @@ $(document).keydown(function(event) {
                                 <th>储值卡名称</th>
                                 <th>储值卡面值</th>
                                 <th>赠送金额</th>
-                                <th>工时折扣</th>
-                                <th>配件折扣</th>
-                                <th>状态</th>
                                 <th>适用门店</th>
-                                <th>添加时间</th>
+                                <th>售出状态</th>
+                                <th>购卡人姓名</th>
+                                <th>充值账号用户名</th>
+                                <th>充值时间</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -298,17 +298,23 @@ $(document).keydown(function(event) {
                                 <td><span><?php echo $v->car_name ?></span></td>
                                 <td><span><?php echo $v->sale ?>元</span></td>
                                 <td><span><?php echo $v->present ?>元</span></td>
-                                <td><span><?php echo $v->hour_discount ?>%</span></td>
-                                <td><span><?php echo $v->parts_discount ?>%</span></td>
-                                <?php if($v->status == 0):?>
-                                    <td><span>正常</span></td>
-                                <?php else : ?>
-                                    <td><span>停用</span></td>
-                                <?php endif; ?>
                                 <td><span><?php echo $v->orgname ?></span></td>
-                                <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
+                                <?php if ($v->status_sale == 0) :?>
+                                    <td><span>未售出</span></td>
+                                <?php elseif ($v->status_sale == 1) :?>
+                                    <td><span>售出未充值</span></td>
+                                <?php elseif ($v->status_sale == 2) :?>
+                                    <td><span>售出已充值</span></td>
+                                <?php endif;?>
+                                <td><span><?php echo $v->name ?></span></td>
+                                <td><span><?php echo $v->recharge_name ?></span></td>
+                                <td><span><?php echo date('Y-m-d H:i:s' ,$v->recharge_time )?></span></td>
                                 <input type="hidden" id="type" value="add">
-                                <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修改</a></span></td><!--放id-->
+                                <?php if ($v->status_sale == 0) :?>
+                                    <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</a></span></td>
+                                <?php else:?>
+                                    <td><span><a class="ui-btn mrb detail" >无法修改</a></span></td>
+                                <?php endif;?>
                             </tr>
                         <?php endforeach ?>
 
@@ -352,45 +358,23 @@ $(document).keydown(function(event) {
         <ul class="content_main clearfix">
             <li><span>储值卡名称:</span><input type="text" id="car_name"></li>
             <li><span>卡号:</span><input type="text" id="car_num"></li>
-            <li><span>实际售价:</span><input type="text" id="sale"></li>
-            <li><span>赠送金额:</span><input type="text" id="present"></li>
-            <li>
-                <span>状态:</span>
-                <span class="sel">
-                    <select name="status" id="status">
-                        <option value="0" selected >正常</option>
-                        <option value="1">停用</option>
-                    </select>
-                </span>
-            </li>
-
-            <li>
+            <li><span>储值卡面值:</span><input type="number" min="0" step="0.01" id="sale"></li>
+            <li><span>赠送金额:</span><input type="number" min="0" step="0.01" id="present"></li>
+            <li class="orgid_edit_one" style="display: block;">
                 <span>门店:</span>
                 <span class="sel">
                     <select name="orgid" id="orgid">
-                        <option value="<?php echo $orgid ?>" selected>通用</option>
+                        <option value="<?php echo $orgid ?>" selected = "selected">通用</option>
                          <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
                         <?php foreach ($org as $k=>$v): ?>
                             <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
                             <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
                         <?php endforeach ?>
                     </select>
+
                 </span>
             </li>
-<!--            <li>-->
-<!--                <span>限制车辆:</span>-->
-<!--                <span class="sel">-->
-<!--                    <select name="limit" id="limit">-->
-<!--                        <option value="1" selected>是</option>-->
-<!--                        <option value="0">否</option>-->
-<!--                    </select>-->
-<!--                </span>-->
-<!--            </li>-->
-        </ul>
-        <ul class="content_title"><h3>折扣设置</h3></ul>
-        <ul class="content_main clearfix">
-            <li><span>工时折扣:</span><input type="text" id="hour_discount"><span>%</span></li>
-            <li><span>配件折扣:</span><input type="text" id="parts_discount"><span>%</span></li>
+            <li class="orgid_edit_two" style="display: none;"><span>门店:</span> <input type="hidden" id="orgid_edit_id" value="" readonly><input type="text" id="orgid_edit_name" value="" readonly></li>
         </ul>
     </div>
     <div id="add_footer">
@@ -410,15 +394,11 @@ $("#save").click(function(){
     var car_num = $("#car_num").val();
     var sale = $("#sale").val();
     var present = $("#present").val();
-    var status = $("#status").val();
-    var hour_discount = $("#hour_discount").val();
-    var parts_discount = $("#parts_discount").val();
     var orgid =  $("#orgid").find("option:selected").val();
     var orgname = $("#"+orgid).val();
     var id = $("#id").val();
 
-    // alert(orgname);
-    if(!car_name || !car_num || !sale || !present || !status || !hour_discount || !parts_discount || !orgid){
+    if(!car_name || !car_num || !sale || !present || !orgid){
         alert("请填写全卡信息！")
     }else{
         if($("#add_title").text() == "修改储值卡"){
@@ -436,9 +416,6 @@ $("#save").click(function(){
                 car_num: car_num,
                 sale:sale,
                 present:present,
-                status:status,
-                hour_discount:hour_discount,
-                parts_discount:parts_discount,
                 orgid:orgid,
                 orgname:orgname,
                 id:id,
@@ -537,12 +514,11 @@ $("#save").click(function(){
             $("#car_name").val('');
             $("#car_num").val('');
             $("#sale").val('');
-            // $("#validity").val('');
             $("#present").val('');
-            // $("#status").find("option[value = 0").attr("selected",true);
-            $("#parts_discount").val('');
-            $("#hour_discount").val('');
-            // $("#orgid").find("option[value = 0]").attr("selected",true);
+            $('.orgid_edit_one').show();
+            $('.orgid_edit_two').hide();
+            $('#orgid_edit_id').val('');
+            $('#orgid_edit_name').val('');
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
@@ -566,25 +542,27 @@ $("#save").click(function(){
             },
             dataType: "json",
             success: function (res) {
-                console.log(res);
+                console.log(res.data.orgid);
                 if(res){
+
                     $("#id").val(res.data.id);
                     $("#car_name").val(res.data.car_name);
                     $("#car_num").val(res.data.car_num);
                     $("#sale").val(res.data.sale);
-                    $("#validity").val(res.data.validity);
                     $("#present").val(res.data.present);
-                    $("#status").find("option[value = "+res.data.status +"]").attr("selected",true);
-                    $("#parts_discount").val(res.data.parts_discount);
-                    $("#hour_discount").val(res.data.hour_discount);
-                    $("#orgid").find("option[value = "+res.data.orgid +"]").attr("selected",true);
+                    $('.orgid_edit_one').hide();
+                    $('.orgid_edit_two').show();
+                    $('#orgid_edit_id').val(res.data.orgid);
+                    $('#orgid_edit_name').val(res.data.orgname);
+                    // $("#orgid").find("option[selected = 'selected']").removeAttr('selected');
+                    // $("#orgid").find("option[value = "+res.data.orgid +"]").attr("selected",true);
+                    // $("#orgid").attr("disabled","disabled");
                 } else{
                     parent.Public.tips({
                         type:1,
                         content:"未知错误"
                     });
                 }
-
             },
         });
     }

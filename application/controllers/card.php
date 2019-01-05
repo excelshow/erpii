@@ -12,13 +12,19 @@ class Card extends CI_Controller {
     public function index() {
         $user = $this->session->userdata('jxcsys');
 
-        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
-
         $like = array('car_num' => $this->input->post('matchCon'));
 
-        $data = $this->db->where($where)->like($like)->get('ci_storedcard')->result();
+        if($user['orgWhere'] == 'lowId='.$user['lowId']){
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $orgids = array($user['lowId'], $user['midId']);
+            $data = $this->db->where($where)->where_in('orgid',$orgids)->like($like)->get('ci_storedcard')->result();
+        }else{
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $data = $this->db->where($where)->like($like)->get('ci_storedcard')->result();
+        }
+        $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
 
-        $this->load->view('/settings/stored_value_card',['data'=>$data,'like'=>$this->input->post('matchCon')]);
+        $this->load->view('/settings/stored_value_card',['data'=>$data,'like'=>$this->input->post('matchCon'),'org'=>$org,'orgid'=>$user['midId']]);
     }
 
     //添加储值卡
@@ -35,11 +41,7 @@ class Card extends CI_Controller {
                 'car_num'=>$data['car_num'],
                 'car_name'=>$data['car_name'],
                 'sale'=>$data['sale'],
-//            'validity'=>$data['validity'],
                 'present'=>$data['present'],
-                'status'=>$data['status'],
-                'hour_discount'=>$data['hour_discount'],
-                'parts_discount'=>$data['parts_discount'],
                 'addtime'=>time(),
                 'orgid'=> $data['orgid'],
                 'orgname'=>$data['orgname'],
@@ -82,7 +84,7 @@ class Card extends CI_Controller {
         $res = [];
         $data = str_enhtml($this->input->post(NULL,TRUE));
 
-        $edit = $this->db->update('ci_storedcard',array('car_num'=>$data['car_num'],'car_name'=>$data['car_name'],'sale'=>$data['sale'],'validity'=>$data['validity'],'present'=>$data['present'],'status'=>$data['status'],'hour_discount'=>$data['hour_discount'],'parts_discount'=>$data['parts_discount'],'orgid'=>$data['orgid'],'orgname'=>$data['orgname']),array('id'=>$data['id']));
+        $edit = $this->db->update('ci_storedcard',array('car_num'=>$data['car_num'],'car_name'=>$data['car_name'],'sale'=>$data['sale'],'validity'=>$data['validity'],'present'=>$data['present'],'orgid'=>$data['orgid'],'orgname'=>$data['orgname']),array('id'=>$data['id']));
         if($edit){
             $res['code'] = 0;
             $res['text'] = "修改成功";

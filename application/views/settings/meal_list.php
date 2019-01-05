@@ -252,10 +252,8 @@
                 <thead>
                 <tr>
                     <th style="width: 5%;">操作</th>
-                    <th style="width: 10%;">套餐名称</th>
-                    <th style="width:10%;">套餐价格(元)</th>
-                    <th style="width: 75%;">套餐内容</th>
-
+                    <th style="width: 15%;">套餐名称</th>
+                    <th style="width: 80%;">套餐内容</th>
                 </tr>
                 </thead>
                 <tbody >
@@ -263,13 +261,12 @@
                     <?php foreach ($data as $key=>$val) :?>
                         <tr>
                             <td>
-                                <a style="margin-bottom: -6px" class="write" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/edit?id='."$val->id")?>"></a>
+<!--                                <a style="margin-bottom: -6px" class="write" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="--><?php //echo site_url('meal/edit?id='."$val->id")?><!--"></a>-->
                                 <a style="margin-bottom: -6px" class="delete" href="javascript:0"></a>
 
                                 <input type="hidden" class="id"  value="<?php echo $val->id?>">
                             </td>
                             <td><span class="name"><?php echo $val->name?></span></td>
-                            <td><span class="price" ><?php echo $val->price?></span></td>
                             <td><span class="surplus"><?php echo $val->content?></span></td>
                         </tr>
                     <?php endforeach;?>
