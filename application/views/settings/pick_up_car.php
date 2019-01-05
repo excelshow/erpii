@@ -853,20 +853,6 @@
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="company">工作单位:</label></div>-->
-<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>-->
-<!--            </li>-->
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="reception">接待人员:</label></div>-->
-<!--                <div class="ctn-wrap">-->
-<!--                    <select name="reception" id="reception" class="sel">-->
-<!--                        <option value="1" selected>待确定</option>-->
-<!--                        <option value="2">已确定</option>-->
-<!--                        <option value="3">已取消</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </li>-->
 
             <li class="row-item">
                 <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
@@ -889,14 +875,7 @@
                     </select>
                 </div>
             </li>
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="source">客户来源:</label></div>-->
-<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>-->
-<!--            </li>-->
-<!--            <li class="row-item" style="width: 100% ;">-->
-<!--                <div class="label-wrap"><label for="address">顾客地址:</label></div>-->
-<!--                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>-->
-<!--            </li>-->
+
             <li class="row-item">
                 <div class="label-wrap"><label for="startTime">开工时间:</label></div>
                 <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="startTime" id="startTime"></div>
@@ -1097,10 +1076,7 @@
 
         <ul class="main_title car_report" style="display: none">车检报告</ul>
         <ul class="mod-form-rows base-form clearfix car_report" style="display: none;" id="base-form">
-            <li class="row-item" style="width: 100% ;">
-                <div class="label-wrap"><label for="examination_advice">体检建议:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="examination_advice" id="examination_advice" style="width: 83.1%;height: 100%;"></textarea></div>
-            </li>
+
             <li class="row-item" style="width: 100%;">
                 <a class="ui-btn ui-btn-sp choose_inspect">全面检查</a>
                 <a class="ui-btn choose_inspect">基础检查</a>
@@ -1598,14 +1574,14 @@
                 <li>
                     <span>车牌号:</span>
                     <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
-                        <span id="show_province" style="padding-left: 5px">粤</span>
+                        <span id="show_province" style="padding-left: 5px">浙</span>
                         <i style="width: 20px;height: 20px;background: url(<?php echo base_url()?>statics/css/img/ssxljt.png) no-repeat;position: absolute;top: 5px;right: 2px;"></i>
                     </span>
                     <input type="text" name="carNumberLast" id="carNumberLast" style="width: 50%;height: 30px;margin-left: -5px">
                 </li>
                 <ul class="province clearfix" hidden>
-                    <li class="province_li">粤</li>
                     <li class="province_li">浙</li>
+                    <li class="province_li">粤</li>
                     <li class="province_li">京</li>
                     <li class="province_li">沪</li>
                     <li class="province_li">苏</li>
@@ -1799,207 +1775,7 @@
     </div>
 
 </div>
-<script>
-    function phone(){
-        var mobile =$("#userPhone").val();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/phone');?>",
-            data: {
-                mobile:mobile,
-            },
-            dataType: "json",
-
-            success: function (data) {
-
-                if(data.length != 0){
-                    $("#userName").val(data.name);
-                    $("#userId").val(data.id);
-                }else{
-                    $("#userName").val("无此账号");
-                }
-
-            },
-        });
-    }
-    $('.serve_type').on('click','.serve',function () {
-        var serve_id = $(this).find('input').val();
-        $('.add_content_l_hover').removeClass('add_content_l_hover');
-        $(this).addClass('add_content_l_hover');
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/service');?>",
-            data: {
-                serve_id:serve_id,
-            },
-            dataType: "json",
-
-            success: function (data) {
-                var str = '';
-                var str1 = '<li class="add_content_li add_content_c_li"><span>';
-                var str2 = '</span><span>';
-                var str3 = '</span><input type="hidden" value="';
-                var str4 = '"><span style="display: none;">';
-                var str5 = '</span></li>';
-                $.each(data,function ($k,$v) {
-                    str += str1 + $v.name + str2 + $v.price + str2 + $v.vip_price + str3 + $v.id + str4 + $v.working + str5;
-                });
-                $('#serve_level2').html(str);
-            },
-        });
-
-    });
-    $("#save_all").click(function () {
-        var describe = $("#describe").text(); //故障描述
-        var advice = $("#advice").text();   //维修建议
-        var report = $("#report").text();  //出车报告
-        var request = $("#request").text();  //顾客要求
-        var remarks = $("#remarks").text();  //备注
-        var  name = $("#name").val();  //客户用户名
-        var  phone = $("#phone").val();  //客户电话
-        var  number = $("#number").val();  //车牌
-        var  songCarRen = $("#songCarRen").val();  //送修人名字
-        var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
-        var  startTime = $("#startTime").val();  //开工时间
-        var  estimateTime = $("#estimateTime").val();  //预计完工时间
-        var  endTime = $("#endTime").val();  //完工时间
-
-        var  brand = $("#brand").val();   //品牌
-        var  vin = $("#vin").val();  //vin
-        var  insureCompany = $("#insureCompany").val();   //交强险保险公司
-        var  system = $("#system").val();  //车系
-        var  notice = $("#notice").val();  //公告号
-        var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
-        var  shape = $("#shape").val();  //车型年款
-        var  lastMileage = $("#lastMileage").val();  //上次里程
-        var  annualEndTime = $("#annualEndTime").val();  //年审到期
-        var  carShape = $("#carShape").val();   //车型
-        var  useMileage = $("#useMileage").val();  //行驶里程
-        var  suggestedMaintenanceTime = $("#suggestedMaintenanceTime").val();  //建议保养时间
-        var  carName = $("#carName").val();  //车主姓名
-        var  engineNumber = $("#engineNumber").val();   //发动机号
-        var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
-        var  idNumber = $("#idNumber").val();   //身份证号
-        var  carColor = $("#carColor").val();  //车辆颜色
-        var  carPrice = $("#carPrice").val();  //车辆价格
-        var  carAddress = $("#carAddress").val();  //车主地址
-        var  registedTime = $("#registedTime").val();   //注册时间
-        var  natureUsage = $("#natureUsage").val(); //使用性质
-        var  frontWheelType = $("#frontWheelType").val(); //前轮型号
-        var  backWheelType = $("#backWheelType").val(); //后轮型号
-        var  carType = $("#carType").val();  //车辆类型
-        var  transmission = $("#transmission").val();  //变速箱型号
-        var  carRmarks = $("#carRmarks").val();  //车辆备注
-        var  displacement = $("#displacement").val();  //排量
-        var  oilVolume = $("#oilVolume").val();  //油量
-
-        var image = new FormData();
-
-        //实录照片
-        $.each(url_arr['li0_img'],function ($key,$val) {
-            image.append('li0_img'+$key,$val);
-        });
-        //发动机部分照片
-        $.each(url_arr['li1_img'],function ($key,$val) {
-            image.append('li1_img'+$key,$val);
-        });
-        //底盘部分照片
-        $.each(url_arr['li2_img'],function ($key,$val) {
-            image.append('li2_img'+$key,$val);
-        });
-        //电气设备照片
-        $.each(url_arr['li3_img'],function ($key,$val) {
-            image.append('li3_img'+$key,$val);
-        });
-        //轮胎部分照片
-        $.each(url_arr['li4_img'],function ($key,$val) {
-            image.append('li4_img'+$key,$val);
-        });
-        //刹车系统照片
-        $.each(url_arr['li5_img'],function ($key,$val) {
-            image.append('li5_img'+$key,$val);
-        });
-        //油水部分照片
-        $.each(url_arr['li6_img'],function ($key,$val) {
-            image.append('li6_img'+$key,$val);
-        });
-        //电脑检测照片
-        $.each(url_arr['li7_img'],function ($key,$val) {
-            image.append('li7_img'+$key,$val);
-        });
-        //外观检测照片
-        $.each(url_arr['li8_img'],function ($key,$val) {
-            image.append('li8_img'+$key,$val);
-        });
-        image.append('number',number);
-
-        var checks = new Array();
-
-        $(".checks").each(function($key,$val){
-            checks.push($val.value);
-        });
-        image.append('checks',checks);
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/start');?>",
-            traditional: false,
-            dataType: "json",
-            processData :false,
-            contentType :false,
-            data:image,
-
-            success: function (data) {
-                console.log(data);
-
-            },
-        });
-
-    });
-
-    $('#save').click(function () {
-        var  car_number = $("#number").val();
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/car');?>",
-            data: {
-                car_number:car_number,
-            },
-            dataType: "json",
-
-            success: function (data) {
-
-                if(data.length != 0){
-                    $("#brand").val(data.brand);
-                    $("#vin").val(data.vin);
-                    $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
-                    $("#system").val(data.system);
-                    $("#notice").val(data.notice);
-                    $("#insuranceEndTime").val(data.compulsoryTime);
-                    $("#shape").val(data.annual);
-                    $("#annualEndTime").val(data.review);
-                    $("#carShape").val(data.shape);
-                    $("#carName").val(data.username);
-                    $("#engineNumber").val(data.engine);
-                    $("#idNumber").val(data.people_id);
-                    $("#carColor").val(data.color);
-                    $("#carPrice").val(data.price);
-                    $("#carAddress").val(data.address);
-                    $("#registedTime").val(data.registration);
-                    $("#frontWheelType").val(data.front);
-                    $("#backWheelType").val(data.rear);
-                    $("#carType").find("option[value = "+data.type +"]").attr("selected",true);
-                    $("#transmission").val(data.transmission);
-                    $("#displacement").val(data.displacement);
-                    $("#natureUsage").find("option[value = "+data.nature +"]").attr("selected",true);
-                }
-
-            },
-        });
-    });
-
-
-</script>
 <script>
     $(function () {
         // 弹框
@@ -2015,12 +1791,11 @@
                 $('#name').val($('#userName').val());
                 $('#number').val($('#show_province').html()+$('#carNumberLast').val());
             }
-
-
             $('#userPhone').val('');
             $('#userName').val('');
             $('#carNumberLast').val('');
-            $('#show_province').html('粤');
+            $('#show_province').html('浙');
+            car();
         });
         $('#name,#phone,#number').on('focus',function () {
             $('#ldg_lockmask').css('display','');
@@ -2528,6 +2303,271 @@
     var goodsCombo = Business.goodsCombo($('#goodsAuto'), {
         extraListHtml: ''
     });
+</script>
+<script>
+    function phone(){
+        var mobile =$("#userPhone").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/phone');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.length != 0){
+                    $("#userName").val(data.name);
+                    $("#userId").val(data.id);
+                }else{
+                    $("#userName").val("无此账号");
+                }
+
+            },
+        });
+    }
+
+    $('.serve_type').on('click','.serve',function () {
+        var serve_id = $(this).find('input').val();
+        $('.add_content_l_hover').removeClass('add_content_l_hover');
+        $(this).addClass('add_content_l_hover');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/service');?>",
+            data: {
+                serve_id:serve_id,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                var str = '';
+                var str1 = '<li class="add_content_li add_content_c_li"><span>';
+                var str2 = '</span><span>';
+                var str3 = '</span><input type="hidden" value="';
+                var str4 = '"><span style="display: none;">';
+                var str5 = '</span></li>';
+                $.each(data,function ($k,$v) {
+                    str += str1 + $v.name + str2 + $v.price + str2 + $v.vip_price + str3 + $v.id + str4 + $v.working + str5;
+                });
+                $('#serve_level2').html(str);
+            },
+        });
+
+    });
+
+    $("#save_all").click(function () {
+        var userId = $("#userId").val(); //故障描述
+        var describe = $("#describe").val(); //故障描述
+        var advice = $("#advice").val();   //维修建议
+        var report = $("#report").val();  //出车报告
+        var request = $("#request").val();  //顾客要求
+        var remarks = $("#remarks").val();  //备注
+        var  name = $("#name").val();  //客户用户名
+        var  phone = $("#phone").val();  //客户电话
+        var  number = $("#number").val();  //车牌
+        var  songCarRen = $("#songCarRen").val();  //送修人名字
+        var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
+        var  startTime = $("#startTime").val();  //开工时间
+        var  estimateTime = $("#estimateTime").val();  //预计完工时间
+        var  endTime = $("#endTime").val();  //完工时间
+        var  brand = $("#brand").val();   //品牌
+        var  vin = $("#vin").val();  //vin
+        var  insureCompany = $("#insureCompany").val();   //交强险保险公司
+        var  system = $("#system").val();  //车系
+        var  notice = $("#notice").val();  //公告号
+        var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
+        var  shape = $("#shape").val();  //车型年款
+        var  lastMileage = $("#lastMileage").val();  //上次里程
+        var  annualEndTime = $("#annualEndTime").val();  //年审到期
+        var  carShape = $("#carShape").val();   //车型
+        var  useMileage = $("#useMileage").val();  //行驶里程
+        var  suggestedMaintenanceTime = $("#suggestedMaintenanceTime").val();  //建议保养时间
+        var  carName = $("#carName").val();  //车主姓名
+        var  engineNumber = $("#engineNumber").val();   //发动机号
+        var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
+        var  idNumber = $("#idNumber").val();   //身份证号
+        var  carColor = $("#carColor").val();  //车辆颜色
+        var  carPrice = $("#carPrice").val();  //车辆价格
+        var  carAddress = $("#carAddress").val();  //车主地址
+        var  registedTime = $("#registedTime").val();   //注册时间
+        var  natureUsage = $("#natureUsage").val(); //使用性质
+        var  frontWheelType = $("#frontWheelType").val(); //前轮型号
+        var  backWheelType = $("#backWheelType").val(); //后轮型号
+        var  carType = $("#carType").val();  //车辆类型
+        var  transmission = $("#transmission").val();  //变速箱型号
+        var  carRmarks = $("#carRmarks").val();  //车辆备注
+        var  displacement = $("#displacement").val();  //排量
+        var  oilVolume = $("#oilVolume").val();  //油量
+// console.log(describe);
+        var image = new FormData();
+
+        //实录照片
+        $.each(url_arr['li0_img'],function ($key,$val) {
+            image.append('li0_img'+$key,$val);
+        });
+        //发动机部分照片
+        $.each(url_arr['li1_img'],function ($key,$val) {
+            image.append('li1_img'+$key,$val);
+        });
+        //底盘部分照片
+        $.each(url_arr['li2_img'],function ($key,$val) {
+            image.append('li2_img'+$key,$val);
+        });
+        //电气设备照片
+        $.each(url_arr['li3_img'],function ($key,$val) {
+            image.append('li3_img'+$key,$val);
+        });
+        //轮胎部分照片
+        $.each(url_arr['li4_img'],function ($key,$val) {
+            image.append('li4_img'+$key,$val);
+        });
+        //刹车系统照片
+        $.each(url_arr['li5_img'],function ($key,$val) {
+            image.append('li5_img'+$key,$val);
+        });
+        //油水部分照片
+        $.each(url_arr['li6_img'],function ($key,$val) {
+            image.append('li6_img'+$key,$val);
+        });
+        //电脑检测照片
+        $.each(url_arr['li7_img'],function ($key,$val) {
+            image.append('li7_img'+$key,$val);
+        });
+        //外观检测照片
+        $.each(url_arr['li8_img'],function ($key,$val) {
+            image.append('li8_img'+$key,$val);
+        });
+
+        var service_item = new Array();
+        $('.serviceItem').each(function () {
+            var service_id = $(this).find('input').val();
+
+            var good_item = new Array();
+
+            $('.parentID_'+service_id).each(function () {
+                good_item.push({"parts_id":$(this).find('.parts_id').val(),"num":$(this).find('.parts_num_int').val()});
+
+            });
+            service_item.push({"service_id":service_id,"child":good_item});
+
+        });
+        var vip_item = new Array();
+        $('.mealItem').each(function () {
+            vip_item.push({"mealID":$(this).find('.mealID').val(),"serveID":$(this).find('.serveID').val()});
+        });
+         var vip_items = JSON.stringify(vip_item);
+         var service_items = JSON.stringify(service_item);
+        image.append('userId',userId);
+        image.append('describe',describe);
+        image.append('advice',advice);
+        image.append('report',report);
+        image.append('request',request);
+        image.append('remarks',remarks);
+        image.append('name',name);
+        image.append('phone',phone);
+        image.append('number',number);
+        image.append('songCarRen',songCarRen);
+        image.append('songCarRenPhone',songCarRenPhone);
+        image.append('startTime',startTime);
+        image.append('estimateTime',estimateTime);
+        image.append('endTime',endTime);
+        image.append('brand',brand);
+        image.append('vin',vin);
+        image.append('insureCompany',insureCompany);
+        image.append('system',system);
+        image.append('notice',notice);
+        image.append('insuranceEndTime',insuranceEndTime);
+        image.append('shape',shape);
+        image.append('lastMileage',lastMileage);
+        image.append('annualEndTime',annualEndTime);
+        image.append('carShape',carShape);
+        image.append('useMileage',useMileage);
+        image.append('suggestedMaintenanceTime',suggestedMaintenanceTime);
+        image.append('carName',carName);
+        image.append('engineNumber',engineNumber);
+        image.append('suggestedMaintenance',suggestedMaintenance);
+        image.append('idNumber',idNumber);
+        image.append('carColor',carColor);
+        image.append('carPrice',carPrice);
+        image.append('carAddress',carAddress);
+        image.append('registedTime',registedTime);
+        image.append('natureUsage',natureUsage);
+        image.append('frontWheelType',frontWheelType);
+        image.append('backWheelType',backWheelType);
+        image.append('carType',carType);
+        image.append('transmission',transmission);
+        image.append('carRmarks',carRmarks);
+        image.append('displacement',displacement);
+        image.append('oilVolume',oilVolume);
+        image.append('service_item',service_items);
+        image.append('vip_item',vip_items);
+        var checks = new Array();
+
+        $(".checks").each(function($key,$val){
+            checks.push($val.value);
+        });
+        image.append('checks',checks);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/start');?>",
+            traditional: false,
+            dataType: "json",
+            processData :false,
+            contentType :false,
+            data:image,
+
+            success: function (data) {
+                console.log(data);
+
+            },
+        });
+
+    });
+
+    function car(){
+        var  car_number = $("#number").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/car');?>",
+            data: {
+                car_number:car_number,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data.length != 0){
+                    $("#brand").val(data.brand);
+                    $("#vin").val(data.vin);
+                    $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
+                    $("#system").val(data.system);
+                    $("#notice").val(data.notice);
+                    $("#insuranceEndTime").val(data.compulsoryTime);
+                    $("#shape").val(data.annual);
+                    $("#annualEndTime").val(data.review);
+                    $("#carShape").val(data.shape);
+                    $("#carName").val(data.username);
+                    $("#engineNumber").val(data.engine);
+                    $("#idNumber").val(data.people_id);
+                    $("#carColor").val(data.color);
+                    $("#carPrice").val(data.price);
+                    $("#carAddress").val(data.address);
+                    $("#registedTime").val(data.registration);
+                    $("#frontWheelType").val(data.front);
+                    $("#backWheelType").val(data.rear);
+                    $("#carType").find("option[value = "+data.type +"]").attr("selected",true);
+                    $("#transmission").val(data.transmission);
+                    $("#displacement").val(data.displacement);
+                    $("#natureUsage").find("option[value = "+data.nature +"]").attr("selected",true);
+                }
+
+            },
+        });
+    }
+
 </script>
 </body>
 </html>
