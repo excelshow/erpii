@@ -734,6 +734,22 @@
         background-position:center center;
     }
 
+    /*配件显示*/
+    .partsItem>td>.parts_num{
+        width: 96%;
+        height: 29px;
+        border: 1px solid #ddd;
+    }
+    .parts_num .parts_num_int{
+        width: 70%;
+        height: 100%;
+        border: none;
+        outline:none;
+    }
+    .partsItem:hover .parts_num .parts_num_int{
+        background-color: #f8ff94;
+    }
+
     /*选择套餐弹窗*/
     .add>.add_content .content_title{
         background-color: #f1f1f1;
@@ -802,6 +818,8 @@
         background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
         background-position:center bottom;
     }
+
+
 </style>
 </head>
 <body>
@@ -1456,13 +1474,13 @@
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
-                                <th style="width: 40%;">名称</th>
+                                <th style="width: 35%;">名称</th>
 <!--                                <th style="width: 10%;">项目类型</th>-->
 <!--                                <th style="width: 10%;">收费类型</th>-->
+                                <th style="width: 5%;">数量</th>
                                 <th style="width: 20%;">单价</th>
                                 <th style="width: 20%;">VIP单价</th>
                                 <th style="width: 15%;">工时</th>
-<!--                                <th style="width: 5%;">数量</th>-->
 <!--                                <th style="width: 10%;">折扣</th>-->
 <!--                                <th style="width: 10%;">金额</th>-->
 <!--                                <th style="width: 5%;">减免</th>-->
@@ -2214,7 +2232,7 @@
             var str = '';
             var str1 = '<tr class="serviceItem serviceItem_';
             var str2 = '"><td class="name"><span>';
-            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>';
+            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>1</span></td><td><span>';
             var str4 = '</span></td><td><span>';
             var str5 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(';
             var str6 = ')" style="margin: 0;">删除</a></span></td><input type="hidden" value="';
@@ -2238,7 +2256,9 @@
         });
 
         //添加选择配件弹框
+        var local_parts_id = '';
         $('#serve_position').on('click','.parts',function () {
+            local_parts_id = $(this).parent().parent().find('input').val();
             $('#ldg_lockmask').css('display','');
             $('#add_parts').css('display','');
         });
@@ -2275,16 +2295,36 @@
 
         //添加配件,添加配件
         $('#add_parts_val').on('click',function () {
+            var all = $('.parentID_' + local_parts_id);
+            var num = 0;
+            var id = '';
             $('#ldg_lockmask').css('display','none');
             $('#add_parts').css('display','none');
-            var input = $('.parts_li input');
-            var arr = new Array();
-            $.each(input,function () {
-                arr.push($(this).val());
+            var parts_li = $('.parts_li');
+            var str = '';
+            var str1 = '<tr class="partsItem partsItem_';
+            var str2 = ' parentID_';
+            var str3 = '"><td class="name"><span>';
+            var str4 = '</span></td><td><span class="parts_num"><input type="text" class="parts_num_int" value="1" step="1" min="1"><span>';
+            var str5 = '</sapn></span></td><td><span>';
+            var str6 = '</span></td><td><span>';
+            var str7 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItemParts(\'';
+            var str8 = '\')" style="margin: 0;">删除</a></span></td><input type="hidden" class="parts_id" value="';
+            var str9 = '"></tr>';
+            $.each(parts_li,function () {
+                id = $(this).find('.parts_id').val();
+                $.each(all,function () {
+                    if ($(this).find('.parts_id').val() == id){
+                        num++;
+                    }
+                });
+                if (num <= 0){
+                    str += str1 + local_parts_id + '_' + $(this).find('.parts_id').val() + str2 + local_parts_id + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.parts_unitName').val() + str5 + $(this).find('.parts_price').val() + str6 + $(this).find('.parts_vipprice').val() + str6 + str7 + local_parts_id + '_' + $(this).find('.parts_id').val() + str8 + $(this).find('.parts_id').val() + str9;
+                }
+
             });
-            // $.ajax({
-            //
-            // });
+            $('.serviceItem_' + local_parts_id).after(str);
+
             $('.parts_li').remove();
         });
 
@@ -2441,14 +2481,20 @@
         $('.add_content_r_li_' + id).remove();
     }
 
-    //删除已选配件
+    //删除以显示配件
     function delParts(id) {
         $('.parts_tr_' + id).remove();
+    }
+
+    //删除已选中配件
+    function delItemParts(id) {
+        $('.partsItem_' + id).remove();
     }
 
     //删除以显示服务项目
     function delItem(id) {
         $('.serviceItem_' + id).remove();
+        $('.parentID_' + id).remove();
     }
 
     //删除已选套餐服务
