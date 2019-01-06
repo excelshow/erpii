@@ -155,12 +155,12 @@ var dataReflush, list = {
 		target: "vip-JDStorage"
 	},
 
-	sales2: {
-		name: "预约开单",
-		href: "../settings/appointment_list",
-		dataRight: "",
-		target: "sales"
-	},
+	// sales2: {
+	// 	name: "预约开单",
+	// 	href: "../settings/appointment_list",
+	// 	dataRight: "",
+	// 	target: "sales"
+	// },
 	sales1: {
 		name: "接车开单",
 		href: "../billing/index",
@@ -168,13 +168,13 @@ var dataReflush, list = {
 		target: "sales",
         list: "../settings/pick_up_car_list"
 	},
-	sales3: {
-		name: "车况检测",
-		href: "../scm/invPu?action=initPur",
-		dataRight: "",
-		target: "sales",
-		list: "../scm/invPu?action=initPurList"
-	},
+	// sales3: {
+	// 	name: "车况检测",
+	// 	href: "../scm/invPu?action=initPur",
+	// 	dataRight: "",
+	// 	target: "sales",
+	// 	list: "../scm/invPu?action=initPurList"
+	// },
 	sales11: {
 		name: "新增客户",
 		href: "../settings/customer_add",
@@ -188,13 +188,13 @@ var dataReflush, list = {
 		dataRight: "",
 		target: "sales1"
 	},
-	sales13: {
-		name: "VIP卡",
-		href: "../scm/invPu?action=initPur",
-		dataRight: "",
-		target: "sales1",
-		list: "../scm/invPu?action=initPurList"
-	},
+	// sales13: {
+	// 	name: "VIP卡",
+	// 	href: "../scm/invPu?action=initPur",
+	// 	dataRight: "",
+	// 	target: "sales1",
+	// 	list: "../scm/invPu?action=initPurList"
+	// },
 	sales14: {
 		name: "购买储值卡",
 		href: "../card/buycard",
