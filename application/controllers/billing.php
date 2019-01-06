@@ -48,14 +48,26 @@ class Billing extends CI_Controller {
         $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'mobile'=>$mobile);
 
         $data =  $this->db->where($where)->get('ci_customer')->row();
+        $where_vip = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'status'=>0,'user_id'=>$data->id);
+        $data_vip =  $this->db->where($where_vip)->get('ci_vipcard')->row();
+        if($data_vip->time <time()){
+            $edit = $this->db->update('ci_vipcard',array('status'=>2),array('id'=>$data_vip->id));
+        }else{
+            $edit = null;
+        }
         if($data){
             $res['code'] = 0;
             $res['text'] = $data;
+            if($edit){
+                $res['vipId'] = 0;
+            }else{
+                $res['vipId'] = $data_vip->id;
+            }
             die(json_encode($res));
-        }
-        else{
+        }else{
             $res['code'] = 2;
             $res['text'] = '';
+            $res['vipId'] = 0;
             die(json_encode($res));
         }
 

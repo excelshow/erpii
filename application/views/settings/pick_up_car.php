@@ -1391,6 +1391,7 @@
             <li class="row-item" style="width: 100%;margin-top: 10px">
                 <a class="ui-btn ui-btn-sp choose_type">标准工时</a>
                 <a class="ui-btn choose_type">VIP套餐</a>
+                <input type="text" value="" id="vipId">
             </li>
             <li class="row-item type_standard" style="width: 100%;border: 1px solid #ddd;">
                 <div class="table">
@@ -1398,17 +1399,10 @@
                         <thead style="width: 100%;">
                             <tr style="width: 100%;">
                                 <th style="width: 35%;">名称</th>
-<!--                                <th style="width: 10%;">项目类型</th>-->
-<!--                                <th style="width: 10%;">收费类型</th>-->
                                 <th style="width: 5%;">数量</th>
                                 <th style="width: 20%;">单价</th>
                                 <th style="width: 20%;">VIP单价</th>
                                 <th style="width: 15%;">工时</th>
-<!--                                <th style="width: 10%;">折扣</th>-->
-<!--                                <th style="width: 10%;">金额</th>-->
-<!--                                <th style="width: 5%;">减免</th>-->
-<!--                                <th style="width: 5%;">施工员</th>-->
-<!--                                <th style="width: 10%;">销售员</th>-->
                                 <th style="width: 5%;">操作</th>
                             </tr>
                         </thead>
@@ -1437,13 +1431,11 @@
                     <div class="table_total_r">
                         <table class="table_new">
                             <tr>
-                                <td>工时费：  <span>9490.00</span></td>
-                                <td>配件费：  <span>65.00</span></td>
-                                <td>附加费：	 <span>0.00</span></td>
-                                <td>减免：   <span>0.00</span></td>
-                                <td>管理费： <span>0.00</span></td>
-                                <td>税费：   <span>0.00</span></td>
-                                <td>总费用： <span>9555.00</span></td>
+                                <td>工时费：  <span id="service_total">0.00</span></td>
+                                <td>配件费：  <span id="good_total">0.00</span></td>
+                                <td>原价：    <span id="old_total">0.00</span></td>
+                                <td>VIP价：   <span id="vip_total">0.00</span></td>
+                                <td>实际总费用： <span id="actual_total">0.00</span></td>
                             </tr>
                         </table>
                     </div>
@@ -1956,7 +1948,7 @@
             var str = '';
             var str1 = '<tr class="serviceItem serviceItem_';
             var str2 = '"><td class="name"><span>';
-            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>1</span></td><td><span>';
+            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>1</span></td><td><span class="single_price">';
             var str4 = '</span></td><td><span>';
             var str5 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(';
             var str6 = ')" style="margin: 0;">删除</a></span></td><input type="hidden" value="';
@@ -1977,6 +1969,18 @@
             $('#serve_level2').html('');
             $('.add_content_l_hover').removeClass('add_content_l_hover');
             $('#serve_position').append(str);
+            var service_price = 0.00;
+            if($("#vipId").val()){
+                $('.serviceItem').each(function () {
+                    service_price = service_price + parseFloat($(this).find('td:nth-child(4)').text());
+                });
+            }else{
+                $('.serviceItem').each(function () {
+                    service_price = service_price + parseFloat($(this).find('.single_price').text());
+                });
+            }
+            $("#service_total").text(service_price);
+
         });
 
         //添加选择配件弹框
@@ -2276,10 +2280,12 @@
                     $("#userName").val(data.text.name);
                     $("#userId").val(data.text.id);
                     $("#wechat").val(data.text.wechat);
+                    $("#vipId").val(data.vipId);
                 }else{
                     $("#userName").val("无此账号");
                     $("#wechat").val("无此账号");
                     $("#userId").val('');
+                    $("#vipId").val('');
                 }
 
             },
@@ -2512,6 +2518,7 @@
             },
         });
     }
+
 
 </script>
 </body>
