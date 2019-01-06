@@ -157,25 +157,26 @@ $(document).keydown(function(event) {
 	        <li><a class="ui-btn mrb" id="search">查询</a></li>
 	      </ul>
 	    </div>
-        <div class="fl">
-            <a tabTxt="会员列表" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer')?>" class="ui-btn ui-btn-sp mrb">会员列表</a>
-            <a tabTxt="车辆列表" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_car')?>" class="ui-btn ui-btn-sp mrb">车辆列表</a>
-        </div>
-	    <div class="fr">
-            <a  tabTxt="新增会员" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
-            <a href="#" class="ui-btn" id="btn-batchDel">删除</a>
-        </div>
+<!--        <div class="fl">-->
+<!--            <a tabTxt="会员列表" parentOpen="true" rel="pageTab" href="--><?php //echo site_url('settings/customer')?><!--" class="ui-btn ui-btn-sp mrb">会员列表</a>-->
+<!--            <a tabTxt="车辆列表" parentOpen="true" rel="pageTab" href="--><?php //echo site_url('settings/customer_car')?><!--" class="ui-btn ui-btn-sp mrb">车辆列表</a>-->
+<!--        </div>-->
+<!--	    <div class="fr">-->
+<!--            <a  tabTxt="新增会员" parentOpen="true" rel="pageTab" href="--><?php //echo site_url('settings/customer_add')?><!--" class="ui-btn ui-btn-sp mrb">新增</a>-->
+<!--            <a href="#" class="ui-btn" id="btn-batchDel">删除</a>-->
+<!--        </div>-->
 	  </div>
     <div class="grid-wrap">
         <div class="table">
-            <table>
+            <table style="width: 100%;">
                 <thead>
                     <tr>
                         <th style="width: 20px;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>姓名</th>
-                        <th>客户类别</th>
+                        <th>微信昵称</th>
+                        <th>真实姓名</th>
+                        <th>性别</th>
                         <th>电话</th>
                         <th>单位</th>
                         <th>地址</th>
@@ -192,14 +193,19 @@ $(document).keydown(function(event) {
                         <td class="check">
                             <input type="checkbox" class="check_child" value="1"><!--放id-->
                         </td>
+                        <td><span><?php echo $value->wechat ?></span></td>
                         <td><span><?php echo $value->name ?></span></td>
-                        <td><span><?php echo $value->name ?></span></td>
+                        <?php if ($value->sex == 0) :?>
+                            <td><span>女</span></td>
+                        <?php else:?>
+                            <td><span>男</span></td>
+                        <?php endif;?>
                         <td><span><?php echo $value->mobile ?></span></td>
                         <td><span><?php echo $value->company ?></span></td>
                         <td><span><?php echo $value->address ?></span></td>
                         <td><span><?php echo $value->service ?></span></td>
                         <td><span><?php echo $value->org_name ?></span></td>
-                        <td><span><?php echo $value->time ?></span></td>
+                        <td><span><?php echo date('Y-m-d H:i:s',$value->time) ?></span></td>
 
                         <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/detail')?>?id=<?php echo $value->id ?>" class="ui-btn mrb detail" id=<?php echo $value->id ?>>详情</a></span></td><!--放id-->
                     </tr>

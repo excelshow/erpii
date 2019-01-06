@@ -59,6 +59,7 @@ class Follow extends CI_Controller {
                         'lowId'=> $lowId,
                         'org_id'=> $lowId,
                         'org_name'=>$org_data->name,
+                        'time'=>time(),
                     );
                     $this->db->insert('ci_customer',$add);
                 }

@@ -546,6 +546,7 @@ $(document).keydown(function(event) {
         var remarks = $("#remarks").val();
         var user_id = $("#user_id").val();
         var id = $("#id").val();
+
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('customer/caradd');?>",
@@ -600,7 +601,7 @@ $(document).keydown(function(event) {
                     parent.Public.tips({
                         content:data.text
                     });
-                    location.href = "<?php echo site_url('customer/car?id=')?>"+id;
+                    location.href = "<?php echo site_url('customer/detail?id=')?>"+id;
                 }else if (data.code == 1){
                     parent.Public.tips({
                         type:1,

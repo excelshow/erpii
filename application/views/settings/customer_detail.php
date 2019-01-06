@@ -101,7 +101,7 @@ $(document).keydown(function(event) {
     }
     .table th,td{
         border: 1px solid #e2e2e2;
-        width: 20%;
+
         height: 33px;
         text-align: center;
     }
@@ -174,10 +174,7 @@ $(document).keydown(function(event) {
         <div class="fl">
             <input type="text" class="name" value="<?php echo $data->name ?>">
         </div>
-<!--	    <div class="fr">-->
-<!--            <a href="#" class="ui-btn ui-btn-sp mrb">成为会员</a>-->
-<!--            <a href="#" class="ui-btn" id="btn-batchDel">撤销会员</a>-->
-<!--        </div>-->
+
     </div>
     <div class="grid-wrap">
         <input type="text" hidden value="<?php echo $id ?>" id="id">
@@ -316,9 +313,9 @@ $(document).keydown(function(event) {
 
 
 <!--        车辆信息-->
-        <ul style="font-size: 20px;font-weight: bold">车辆信息</ul>
+        <ul style="font-size: 20px;font-weight: bold">车辆信息<a  tabTxt="新增车辆" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/newcar?id='.$id)?>" class="ui-btn ui-btn-sp mrb" style="float: right;margin-bottom: 5px;">新增</a></ul>
         <div class="table item">
-            <table>
+            <table style="width: 100%;">
                 <thead>
                     <tr>
                         <th>车牌号</th>
@@ -332,18 +329,25 @@ $(document).keydown(function(event) {
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($cars as $k=>$v):?>
+                <?php if ($cars) :?>
+                    <?php foreach ($cars as $k=>$v):?>
+                        <tr>
+                            <td><span><?php echo $v->plateNo ?></span></td>
+                            <td><span><?php echo $v->shape ?> </span></td>
+                            <td><span><?php echo $v->username ?></span></td>
+                            <td><span><?php echo $v->tel ?></span></td>
+                            <td><span><?php echo $v->compulsoryTime ?></span></td>
+                            <td><span><?php echo $v->adviceTime ?></span></td>
+                            <td><span><?php echo $v->currentMileage ?></span></td>
+                            <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/car?id='.$v->id)?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                        </tr>
+                    <?php endforeach;?>
+                <?php else: ?>
                     <tr>
-                        <td><span><?php echo $v->plateNo ?></span></td>
-                        <td><span><?php echo $v->shape ?> </span></td>
-                        <td><span><?php echo $v->username ?></span></td>
-                        <td><span><?php echo $v->tel ?></span></td>
-                        <td><span><?php echo $v->compulsoryTime ?></span></td>
-                        <td><span><?php echo $v->adviceTime ?></span></td>
-                        <td><span><?php echo $v->currentMileage ?></span></td>
-                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/car?id='.$v->id)?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                        <td colspan="8">暂无记录</td>
                     </tr>
-                <?php endforeach;?>
+                <?php endif;?>
+
 
                 </tbody>
             </table>
@@ -356,7 +360,7 @@ $(document).keydown(function(event) {
             <li style="float: left"><a href="javascript:void(0);" class="history">历史维修记录</a></li>
         </ul>
         <div class="table item" id="service">
-            <table>
+            <table style="width: 100%;">
                 <thead>
                 <tr>
                     <th>车牌号</th>

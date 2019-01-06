@@ -8,14 +8,18 @@ class Customer extends CI_Controller {
         $this->common_model->checkpurview(305);
     }
 
+    //客户列表
     public function index() {
         $user = $this->session->userdata('jxcsys');
-        $data = $this->db->get('ci_customer')->result();
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+
+        $data = $this->db->where($where)->get('ci_customer')->result();
 
         $this->load->view('/settings/customer',['data'=>$data]);
 
     }
 
+    //客户添加
     public function add() {
 
         $data = str_enhtml($this->input->post(NULL,TRUE));
@@ -70,6 +74,7 @@ class Customer extends CI_Controller {
         die(json_encode($res));
     }
 
+//    客户详情
     public function detail() {
 
         $id = $this->input->get('id');
@@ -112,16 +117,24 @@ class Customer extends CI_Controller {
         }
     }
 
+//    客户车辆信息
     public function car(){
         $id = $this->input->get('id');
         $data = $this->db->where('id',$id)->get('ci_car')->row();
         $this->load->view('/settings/customer_car_detail',['data'=>$data,'id'=>$id]);
     }
+//    新增客户车辆信息
+    public function newcar(){
+        $id = $this->input->get('id');
 
+        $this->load->view('/settings/customer_car_detail',['id'=>$id]);
+    }
+    //车辆添加
     public function caradd(){
         $data = str_enhtml($this->input->post(NULL,TRUE));
 
         $add = array(
+            'user_id'=>$data['id'],
             'plateNo'=>$data['plateNo'],
             'brand'=>$data['brand'],
             'system'=>$data['system'],
@@ -161,45 +174,31 @@ class Customer extends CI_Controller {
             'insured'=>$data['insured'],
             'remarks'=>$data['remarks'],
         );
-
-        $car_res = $this->db->update('ci_car',$add,array('id'=>$data['id']));
-
-        if($car_res){
-            $res['code'] = 0;
-            $res['text'] = "修改成功";
-            die(json_encode($res));
+        if($data['user_id']){
+            $car_res = $this->db->update('ci_car',$add,array('id'=>$data['id']));
+            if($car_res){
+                $res['code'] = 0;
+                $res['text'] = "修改成功";
+                die(json_encode($res));
+            }else{
+                $res['code'] = 1;
+                $res['text'] = "修改失败";
+                die(json_encode($res));
+            }
         }else{
-            $res['code'] = 1;
-            $res['text'] = "修改失败";
-            die(json_encode($res));
+            $car_res = $this->db->insert('ci_car',$add);
+            if($car_res){
+                $res['code'] = 0;
+                $res['text'] = "新增成功";
+                die(json_encode($res));
+            }else{
+                $res['code'] = 1;
+                $res['text'] = "新增失败";
+                die(json_encode($res));
+            }
         }
+
+
+
     }
 }
-//'topId' => int 1
-//  'midId' => int -1
-//  'lowId' => int -1
-//  'orgId' => int 1
-//  'orgLevel' => int 1
-//  'orgName' => string '中华区' (length=9)
-//  'orgWhere' => string 'topId=1' (length=7)
-//  'orgMidWhere' => string 'topId=1' (length=7)
-
-
-//'topId' => int 1
-//  'midId' => int 2
-//  'lowId' => int -1
-//  'orgId' => int 1
-//  'orgLevel' => int 1
-//  'orgName' => string '上海' (length=6)
-//  'orgWhere' => string 'midId=2' (length=7)
-//  'orgMidWhere' => string 'midId=2' (length=7)
-
-
-//'topId' => int 1
-//  'midId' => int 2
-//  'lowId' => int 3
-//  'orgId' => int 1
-//  'orgLevel' => int 1
-//  'orgName' => string '普陀' (length=6)
-//  'orgWhere' => string 'lowId=3' (length=7)
-//  'orgMidWhere' => string 'midId=2' (length=7)
