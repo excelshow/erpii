@@ -18,38 +18,67 @@
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720px, user-scalable=no">
 </head>
 <body>
-
     <div class="system">
+<!--        头部-->
         <div class="title">
             <a href="javascript:history.back(-1);" class="back">返回</a>
             <a href="javascript:void(0);" class="topsearch">搜索</a>
             <ul class="sytime">客户</ul>
         </div>
-
+<!--        搜索-->
         <div class="khtopss">
             <table width="580" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tbody><tr>
-                    <td height="55">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td height="80" style="font-size: 30px;">请输入客户、车牌或手机号码：</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" class="khtopinput" id="txtkey"><input type="button" class="khtopbtn" id="btnsearch"></td>
-                </tr>
-                </tbody></table>
+                <tbody>
+                    <tr>
+                        <td height="55">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="80" style="font-size: 30px;">请输入手机号码：</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="khtopinput" id="txtkey">
+                            <input type="button" class="khtopbtn" id="btnsearch">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+<!--        搜索结果-->
         <div class="yuyue_title">
+            <div class="left font28">搜索结果<font>(共 9 条)</font></div>
         </div>
-
         <div id="adddata">
+<!--            如果存在-->
+            <div class="kh_list">
+                <div class="kh_ny">
+                    <dl>
+                        <dt class=""><!--非会员-->
+<!--                        <dt class="hy">会员-->
+                            <a href=""><p class="link">贾真人</p></a>
+                            <span class="ptkh">(普通客户)</span><!--非会员-->
+<!--                            <span class="yhkh">会员</span>会员-->
+<!--                            <font class="">未注册</font>-->
 
+                        </dt>
+                        <dd>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody><tr>
+                                    <td>粤A12342 </td>
+                                    <td width="17%" align="right">15057725702</td>
+                                </tr>
+                                </tbody></table>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+<!--            如果没有-->
             <div class="nophoto">
                 <span>暂无客户</span>
             </div>
         </div>
-
+<!--        loading-->
         <div class="loading" style="display: none;" lang="item_loading">
             <img src="<?php echo base_url()?>statics/h5/images/loading.gif" width="24" height="24" style="margin-top: -5px;">&nbsp;正在加载中
         </div>
@@ -57,26 +86,19 @@
     </div>
 
     <script type="text/javascript">
-        $(function ()
-        {
+        $(function (){
             $(document).bind("click",function(e){
                 var target  = $(e.target);
-                if(target.closest("#asearch").length == 0)
-                {
+                if(target.closest("#asearch").length == 0){
                     $("#ulsearchstatus").hide();
                 }
-            })
+            });
 
-            //$(".topsearch").click(function()
-            //{
-            //    $(".kh_ss").slideToggle(500);
-            //});
-
-            $("#btnsearch").click(function()
-            {
-                var url="/Customer/List" +"?keyword=" + $.trim($("#txtkey").val());
+            // 搜索
+            $("#btnsearch").click(function(){
+                var url="" +"?keyword=" + $.trim($("#txtkey").val());
                 window.location.href=url;
-            })
+            });
 
             function contains(arr, obj) {
                 var i = arr.length;
@@ -86,14 +108,14 @@
                     }
                 }
                 return false;
-            }
+            };
 
             //筛选按钮
-            $("#asearch").click(function()
-            {
+            $("#asearch").click(function(){
                 $(this).next("ul").toggle();
-            })
+            });
 
+            // 上拉加载下一页
             var myArray = new Array();
             var totalpage = 1; //总页数，防止超过总页数继续滚动
             var winH = $(window).height(); //页面可视区域高度
@@ -118,7 +140,7 @@
                 $.ajax({
                     async:true,
                     type: "POST",
-                    url: '/Customer/ListIndex',
+                    url: '',
                     data: { page: page,keyword: keyword },
                     cache:false,
                     success: function (result) {
@@ -127,7 +149,6 @@
                         i++;
                     },
                     error: function () {
-                        //Ewewo.Tips('网络错误!');
                         Ewewo.RemoveLoading();
                     }
                 });
