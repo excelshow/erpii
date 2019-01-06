@@ -44,12 +44,21 @@ class Billing extends CI_Controller {
     public function phone(){
         $mobile = str_enhtml($this->input->post('mobile',TRUE));
         $user = $this->session->userdata('jxcsys');
-
+        $res = [];
         $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'mobile'=>$mobile);
 
         $data =  $this->db->where($where)->get('ci_customer')->row();
+        if($data){
+            $res['code'] = 0;
+            $res['text'] = $data;
+            die(json_encode($res));
+        }
+        else{
+            $res['code'] = 2;
+            $res['text'] = '';
+            die(json_encode($res));
+        }
 
-        die(json_encode($data));
     }
 
     //查询车辆信息
@@ -70,7 +79,6 @@ class Billing extends CI_Controller {
             $res['text'] = "您尚未在组织中，添加失败！";
             die(json_encode($res));
         }
-//        $a = str_enhtml($this->input->post('vip_item',TRUE));
 
 //        die(json_encode($a));
         $image = $_FILES;
@@ -122,47 +130,41 @@ class Billing extends CI_Controller {
 
         $add = array(
             'userId'=>$this->input->post('userId'),
-            'name'=>$this->input->post('name'),
-            'phone'=>$this->input->post('phone'),
-            'number'=>$this->input->post('number'),
-            'songCarRen'=>$this->input->post('songCarRen'),
-            'songCarRenPhone'=>$this->input->post('songCarRenPhone'),
-            'startTime'=>$this->input->post('startTime'),
-            'estimateTime'=>$this->input->post('estimateTime'),
-            'endTime'=>$this->input->post('endTime'),
             'describe'=>$this->input->post('describe'),
             'advice'=>$this->input->post('advice'),
             'report'=>$this->input->post('report'),
             'request'=>$this->input->post('request'),
             'remarks'=>$this->input->post('remarks'),
+            'name'=>$this->input->post('name'),
+            'phone'=>$this->input->post('phone'),
+            'number'=>$this->input->post('number'),
+            'songCarRen'=>$this->input->post('songCarRen'),
+            'songCarRenPhone'=>$this->input->post('songCarRenPhone'),
+            'service'=>$this->input->post('service'),
+            'startTime'=>$this->input->post('startTime'),
+            'estimateTime'=>$this->input->post('estimateTime'),
+            'endTime'=>$this->input->post('endTime'),
             'brand'=>$this->input->post('brand'),
-            'vin'=>$this->input->post('vin'),
             'insureCompany'=>$this->input->post('insureCompany'),
             'system'=>$this->input->post('system'),
-            'notice'=>$this->input->post('notice'),
             'insuranceEndTime'=>$this->input->post('insuranceEndTime'),
             'shape'=>$this->input->post('shape'),
-            'lastMileage'=>$this->input->post('lastMileage'),
-            'annualEndTime'=>$this->input->post('annualEndTime'),
             'carShape'=>$this->input->post('carShape'),
-            'useMileage'=>$this->input->post('useMileage'),
-            'suggestedMaintenanceTime'=>$this->input->post('suggestedMaintenanceTime'),
-            'carName'=>$this->input->post('carName'),
             'engineNumber'=>$this->input->post('engineNumber'),
             'suggestedMaintenance'=>$this->input->post('suggestedMaintenance'),
-            'idNumber'=>$this->input->post('idNumber'),
             'carColor'=>$this->input->post('carColor'),
-            'carPrice'=>$this->input->post('carPrice'),
-            'carAddress'=>$this->input->post('carAddress'),
-            'registedTime'=>$this->input->post('registedTime'),
             'natureUsage'=>$this->input->post('natureUsage'),
             'frontWheelType'=>$this->input->post('frontWheelType'),
             'backWheelType'=>$this->input->post('backWheelType'),
             'carType'=>$this->input->post('carType'),
             'transmission'=>$this->input->post('transmission'),
-            'carRmarks'=>$this->input->post('carRmarks'),
             'displacement'=>$this->input->post('displacement'),
             'oilVolume'=>$this->input->post('oilVolume'),
+            'wechat'=>$this->input->post('wechat'),
+            'schedule'=>1,
+            'topId'=>$user['topId'],
+            'midId'=>$user['midId'],
+            'lowId'=>$user['lowId'],
             'checks'=>$this->input->post('checks'),
             'image'=>json_encode($img),
             'service_item'=>json_encode($this->input->post('service_item')),
@@ -170,7 +172,16 @@ class Billing extends CI_Controller {
         );
 
         $billing = $this->db->insert('ci_billing',$add);
-        die(json_encode($billing));
+        if($billing){
+            $res['code'] = 0;
+            $res['text'] = "服务单已提交客户确认，请确认后开始施工。";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "服务单生成失败。";
+            die(json_encode($res));
+        }
+
     }
 
     //查询服务内容
@@ -256,4 +267,23 @@ class Billing extends CI_Controller {
         die(json_encode($data));
     }
 
+//    服务单列表
+    public function billinglist(){
+        $user = $this->session->userdata('jxcsys');
+
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $data = $this->db->where($where)->get('ci_billing')->result();
+
+        $this->load->view('/settings/pick_up_car_list',['data'=>$data]);
+    }
+
+    //    服务单详情
+    public function billingdetail(){
+        $user = $this->session->userdata('jxcsys');
+        $id = $this->input->get('id');
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'id'=>$id);
+        $data = $this->db->where($where)->get('ci_billing')->row();
+//var_dump($data);
+        $this->load->view('/settings/pick_up_car_edit',['data'=>$data]);
+    }
 }

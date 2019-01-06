@@ -881,20 +881,6 @@
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="company">工作单位:</label></div>-->
-<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company"></div>-->
-<!--            </li>-->
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="reception">接待人员:</label></div>-->
-<!--                <div class="ctn-wrap">-->
-<!--                    <select name="reception" id="reception" class="sel">-->
-<!--                        <option value="1" selected>待确定</option>-->
-<!--                        <option value="2">已确定</option>-->
-<!--                        <option value="3">已取消</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </li>-->
 
             <li class="row-item">
                 <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
