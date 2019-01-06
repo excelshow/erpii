@@ -748,7 +748,12 @@
     }
     .partsItem:hover .parts_num .parts_num_int{
         background-color: #f8ff94;
+        /*-moz-appearance:textfield;*/
     }
+    /*.partsItem:hover .parts_num .parts_num_int::-webkit-outer-spin-button,*/
+    /*.partsItem:hover .parts_num .parts_num_int::-webkit-inner-spin-button{*/
+        /*-webkit-appearance: none;*/
+    /*}*/
 
     /*选择套餐弹窗*/
     .add>.add_content .content_title{
@@ -2047,6 +2052,7 @@
             var unitName = $(this).find('td:nth-child(5)').html();
             var price = $(this).find('td:nth-child(8)').html();
             var vipprice = $(this).find('td:nth-child(9)').html();
+            var stock = $(this).find('td:nth-child(7)').html();
             var str = '';
             var str1 = '<li onclick="delParts(';
             var str2 = ')" class="parts_li parts_tr_';
@@ -2055,14 +2061,15 @@
             var str5 = '"><input type="hidden" class="parts_unitName" value="';
             var str6 = '"><input type="hidden" class="parts_price" value="';
             var str7 = '"><input type="hidden" class="parts_vipprice" value="';
-            var str8 = '"></li>';
+            var str8 = '"><input type="hidden" class="parts_stock" value="';
+            var str9 = '"></li>';
             $.each(all,function () {
                if ($(this).find('.parts_id').val() == id){
                    num++;
                }
             });
             if (num <= 0){
-                str = str1 + id + str2 + id + str3 + name + str4 + id + str5 + unitName + str6 + price + str7 + vipprice + str8;
+                str = str1 + id + str2 + id + str3 + name + str4 + id + str5 + unitName + str6 + price + str7 + vipprice + str8 + stock + str9;
                 $('.add_parts_ul').append(str);
             }
 
@@ -2080,12 +2087,13 @@
             var str1 = '<tr class="partsItem partsItem_';
             var str2 = ' parentID_';
             var str3 = '"><td class="name"><span>';
-            var str4 = '</span></td><td><span class="parts_num"><input type="text" class="parts_num_int" value="1" step="1" min="1"><span>';
-            var str5 = '</sapn></span></td><td><span>';
-            var str6 = '</span></td><td><span>';
-            var str7 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItemParts(\'';
-            var str8 = '\')" style="margin: 0;">删除</a></span></td><input type="hidden" class="parts_id" value="';
-            var str9 = '"></tr>';
+            var str4 = '</span></td><td><span class="parts_num"><input type="number" class="parts_num_int" value="1" step="1" min="1" max="';
+            var str5 = '"><span>';
+            var str6 = '</sapn></span></td><td><span>';
+            var str7 = '</span></td><td><span>';
+            var str8 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItemParts(\'';
+            var str9 = '\')" style="margin: 0;">删除</a></span></td><input type="hidden" class="parts_id" value="';
+            var str10 = '"></tr>';
             $.each(parts_li,function () {
                 id = $(this).find('.parts_id').val();
                 $.each(all,function () {
@@ -2094,7 +2102,7 @@
                     }
                 });
                 if (num <= 0){
-                    str += str1 + local_parts_id + '_' + $(this).find('.parts_id').val() + str2 + local_parts_id + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.parts_unitName').val() + str5 + $(this).find('.parts_price').val() + str6 + $(this).find('.parts_vipprice').val() + str6 + str7 + local_parts_id + '_' + $(this).find('.parts_id').val() + str8 + $(this).find('.parts_id').val() + str9;
+                    str += str1 + local_parts_id + '_' + $(this).find('.parts_id').val() + str2 + local_parts_id + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.parts_stock').val() + str5 + $(this).find('.parts_unitName').val() + str6 + $(this).find('.parts_price').val() + str7 + $(this).find('.parts_vipprice').val() + str7 + str8 + local_parts_id + '_' + $(this).find('.parts_id').val() + str9 + $(this).find('.parts_id').val() + str10;
                 }
 
             });
