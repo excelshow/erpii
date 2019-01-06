@@ -166,7 +166,7 @@ var dataReflush, list = {
 		href: "../billing/index",
 		dataRight: "",
 		target: "sales",
-        list: "../settings/pick_up_car_list"
+        list: "../billing/billinglist"
 	},
 	// sales3: {
 	// 	name: "车况检测",

@@ -838,7 +838,7 @@
             <a class="ui-btn choose">服务项目</a>
         </div>
         <div class="fr">
-            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: none">报价</a>
+            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: none">施工</a>
         </div>
     </div>
 <!--信息-->
@@ -874,7 +874,9 @@
                         <option value="1" selected>正常服务</option>
                         <option value="2">保险</option>
                         <option value="3">返工</option>
-                        <option value="4">索赔</option>
+                        <option value="3">索赔</option>
+                        <option value="3">免单</option>
+                        <option value="3">公务车</option>
                     </select>
                 </div>
             </li>
@@ -900,6 +902,11 @@
                 <div class="label-wrap"><label for="brand">品牌:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="brand" id="brand"></div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="vin">VIN码:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="vin" id="vin"></div>-->
+<!--            </li>-->
+
             <li class="row-item">
                 <div class="label-wrap"><label for="system">车系:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="system" id="system"></div>
@@ -928,6 +935,10 @@
                     </select>
                 </div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="notice">公告号	:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="notice" id="notice"></div>-->
+<!--            </li>-->
             <li class="row-item">
                 <div class="label-wrap"><label for="insuranceEndTime">保险到期	:</label></div>
                 <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="insuranceEndTime" id="insuranceEndTime"></div>
@@ -936,11 +947,31 @@
                 <div class="label-wrap"><label for="shape">车型年款:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="shape" id="shape"></div>
             </li>
+
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="lastMileage">上次里程:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="lastMileage" id="lastMileage"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="annualEndTime">年审到期:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="annualEndTime" id="annualEndTime"></div>-->
+<!--            </li>-->
             <li class="row-item">
                 <div class="label-wrap"><label for="carShape">车型:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carShape" id="carShape"></div>
             </li>
-
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="useMileage">行驶里程:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="useMileage" id="useMileage"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="suggestedMaintenanceTime">	建议保养时间:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="suggestedMaintenanceTime" id="suggestedMaintenanceTime"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="carName">车主姓名:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carName" id="carName"></div>-->
+<!--            </li>-->
             <li class="row-item">
                 <div class="label-wrap"><label for="engineNumber">发动机号:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="engineNumber" id="engineNumber"></div>
@@ -958,10 +989,26 @@
                     </select>
                 </div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="idNumber">身份证号:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="idNumber" id="idNumber"></div>-->
+<!--            </li>-->
             <li class="row-item">
                 <div class="label-wrap"><label for="carColor">车辆颜色:</label></div>
                 <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carColor" id="carColor"></div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="carPrice">车辆价格:</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carPrice" id="carPrice"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="carAddress">车主地址 :</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carAddress" id="carAddress"></div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="registedTime">注册时间 :</label></div>-->
+<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="registedTime" id="registedTime"></div>-->
+<!--            </li>-->
 
             <li class="row-item">
                 <div class="label-wrap"><label for="frontWheelType">前轮型号 :</label></div>
@@ -993,6 +1040,22 @@
                     </select>
                 </div>
             </li>
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="carRmarks">车辆备注 :</label></div>-->
+<!--                <div class="ctn-wrap">-->
+<!--                    <input type="text" value="" class="ui-input normal" name="carRmarks" id="carRmarks">-->
+<!--                    <!--                    <textarea class="ui-input" name="carRmarks" id="carRmarks"></textarea>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <li class="row-item">-->
+<!--                <div class="label-wrap"><label for="displacement">排量 :</label></div>-->
+<!--                <div class="ctn-wrap clearfix">-->
+<!--                    <input type="radio" value="1" class="ui-input normal" name="displacement" id="displacement" checked="checked" style="width: 25%;float:left;margin-top: 8px">-->
+<!--                    <span style="float:left;margin-left: -10%">良好</span>-->
+<!--                    <input type="radio" value="2" class="ui-input normal" name="displacement" id="displacement" style="width: 25%;float:left;margin-top: 8px">-->
+<!--                    <span style="float:left;margin-left: -10%">不正常</span>-->
+<!--                </div>-->
+<!--            </li>-->
             <li class="row-item" style="width: 50%;">
                 <div class="label-wrap"><label for="oilVolume">剩余油量 :</label></div>
                 <div class="ctn-wrap clearfix">
@@ -1513,9 +1576,9 @@
         </div>
         <div class="add_content">
             <ul class="content_main clearfix" style="position: relative;">
-                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号进行搜索" oninput="phone()"></li>
+                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号进行搜索" onblur="phone()"></li>
 
-                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;" readonly placeholder="输入手机号可自动查询">
+                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;">
                     <input type="hidden" value="" id="userId">
                 </li>
                 <li>
@@ -1560,8 +1623,6 @@
                     <li class="province_li">琼</li>
                     <li class="province_li">WJ</li>
                 </ul>
-                <li style="margin-bottom: 20px"><span>微信昵称:</span><input type="text" name="wechat" id="wechat" style="width: 70%;height: 30px;" readonly placeholder="输入手机号可自动查询">
-                </li>
             </ul>
         </div>
         <div class="add_footer">
@@ -2270,16 +2331,11 @@
 
             success: function (data) {
 
-                if(data.code == 1){
-                    $("#phone").val('');
-                }else if (data.code == 0) {
-                    $("#userName").val(data.text.name);
-                    $("#userId").val(data.text.id);
-                    $("#wechat").val(data.text.wechat);
+                if(data.length != 0){
+                    $("#userName").val(data.name);
+                    $("#userId").val(data.id);
                 }else{
                     $("#userName").val("无此账号");
-                    $("#wechat").val("无此账号");
-                    $("#userId").val('');
                 }
 
             },
@@ -2315,7 +2371,7 @@
     });
 
     $("#save_all").click(function () {
-        var userId = $("#userId").val(); //用户ID
+        var userId = $("#userId").val(); //故障描述
         var describe = $("#describe").val(); //故障描述
         var advice = $("#advice").val();   //维修建议
         var report = $("#report").val();  //出车报告
@@ -2323,31 +2379,41 @@
         var remarks = $("#remarks").val();  //备注
         var  name = $("#name").val();  //客户用户名
         var  phone = $("#phone").val();  //客户电话
-        var  number = $("#number").val();  //车牌号
-        var  wechat = $("#wechat").val();  //用户微信昵称
+        var  number = $("#number").val();  //车牌
         var  songCarRen = $("#songCarRen").val();  //送修人名字
         var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
-        var  service = $("#service").val(); //服务类别
         var  startTime = $("#startTime").val();  //开工时间
         var  estimateTime = $("#estimateTime").val();  //预计完工时间
         var  endTime = $("#endTime").val();  //完工时间
         var  brand = $("#brand").val();   //品牌
+        var  vin = $("#vin").val();  //vin
         var  insureCompany = $("#insureCompany").val();   //交强险保险公司
         var  system = $("#system").val();  //车系
+        var  notice = $("#notice").val();  //公告号
         var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
         var  shape = $("#shape").val();  //车型年款
+        var  lastMileage = $("#lastMileage").val();  //上次里程
+        var  annualEndTime = $("#annualEndTime").val();  //年审到期
         var  carShape = $("#carShape").val();   //车型
+        var  useMileage = $("#useMileage").val();  //行驶里程
+        var  suggestedMaintenanceTime = $("#suggestedMaintenanceTime").val();  //建议保养时间
+        var  carName = $("#carName").val();  //车主姓名
         var  engineNumber = $("#engineNumber").val();   //发动机号
         var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
+        var  idNumber = $("#idNumber").val();   //身份证号
         var  carColor = $("#carColor").val();  //车辆颜色
+        var  carPrice = $("#carPrice").val();  //车辆价格
+        var  carAddress = $("#carAddress").val();  //车主地址
+        var  registedTime = $("#registedTime").val();   //注册时间
         var  natureUsage = $("#natureUsage").val(); //使用性质
         var  frontWheelType = $("#frontWheelType").val(); //前轮型号
         var  backWheelType = $("#backWheelType").val(); //后轮型号
         var  carType = $("#carType").val();  //车辆类型
         var  transmission = $("#transmission").val();  //变速箱型号
+        var  carRmarks = $("#carRmarks").val();  //车辆备注
         var  displacement = $("#displacement").val();  //排量
         var  oilVolume = $("#oilVolume").val();  //油量
-
+// console.log(describe);
         var image = new FormData();
 
         //实录照片
@@ -2415,27 +2481,37 @@
         image.append('name',name);
         image.append('phone',phone);
         image.append('number',number);
-        image.append('wechat',wechat);
         image.append('songCarRen',songCarRen);
         image.append('songCarRenPhone',songCarRenPhone);
-        image.append('service',service);
         image.append('startTime',startTime);
         image.append('estimateTime',estimateTime);
         image.append('endTime',endTime);
         image.append('brand',brand);
+        image.append('vin',vin);
         image.append('insureCompany',insureCompany);
         image.append('system',system);
+        image.append('notice',notice);
         image.append('insuranceEndTime',insuranceEndTime);
         image.append('shape',shape);
+        image.append('lastMileage',lastMileage);
+        image.append('annualEndTime',annualEndTime);
         image.append('carShape',carShape);
+        image.append('useMileage',useMileage);
+        image.append('suggestedMaintenanceTime',suggestedMaintenanceTime);
+        image.append('carName',carName);
         image.append('engineNumber',engineNumber);
         image.append('suggestedMaintenance',suggestedMaintenance);
+        image.append('idNumber',idNumber);
         image.append('carColor',carColor);
+        image.append('carPrice',carPrice);
+        image.append('carAddress',carAddress);
+        image.append('registedTime',registedTime);
         image.append('natureUsage',natureUsage);
         image.append('frontWheelType',frontWheelType);
         image.append('backWheelType',backWheelType);
         image.append('carType',carType);
         image.append('transmission',transmission);
+        image.append('carRmarks',carRmarks);
         image.append('displacement',displacement);
         image.append('oilVolume',oilVolume);
         image.append('service_item',service_items);
@@ -2456,18 +2532,6 @@
             data:image,
 
             success: function (data) {
-                if(data.code == 1){
-                    parent.Public.tips({
-                        type:1,
-                        content:data.text,
-                    });
-                }else if(data.code == 0){
-                    parent.Public.tips({
-                        content:data.text,
-
-                    });
-                    location.href = "<?php echo site_url('billing/billinglist')?>";
-                }
                 console.log(data);
 
             },
@@ -2490,6 +2554,7 @@
                 console.log(data);
                 if(data.length != 0){
                     $("#brand").val(data.brand);
+                    $("#vin").val(data.vin);
                     $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
                     $("#system").val(data.system);
                     $("#notice").val(data.notice);
@@ -2499,7 +2564,10 @@
                     $("#carShape").val(data.shape);
                     $("#carName").val(data.username);
                     $("#engineNumber").val(data.engine);
+                    $("#idNumber").val(data.people_id);
                     $("#carColor").val(data.color);
+                    $("#carPrice").val(data.price);
+                    $("#carAddress").val(data.address);
                     $("#registedTime").val(data.registration);
                     $("#frontWheelType").val(data.front);
                     $("#backWheelType").val(data.rear);

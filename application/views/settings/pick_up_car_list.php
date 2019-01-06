@@ -176,49 +176,71 @@ $(document).keydown(function(event) {
                         <th style="width: 3%;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th style="width: 7%;">编号</th>
+                        <th style="width: 7%;">服务单号</th>
                         <th style="width: 7%;">车牌号</th>
                         <th style="width: 5%;">客户名称</th>
+                        <th style="width: 5%;">客户微信</th>
                         <th style="width: 7%;">电话</th>
                         <th style="width: 7%;">开始时间</th>
                         <th style="width: 5%;">项目类型</th>
-                        <th style="width: 10%;">服务项目</th>
                         <th style="width: 5%;">送修人</th>
                         <th style="width: 7%;">送修电话</th>
                         <th style="width: 5%;">接待人员</th>
                         <th style="width: 5%;">总金额</th>
-                        <th style="width: 5%;">目前状态</th>
+                        <th style="width: 5%;">目前进度</th>
                         <th style="width: 7%;">结算时间</th>
-                        <th style="width: 5%;">类型</th>
-                        <th style="width: 5%;">备注</th>
                         <th style="width: 5%;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php if ($data) :?>
+                        <?php foreach ($data as $k=>$v) :?>
                         <tr>
                             <td class="check">
                                 <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
                             </td>
-                            <td><span>1</span></td>
-                            <td><span>2</span></td>
-                            <td><span>3</span></td>
-                            <td><span>4</span></td>
-                            <td><span>5</span></td>
-                            <td><span>6</span></td>
-                            <td><span>7</span></td>
-                            <td><span>8</span></td>
-                            <td><span>9</span></td>
-                            <td><span>10</span></td>
-                            <td><span>11</span></td>
-                            <td><span>12</span></td>
-                            <td><span>13</span></td>
-                            <td><span>14</span></td>
-                            <td><span>15</span></td>
-                            <td><span><a tabTxt="服务记录详情" parentOpen="true" rel="pageTab" href="<?php echo site_url("settings/pick_up_car?id=$v->id")?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                            <td><span><?php echo $v->uid ?></span></td>
+                            <td><span><?php echo $v->number ?></span></td>
+                            <td><span><?php echo $v->name ?></span></td>
+                            <td><span><?php echo $v->wechat ?></span></td>
+                            <td><span><?php echo $v->phone ?></span></td>
+                            <td><span><?php echo $v->startTime ?></span></td>
+                            <?php if($v->service == 1) :?>
+                                <td><span>正常服务</span></td>
+                            <?php elseif($v->service == 2) :?>
+                                <td><span>保险</span></td>
+                            <?php elseif($v->service == 3) :?>
+                                <td><span>返工</span></td>
+                            <?php elseif($v->service == 4) :?>
+                                <td><span>索赔</span></td>
+                            <?php endif;?>
+                            <td><span><?php echo $v->songCarRen ?></span></td>
+                            <td><span><?php echo $v->songCarRenPhone ?></span></td>
+                            <td><span>接待人员</span></td>
+                            <td><span>账单总金额</span></td>
+                            <?php if($v->schedule == 1) :?>
+                                <td><span>客户确认报价中</span></td>
+                            <?php elseif($v->schedule == 2) :?>
+                                <td><span>准备施工</span></td>
+                            <?php elseif($v->schedule == 3) :?>
+                                <td><span>施工中</span></td>
+                            <?php elseif($v->schedule == 4) :?>
+                                <td><span>已完成，待结算</span></td>
+                            <?php elseif($v->schedule == 5) :?>
+                                <td><span>已结算</span></td>
+                            <?php elseif($v->schedule == 6) :?>
+                                <td><span>客户拒绝报价</span></td>
+                            <?php endif;?>
+                            <td><span>结算时间</span></td>
+                            <td><span><a tabTxt="服务记录详情" parentOpen="true" rel="pageTab" href="<?php echo site_url("billing/billingdetail?id=$v->id")?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
                         </tr>
-<!--                    <tr>-->
-<!--                        <td colspan="10">暂无记录</td>-->
-<!--                    </tr>-->
+                        <?php endforeach;?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="10">暂无记录</td>
+                        </tr>
+                    <?php endif ;?>
+
                 </tbody>
             </table>
         </div>
