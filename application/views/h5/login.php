@@ -4,7 +4,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>登录</title>
-
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>statics/h5/css/style.css">
     <script type="text/javascript" src="<?php echo base_url()?>statics/h5/js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>statics/h5/js/androidviewport.js"></script>
@@ -31,56 +30,56 @@
     </div>
 
     <script type="text/javascript">
-    $(function () {
-        $('#username').placeholder({
-            word: '用户名'
+        // 显示placeholder
+        $(function () {
+            $('#username').placeholder({
+                word: '用户名'
+            });
+
+            $('#password').placeholder({
+                word: '*请输入密码'
+            });
+
+            $("#password").keypress(function (e) {
+                if (e.which == 13) {
+                    $("#btn_login").click();
+                }
+            });
         });
 
-        $('#password').placeholder({
-            word: '*请输入密码'
-        });
-
-        $("#password").keypress(function (e) {
-            if (e.which == 13) {
-                $("#btn_login").click();
+        校验数据
+        function getFormVals() {
+            var username = $.trim($("#username").val()).replace("用户名", "");
+            var password = $.trim($("#password").val()).replace("*请输入密码", "");
+            if (username == '') {
+                Ewewo.Tips('*请输入用户名!');
+                return;
             }
-        });
-    })
-
-    function getFormVals() {
-        var username = $.trim($("#username").val()).replace("用户名", "");
-        var password = $.trim($("#password").val()).replace("*请输入密码", "");
-        if (username == '') {
-            Ewewo.Tips('*请输入用户名!');
-            return;
-        }
-        if (password == '') {
-            Ewewo.Tips('*请输入密码!');
-            return;
-        }
-
-        return { username: username, password: password };
-    }
-
-    $('#btn_login').click(function () {
-        var temp = getFormVals();
-        if (temp == undefined && temp == null) {
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/user/logindo",
-            data: temp,
-            dataType: "json",
-            success: function (data) {
-
-            },
-            error: function () {
-                Ewewo.Tips('网络错误，登录不成功!');
+            if (password == '') {
+                Ewewo.Tips('*请输入密码!');
+                return;
             }
+            return { username: username, password: password };
+        }
+
+        $('#btn_login').click(function () {
+            var temp = getFormVals();
+            if (temp == undefined && temp == null) {
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "",
+                data: temp,
+                dataType: "json",
+                success: function (data) {
+
+                },
+                error: function () {
+                    Ewewo.Tips('网络错误，登录不成功!');
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
