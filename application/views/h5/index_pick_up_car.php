@@ -47,10 +47,13 @@
                         <td height="55">&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style="font-size: 36px; color: rgb(255, 255, 255);" height="80">请输入手机号或车牌号：</td>
+                        <td style="font-size: 36px; color: rgb(255, 255, 255);" height="80">请输入手机号：</td>
                     </tr>
                     <tr>
                         <td style="position: relative;">
+                            <a href="javascript:void(0);" id="PlateAI" style="position: absolute; right: 30px;">
+                                <img src="<?php echo base_url()?>statics/h5/images/index/sys.png">
+                            </a>
                             <div class="xzkh" style="display: none;">
                                 <div id="loading2" class="loading2">
                                     <img src="<?php echo base_url()?>statics/h5/images/loading2.gif" width="32" height="32">加载中，请稍后..

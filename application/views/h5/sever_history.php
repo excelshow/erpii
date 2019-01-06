@@ -28,6 +28,7 @@
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720px, user-scalable=no">
 </head>
 <body>
+<!--筛选-->
     <div class="mask_box" style="display: none;" id="mask_box">&nbsp;</div>
     <div class="ser_ss" style="display: none; position: fixed;" id="divsearch">
         <h2>姓名/手机号/车牌号</h2>
@@ -40,42 +41,45 @@
         </ul>
         <h2>服务状态</h2>
         <dl id="dlstatus" style="margin-bottom: 30px;">
-            <a href="javascript:;" itemid="8" class="ssxz">等待报价</a>
-            <a href="javascript:;" itemid="4" class="ssxz">报价</a>
-            <a href="javascript:;" itemid="5" class="ssxz">施工</a>
+            <a href="javascript:void(0);" itemid="8" class="ssxz">等待报价</a>
+            <a href="javascript:void(0);" itemid="4" class="ssxz">报价</a>
+            <a href="javascript:void(0);" itemid="5" class="ssxz">施工</a>
 
-            <a href="javascript:;" itemid="20" class="ssxz">完工</a>
-            <a href="javascript:;" itemid="25">已结算</a>
-            <a href="javascript:;" itemid="24" class="ssxz">服务取消</a>
+            <a href="javascript:void(0);" itemid="20" class="ssxz">完工</a>
+            <a href="javascript:void(0);" itemid="25" class="ssxz">已结算</a>
+            <a href="javascript:void(0);" itemid="24" class="ssxz">服务取消</a>
 
         </dl>
-        <div class="mask_btn"><a href="javascript:;" id="cancel">取消</a><a href="javascript:;" id="btnSearch" class="queding">确定</a></div>
+        <div class="mask_btn"><a href="javascript:void(0);" id="cancel">取消</a><a href="javascript:;" id="btnSearch" class="queding">确定</a></div>
     </div>
 
+<!--取消服务-->
     <div class="mask_box" style="display: none;" id="mask_box1">&nbsp;</div>
     <div class="mask_div" style="height: 240px; display: none; margin-top: -120px;" id="divcancelrecord">
         <h2>取消服务</h2>
         <ul style="height: 84px;">
             <li style="font-size: 24px; color: #999; text-align: left; padding-left: 10px;">您确定取消服务吗？</li>
         </ul>
-        <div class="mask_btn"><a href="javascript:;" id="cancel1">取消</a><a href="javascrip:;" class="queding" id="cancelconfirm">确定</a></div>
+        <div class="mask_btn"><a href="javascript:void(0);" id="cancel1">取消</a><a href="javascrip:;" class="queding" id="cancelconfirm">确定</a></div>
     </div>
 
+<!--删除服务-->
     <div class="mask_box" style="display: none;" id="mask_box2">&nbsp;</div>
     <div class="mask_div" style="height: 240px; display: none; margin-top: -120px;" id="divdeleterecord">
         <h2>删除服务</h2>
         <ul style="height: 84px;">
             <li style="font-size: 24px; color: #999; text-align: left; padding-left: 10px;">您确定删除服务吗？</li>
         </ul>
-        <div class="mask_btn"><a href="javascript:;" id="cancel2">取消</a><a href="javascript:void(0);" class="queding" id="deleteconfirm">确定</a></div>
+        <div class="mask_btn"><a href="javascript:void(0);" id="cancel2">取消</a><a href="javascript:void(0);" class="queding" id="deleteconfirm">确定</a></div>
     </div>
 
     <div class="system">
         <div class="title">
             <a href="javascript:history.back(-1);" class="back">返回</a>
-            <a href="/Service/AddRecord" class="fw_add">新建</a>
+            <a href="sever_deailed_add" class="fw_add">新建</a>
             <ul class="sytime">服务记录</ul>
         </div>
+<!--        主要内容-->
         <div class="yuyue_title">
             <div class="left font28">服务记录列表<font>(共 <span id="sprecord">1</span> 条)</font></div>
             <div class="right shaixuan">
@@ -87,8 +91,6 @@
                 <div class="service_left left">
                     <img src="http://res.ewewo.com//brandlogo/5014.jpg" width="100" height="100">
                     <span style="display: block; text-align: center;"></span>
-
-
                 </div>
                 <div class="service_right right">
                     <dl>
@@ -99,9 +101,7 @@
                             <a href="javascript:;" class="fwzt" name="acancelrecord" style="width:80px;" itemid="5340572" id="acancel5340572">
                                 取消
                             </a>
-                            <a href="javascript:;" class="bbqctz" storeid="806" data-commited="0" itemid="车牌号, 皖J40150,已完工，请取车!"></a>
-
-                            <a href="/Service/Detail/5340572?reurl=%2FService%2FRecordList"> 皖J40150 - 王小姐<font>(报价)</font></a>
+                            <a href="sever_deailed_add + id"> 皖J40150 - 王小姐<font>(报价)</font></a>
                         </dt>
                         <dd style="border-bottom:1px #e6e6e6 solid; padding:10px 15px 10px 0;"><font class="fr">综合服务单</font>单号：1901050001</dd>
                         <dd>四轮动平衡换位</dd>
@@ -166,8 +166,7 @@
             };
 
 
-            $('#starttime,#endtime').change(
-                function () {
+            $('#starttime,#endtime').change(function () {
                     var date = new Date($(this).val());
                     var starttime = $("#starttime").val().replace("-", "/");
                     var endtime = $("#endtime").val().replace("-", "/");

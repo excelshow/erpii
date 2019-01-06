@@ -69,4 +69,32 @@ class h5 extends CI_Controller {
         $this->load->view('/h5/task_list');
     }
 
+    /**
+     * 客户详情
+     */
+    public function customer_detail(){
+        $this->load->view('/h5/customer_detail');
+    }
+
+    /**
+     * 编辑客户基本资料
+     */
+    public function customer_edit_base(){
+        $this->load->view('/h5/customer_edit_base');
+    }
+
+    /**
+     * 编辑客户开票
+     */
+    public function customer_edit_invoice(){
+        $this->load->view('/h5/customer_edit_invoice');
+    }
+
+    /**
+     * 编辑客户开票
+     */
+    public function customer_edit_car(){
+        $this->load->view('/h5/customer_edit_car');
+    }
+
 }
