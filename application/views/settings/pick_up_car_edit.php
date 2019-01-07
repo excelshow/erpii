@@ -911,6 +911,14 @@
         border-color: #78c800;
         color: #fff;
     }
+    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(4){
+        background-position-y: 0;
+    }
+    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(5){
+        background-color: none;
+        border-color: #aab4c8;
+        color: #96aab4;
+    }
 
     /*服务进度,状态4*/
     .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(2),
@@ -2094,6 +2102,7 @@
     </div>
 
     <!--进度-->
+
     <input type="hidden" id="itemStatus" value="1"><!--当前状态-->
     <input type="hidden" id="read" value="0"><!--报价是否接受-->
     <input type="hidden" id="orderID" value="0"><!--订单ID-->
@@ -2861,42 +2870,52 @@
     }
 
     //读取状态
-    var itemStatus = $('#itemStatus').val();
-    var read = $('#read').val();
+    window.itemStatus = $('#itemStatus').val();
     var url = '';
-    if (itemStatus == '6'){
-        $('#finish').html('再次通知');
-        $('#noticeCustomer').css('display','none');
-    } else if (itemStatus == '3') {
-        $('.itemStatus').addClass('changeStatus3');
-        $('#finish').html('完工');
-    } else if (itemStatus == '4') {
-        $('.itemStatus').addClass('changeStatus4');
-        $('#finish').html('结算');
-    } else if (itemStatus == '5') {
-        $('.itemStatus').addClass('changeStatus5');
-        $('#finish').html('已完成');
-        $('#rework').css('display','');
-    };
+    changeCss();
+    function changeCss() {
+        if (itemStatus == '6' || itemStatus == '1'){
+            $('#finish').html('再次通知');
+            $('#noticeCustomer').css('display','none');
+        }else if (itemStatus == '2') {
+            $('#finish').html('施工');
+        } else if (itemStatus == '3') {
+            $('.itemStatus').addClass('changeStatus3');
+            $('#finish').html('完工');
+        } else if (itemStatus == '4') {
+            $('.itemStatus').addClass('changeStatus4');
+            $('#finish').html('结算');
+            $('#rework').css('display','');
+        } else if (itemStatus == '5') {
+            $('.itemStatus').addClass('changeStatus5');
+            $('#finish').html('已完成');
+            $('#rework').css('display','none');
+        };
+    }
 
     //改变状态
     $('#finish').on('click',function () {
         if (itemStatus == '2'){
-            if (read == '0'){
-                type = 1;
-            } else{
-                type = 2;
-            }
+            itemStatus = 3;
         } else if (itemStatus == '3'){
-            type = 3;
+            itemStatus = 4;
         } else if (itemStatus == '4'){
-            type = 4;
+            itemStatus = 5;
+        } else if (itemStatus == '1' || itemStatus == '6'){
+
         }
-        changeStatus(type)
+        changeStatus(itemStatus)
     });
     $('#rework').on('click',function () {
-        changeStatus(5)
+        itemStatus = 3;
+        changeStatus(itemStatus);
+        $('.itemStatus').removeClass('changeStatus4');
     });
+
+    function changeStatus(status) {
+        $('#itemStatus').val(status);
+        changeCss();
+    }
 </script>
 <script>
     Public.pageTab();
