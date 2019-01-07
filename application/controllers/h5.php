@@ -95,11 +95,20 @@ class h5 extends CI_Controller {
      */
     public function customer_list(){
         $this->checkpurview();
-        $this->load->view('/h5/customer_list');
+        $data = null;
+        $data['count'] = 0;
+        if ($this->input->get('keyword')){
+            $user = $this->jxcsys;
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $data['items'] = $this->db->where($where)->like('mobile',$this->input->get('keyword'))->get('ci_customer')->result();
+            $data['count'] = count($data['items']);
+            $data['keyword'] = $this->input->get('keyword');
+        }
+        $this->load->view('/h5/customer_list',['data'=>$data]);
     }
 
     /**
-     * 客户列表
+     * 服务历史
      */
     public function sever_history(){
         $this->checkpurview();
@@ -135,7 +144,10 @@ class h5 extends CI_Controller {
      */
     public function customer_detail(){
         $this->checkpurview();
-        $this->load->view('/h5/customer_detail');
+        $id = $this->input->get('uid');
+        $data = $this->db->where('id',$id)->get('ci_customer')->row();
+        $cars = $this->db->where('user_id',$id)->get('ci_car')->result();
+        $this->load->view('/h5/customer_detail',['data'=>$data,'id'=>$id,'cars'=>$cars]);
     }
 
     /**

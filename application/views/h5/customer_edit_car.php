@@ -41,8 +41,8 @@
 <div class="mask_box" style="display: none">&nbsp;</div>
 <div class="system" id="addcarinfo" itemid="0" customerid="2340187">
     <div class="title" style="position: fixed; width: 720px; z-index: 100;">
-        <a href="/Customer/view/2340187" class="back">返回</a>
-        <a href="javascript:;" class="sure">确定</a>
+        <a href="javascript:history.back(-1);" class="back">返回</a>
+        <a href="javascript:void(0);" class="sure">确定</a>
         <ul class="sytime">
             车辆信息
         </ul>

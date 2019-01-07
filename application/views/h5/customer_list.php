@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" class="khtopinput" id="txtkey">
+                            <input type="text" class="khtopinput" id="txtkey" value="<?php echo $data['keyword'] ?>">
                             <input type="button" class="khtopbtn" id="btnsearch">
                         </td>
                     </tr>
@@ -47,36 +47,59 @@
 
 <!--        搜索结果-->
         <div class="yuyue_title">
-            <div class="left font28">搜索结果<font>(共 9 条)</font></div>
+            <div class="left font28">搜索结果<font>(共 <?php echo $data['count'] ?> 条)</font></div>
         </div>
         <div id="adddata">
 <!--            如果存在-->
-            <div class="kh_list">
-                <div class="kh_ny">
-                    <dl>
-                        <dt class=""><!--非会员-->
-<!--                        <dt class="hy">会员-->
-                            <a href=""><p class="link">贾真人</p></a>
-                            <span class="ptkh">(普通客户)</span><!--非会员-->
-<!--                            <span class="yhkh">会员</span>会员-->
-<!--                            <font class="">未注册</font>-->
+            <?php if ($data['count']) :?>
+                <?php foreach ($data['items'] as $k=>$v) : ?>
+                    <div class="kh_list">
+                        <div class="kh_ny">
+                            <dl>
+                                <?php if ($v->vipId) : ?>
+                                    <dt class="hy">
+                                        <a href="customer_detail?uid=<?php echo $v->id ?>"><p class="link"><?php echo $v->name?></p></a>
+                                        <span class="yhkh">会员</span>
+                                <?php else :?>
+                                    <dt>
+                                        <a href="customer_detail?uid=<?php echo $v->id ?>"><p class="link"><?php echo $v->name?></p></a>
+                                        <span class="ptkh">(普通客户)</span>
+                                <?php endif;?>
 
-                        </dt>
-                        <dd>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tbody><tr>
-                                    <td>粤A12342 </td>
-                                    <td width="17%" align="right">15057725702</td>
-                                </tr>
-                                </tbody></table>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
+                                    <?php if ($v->wechat) : ?>
+                                    <font class="wxyh"><?php echo $v->wechat ?></font>
+                                    <?php else :?>
+                                    <font class="">未注册</font>
+                                    <?php endif;?>
+                                </dt>
+                                <dd>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <?php if ($v->org_name) :?>
+                                                    <td><?php echo $v->org_name ?> </td>
+                                                <?php else : ?>
+                                                    <td>无注册门店 </td>
+                                                <?php endif; ?>
+                                                <?php if ($v->mobile) : ?>
+                                                    <td width="17%" align="right"><?php echo $v->mobile?></td>
+                                                <?php else :?>
+                                                    <td width="17%" align="right">无手机号</td>
+                                                <?php endif;?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else :?>
 <!--            如果没有-->
-            <div class="nophoto">
+                <div class="nophoto">
                 <span>暂无客户</span>
             </div>
+            <?php endif; ?>
         </div>
 <!--        loading-->
         <div class="loading" style="display: none;" lang="item_loading">
@@ -96,7 +119,7 @@
 
             // 搜索
             $("#btnsearch").click(function(){
-                var url="" +"?keyword=" + $.trim($("#txtkey").val());
+                var url="customer_list" +"?keyword=" + $.trim($("#txtkey").val());
                 window.location.href=url;
             });
 
