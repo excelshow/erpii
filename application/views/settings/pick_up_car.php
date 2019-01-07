@@ -2475,18 +2475,19 @@
             data:image,
 
             success: function (data) {
-                if(data.code == 1){
-                    parent.Public.tips({
-                        type:1,
-                        content:data.text,
-                    });
-                }else if(data.code == 0){
-                    parent.Public.tips({
-                        content:data.text,
-
-                    });
-                    location.href = "<?php echo site_url('billing/billinglist')?>";
-                }
+                console.log(data);
+                //if(data.code == 1){
+                //    parent.Public.tips({
+                //        type:1,
+                //        content:data.text,
+                //    });
+                //}else if(data.code == 0){
+                //    parent.Public.tips({
+                //        content:data.text,
+                //
+                //    });
+                //    location.href = "<?php //echo site_url('billing/billinglist')?>//";
+                //}
 
 
             },

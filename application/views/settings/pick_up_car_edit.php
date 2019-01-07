@@ -2094,7 +2094,7 @@
     </div>
 
     <!--进度-->
-    <input type="hidden" id="itemStatus" value="6"><!--当前状态-->
+    <input type="hidden" id="itemStatus" value="1"><!--当前状态-->
     <input type="hidden" id="read" value="0"><!--报价是否接受-->
     <input type="hidden" id="orderID" value="0"><!--订单ID-->
     <div class="itemStatus clearfix">
