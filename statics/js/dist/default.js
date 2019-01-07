@@ -568,6 +568,18 @@ var dataReflush, list = {
 		dataRight: "BUTYPE_QUERY",
 		target: "sales1"
 	},
+	notice1: {
+		name: "保险提醒",
+		href: "../settings/insurance",
+		dataRight: "BUTYPE_QUERY",
+		target: "sales1"
+	},
+	notice2: {
+		name: "保养提醒",
+		href: "../settings/maintain",
+		dataRight: "BUTYPE_QUERY",
+		target: "sales1"
+	},
 	vendorCategoryList: {
 		name: "供应商类别",
 		href: "../settings/category_list?typeNumber=supplytype",

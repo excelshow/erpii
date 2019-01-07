@@ -154,6 +154,20 @@ class Settings extends CI_Controller {
         $this->load->view('settings/recharge_stored_value_card');
     }
 
+    /**
+     * 保险提醒
+     */
+    public function insurance(){
+        $this->load->view('settings/insurance');
+    }
+
+    /**
+     * 保养提醒
+     */
+    public function maintain(){
+        $this->load->view('settings/maintain');
+    }
+
 
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
