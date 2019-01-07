@@ -92,7 +92,6 @@ class Billing extends CI_Controller {
             die(json_encode($res));
         }
 
-//        die(json_encode($a));
         $image = $_FILES;
         $number = $this->input->post('number');
         if($image){
@@ -100,40 +99,40 @@ class Billing extends CI_Controller {
             $img = [];
             foreach ($image as $k=>$v){
 
-                $dir = iconv("UTF-8", "GBK", "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7));
+                $dir = iconv("UTF-8", "GBK", "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7));
                 if (!file_exists($dir)){
                     mkdir ($dir,0777,true);
                 }
                 $strs="QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
                 $name = substr(str_shuffle($strs),mt_rand(0,strlen($strs)-33),32);
-                move_uploaded_file($v['tmp_name'],iconv("utf-8","gb2312","image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg'));
+                move_uploaded_file($v['tmp_name'],iconv("utf-8","gb2312","image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg'));
 //
                 if(substr($k,0,7) == 'li0_img'){
-                    $img['li0_img'][$t0] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li0_img'][$t0] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t0 ++;
                 }elseif (substr($k,0,7) == 'li1_img'){
-                    $img['li1_img'][$t1] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li1_img'][$t1] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t1 ++;
                 }elseif (substr($k,0,7) == 'li2_img'){
-                    $img['li2_img'][$t2] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li2_img'][$t2] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t2 ++;
                 }elseif (substr($k,0,7) == 'li3_img'){
-                    $img['li3_img'][$t3] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li3_img'][$t3] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t3 ++;
                 }elseif (substr($k,0,7) == 'li4_img'){
-                    $img['li4_img'][$t4] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li4_img'][$t4] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t4 ++;
                 }elseif (substr($k,0,7) == 'li5_img'){
-                    $img['li5_img'][$t5] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li5_img'][$t5] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t5 ++;
                 }elseif (substr($k,0,7) == 'li6_img'){
-                    $img['li6_img'][$t6] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li6_img'][$t6] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t6 ++;
                 }elseif (substr($k,0,7) == 'li7_img'){
-                    $img['li7_img'][$t7] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li7_img'][$t7] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t7 ++;
                 }elseif (substr($k,0,7) == 'li8_img'){
-                    $img['li8_img'][$t8] = "image/".$user['lowId'].'-'.$user['orgName'].'/'.$number.'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $img['li8_img'][$t8] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
                     $t8 ++;
                 }
             }
@@ -184,8 +183,8 @@ class Billing extends CI_Controller {
             'lowId'=>$user['lowId'],
             'checks'=>$this->input->post('checks'),
             'image'=>json_encode($img),
-            'service_item'=>json_encode($this->input->post('service_item')),
-            'vip_item'=>json_encode($this->input->post('vip_item')),
+            'service_item'=>$this->input->post('service_item'),
+            'vip_item'=>$this->input->post('vip_item'),
         );
 
         $billing = $this->db->insert('ci_billing',$add);
@@ -298,9 +297,62 @@ class Billing extends CI_Controller {
     public function billingdetail(){
         $user = $this->session->userdata('jxcsys');
         $id = $this->input->get('id');
-        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'id'=>$id);
-        $data = $this->db->where($where)->get('ci_billing')->row();
-//var_dump($data);
-        $this->load->view('/settings/pick_up_car_edit',['data'=>$data]);
+
+        $where_billing = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'id'=>$id);
+        $data = $this->db->where($where_billing)->get('ci_billing')->row();
+//var_dump(json_decode($data->vip_item));
+        $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+        $goods = $this->db->where($where)->get('ci_goods')->result();
+        $service = $this->db->where($where)->get('ci_service')->result();
+        $where_serve = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')),'level'=>1);
+        $one = $this->db->where($where_serve)->get('ci_serve')->result();
+        $t = 0;
+        $serve = [];
+        foreach ($one as $k=>$v){
+            $serve[$t]['id']= $v->id;
+            $serve[$t]['name']= $v->name;
+            $two = $this->db->where(['parentId'=>$v->id])->get('ci_serve')->result();
+            $m = 0;
+            foreach ($two as $key => $value){
+                $serve[$t]['child'][$m]['id']= $value->id;
+                $serve[$t]['child'][$m]['name']= $value->name;
+                $three = $this->db->where(['parentId'=>$value->id])->get('ci_serve')->result();
+                $n = 0;
+                foreach ($three as $a=>$b){
+                    $serve[$t]['child'][$m]['child'][$n]['id']= $b->id;
+                    $serve[$t]['child'][$m]['child'][$n]['name']= $b->name;
+                    $n ++;
+                }
+                $m ++;
+            }
+            $t ++;
+        }
+
+        $this->load->view('/settings/pick_up_car_edit',['data'=>$data,'goods'=>$goods,'service'=>$service,'serve'=>$serve]);
+    }
+
+
+    //删除照片
+    public function deleteImage(){
+        $res = [];
+        $image = $this->input->post('src');
+        $src = substr($image,strpos($image,'image'));
+        if(file_exists($src)){
+            if(unlink($src)){
+                $res['code'] = 0;
+                $res['text'] = $image;
+                die(json_encode($res));
+            }else{
+                $res['code'] = 1;
+                $res['text'] = '删除失败';
+                die(json_encode($res));
+            }
+        }else{
+            $res['code'] = 1;
+            $res['text'] = '文件未找到';
+            die(json_encode($res));
+        }
+
+
     }
 }

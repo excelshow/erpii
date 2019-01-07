@@ -509,7 +509,6 @@
         color: #fff;
         background-color: #578ccd;
         border-radius: 20px;
-        margin-left: -336px;
         cursor: pointer;
     }
     .table_total .table_total_l{
@@ -591,13 +590,14 @@
         float: left;
         border-right: none;
     }
+    .add>.add_content .add_content_l_hover{
+        background-color: #ddd;
+    }
     .add>.add_content .add_content_l .add_content_ul .add_content_li span{
         display: inline-block;
-        width: 48%;
-    }
-    .add>.add_content .add_content_l .add_content_ul .add_content_li span:last-child{
-        text-align: right;
-        font-size: 18px;
+        box-sizing: border-box;
+        padding-left: 5px;
+        width: 100%;
     }
     .add>.add_content .add_content_c{
         height: 100%;
@@ -606,12 +606,12 @@
         float: left;
     }
     .add>.add_content .add_content_c .add_content_title li{
-        width: 48%;
+        width: 32%;
         display: inline-block;
     }
     .add>.add_content .add_content_c .add_content_ul .add_content_li span{
         display: inline-block;
-        width: 48%;
+        width: 32%;
     }
     .add>.add_content .add_content_r{
         height: 100%;
@@ -732,6 +732,96 @@
         height: 30px;
         background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
         background-position:center center;
+    }
+
+    /*配件显示*/
+    .partsItem>td>.parts_num{
+        width: 96%;
+        height: 29px;
+        border: 1px solid #ddd;
+    }
+    .parts_num .parts_num_int{
+        width: 70%;
+        height: 100%;
+        border: none;
+        outline:none;
+    }
+    .partsItem:hover .parts_num .parts_num_int{
+        background-color: #f8ff94;
+        /*-moz-appearance:textfield;*/
+    }
+    /*.partsItem:hover .parts_num .parts_num_int::-webkit-outer-spin-button,*/
+    /*.partsItem:hover .parts_num .parts_num_int::-webkit-inner-spin-button{*/
+    /*-webkit-appearance: none;*/
+    /*}*/
+
+    /*选择套餐弹窗*/
+    .add>.add_content .content_title{
+        background-color: #f1f1f1;
+        height: 30px;
+        width: 100%;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .add>.add_content .content_ul{
+        height: 355px;
+        overflow-y: auto;
+    }
+    .add>.add_content .content_li{
+        height: 30px;
+        width: 100%;
+        line-height: 30px;
+        text-align: center;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .add>.add_content .content_li:hover{
+        background-color: #f8ff94;
+    }
+    .add>.add_content .content_l{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: left;
+        border-right: none;
+    }
+    .add>.add_content .content_l_hover{
+        background-color: #ddd;
+    }
+    .add>.add_content .content_l .content_ul .content_li span{
+        display: inline-block;
+        box-sizing: border-box;
+        padding-left: 5px;
+        width: 100%;
+    }
+    .add>.add_content .content_c{
+        height: 100%;
+        width: 45%;
+        border: 1px solid #ddd;
+        float: left;
+    }
+    .add>.add_content .content_c .content_title li{
+        width: 32%;
+        display: inline-block;
+    }
+    .add>.add_content .content_c .content_ul .content_li span{
+        display: inline-block;
+        width: 32%;
+    }
+    .add>.add_content .content_r{
+        height: 100%;
+        width: 25%;
+        border: 1px solid #ddd;
+        float: right;
+    }
+    .add>.add_content .content_r .content_ul .content_li span{
+        display: inline-block;
+        width: 48%;
+    }
+    .add>.add_content .content_r .content_ul .content_li .delete{
+        height: 20px;
+        background: url(<?php echo base_url()?>statics/css/img/delete.gif) no-repeat;
+        background-position:center bottom;
     }
 
     /*服务进度*/
@@ -863,65 +953,75 @@
             <a class="ui-btn choose">车检报告</a>
             <a class="ui-btn choose">服务项目</a>
         </div>
+        <div class="fr">
+            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: none">报价</a>
+        </div>
     </div>
-<!--信息-->
+    <!--信息-->
     <div class="grid-wrap">
         <span id="config" class="ui-icon ui-state-default ui-icon-config"></span>
         <ul class="main_title customer_information">顾客信息</ul>
         <ul class="mod-form-rows base-form clearfix customer_information" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="name">客户姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name" readonly></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data -> name?>" class="ui-input normal" name="name" id="name" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="phone">手机号:</label></div>
-                <div class="ctn-wrap"><input type="tel" value="" class="ui-input normal" name="phone" id="phone" readonly></div>
+                <div class="ctn-wrap"><input type="tel" value="<?php echo $data -> phone?>" class="ui-input normal" name="phone" id="phone" readonly></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="number">车牌号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number" readonly></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data -> number?>" class="ui-input normal" name="number" id="number" readonly></div>
             </li>
 
             <li class="row-item">
                 <div class="label-wrap"><label for="songCarRen">送修人:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data -> songCarRen?>" class="ui-input normal" name="songCarRen" id="songCarRen"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="songCarRenPhone">送修人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data -> songCarRenPhone?>" class="ui-input normal" name="songCarRenPhone" id="songCarRenPhone"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="service">服务性质:</label></div>
                 <div class="ctn-wrap">
                     <select name="service" id="service" class="sel">
-                        <option value="1" selected>正常服务</option>
-                        <option value="2">保险</option>
-                        <option value="3">返工</option>
-                        <option value="3">索赔</option>
-                        <option value="3">免单</option>
-                        <option value="3">公务车</option>
+                        <?php if ($data->service == 1) :?>
+                            <option value="1" selected>正常服务</option>
+                        <?php else:?>
+                            <option value="1">正常服务</option>
+                        <?php endif; ?>
+                        <?php if ($data->service == 2) :?>
+                            <option value="2" selected>保险</option>
+                        <?php else:?>
+                            <option value="2">保险</option>
+                        <?php endif; ?>
+                        <?php if ($data->service == 3) :?>
+                            <option value="3" selected>返工</option>
+                        <?php else:?>
+                            <option value="3">返工</option>
+                        <?php endif; ?>
+                        <?php if ($data->service == 4) :?>
+                            <option value="4" selected>索赔</option>
+                        <?php else:?>
+                            <option value="4">索赔</option>
+                        <?php endif; ?>
                     </select>
                 </div>
             </li>
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="source">客户来源:</label></div>-->
-<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="source" id="source"></div>-->
-<!--            </li>-->
-<!--            <li class="row-item" style="width: 100% ;">-->
-<!--                <div class="label-wrap"><label for="address">顾客地址:</label></div>-->
-<!--                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="address" id="address" style="width: 80.5%;height: 100%;"></textarea></div>-->
-<!--            </li>-->
+
             <li class="row-item">
                 <div class="label-wrap"><label for="startTime">开工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="startTime" id="startTime"></div>
+                <div class="ctn-wrap"><input type="date" value="<?php echo $data-> startTime?>" class="ui-input normal" name="startTime" id="startTime"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="estimateTime">预计完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="estimateTime" id="estimateTime"></div>
+                <div class="ctn-wrap"><input type="date" value="<?php echo $data-> estimateTime?>" class="ui-input normal" name="estimateTime" id="estimateTime"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="endTime">完工时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="endTime" id="endTime"></div>
+                <div class="ctn-wrap"><input type="date" value="<?php echo $data-> endTime?>" class="ui-input normal" name="endTime" id="endTime"></div>
             </li>
 
         </ul>
@@ -930,121 +1030,163 @@
         <ul class="mod-form-rows base-form clearfix car_information" style="display: none;" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="brand">品牌:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="brand" id="brand"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> brand?>" class="ui-input normal" name="brand" id="brand"></div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="vin">VIN码:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="vin" id="vin"></div>
+                <div class="label-wrap"><label for="system">车系:</label></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> system?>" class="ui-input normal" name="system" id="system"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="insureCompany">投保公司:</label></div>
                 <div class="ctn-wrap">
                     <select name="insureCompany" id="insureCompany" class="sel">
-                        <option value="1" selected>太平洋车险</option>
-                        <option value="2">平安车险</option>
-                        <option value="3">人保车险</option>
-                        <option value="4">中国人寿财险</option>
-                        <option value="5">中华联合车险</option>
-                        <option value="6">大地车险</option>
-                        <option value="7">阳光车险</option>
-                        <option value="8">太平车险</option>
-                        <option value="9">华安车险</option>
-                        <option value="10">天安车险</option>
-                        <option value="11">英大泰和车险</option>
-                        <option value="12">安盛天平车险</option>
-                        <option value="13">安心车险</option>
-                        <option value="14">紫金车险</option>
-                        <option value="15">合众车险</option>
-                        <option value="16">利宝车险</option>
-                        <option value="17">其他</option>
+                        <?php if ($data->insureCompany == 1) :?>
+                            <option value="1" selected>太平洋车险</option>
+                        <?php else:?>
+                            <option value="1">太平洋车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 2) :?>
+                            <option value="2" selected>平安车险</option>
+                        <?php else:?>
+                            <option value="2">平安车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 3) :?>
+                            <option value="3" selected>人保车险</option>
+                        <?php else:?>
+                            <option value="3">人保车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 4) :?>
+                            <option value="4" selected>中国人寿财险</option>
+                        <?php else:?>
+                            <option value="4">中国人寿财险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 5) :?>
+                            <option value="5" selected>中华联合车险</option>
+                        <?php else:?>
+                            <option value="5">中华联合车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 6) :?>
+                            <option value="6" selected>大地车险</option>
+                        <?php else:?>
+                            <option value="6">大地车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 7) :?>
+                            <option value="7" selected>阳光车险</option>
+                        <?php else:?>
+                            <option value="7">阳光车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 8) :?>
+                            <option value="8" selected>太平车险</option>
+                        <?php else:?>
+                            <option value="8">太平车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 9) :?>
+                            <option value="9" selected>华安车险</option>
+                        <?php else:?>
+                            <option value="9">华安车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 10) :?>
+                            <option value="10" selected>天安车险</option>
+                        <?php else:?>
+                            <option value="10">天安车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 11) :?>
+                            <option value="11" selected>英大泰和车险</option>
+                        <?php else:?>
+                            <option value="11">英大泰和车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 12) :?>
+                            <option value="12" selected>安盛天平车险</option>
+                        <?php else:?>
+                            <option value="12">安盛天平车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 13) :?>
+                            <option value="13" selected>安心车险</option>
+                        <?php else:?>
+                            <option value="13">安心车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 14) :?>
+                            <option value="14" selected>紫金车险</option>
+                        <?php else:?>
+                            <option value="14">紫金车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 15) :?>
+                            <option value="15" selected>合众车险</option>
+                        <?php else:?>
+                            <option value="15">合众车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 16) :?>
+                            <option value="16" selected>利宝车险</option>
+                        <?php else:?>
+                            <option value="16">利宝车险</option>
+                        <?php endif; ?>
+                        <?php if ($data->insureCompany == 17) :?>
+                            <option value="17" selected>其他</option>
+                        <?php else:?>
+                            <option value="17">其他</option>
+                        <?php endif; ?>
+
                     </select>
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="system">车系:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="system" id="system"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="notice">公告号	:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="notice" id="notice"></div>
-            </li>
-            <li class="row-item">
                 <div class="label-wrap"><label for="insuranceEndTime">保险到期	:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="insuranceEndTime" id="insuranceEndTime"></div>
+                <div class="ctn-wrap"><input type="date" value="<?php echo $data-> insuranceEndTime?>" class="ui-input normal" name="insuranceEndTime" id="insuranceEndTime"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="shape">车型年款:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="shape" id="shape"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="lastMileage">上次里程:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="lastMileage" id="lastMileage"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="annualEndTime">年审到期:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="annualEndTime" id="annualEndTime"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> shape?>" class="ui-input normal" name="shape" id="shape"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="carShape">车型:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carShape" id="carShape"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> carShape?>" class="ui-input normal" name="carShape" id="carShape"></div>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="useMileage">行驶里程:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input normal" name="useMileage" id="useMileage"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="suggestedMaintenanceTime">	建议保养时间:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="suggestedMaintenanceTime" id="suggestedMaintenanceTime"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carName">车主姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carName" id="carName"></div>
-            </li>
+
             <li class="row-item">
                 <div class="label-wrap"><label for="engineNumber">发动机号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="engineNumber" id="engineNumber"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> engineNumber?>" class="ui-input normal" name="engineNumber" id="engineNumber"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="suggestedMaintenance">建议保养里程:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="suggestedMaintenance" id="suggestedMaintenance"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="idNumber">身份证号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="idNumber" id="idNumber"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carColor">车辆颜色:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carColor" id="carColor"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carPrice">车辆价格:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carPrice" id="carPrice"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carAddress">车主地址 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="carAddress" id="carAddress"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="registedTime">注册时间 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="registedTime" id="registedTime"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> suggestedMaintenance?>" class="ui-input normal" name="suggestedMaintenance" id="suggestedMaintenance"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="natureUsage">使用性质:</label></div>
                 <div class="ctn-wrap">
                     <select name="natureUsage" id="natureUsage" class="sel">
-                        <option value="1" selected>营运</option>
-                        <option value="2">非营运</option>
+                        <?php if ($data->natureUsage ==1) :?>
+                            <option value="1" selected>营运</option>
+                            <option value="2">非营运</option>
+                        <?php else :?>
+                            <option value="1" >营运</option>
+                            <option value="2" selected>非营运</option>
+                        <?php endif ;?>
                     </select>
                 </div>
             </li>
             <li class="row-item">
+                <div class="label-wrap"><label for="carColor">车辆颜色:</label></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> carColor?>" class="ui-input normal" name="carColor" id="carColor"></div>
+            </li>
+
+            <li class="row-item">
                 <div class="label-wrap"><label for="frontWheelType">前轮型号 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="frontWheelType" id="frontWheelType"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> frontWheelType?>" class="ui-input normal" name="frontWheelType" id="frontWheelType"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="backWheelType">后轮型号 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="backWheelType" id="backWheelType"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> backWheelType?>" class="ui-input normal" name="backWheelType" id="backWheelType"></div>
             </li>
+
+            <li class="row-item">
+                <div class="label-wrap"><label for="transmission">变速箱型号 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> transmission?>" class="ui-input normal" name="transmission" id="transmission"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="displacement">排量 :</label></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data-> displacement?>" class="ui-input normal" name="displacement" id="displacement"></div>
+            </li>
+
             <li class="row-item">
                 <div class="label-wrap"><label for="carType">车辆类型:</label></div>
                 <div class="ctn-wrap">
@@ -1057,43 +1199,45 @@
                     </select>
                 </div>
             </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="transmission">变速箱型号 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="transmission" id="transmission"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carRmarks">车辆备注 :</label></div>
-                <div class="ctn-wrap">
-                    <input type="text" value="" class="ui-input normal" name="carRmarks" id="carRmarks">
-<!--                    <textarea class="ui-input" name="carRmarks" id="carRmarks"></textarea>-->
-                </div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="displacement">排量 :</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="displacement" id="displacement"></div>
-            </li>
-<!--            <li class="row-item">-->
-<!--                <div class="label-wrap"><label for="displacement">排量 :</label></div>-->
-<!--                <div class="ctn-wrap clearfix">-->
-<!--                    <input type="radio" value="1" class="ui-input normal" name="displacement" id="displacement" checked="checked" style="width: 25%;float:left;margin-top: 8px">-->
-<!--                    <span style="float:left;margin-left: -10%">良好</span>-->
-<!--                    <input type="radio" value="2" class="ui-input normal" name="displacement" id="displacement" style="width: 25%;float:left;margin-top: 8px">-->
-<!--                    <span style="float:left;margin-left: -10%">不正常</span>-->
-<!--                </div>-->
-<!--            </li>-->
             <li class="row-item" style="width: 50%;">
                 <div class="label-wrap"><label for="oilVolume">剩余油量 :</label></div>
                 <div class="ctn-wrap clearfix">
-                    <input type="radio" value="1" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -5%">0</span>
-                    <input type="radio" value="2" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -5%">1/4</span>
-                    <input type="radio" value="3" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -5%">1/2</span>
-                    <input type="radio" value="4" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -5%">3/4</span>
-                    <input type="radio" value="5" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
-                    <span style="float:left;margin-left: -5%">1</span>
+                    <?php if ($data->oilVolume ==1) :?>
+                        <input type="radio" value="1" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">0</span>
+                    <?php else :?>
+                        <input type="radio" value="1" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">0</span>
+                    <?php endif ;?>
+                    <?php if ($data->oilVolume ==2) :?>
+                        <input type="radio" value="2" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1/4</span>
+                    <?php else :?>
+                        <input type="radio" value="2" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1/4</span>
+                    <?php endif ;?>
+                    <?php if ($data->oilVolume ==3) :?>
+                        <input type="radio" value="3" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1/2</span>
+                    <?php else :?>
+                        <input type="radio" value="3" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1/2</span>
+                    <?php endif ;?>
+                    <?php if ($data->oilVolume ==4) :?>
+                        <input type="radio" value="4" class="ui-input normal" name="oilVolume" id="oilVolume" checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">3/4</span>
+                    <?php else :?>
+                        <input type="radio" value="4" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">3/4</span>
+                    <?php endif ;?>
+                    <?php if ($data->oilVolume ==5) :?>
+                        <input type="radio" value="5" class="ui-input normal" name="oilVolume" id="oilVolume"  checked="checked" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1</span>
+                    <?php else :?>
+                        <input type="radio" value="5" class="ui-input normal" name="oilVolume" id="oilVolume" style="width: 15%;float:left;margin-top: 8px">
+                        <span style="float:left;margin-left: -5%">1</span>
+                    <?php endif ;?>
+
                 </div>
             </li>
         </ul>
@@ -1106,15 +1250,20 @@
                     <span>+</span>
                     <span>上传照片</span>
                 </span>
+                <?php foreach (json_decode($data->image)->li0_img as $k=>$v) :?>
+                    <?php if(getimagesize($v)) :?>
+                        <span class="show_image_span">
+                            <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                            <a href="javascript:void(0);" class="del_img"></a>
+                        </span>
+                    <?php endif;?>
+                <?php endforeach;?>
             </li>
         </ul>
 
         <ul class="main_title car_report" style="display: none">车检报告</ul>
         <ul class="mod-form-rows base-form clearfix car_report" style="display: none;" id="base-form">
-            <li class="row-item" style="width: 100% ;">
-                <div class="label-wrap"><label for="examination_advice">体检建议:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="examination_advice" id="examination_advice" style="width: 83.1%;height: 100%;"></textarea></div>
-            </li>
+
             <li class="row-item" style="width: 100%;">
                 <a class="ui-btn ui-btn-sp choose_inspect">全面检查</a>
                 <a class="ui-btn choose_inspect">基础检查</a>
@@ -1130,60 +1279,123 @@
                     </li>
                     <li class="item_item base">
                         <span class="item_name" >1.   着车检查发动机有无异响</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="1" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[0] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">2.   检查正时皮带是否老化或磨损（建议每3年或7万公里更换）</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="2" value="0">
+                        <?php if($data->checks[2] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">3.   检查风扇、空调、助力泵皮带的有无异响、老化、裂纹</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="3" value="0">
+                        <?php if($data->checks[4] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">4.   清洁或更换空气格、空调格</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="4" value="0">
+                        <?php if($data->checks[6] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">5.   检查气门垫片是否漏油</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="5" value="0">
+                        <?php if($data->checks[8] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">6.   检查火花塞、点火线圈是否漏电</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="6" value="0">
+                        <?php if($data->checks[10] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">7.   检查上、下水管有无老化、膨胀、漏水现象</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="7" value="0">
+                        <?php if($data->checks[12] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">8.   检查碳罐是否堵塞（建议每3年或8万公里更换）</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="8" value="0">
+                        <?php if($data->checks[14] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item base">
                         <span class="item_name">9.   检查节气门是否脏、堵塞</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="9" value="0">
+                        <?php if($data->checks[16] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li1_img" id="li1_img" class="file" accept="image/*" hidden>
+
+                        <?php foreach (json_decode($data->image)->li1_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -1196,54 +1408,110 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">10.   紧固底盘螺丝</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="10" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[18] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">11.   检查离合器是否有打滑现象</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="11" value="0">
+                        <?php if($data->checks[20] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">12.   检查变速器紧固情况，油平面及有无漏油现象</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="12" value="0">
+                        <?php if($data->checks[22] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">13.   检查悬挂各球头是否松动或胶套漏油现象</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="13" value="0">
+                        <?php if($data->checks[24] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">14.   检查前、后减震器是否漏油或变形</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="14" value="0">
+                        <?php if($data->checks[26] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">15.   检查前、后桥是否碰撞变形</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="15" value="0">
+                        <?php if($data->checks[28] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">16.   检查排气管是否变形或吊胶脱落</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="16" value="0">
+                        <?php if($data->checks[30] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">17.   检查油箱固定螺丝是否紧固</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="17" value="0">
+                        <?php if($data->checks[32] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li2_img" id="li2_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li2_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -1256,48 +1524,98 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">18.   检查蓄电池电压是否正常</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="18" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[34] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">19.   检查发电机是否供电正常</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="19" value="0">
+                        <?php if($data->checks[36] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">20.   检查内部灯光是否正常、仪表指示灯、室内阅读灯</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="20" value="0">
+                        <?php if($data->checks[38] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">21.   检查外部灯光是否正常、大灯、小灯、前后雾灯、牌照灯、制动灯等</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="21" value="0">
+                        <?php if($data->checks[40] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">22.   检查喇叭是否沙哑、单音等故障</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="22" value="0">
+                        <?php if($data->checks[42] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">23.   检查四门玻璃升降是否正常</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="23" value="0">
+                        <?php if($data->checks[44] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">24.   检查空调温度是否制冷正常</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="24" value="0">
+                        <?php if($data->checks[46] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li3_img" id="li3_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li3_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -1310,30 +1628,62 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">25.   检查前、后轮胎和备用胎是否漏气、老化、磨损</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="25" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[48] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">26.   检查前后轮磨损情况是否需要对调动平衡（建议半年更换1次）</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="26" value="0">
+                        <?php if($data->checks[50] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">27.   清理胎纹石子用袋子装好展示给客户</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="27" value="0">
+                        <?php if($data->checks[52] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">28.   紧固轮胎螺丝</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="28" value="0">
+                        <?php if($data->checks[54] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li4_img" id="li4_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li4_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -1346,36 +1696,74 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">29.   检查刹车软管是否漏油、老化（建议3年更换1次）</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="29" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[56] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">30.   检查刹车分泵是否卡死或漏油</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="30" value="0">
+                        <?php if($data->checks[58] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">31.   检查手刹工作情况</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="31" value="0">
+                        <?php if($data->checks[60] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">32.   检查刹车皮厚度是否正常</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="32" value="0">
+                        <?php if($data->checks[62] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">33.   检查刹车碟是否平整</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="33" value="0">
+                        <?php if($data->checks[64] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li5_img" id="li5_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li5_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -1388,24 +1776,50 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">34.   检查或更换机油、机油格</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="34" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[66] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">35.   检查或更换方向机油、变速箱油、刹车油（建议2年或4万公里更换）</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="35" value="0">
+                        <?php if($data->checks[68] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">36.   补充或更换雨刮水、防冻液，建议2年或4万公里更换防冻液</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="36" value="0">
+                        <?php if($data->checks[70] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li6_img" id="li6_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li6_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix base">
@@ -1418,18 +1832,38 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">37.   电脑检测读取故障码</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="37" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[72] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">38.   保养机油灯复位归零</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="38" value="0">
+                        <?php if($data->checks[74] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li7_img" id="li7_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li7_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
                 <ul class="item clearfix">
@@ -1442,36 +1876,74 @@
                     </li>
                     <li class="item_item">
                         <span class="item_name">39.   左侧车身</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="39" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[76] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">40.   右侧车身</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="40" value="0">
+                        <?php if($data->checks[78] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">41.   车顶</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="41" value="0"><!-- 0正常1不正常-->
+                        <?php if($data->checks[80] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">42.   车前部</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="42" value="0">
+                        <?php if($data->checks[82] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item">
                         <span class="item_name">43.   车后部</span>
-                        <span class="item_discribe">正常</span>
-                        <span class="item_icon"></span>
-                        <input type="hidden" class = "checks" name="43" value="0">
+                        <?php if($data->checks[84] == 0):?>
+                            <span class="item_discribe">正常</span>
+                            <span class="item_icon"></span>
+                            <input type="hidden" class = "checks" value="0"><!-- 0正常1不正常-->
+                        <?php else:?>
+                            <span class="item_discribe item_discribe_click">不正常</span>
+                            <span class="item_icon item_icon_click"></span>
+                            <input type="hidden" class = "checks" value="1"><!-- 0正常1不正常-->
+                        <?php endif;?>
                     </li>
                     <li class="item_item upload_img">
                         <input type="file" name="li8_img" id="li8_img" class="file" accept="image/*" hidden>
+                        <?php foreach (json_decode($data->image)->li8_img as $k=>$v) :?>
+                            <?php if(getimagesize($v)) :?>
+                                <span>
+                                    <img src="<?php echo base_url()?><?php echo $v ?>" class="show_image">
+                                    <a href="javascript:void(0);" class="del_img"></a>
+                                </span>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </li>
                 </ul>
             </li>
@@ -1482,56 +1954,62 @@
             <li class="row-item" style="width: 100%;margin-top: 10px">
                 <a class="ui-btn ui-btn-sp choose_type">标准工时</a>
                 <a class="ui-btn choose_type">VIP套餐</a>
+                <input type="hidden" value="" id="vipId">
             </li>
             <li class="row-item type_standard" style="width: 100%;border: 1px solid #ddd;">
                 <div class="table">
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
-                            <tr style="width: 100%;">
-                                <th style="width: 20%;">名称</th>
-                                <th style="width: 10%;">项目类型</th>
-                                <th style="width: 10%;">收费类型</th>
-                                <th style="width: 10%;">单价</th>
-                                <th style="width: 5%;">数量</th>
-                                <th style="width: 10%;">折扣</th>
-                                <th style="width: 10%;">金额</th>
-                                <th style="width: 5%;">减免</th>
-                                <th style="width: 5%;">施工员</th>
-                                <th style="width: 10%;">销售员</th>
-                                <th style="width: 5%;">操作</th>
-                            </tr>
+                        <tr style="width: 100%;">
+                            <th style="width: 35%;">名称</th>
+                            <th style="width: 5%;">数量</th>
+                            <th style="width: 20%;">单价</th>
+                            <th style="width: 20%;">VIP单价</th>
+                            <th style="width: 15%;">工时</th>
+                            <th style="width: 5%;">操作</th>
+                        </tr>
                         </thead>
-                        <tbody>
-                            <tr class="serviceItem_1">
-                                <td class="name">
-                                    <span>1</span>
-                                    <span class="parts clearfix">
-                                        <span class="parts_logo">+</span>
-                                        <span class="parts_text">配件</span>
-                                    </span>
-                                </td>
-                                <td><span>2</span></td>
-                                <td><span>3</span></td>
-                                <td><span>4</span></td>
-                                <td><span>5</span></td>
-                                <td><span>6</span></td>
-                                <td><span>7</span></td>
-                                <td><span>8</span></td>
-                                <td><span>9</span></td>
-                                <td><span>10</span></td>
-                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(1)" style="margin: 0;">删除</a></span></td><!--放id-->
-                            </tr>
+                        <tbody id="serve_position">
+                            <?php foreach (json_decode($data->service_item) as $k=>$v) :?>
+                                <tr class="serviceItem serviceItem_<?php echo $v->service_id?>">
+                                    <td class="name"><span><?php echo $v->service_name?></span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td>
+                                    <td><span>1</span></td>
+                                    <td><span class="single_price"><?php echo $v->service_price_pu?></span></td>
+                                    <td><span><?php echo $v->service_price_vip?></span></td>
+                                    <td><span><?php echo $v->gongshi?></span></td>
+                                    <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(<?php echo $v->service_id?>)" style="margin: 0;">删除</a></span></td>
+                                    <input type="hidden" value="<?php echo $v->service_id?>">
+                                </tr>
+                                <?php if($v->child) :?>
+                                    <?php foreach ($v->child as $key=>$val) :?>
+                                        <tr class="partsItem partsItem_<?php echo $v->service_id?>_<?php echo $val->good_id?> parentID_<?php echo $v->service_id?>">
+                                            <td class="name"><span><?php echo $val->good_name?></span></td>
+                                            <td>
+                                                <span class="parts_num">
+                                                    <input type="number" oninput="price()" class="parts_num_int" value="<?php echo $val->num?>" step="1" min="1" max="2500">                                              <span>只</span>
+                                                </span>
+                                            </td>
+                                            <td><span><?php echo $val->good_price_pu?></span></td>
+                                            <td><span><?php echo $val->good_price_vip?></span></td>
+                                            <td><span></span></td>
+                                            <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItemParts('<?php echo $v->service_id?>_<?php echo $val->good_id?>')" style="margin: 0;">删除</a></span>
+                                            </td>
+                                            <input type="hidden" class="parts_id" value="<?php echo $val->good_id?>">
+                                        </tr>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
                 <div class="table_add clearfix">
                     <span>
-                        质检员:
-                        <select name="inspector" id="inspector" class="sel">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+<!--                        质检员:-->
+                        <!--                        <select name="inspector" id="inspector" class="sel">-->
+                        <!--                            <option value="1">1</option>-->
+                        <!--                            <option value="2">2</option>-->
+                        <!--                            <option value="3">3</option>-->
+                        <!--                        </select>-->
                     </span>
                     <span id="add_working_btn">选择工时</span>
                 </div>
@@ -1544,13 +2022,11 @@
                     <div class="table_total_r">
                         <table class="table_new">
                             <tr>
-                                <td>工时费：  <span>9490.00</span></td>
-                                <td>配件费：  <span>65.00</span></td>
-                                <td>附加费：	 <span>0.00</span></td>
-                                <td>减免：   <span>0.00</span></td>
-                                <td>管理费： <span>0.00</span></td>
-                                <td>税费：   <span>0.00</span></td>
-                                <td>总费用： <span>9555.00</span></td>
+                                <td>工时费：  <span id="service_total">0.00</span></td>
+                                <td>配件费：  <span id="good_total">0.00</span></td>
+                                <td>原价：    <span id="old_total">0.00</span></td>
+                                <td>VIP价：   <span id="vip_total">0.00</span></td>
+                                <td>实际总费用： <span id="actual_total">0.00</span></td>
                             </tr>
                         </table>
                     </div>
@@ -1558,57 +2034,63 @@
             </li>
             <li class="row-item type_meal" style="display: none; width: 50%;">
                 <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="VIPNumber" id="VIPNumber"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data->VIPNumber ?>" class="ui-input" name="VIPNumber" id="VIPNumber" readonly></div>
             </li>
-            <li class="row-item type_meal" style="display: none; width: 50%;text-align: right">
+            <li class="row-item type_meal" style="display: none; width: 100%;text-align: left">
                 <a href="javascript:void(0);" class="ui-btn mrb addMeal" style="margin: 0;">添加套餐</a>
             </li>
             <li class="row-item type_meal" style="display: none; width: 100%;">
                 <div class="table">
                     <table style="width: 100%;">
                         <thead style="width: 100%;">
-                            <tr style="width: 100%;">
-                                <th style="width: 25%;">名称</th>
-                                <th style="width: 10%;">售价</th>
-                                <th style="width: 60%;">套餐内容</th>
-                                <th style="width: 5%;">操作</th>
-                            </tr>
+                        <tr style="width: 100%;">
+                            <th style="width: 25%;">套餐名称</th>
+                            <th style="width: 60%;">已选服务</th>
+                            <th style="width: 5%;">操作</th>
+                        </tr>
                         </thead>
                         <tbody id="taocan_all">
-                            <tr class="mealItem_2">
-                                <td><span>1</span></td>
-                                <td><span>3</span></td>
-                                <td><span>4</span></td>
-                                <td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal(2)" style="margin: 0;">删除</a></span></td><!--放id-->
-                            </tr>
+                            <?php foreach (json_decode($data->vip_item) as $k=>$v) :?>
+                                <tr class="mealItem mealItem_<?php echo $v->mealID ?>_<?php echo $v->serveID ?>">
+                                    <td><span><?php echo $v->mealName ?></span></td>
+                                    <td>
+                                        <span><?php echo $v->serveName ?></span>
+                                        <input type="hidden" class="mealID" value="<?php echo $v->mealID ?>">
+                                        <input type="hidden" class="serveID" value="<?php echo $v->serveID ?>">
+                                    </td>
+                                    <td>
+                                        <span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal('<?php echo $v->mealID ?>_<?php echo $v->serveID ?>')" style="margin: 0;">删除</a></span>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
             </li>
-            <input type="hidden" value="" id="taocan_id"> <!--存放套餐ID-->
+            <input type="hidden" value="<?php echo $v->mealID ?>" id="taocan_id"> <!--存放套餐ID-->
         </ul>
 
         <ul class="main_title"></ul>
         <ul class="mod-form-rows base-form clearfix" id="base-form">
             <li class="row-item" style="width: 45% ;">
                 <div class="label-wrap"><label for="describe">故障描述:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="describe" id="describe" style="width: 85%;height: 100%;"></textarea></div>
+                <div class="ctn-wrap"><textarea class="ui-input normal" name="describe" id="describe" style="width: 85%;height: 100%;"><?php echo $data-> describe?></textarea></div>
             </li>
             <li class="row-item" style="width: 45% ;">
                 <div class="label-wrap"><label for="advice">维修建议:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="advice" id="advice" style="width: 85%;height: 100%;"></textarea></div>
+                <div class="ctn-wrap"><textarea class="ui-input normal" name="advice" id="advice" style="width: 85%;height: 100%;"><?php echo $data-> advice?></textarea></div>
             </li>
             <li class="row-item" style="width: 45% ;">
                 <div class="label-wrap"><label for="report">出车报告:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="report" id="report" style="width: 85%;height: 100%;"></textarea></div>
+                <div class="ctn-wrap"><textarea class="ui-input normal" name="report" id="report" style="width: 85%;height: 100%;"><?php echo $data-> report?></textarea></div>
             </li>
             <li class="row-item" style="width: 45% ;">
                 <div class="label-wrap"><label for="request">顾客要求:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="request" id="request" style="width: 85%;height: 100%;"></textarea></div>
+                <div class="ctn-wrap"><textarea class="ui-input normal" name="request" id="request" style="width: 85%;height: 100%;"><?php echo $data->request?></textarea></div>
             </li>
             <li class="row-item" style="width: 100% ;">
                 <div class="label-wrap"><label for="remarks">备注:</label></div>
-                <div class="ctn-wrap"><textarea value="" class="ui-input normal" name="remarks" id="remarks" style="width: 83.1%;height: 100%;"></textarea></div>
+                <div class="ctn-wrap"><textarea class="ui-input normal" name="remarks" id="remarks" style="width: 83.1%;height: 100%;"><?php echo $data-> remarks?></textarea></div>
             </li>
 
 
@@ -1644,7 +2126,6 @@
         </div>
     </div>
 
-<!--弹窗开始-->
     <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
 
     <!--选择顾客弹框-->
@@ -1655,22 +2136,22 @@
         </div>
         <div class="add_content">
             <ul class="content_main clearfix" style="position: relative;">
-                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号进行搜索" onblur="phone()"></li>
+                <li style="margin-bottom: 20px"><span>手机号:</span><input type="text" name="userPhone" id="userPhone" style="width: 70%;height: 30px;"  placeholder=" 请输入手机号进行搜索" oninput="phone()" <?php echo $data -> phone?> ></li>
 
-                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;">
-                    <input type="hidden" value="" id="userId">
+                <li style="margin-bottom: 20px"><span>姓名:</span><input type="text" name="userName" id="userName" style="width: 70%;height: 30px;" readonly placeholder="输入手机号可自动查询" value="<?php echo $data -> name?>">
+                    <input type="hidden" value="<?php echo $data -> userId?>" id="userId">
                 </li>
                 <li>
                     <span>车牌号:</span>
                     <span style="border: 1px solid #ddd;width: 40px;height: 30px;line-height: 30px;margin-left: -3px;position: relative;"  class="change">
-                        <span id="show_province" style="padding-left: 5px">粤</span>
+                        <span id="show_province" style="padding-left: 5px">浙</span>
                         <i style="width: 20px;height: 20px;background: url(<?php echo base_url()?>statics/css/img/ssxljt.png) no-repeat;position: absolute;top: 5px;right: 2px;"></i>
                     </span>
                     <input type="text" name="carNumberLast" id="carNumberLast" style="width: 50%;height: 30px;margin-left: -5px">
                 </li>
                 <ul class="province clearfix" hidden>
-                    <li class="province_li">粤</li>
                     <li class="province_li">浙</li>
+                    <li class="province_li">粤</li>
                     <li class="province_li">京</li>
                     <li class="province_li">沪</li>
                     <li class="province_li">苏</li>
@@ -1702,6 +2183,8 @@
                     <li class="province_li">琼</li>
                     <li class="province_li">WJ</li>
                 </ul>
+                <li style="margin-bottom: 20px"><span>微信昵称:</span><input type="text" name="wechat" id="wechat" style="width: 70%;height: 30px;" readonly placeholder="输入手机号可自动查询">
+                </li>
             </ul>
         </div>
         <div class="add_footer">
@@ -1716,83 +2199,61 @@
 
     <!--选择工时弹窗-->
     <div id="add_working" class="add" style="display: none;">
-    <div class="add_header clearfix">
-        <div class="add_title">选择工时</div>
-        <div class="add_close close_add">&times;</div>
-    </div>
-    <div class="add_content">
-        <div class="add_content_l">
-            <ul class="add_content_title">类型</ul>
-            <ul class="add_content_ul">
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-                <li class="add_content_li">
-                    <span>1</span>
-                    <span>&gt;</span>
-                </li>
-            </ul>
+        <div class="add_header clearfix">
+            <div class="add_title">选择工时</div>
+            <div class="add_close close_add">&times;</div>
         </div>
-        <div class="add_content_c">
-            <ul class="add_content_title">
-                <li>名称</li>
-                <li>售价</li>
-            </ul>
-            <ul class="add_content_ul">
-                <li class="add_content_li add_content_c_li">
-                    <span>1</span>
-                    <span>2</span>
-                    <input type="hidden" value="1">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>2</span>
-                    <span>2</span>
-                    <input type="hidden" value="2">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>3</span>
-                    <span>2</span>
-                    <input type="hidden" value="3">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>4</span>
-                    <span>2</span>
-                    <input type="hidden" value="4">
-                </li>
-                <li class="add_content_li add_content_c_li">
-                    <span>5</span>
-                    <span>2</span>
-                    <input type="hidden" value="5">
-                </li>
-            </ul>
-        </div>
-        <div class="add_content_r">
-            <ul class="add_content_title">已选工时</ul>
-            <ul class="add_content_ul"></ul>
-        </div>
-    </div>
-    <div class="add_footer">
-        <td colspan="2">
-            <div class="ui_buttons">
-                <input type="button" id="add_working_val" value="确定" class="ui_state_highlight" />
-                <input type="button" class="close_add" value="关闭" />
+        <div class="add_content">
+            <div class="add_content_l">
+                <ul class="add_content_title">类型</ul>
+                <ul class="add_content_ul serve_type">
+                    <?php foreach ($serve as $key=>$val) :?>
+                        <li class="add_content_li serve" style="text-align: left;">
+                        <span><?php echo $val['name'] ?></span>
+                        <input type="hidden" value="<?php echo $val['id'] ?>" >
+                        <?php if($val['child']) :?>
+                            <?php foreach ($val['child'] as $key1=>$val1) :?>
+                                <li class="add_content_li serve" style="text-align: left;">
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></span>
+                                <input type="hidden" value="<?php echo $val1['id'] ?>">
+                                <?php if($val1['child']) :?>
+                                    <?php foreach ($val1['child'] as $key2=>$val2) :?>
+                                        <li class="add_content_li serve" style="text-align: left;">
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></span>
+                                            <input type="hidden" value="<?php echo $val2['id'] ?>">
+                                        </li>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+                                </li>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
             </div>
-        </td>
+            <div class="add_content_c">
+                <ul class="add_content_title">
+                    <li>名称</li>
+                    <li>售价</li>
+                    <li>VIP售价</li>
+                </ul>
+                <ul class="add_content_ul" id="serve_level2">
+                </ul>
+            </div>
+            <div class="add_content_r">
+                <ul class="add_content_title">已选工时</ul>
+                <ul class="add_content_ul"></ul>
+            </div>
+        </div>
+        <div class="add_footer">
+            <td colspan="2">
+                <div class="ui_buttons">
+                    <input type="button" id="add_working_val" value="确定" class="ui_state_highlight" />
+                    <input type="button" class="close_add" value="关闭" />
+                </div>
+            </td>
+        </div>
     </div>
-</div>
 
     <!--选择配件弹框-->
     <div id="add_parts" class="add" style="display: none;">
@@ -1802,39 +2263,42 @@
         </div>
         <div class="add_content clearfix">
             <div class="parts_l">
+
                 <table>
                     <thead>
-                        <tr>
-                            <th>名称</th>
-                            <th>规格/型号</th>
-                            <th>品牌</th>
-                            <th>编码</th>
-                            <th>OEM</th>
-                            <th>仓位</th>
-                            <th>库存</th>
-                            <th>适用车型</th>
-                            <th>售价</th>
-                        </tr>
+                    <tr>
+                        <th>配件编码</th>
+                        <th>名称</th>
+                        <th>规格/型号</th>
+                        <th>配件类别</th>
+                        <th>单位</th>
+                        <th>仓位</th>
+                        <th>库存</th>
+                        <th>零售价</th>
+                        <th>VIP价</th>
+                    </tr>
                     </thead>
                     <tbody class="parts_main">
+                    <?php foreach ($goods as $k=>$v) :?>
                         <tr class="parts_tr">
-                            <td class="parts_td">111</td>
-                            <td class="parts_td">2</td>
-                            <td class="parts_td">3</td>
-                            <td class="parts_td">4</td>
-                            <td class="parts_td">5</td>
-                            <td class="parts_td">6</td>
-                            <td class="parts_td">7</td>
-                            <td class="parts_td">8</td>
-                            <td class="parts_td">9</td>
-                            <input type="hidden" value="1">
+                            <td class="parts_td"><?php echo $v->number ?></td>
+                            <td class="parts_td"><?php echo $v->name ?></td>
+                            <td class="parts_td"><?php echo $v->spec ?></td>
+                            <td class="parts_td"><?php echo $v->categoryName ?></td>
+                            <td class="parts_td"><?php echo $v->unitName ?></td>
+                            <td class="parts_td"><?php echo $v->locationName ?></td>
+                            <td class="parts_td"><?php echo $v->vipPrice ?></td>
+                            <td class="parts_td"><?php echo $v->salePrice ?></td>
+                            <td class="parts_td"><?php echo $v->vipPrice ?></td>
+                            <input type="hidden" value="<?php echo $v->id ?>">
                         </tr>
+                    <?php endforeach;?>
                     </tbody>
                     </thead>
                 </table>
             </div>
             <div class="parts_r">
-                <ul class="add_parts_title">已选工时</ul>
+                <ul class="add_parts_title">已选配件</ul>
                 <ul class="add_parts_ul"></ul>
             </div>
         </div>
@@ -1855,66 +2319,21 @@
             <div class="add_close close_add">&times;</div>
         </div>
         <div class="add_content">
-            <div class="mod-search cf">
-                <div class="fl">
-                    <ul class="ul-inline">
-                        <li>
-                            <span id="catorage"></span>
-                        </li>
-                        <li>
-                            <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入名称" style="width: 280px;">
-                        </li>
-                        <li><a class="ui-btn mrb" id="search">查询</a></li>
-                    </ul>
-                </div>
+            <div class="content_l">
+                <ul class="content_title">套餐名称</ul>
+                <ul class="content_ul content_l_ul">
+                </ul>
             </div>
-            <div class="grid-wrap tankuang">
-                <div class="table">
-                    <table style="width: 100%;">
-                        <thead style="width: 100%;">
-                        <tr style="width: 100%;">
-                            <th style="width: 5%;">
-                                <input type="checkbox" id="all">
-                            </th>
-                            <th style="width: 15%;">套餐名称</th>
-                            <th style="width: 70%;">套餐项目</th>
-                            <th style="width: 10%;">金额(元)</th>
-                        </tr>
-                        </thead>
-                        <tbody id="meal_all">
-                            <tr>
-                                <td class="check" style="width: 5%;">
-                                    <input type="checkbox" class="check_child" value="1"><!--放id-->
-
-                                </td>
-                                <td><span class="taocan_name">1</span></td>
-                                <td><span class="taocan_item">2</span></td>
-                                <td><span class="taocan_price">3</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="page">
-                    <div class="page_left">&nbsp;</div>
-                    <div class="page_center">
-                        <div></div>
-                        <div></div>
-                        <div>
-                            <input type="text" value="1">
-                        </div>
-                        <div>共 1 页</div>
-                        <div></div>
-                        <div></div>
-                        <div>
-                            <select name="pages" id="pages">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
-                </div>
+            <div class="content_c">
+                <ul class="add_content_title">
+                    <li>套餐项目</li>
+                </ul>
+                <ul class="content_ul content_c_ul">
+                </ul>
+            </div>
+            <div class="content_r">
+                <ul class="content_title">已选项目</ul>
+                <ul class="content_ul content_r_ul"></ul>
             </div>
         </div>
         <div class="add_footer">
@@ -1926,184 +2345,9 @@
             </td>
         </div>
     </div>
-<!--弹窗结束-->
 
 </div>
-<script>
-    function phone(){
-        var mobile =$("#userPhone").val();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/phone');?>",
-            data: {
-                mobile:mobile,
-            },
-            dataType: "json",
-
-            success: function (data) {
-
-                if(data.length != 0){
-                    $("#userName").val(data.name);
-                    $("#userId").val(data.id);
-                }else{
-                    $("#userName").val("无此账号");
-                }
-
-            },
-        });
-    }
-    $("#save_all").click(function () {
-        var describe = $("#describe").text(); //故障描述
-        var advice = $("#advice").text();   //维修建议
-        var report = $("#report").text();  //出车报告
-        var request = $("#request").text();  //顾客要求
-        var remarks = $("#remarks").text();  //备注
-        var  name = $("#name").val();  //客户用户名
-        var  phone = $("#phone").val();  //客户电话
-        var  number = $("#number").val();  //车牌
-        var  songCarRen = $("#songCarRen").val();  //送修人名字
-        var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
-        var  startTime = $("#startTime").val();  //开工时间
-        var  estimateTime = $("#estimateTime").val();  //预计完工时间
-        var  endTime = $("#endTime").val();  //完工时间
-
-        var  brand = $("#brand").val();   //品牌
-        var  vin = $("#vin").val();  //vin
-        var  insureCompany = $("#insureCompany").val();   //交强险保险公司
-        var  system = $("#system").val();  //车系
-        var  notice = $("#notice").val();  //公告号
-        var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
-        var  shape = $("#shape").val();  //车型年款
-        var  lastMileage = $("#lastMileage").val();  //上次里程
-        var  annualEndTime = $("#annualEndTime").val();  //年审到期
-        var  carShape = $("#carShape").val();   //车型
-        var  useMileage = $("#useMileage").val();  //行驶里程
-        var  suggestedMaintenanceTime = $("#suggestedMaintenanceTime").val();  //建议保养时间
-        var  carName = $("#carName").val();  //车主姓名
-        var  engineNumber = $("#engineNumber").val();   //发动机号
-        var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
-        var  idNumber = $("#idNumber").val();   //身份证号
-        var  carColor = $("#carColor").val();  //车辆颜色
-        var  carPrice = $("#carPrice").val();  //车辆价格
-        var  carAddress = $("#carAddress").val();  //车主地址
-        var  registedTime = $("#registedTime").val();   //注册时间
-        var  natureUsage = $("#natureUsage").val(); //使用性质
-        var  frontWheelType = $("#frontWheelType").val(); //前轮型号
-        var  backWheelType = $("#backWheelType").val(); //后轮型号
-        var  carType = $("#carType").val();  //车辆类型
-        var  transmission = $("#transmission").val();  //变速箱型号
-        var  carRmarks = $("#carRmarks").val();  //车辆备注
-        var  displacement = $("#displacement").val();  //排量
-        var  oilVolume = $("#oilVolume").val();  //油量
-
-        var image = new FormData();
-
-        //实录照片
-        $.each(url_arr['li0_img'],function ($key,$val) {
-            image.append('li0_img'+$key,$val);
-        });
-        //发动机部分照片
-        $.each(url_arr['li1_img'],function ($key,$val) {
-            image.append('li1_img'+$key,$val);
-        });
-        //底盘部分照片
-        $.each(url_arr['li2_img'],function ($key,$val) {
-            image.append('li2_img'+$key,$val);
-        });
-        //电气设备照片
-        $.each(url_arr['li3_img'],function ($key,$val) {
-            image.append('li3_img'+$key,$val);
-        });
-        //轮胎部分照片
-        $.each(url_arr['li4_img'],function ($key,$val) {
-            image.append('li4_img'+$key,$val);
-        });
-        //刹车系统照片
-        $.each(url_arr['li5_img'],function ($key,$val) {
-            image.append('li5_img'+$key,$val);
-        });
-        //油水部分照片
-        $.each(url_arr['li6_img'],function ($key,$val) {
-            image.append('li6_img'+$key,$val);
-        });
-        //电脑检测照片
-        $.each(url_arr['li7_img'],function ($key,$val) {
-            image.append('li7_img'+$key,$val);
-        });
-        //外观检测照片
-        $.each(url_arr['li8_img'],function ($key,$val) {
-            image.append('li8_img'+$key,$val);
-        });
-        image.append('number',number);
-
-        var checks = new Array();
-
-        $(".checks").each(function($key,$val){
-            checks.push($val.value);
-        });
-        image.append('checks',checks);
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/start');?>",
-            traditional: false,
-            dataType: "json",
-            processData :false,
-            contentType :false,
-            data:image,
-
-            success: function (data) {
-                console.log(data);
-
-            },
-        });
-
-    });
-
-    $('#save').click(function () {
-        var  car_number = $("#number").val();
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('billing/car');?>",
-            data: {
-                car_number:car_number,
-            },
-            dataType: "json",
-
-            success: function (data) {
-
-                if(data.length != 0){
-                    $("#brand").val(data.brand);
-                    $("#vin").val(data.vin);
-                    $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
-                    $("#system").val(data.system);
-                    $("#notice").val(data.notice);
-                    $("#insuranceEndTime").val(data.compulsoryTime);
-                    $("#shape").val(data.annual);
-                    $("#annualEndTime").val(data.review);
-                    $("#carShape").val(data.shape);
-                    $("#carName").val(data.username);
-                    $("#engineNumber").val(data.engine);
-                    $("#idNumber").val(data.people_id);
-                    $("#carColor").val(data.color);
-                    $("#carPrice").val(data.price);
-                    $("#carAddress").val(data.address);
-                    $("#registedTime").val(data.registration);
-                    $("#frontWheelType").val(data.front);
-                    $("#backWheelType").val(data.rear);
-                    $("#carType").find("option[value = "+data.type +"]").attr("selected",true);
-                    $("#transmission").val(data.transmission);
-                    $("#displacement").val(data.displacement);
-                    $("#natureUsage").find("option[value = "+data.nature +"]").attr("selected",true);
-                }
-
-            },
-        });
-    });
-
-
-
-</script>
 <script>
     $(function () {
         // 弹框
@@ -2119,17 +2363,16 @@
                 $('#name').val($('#userName').val());
                 $('#number').val($('#show_province').html()+$('#carNumberLast').val());
             }
-
-
             $('#userPhone').val('');
             $('#userName').val('');
             $('#carNumberLast').val('');
-            $('#show_province').html('粤');
+            $('#show_province').html('浙');
+            car();
         });
-        $('#name,#phone,#number').on('focus',function () {
-            $('#ldg_lockmask').css('display','');
-            $('#add').css('display','');
-        });
+        // $('#name,#phone,#number').on('focus',function () {
+        //     $('#ldg_lockmask').css('display','');
+        //     $('#add').css('display','');
+        // });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
@@ -2148,30 +2391,35 @@
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '车辆信息') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '实录照片'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '车检报告'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','');
                 $('.car_service').css('display','none');
+                $('#save_all').css('display','none');
             }else if ($(this).html() == '服务项目') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','');
+                $('#save_all').css('display','');
             }
         });
         $('.choose_inspect').on('click',function () {
@@ -2294,88 +2542,188 @@
         });
 
         //添加工时，选中工时
-        $('.add_content_c_li').on('click',function () {
-            var val = $(this).find('span:first-child').html();
+        $('#serve_level2').on('click','.add_content_c_li',function () {
+            var all = $('.add_content_r_li');
+            var num = 0;
+            var name = $(this).find('span:first-child').html();
+            var price = $(this).find('span:nth-child(2)').html();
+            var vip_price = $(this).find('span:nth-child(3)').html();
+            var working = $(this).find('span:last-child').html();
             var id = $(this).find('input').val();
+            var str = '';
             var str1 = '<li class="add_content_li add_content_r_li add_content_r_li_';
             var str2 = '"><span>';
-            var str3 = '</span><span class="delete" onclick="delLi(';
-            var str4 = ')"></span><input type="hidden" value="';
-            var str5 = '"> </li>';
-            var str = str1 + id + str2 + val + str3 + id + str4 + id + str5;
-            $('.add_content_r .add_content_ul').append(str);
+            var str3 = '</span><span style="display: none;">';
+            var str4 = '</span><span class="delete" onclick="delLi(';
+            var str5 = ')"></span><input type="hidden" value="';
+            var str6 = '"> </li>';
+            $.each(all,function () {
+                if ($(this).find('input').val() == id){
+                    num++;
+                }
+            });
+            if (num <= 0){
+                str = str1 + id + str2 + name + str3 + price + str3 + vip_price + str3 + working + str4 + id + str5 + id + str6;
+                $('.add_content_r .add_content_ul').append(str);
+            }
         });
 
         //添加工时，添加工时
         $('#add_working_val').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add_working').css('display','none');
-            var input = $('.add_content_r_li input');
-            var arr = new Array();
-            $.each(input,function () {
-                arr.push($(this).val());
+            var serviceItem = $('.serviceItem');
+            var num = 0;
+            var id = '';
+            var all = $('.add_content_r_li');
+            var str = '';
+            var str1 = '<tr class="serviceItem serviceItem_';
+            var str2 = '"><td class="name"><span>';
+            var str3 = '</span><span class="parts clearfix"><span class="parts_logo">+</span><span class="parts_text">配件</span></span></td><td><span>1</span></td><td><span class="single_price">';
+            var str4 = '</span></td><td><span>';
+            var str5 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItem(';
+            var str6 = ')" style="margin: 0;">删除</a></span></td><input type="hidden" value="';
+            var str7 = '"></tr>';
+            $.each(all,function () {
+                id = $(this).find('input').val();
+                $.each(serviceItem,function () {
+                    if ($(this).find('input').val() == id){
+                        num++;
+                    }
+                });
+                if (num <= 0){
+                    str += str1 + $(this).find('input').val() + str2 + $(this).find('span:nth-child(1)').html() + str3 + $(this).find('span:nth-child(2)').html() + str4 + $(this).find('span:nth-child(3)').html() + str4 + $(this).find('span:nth-child(4)').html() + str5 + $(this).find('input').val() + str6 + $(this).find('input').val() + str7;
+                }
+
             });
             $('.add_content_r_li').remove();
-            // $.ajax({
-            //
-            // });
+            $('#serve_level2').html('');
+            $('.add_content_l_hover').removeClass('add_content_l_hover');
+            $('#serve_position').append(str);
+
+            price();
+
         });
 
         //添加选择配件弹框
-        $('.parts').on('click',function () {
+        var local_parts_id = '';
+        $('#serve_position').on('click','.parts',function () {
+            local_parts_id = $(this).parent().parent().find('input').val();
             $('#ldg_lockmask').css('display','');
             $('#add_parts').css('display','');
         });
 
         //添加配件，选中配件
         $('.parts_tr').on('click',function () {
+            var all = $('.parts_li');
+            var num = 0;
             var id = $(this).find('input').val();
-            var name = $(this).find('td:first-child').html();
+            var name = $(this).find('td:nth-child(2)').html();
+            var unitName = $(this).find('td:nth-child(5)').html();
+            var price = $(this).find('td:nth-child(8)').html();
+            var vipprice = $(this).find('td:nth-child(9)').html();
+            var stock = $(this).find('td:nth-child(7)').html();
             var str = '';
             var str1 = '<li onclick="delParts(';
             var str2 = ')" class="parts_li parts_tr_';
             var str3 = '"><span>';
-            var str4 = '</span><span class="del_parts"></span><input type="hidden" value="';
-            var str5 = '"></li>';
-            str = str1 + id + str2 + id + str3 + name + str4 + id + str5;
-            $('.add_parts_ul').append(str);
+            var str4 = '</span><span class="del_parts"></span><input type="hidden" class="parts_id" value="';
+            var str5 = '"><input type="hidden" class="parts_unitName" value="';
+            var str6 = '"><input type="hidden" class="parts_price" value="';
+            var str7 = '"><input type="hidden" class="parts_vipprice" value="';
+            var str8 = '"><input type="hidden" class="parts_stock" value="';
+            var str9 = '"></li>';
+            $.each(all,function () {
+                if ($(this).find('.parts_id').val() == id){
+                    num++;
+                }
+            });
+            if (num <= 0){
+                str = str1 + id + str2 + id + str3 + name + str4 + id + str5 + unitName + str6 + price + str7 + vipprice + str8 + stock + str9;
+                $('.add_parts_ul').append(str);
+            }
+
         });
 
         //添加配件,添加配件
         $('#add_parts_val').on('click',function () {
+            var all = $('.parentID_' + local_parts_id);
+            var num = 0;
+            var id = '';
             $('#ldg_lockmask').css('display','none');
             $('#add_parts').css('display','none');
-            var input = $('.parts_li input');
-            var arr = new Array();
-            $.each(input,function () {
-                arr.push($(this).val());
+            var parts_li = $('.parts_li');
+            var str = '';
+            var str1 = '<tr class="partsItem partsItem_';
+            var str2 = ' parentID_';
+            var str3 = '"><td class="name"><span>';
+            var str4 = '</span></td><td><span class="parts_num"><input type="number" oninput="price()" class="parts_num_int" value="1" step="1" min="1" max="';
+            var str5 = '"><span>';
+            var str6 = '</sapn></span></td><td><span>';
+            var str7 = '</span></td><td><span>';
+            var str8 = '</span></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delItemParts(\'';
+            var str9 = '\')" style="margin: 0;">删除</a></span></td><input type="hidden" class="parts_id" value="';
+            var str10 = '"></tr>';
+            $.each(parts_li,function () {
+                id = $(this).find('.parts_id').val();
+                $.each(all,function () {
+                    if ($(this).find('.parts_id').val() == id){
+                        num++;
+                    }
+                });
+                if (num <= 0){
+                    str += str1 + local_parts_id + '_' + $(this).find('.parts_id').val() + str2 + local_parts_id + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.parts_stock').val() + str5 + $(this).find('.parts_unitName').val() + str6 + $(this).find('.parts_price').val() + str7 + $(this).find('.parts_vipprice').val() + str7 + str8 + local_parts_id + '_' + $(this).find('.parts_id').val() + str9 + $(this).find('.parts_id').val() + str10;
+                }
+
             });
-            // $.ajax({
-            //
-            // });
+            $('.serviceItem_' + local_parts_id).after(str);
+
             $('.parts_li').remove();
+
+            price();
         });
 
         //添加套餐
         $('.addMeal').on('click',function () {
-            var vipNumber = $('#VIPNumber').val();
+            var userId = $("#userId").val();
             $.ajax({
-               url: "",
-               data: {},
-               type: "",
-               datatype: "",
-               success: function (data) {
-                   var str1 = '<tr><td class="check" style="width: 5%;"><input type="checkbox" class="check_child" value="';
-                   var str2 = '"></td><td><span class="taocan_name">';
-                   var str3 = '</span></td><td><span class="taocan_item">';
-                   var str4 = '</span></td><td><span class="taocan_price">';
-                   var str5 = '</span></td></tr>';
-                   var str = '';
-                   $.each(data,function () {
-                       str += str1 + this.id + str2 + this.name + str3 + this.item + str4 + this.price + str5;
-                   });
-                   $('#meal_all').append(str);
-               } ,
+                type: "POST",
+                url: "<?php echo site_url('billing/meal');?>",
+                data: {
+                    userId:userId,
+                },
+                dataType: "json",
+                success: function (data) {
+                    var contentName = JSON.parse(data.content);
+                    var str1 = '<li class="content_li" id="content_l_';
+                    var str2 = '"><span>';
+                    var str3 = '</span></li>';
+                    var str = '';
+                    $.each(contentName,function () {
+                        str += str1 + this.id + str2 + this.name + str3;
+                    });
+                    $('.content_l_ul').html(str);
+
+                    var string = '';
+                    var string1 = '<li class="content_li content_c_li content_c_';
+                    var string2 = '" style="display:none"><span>';
+                    var string3 = '</span><span style="display:none">' ;
+                    var string4 = '</span><input type="hidden" class="serveId" value="';
+                    var string5 = '"><input type="hidden" class="mealId" value="';
+                    var string6 = '"></li>';
+                    var mealId = '';
+                    var mealName = '';
+                    $.each(contentName,function () {
+                        mealId = this.id;
+                        mealName = this.name;
+                        $.each(JSON.parse(this.content),function () {
+                            if (parseInt(this.number) > 0){
+                                string += string1 + mealId + string2 + this.name + string3 + mealName + string4 + this.id + string5 + mealId + string6;
+                            }
+                        });
+                    });
+                    $('.content_c_ul').html(string);
+                } ,
                 error:function () {
 
                 }
@@ -2384,116 +2732,79 @@
             $('#add_meal').css('display','');
         });
 
-        //添加套餐，单选框
-        $('#all').on('click',function () {
-            var thisChecked = $(this).prop('checked');
-            $('.check_child').prop('checked',thisChecked);
-
+        //添加套餐,点击选择套餐名称
+        $('.content_l_ul').on('click','.content_li',function () {
+            $('.content_c_li').css('display','none');
+            $('.content_l_hover').removeClass('content_l_hover');
+            $(this).addClass('content_l_hover');
+            $('.' + $(this).attr('id').replace('_l_','_c_')).css('display','');
         });
-        $('.check_child').on('click',function(){
-            var totalNum =  $('.check_child').length;
-            var checkedNum =  $('.check_child:checked').length;
-            $('#all').prop('checked',totalNum==checkedNum);
+
+        //添加套餐，点击选中服务
+        $('.content_c_ul').on('click','.content_c_li',function () {
+            var all = $('.content_r_li');
+            var num = 0;
+            var name = $(this).find('span:first-child').html();
+            var mealName = $(this).find('span:nth-child(2)').html();
+            var mealId = $(this).find('.mealId').val();
+            var serveId = $(this).find('.serveId').val();
+            var str = '';
+            var str1 = '<li class="content_li content_r_li content_r_li_';
+            var str2 = '"><span>';
+            var str3 = '</span><span class="delete" onclick="delserve(';
+            var str4 = ')"></span><input type="hidden" class="serve_r_id" value="';
+            var str5 = '"><input type="hidden" class="meal_r_id" value="';
+            var str6 = '"><input type="hidden" class="mealName" value="';
+            var str7 = '"></li>';
+            $.each(all,function () {
+                if ($(this).find('.meal_r_id').val() == mealId && $(this).find('.serve_r_id').val() == serveId) {
+                    num++;
+                }
+            });
+            if (num <= 0){
+                str = str1 + serveId + str2 + name + str3 + serveId + str4 + serveId + str5 + mealId + str6 + mealName + str7;
+                $('.content_r_ul').append(str);
+            }
         });
 
         //添加套餐，添加套餐
         $('#add_meal_btn').on('click',function () {
-            var checkitems = new Array();
-            var checkvalues = new Array();
-            $.each($('.check_child:checked'),function(){
-                var biaoji = $(this);
-                var num = 0;
-                if ($('.biaoji').val() != null) {
-                    $.each($('.biaoji'),function () {
-                        if ($(this).val() == biaoji.val()){
-                            num = num + 1;
-                        }
-                    });
-                    if (num <= 0){
-                        checkitems.push($(this).val());
-                        var value1 = '<tr class="mealItem_';
-                        var value2 = '"><input type="hidden" class="biaoji" value="';
-                        var value3 = '"><td><span>'
-                        var value4 = '</span></td>\n' +
-                            '                    <td><span>';
-                        var value5 = '</span></td>\n' +
-                            '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
-                        var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
-                            '                </tr>';
-                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+            var mealItem = $('.mealItem');
+            var num = 0;
+            var serveID = '';
+            var mealID = '';
+            $('#ldg_lockmask').css('display','none');
+            $('#add_meal').css('display','none');
+            var all = $('.content_r_li');
+            var str = '';
+            var str1 = '<tr class="mealItem mealItem_';
+            var str2 = '"><td><span>';
+            var str3 = '</span></td><td><span>';
+            var str4 = '</span><input type="hidden" class="mealID" value="';
+            var str5 = '"><input type="hidden" class="serveID" value="';
+            var str6 = '"></td><td><span><a href="javascript:void(0);" class="ui-btn mrb detail" onclick="delMeal(\'';
+            var str7 = '\')" style="margin: 0;">删除</a></span></td></tr>';
+            $.each(all,function () {
+                mealID = $(this).find('.meal_r_id').val();
+                serveID = $(this).find('.serve_r_id').val();
 
-                        checkvalues.push(value);
+                $.each(mealItem,function () {
+                    if ($(this).find('.mealID').val() == mealID && $(this).find('.serveID').val() == serveID) {
+                        num++;
                     }
-                }else{
-                    checkitems.push($(this).val());
-                    var value1 = '<tr class="mealItem_';
-                    var value2 = '"><input type="hidden" class="biaoji" value="';
-                    var value3 = '"><td ><span>'
-                    var value4 = '</span></td>\n' +
-                        '                    <td><span>';
-                    var value5 = '</span></td>\n' +
-                        '                    <td><span><a href="javascript:void(0);" onclick="delMeal(';
-                    var value6 = ')" class="ui-btn mrb detail" style="margin:0">删除</a></span></td>\n' +
-                        '                </tr>';
-                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
-
-                    checkvalues.push(value);
+                });
+                if (num <=0){
+                    str += str1 + $(this).find('.meal_r_id').val() + '_' + $(this).find('.serve_r_id').val() + str2 + $(this).find('.mealName').val() + str3 + $(this).find('span:first-child').html() + str4 + $(this).find('.meal_r_id').val() + str5 + $(this).find('.serve_r_id').val() + str6 + $(this).find('.meal_r_id').val() + '_' + $(this).find('.serve_r_id').val() + str7;
                 }
 
             });
-            if (checkitems != ''){
-                $('#taocan_id').val(checkitems);
-                $.each(checkvalues, function (key,value) {
-                    $('#taocan_all').append(value);
-                });
-                $('#ldg_lockmask').css('display','none');
-                $('#add_meal').css('display','none');
-            }else{
-                $('#ldg_lockmask').css('display','none');
-                $('#add_meal').css('display','none');
-            }
+            $('#taocan_all').append(str);
+            $('.content_r_li').remove();
+            $('.content_r_li').css('display','none');
+            $('.content_l_hover').removeClass('content_l_hover');
         });
 
-        //读取状态
-        var itemStatus = $('#itemStatus').val();
-        var read = $('#read').val();
-        var url = '';
-        if (itemStatus == '2'){
-            if (read == '0'){
-                $('#finish').html('再次通知');
-                $('#noticeCustomer').css('display','none');
-            }
-        } else if (itemStatus == '3') {
-            $('.itemStatus').addClass('changeStatus3');
-            $('#finish').html('完工');
-        } else if (itemStatus == '4') {
-            $('.itemStatus').addClass('changeStatus4');
-            $('#finish').html('结算');
-            $('#rework').css('display','');
-        } else if (itemStatus == '5') {
-            $('.itemStatus').addClass('changeStatus5');
-            $('#finish').css('display','none');
-            $('#noticeCustomer').css('display','none');
-        };
-
-        //改变状态
-        $('#finish').on('click',function () {
-            if (itemStatus == '2'){
-                if (read == '0'){
-                    type = 1;
-                } else{
-                    type = 2;
-                }
-            } else if (itemStatus == '3'){
-                type = 3;
-            } else if (itemStatus == '4'){
-                type = 4;
-            }
-            changeStatus(type)
-        });
-        $('#rework').on('click',function () {
-            changeStatus(5)
-        });
+        phone();
     });
 
     // 车检报告删除照片
@@ -2527,14 +2838,27 @@
         $('.add_content_r_li_' + id).remove();
     }
 
-    //删除已选配件
+    //删除以显示配件
     function delParts(id) {
         $('.parts_tr_' + id).remove();
+    }
+
+    //删除已选中配件
+    function delItemParts(id) {
+        $('.partsItem_' + id).remove();
+        price();
     }
 
     //删除以显示服务项目
     function delItem(id) {
         $('.serviceItem_' + id).remove();
+        $('.parentID_' + id).remove();
+        price();
+    }
+
+    //删除已选套餐服务
+    function delserve(id) {
+        $('.content_r_li_' + id).remove();
     }
 
     //删除以显示套餐
@@ -2542,12 +2866,46 @@
         $('.mealItem_' + id).remove();
     }
 
-    //提交改变状态
-    function changeStatus(type) {
-        //type:1再次通知确认|2施工|3完工|4结算|5返工
-        
-    }
+    //读取状态
+    var itemStatus = $('#itemStatus').val();
+    var read = $('#read').val();
+    var url = '';
+    if (itemStatus == '2'){
+        if (read == '0'){
+            $('#finish').html('再次通知');
+            $('#noticeCustomer').css('display','none');
+        }
+    } else if (itemStatus == '3') {
+        $('.itemStatus').addClass('changeStatus3');
+        $('#finish').html('完工');
+    } else if (itemStatus == '4') {
+        $('.itemStatus').addClass('changeStatus4');
+        $('#finish').html('结算');
+        $('#rework').css('display','');
+    } else if (itemStatus == '5') {
+        $('.itemStatus').addClass('changeStatus5');
+        $('#finish').css('display','none');
+        $('#noticeCustomer').css('display','none');
+    };
 
+    //改变状态
+    $('#finish').on('click',function () {
+        if (itemStatus == '2'){
+            if (read == '0'){
+                type = 1;
+            } else{
+                type = 2;
+            }
+        } else if (itemStatus == '3'){
+            type = 3;
+        } else if (itemStatus == '4'){
+            type = 4;
+        }
+        changeStatus(type)
+    });
+    $('#rework').on('click',function () {
+        changeStatus(5)
+    });
 </script>
 <script>
     Public.pageTab();
@@ -2569,6 +2927,338 @@
     var goodsCombo = Business.goodsCombo($('#goodsAuto'), {
         extraListHtml: ''
     });
+</script>
+<script>
+    function phone(){
+        var mobile =$("#phone").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/phone');?>",
+            data: {
+                mobile:mobile,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.code == 1){
+                    $("#phone").val('');
+                }else if (data.code == 0) {
+                    $("#userName").val(data.text.name);
+                    $("#userId").val(data.text.id);
+                    $("#wechat").val(data.text.wechat);
+                    $("#vipId").val(data.vipId.id);
+                    $("#VIPNumber").val(data.vipId.number);
+                }else{
+                    $("#userName").val("无此账号");
+                    $("#wechat").val("无此账号");
+                    $("#userId").val('');
+                    $("#vipId").val('');
+                    $("#VIPNumber").val("无VIP卡");
+                }
+
+            },
+        });
+    }
+
+    $('.serve_type').on('click','.serve',function () {
+        var serve_id = $(this).find('input').val();
+        $('.add_content_l_hover').removeClass('add_content_l_hover');
+        $(this).addClass('add_content_l_hover');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/service');?>",
+            data: {
+                serve_id:serve_id,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                var str = '';
+                var str1 = '<li class="add_content_li add_content_c_li"><span>';
+                var str2 = '</span><span>';
+                var str3 = '</span><input type="hidden" value="';
+                var str4 = '"><span style="display: none;">';
+                var str5 = '</span></li>';
+                $.each(data,function ($k,$v) {
+                    str += str1 + $v.name + str2 + $v.price + str2 + $v.vip_price + str3 + $v.id + str4 + $v.working + str5;
+                });
+                $('#serve_level2').html(str);
+            },
+        });
+
+    });
+
+    $("#save_all").click(function () {
+        var userId = $("#userId").val(); //用户ID
+        var describe = $("#describe").val(); //故障描述
+        var advice = $("#advice").val();   //维修建议
+        var report = $("#report").val();  //出车报告
+        var request = $("#request").val();  //顾客要求
+        var remarks = $("#remarks").val();  //备注
+        var  name = $("#name").val();  //客户用户名
+        var  phone = $("#phone").val();  //客户电话
+        var  number = $("#number").val();  //车牌号
+        var  wechat = $("#wechat").val();  //用户微信昵称
+        var  songCarRen = $("#songCarRen").val();  //送修人名字
+        var  songCarRenPhone = $("#songCarRenPhone").val();  //送修人电话
+        var  service = $("#service").val(); //服务类别
+        var  startTime = $("#startTime").val();  //开工时间
+        var  estimateTime = $("#estimateTime").val();  //预计完工时间
+        var  endTime = $("#endTime").val();  //完工时间
+        var  brand = $("#brand").val();   //品牌
+        var  insureCompany = $("#insureCompany").val();   //交强险保险公司
+        var  system = $("#system").val();  //车系
+        var  insuranceEndTime = $("#insuranceEndTime").val();  //保险到期
+        var  shape = $("#shape").val();  //车型年款
+        var  carShape = $("#carShape").val();   //车型
+        var  engineNumber = $("#engineNumber").val();   //发动机号
+        var  suggestedMaintenance = $("#suggestedMaintenance").val(); //建议保养里程
+        var  carColor = $("#carColor").val();  //车辆颜色
+        var  natureUsage = $("#natureUsage").val(); //使用性质
+        var  frontWheelType = $("#frontWheelType").val(); //前轮型号
+        var  backWheelType = $("#backWheelType").val(); //后轮型号
+        var  carType = $("#carType").val();  //车辆类型
+        var  transmission = $("#transmission").val();  //变速箱型号
+        var  displacement = $("#displacement").val();  //排量
+        var  oilVolume = $("#oilVolume").val();  //油量
+        var  VIPNumber = $("#VIPNumber").val();  //VIP卡号
+        var  actual_total = $("#actual_total").val();  //服务单订单总额
+        var  service_total = $("#service_total").val();  //服务单工时总额
+        var  good_total = $("#good_total").val();  //服务单配件总额
+        var image = new FormData();
+
+        //实录照片
+        $.each(url_arr['li0_img'],function ($key,$val) {
+            image.append('li0_img'+$key,$val);
+        });
+        //发动机部分照片
+        $.each(url_arr['li1_img'],function ($key,$val) {
+            image.append('li1_img'+$key,$val);
+        });
+        //底盘部分照片
+        $.each(url_arr['li2_img'],function ($key,$val) {
+            image.append('li2_img'+$key,$val);
+        });
+        //电气设备照片
+        $.each(url_arr['li3_img'],function ($key,$val) {
+            image.append('li3_img'+$key,$val);
+        });
+        //轮胎部分照片
+        $.each(url_arr['li4_img'],function ($key,$val) {
+            image.append('li4_img'+$key,$val);
+        });
+        //刹车系统照片
+        $.each(url_arr['li5_img'],function ($key,$val) {
+            image.append('li5_img'+$key,$val);
+        });
+        //油水部分照片
+        $.each(url_arr['li6_img'],function ($key,$val) {
+            image.append('li6_img'+$key,$val);
+        });
+        //电脑检测照片
+        $.each(url_arr['li7_img'],function ($key,$val) {
+            image.append('li7_img'+$key,$val);
+        });
+        //外观检测照片
+        $.each(url_arr['li8_img'],function ($key,$val) {
+            image.append('li8_img'+$key,$val);
+        });
+
+        var service_item = new Array();
+        $('.serviceItem').each(function () {
+            var service_id = $(this).find('input').val();
+            var service_price_pu = $(this).find('td:nth-child(3)').text();
+            var service_price_vip = $(this).find('td:nth-child(4)').text();
+            var good_item = new Array();
+
+            $('.parentID_'+service_id).each(function () {
+                good_item.push({"good_id":$(this).find('.parts_id').val(),"num":$(this).find('.parts_num_int').val(),"good_price_pu":$(this).find('td:nth-child(3)').text(),"good_price_vip":$(this).find('td:nth-child(4)').text()});
+
+            });
+            service_item.push({"service_id":service_id,"service_price_pu":service_price_pu,"service_price_vip":service_price_vip,"gongshi":$(this).find('td:nth-child(5)').text(),"child":good_item});
+
+        });
+
+        var vip_item = new Array();
+        $('.mealItem').each(function () {
+            vip_item.push({"mealID":$(this).find('.mealID').val(),"serveID":$(this).find('.serveID').val()});
+        });
+        var vip_items = JSON.stringify(vip_item);
+        var service_items = JSON.stringify(service_item);
+        image.append('userId',userId);
+        image.append('describe',describe);
+        image.append('advice',advice);
+        image.append('report',report);
+        image.append('request',request);
+        image.append('remarks',remarks);
+        image.append('name',name);
+        image.append('phone',phone);
+        image.append('number',number);
+        image.append('wechat',wechat);
+        image.append('songCarRen',songCarRen);
+        image.append('songCarRenPhone',songCarRenPhone);
+        image.append('service',service);
+        image.append('startTime',startTime);
+        image.append('estimateTime',estimateTime);
+        image.append('endTime',endTime);
+        image.append('brand',brand);
+        image.append('insureCompany',insureCompany);
+        image.append('system',system);
+        image.append('insuranceEndTime',insuranceEndTime);
+        image.append('shape',shape);
+        image.append('carShape',carShape);
+        image.append('engineNumber',engineNumber);
+        image.append('suggestedMaintenance',suggestedMaintenance);
+        image.append('carColor',carColor);
+        image.append('natureUsage',natureUsage);
+        image.append('frontWheelType',frontWheelType);
+        image.append('backWheelType',backWheelType);
+        image.append('carType',carType);
+        image.append('transmission',transmission);
+        image.append('displacement',displacement);
+        image.append('oilVolume',oilVolume);
+        image.append('service_item',service_items);
+        image.append('vip_item',vip_items);
+        image.append('VIPNumber',VIPNumber);
+        image.append('actual_total',actual_total);
+        image.append('service_total',service_total);
+        image.append('good_total',good_total);
+        var checks = new Array();
+
+        $(".checks").each(function($key,$val){
+            checks.push($val.value);
+        });
+        image.append('checks',checks);
+
+        if($('#shifou').html() == '是'){
+            image.append('invoice',1);
+        }else{
+            image.append('invoice',0);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/start');?>",
+            traditional: false,
+            dataType: "json",
+            processData :false,
+            contentType :false,
+            data:image,
+
+            success: function (data) {
+                if(data.code == 1){
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text,
+                    });
+                }else if(data.code == 0){
+                    parent.Public.tips({
+                        content:data.text,
+
+                    });
+                    location.href = "<?php echo site_url('billing/billinglist')?>";
+                }
+                console.log(data);
+
+            },
+        });
+
+    });
+
+    function car(){
+        var  car_number = $("#number").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/car');?>",
+            data: {
+                car_number:car_number,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data.length != 0){
+                    $("#brand").val(data.brand);
+                    $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
+                    $("#system").val(data.system);
+                    $("#notice").val(data.notice);
+                    $("#insuranceEndTime").val(data.compulsoryTime);
+                    $("#shape").val(data.annual);
+                    $("#annualEndTime").val(data.review);
+                    $("#carShape").val(data.shape);
+                    $("#carName").val(data.username);
+                    $("#engineNumber").val(data.engine);
+                    $("#carColor").val(data.color);
+                    $("#registedTime").val(data.registration);
+                    $("#frontWheelType").val(data.front);
+                    $("#backWheelType").val(data.rear);
+                    $("#carType").find("option[value = "+data.type +"]").attr("selected",true);
+                    $("#transmission").val(data.transmission);
+                    $("#displacement").val(data.displacement);
+                    $("#natureUsage").find("option[value = "+data.nature +"]").attr("selected",true);
+                }
+
+            },
+        });
+    }
+
+    function price() {
+        var service_price_vip = 0.00;
+        var service_price_pu = 0.00;
+        var good_price_vip = 0.00;
+        var good_price_pu = 0.00;
+
+        $('.serviceItem').each(function () {
+            service_price_vip = service_price_vip + parseFloat($(this).find('td:nth-child(4)').text());
+        });
+        $('.partsItem').each(function () {
+            good_price_vip = good_price_vip + (parseFloat($(this).find('.parts_num_int').val()) * parseFloat($(this).find('td:nth-child(4)').text()));
+        });
+
+        $('.serviceItem').each(function () {
+            service_price_pu = service_price_pu + parseFloat($(this).find('.single_price').text());
+        });
+        $('.partsItem').each(function () {
+            good_price_pu = good_price_pu + (parseFloat($(this).find('.parts_num_int').val()) * parseFloat($(this).find('td:nth-child(3)').text()));
+
+        });
+        if($("#vipId").val()){
+            $("#service_total").text(service_price_vip);
+            $("#good_total").text(good_price_vip);
+            $("#old_total").text(service_price_pu+good_price_pu);
+            $("#vip_total").text(service_price_vip+good_price_vip);
+            $("#actual_total").text(service_price_vip+good_price_vip);
+        }else{
+            $("#service_total").text(service_price_pu);
+            $("#good_total").text(good_price_pu);
+            $("#old_total").text(service_price_pu+good_price_pu);
+            $("#vip_total").text(service_price_vip+good_price_vip);
+            $("#actual_total").text(service_price_pu+good_price_pu);
+        }
+
+    }
+
+    $('.del_img').on('click',function () {
+        var src = $(this).parent().find("img").attr('src');
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/deleteImage');?>",
+            data: {
+                src:src,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                $('img[src="'+data.text+'"]').parent().remove();
+            },
+        });
+    })
+
 </script>
 </body>
 </html>

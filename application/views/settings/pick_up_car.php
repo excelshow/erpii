@@ -2396,19 +2396,21 @@
         var service_item = new Array();
         $('.serviceItem').each(function () {
             var service_id = $(this).find('input').val();
-
+            var service_price_pu = $(this).find('td:nth-child(3)').text();
+            var service_price_vip = $(this).find('td:nth-child(4)').text();
             var good_item = new Array();
 
             $('.parentID_'+service_id).each(function () {
-                good_item.push({"parts_id":$(this).find('.parts_id').val(),"num":$(this).find('.parts_num_int').val()});
+                good_item.push({"good_id":$(this).find('.parts_id').val(),"good_name":$(this).find('td:nth-child(1)>span:first-child').text(),"num":$(this).find('.parts_num_int').val(),"good_price_pu":$(this).find('td:nth-child(3)').text(),"good_price_vip":$(this).find('td:nth-child(4)').text()});
 
             });
-            service_item.push({"service_id":service_id,"child":good_item});
+            service_item.push({"service_id":service_id,"service_name":$(this).find('td:nth-child(1)>span:first-child').text(),"service_price_pu":service_price_pu,"service_price_vip":service_price_vip,"gongshi":$(this).find('td:nth-child(5)').text(),"child":good_item});
 
         });
+
         var vip_item = new Array();
         $('.mealItem').each(function () {
-            vip_item.push({"mealID":$(this).find('.mealID').val(),"serveID":$(this).find('.serveID').val()});
+            vip_item.push({"mealID":$(this).find('.mealID').val(),"serveID":$(this).find('.serveID').val(),"mealName":$(this).find('td:nth-child(1)').text(),"serveName":$(this).find('td:nth-child(2)>span').text()});
         });
          var vip_items = JSON.stringify(vip_item);
          var service_items = JSON.stringify(service_item);
@@ -2485,7 +2487,7 @@
                     });
                     location.href = "<?php echo site_url('billing/billinglist')?>";
                 }
-                console.log(data);
+
 
             },
         });
@@ -2504,7 +2506,7 @@
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+
                 if(data.length != 0){
                     $("#brand").val(data.brand);
                     $("#insureCompany").find("option[value = "+data.compulsoryCompany +"]").attr("selected",true);
