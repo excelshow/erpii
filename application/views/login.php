@@ -149,7 +149,7 @@
 
 <div class="connext">
 <!--登录-->
-
+    <form action="" onSubmit="return Login()">
         <div class="LoginBox" id="login">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm">
@@ -176,9 +176,9 @@
                 </div>
             </div>
         </div>
-
+    </form>
 <!--注册-->
-
+    <form action="" onSubmit="return registed()">
         <div class="LoginBox" id="register" style="display: none">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm" style="height: 450px;position: relative">
@@ -227,8 +227,9 @@
             </div>
         </div>
         <input type="text" hidden id="recode" value="7685">
+    </form>
 <!--忘记密码-->
-
+    <form action="" onSubmit="return forgotpwd()">
         <div class="LoginBox" id="forgotpwd" style="display: none">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm" style="height: 280px;">
@@ -271,7 +272,7 @@
                 </div>
             </div>
         </div>
-
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -347,7 +348,9 @@
                 } else {
                     $("#loginerror").text(data).show();
                     $('.loading').hide();
-
+                    setTimeout(function () {
+                        location.reload();
+                    },1000)
                 }
 
                 //$('.loading').hide();

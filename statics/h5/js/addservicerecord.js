@@ -16,7 +16,7 @@ $(function () {
         $(".mask").html("");
         masklayer(0, "加载中...");
         maskshow(2);
-        $(".mask").load("/Service/ShowHtml?viewName=_SelectCarCustomer", {
+        $(".mask").load("customer_select", {
             thisobj: json
         }, function () {
             masklayer(1, "加载中...");

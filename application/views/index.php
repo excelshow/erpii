@@ -414,41 +414,6 @@ function getBatch(){
 		SYSTEM.batchInfo = [];
 	}
 }
-//左上侧版本标识控制
-function markupVension(){
-	var imgSrcList = {
-				base:'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_b.png',	//基础版正式版
-				baseExp:'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_b_e.png',	//基础版体验版
-				baseTrial:'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_b_t.png',	//基础版试用版
-				standard:'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_s.png', //标准版正式版
-				standardExp:'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_s_e.png', //标准版体验版
-				standardTrial :'<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/img/icon_v_s_t.png' //标准版试用版
-			};
-	var imgModel = $("<img id='icon-vension' src='' alt=''/>");
-	if(SYSTEM.siType === 1){
-		switch(SYSTEM.siVersion){
-			case 1:	imgModel.attr('src',imgSrcList.baseTrial).attr('alt','基础版试用版');
-				break;
-			case 2:	imgModel.attr('src',imgSrcList.baseExp).attr('alt','免费版（百度版）');
-				break;
-			case 3: imgModel.attr('src',imgSrcList.base).attr('alt','基础版');//标准版
-				break;
-			case 4: imgModel.attr('src',imgSrcList.baseExp).attr('alt','基础版体验版');//标准版
-				break;
-		};
-	} else {
-		switch(SYSTEM.siVersion){
-			case 1:	imgModel.attr('src',imgSrcList.standardTrial).attr('alt','标准版试用版');
-				break;
-			case 3: imgModel.attr('src',imgSrcList.standard).attr('alt','标准版');//标准版
-				break;
-			case 4: imgModel.attr('src',imgSrcList.standardExp).attr('alt','标准版体验版');//标准版
-				break;
-		};
-	};
-	
-	$('#col-side').prepend(imgModel);
-};
 
 </script>
 <!--<script>
@@ -585,8 +550,8 @@ var _hmt = _hmt || [];
       	<li><a href="javascript:showOrg();" id="curLowOrg" target="_blank" class="buy-now">购买</a>
 		</li><!--add for more-->
       	<li class="space">|</li>
-      	<li class="qq"><a href="" onClick="return false;" id="wpa">QQ咨询：209887082</a></li>
-      	<li class="space">|</li>
+<!--      	<li class="qq"><a href="" onClick="return false;" id="wpa">QQ咨询：209887082</a></li>-->
+<!--      	<li class="space">|</li>-->
         
       	<li class="telphone">电话：400-800-1234</li>
         <li class="space">|</li>

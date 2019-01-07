@@ -214,32 +214,18 @@ var dataReflush, list = {
 		target: "sales1",
 		list: "../scm/invPu?action=initPurList"
 	},
-	purchase1: {
-		name: "添加员工",
-		href: "../scm/invPu?action=initPur",
-		dataRight: "",
-		target: "purchase",
-		list: "../scm/invPu?action=initPurList"
-	},
-	purchase2: {
-		name: "权限分配",
-		href: "../scm/invPu?action=initPur",
-		dataRight: "",
-		target: "purchase",
-		list: "../scm/invPu?action=initPurList"
-	},
 	purchase: {
 		name: "购货单",
 		href: "../scm/invPu?action=initPur",
 		dataRight: "PU_ADD",
-		target: "purchase",
+		target: "sales",
 		list: "../scm/invPu?action=initPurList"
 	},
 	purchaseBack: {
 		name: "购货退货单",
 		href: "../scm/invPu?action=initPur&transType=150502",
 		dataRight: "PU_ADD",
-		target: "purchase",
+		target: "sales",
 		list: "../scm/invPu?action=initPurList&transType=150502"
 	},
 	/*salesOrder: {
@@ -582,6 +568,18 @@ var dataReflush, list = {
 		dataRight: "BUTYPE_QUERY",
 		target: "sales1"
 	},
+	notice1: {
+		name: "保险提醒",
+		href: "../settings/insurance",
+		dataRight: "BUTYPE_QUERY",
+		target: "sales1"
+	},
+	notice2: {
+		name: "保养提醒",
+		href: "../settings/maintain",
+		dataRight: "BUTYPE_QUERY",
+		target: "sales1"
+	},
 	vendorCategoryList: {
 		name: "供应商类别",
 		href: "../settings/category_list?typeNumber=supplytype",
@@ -636,7 +634,7 @@ var dataReflush, list = {
 		name: "权限设置",
 		href: "../settings/authority",
 		dataRight: "AUTHORITY",
-		target: "setting"
+		target: "purchase"
 	},
 	operationLog: {
 		name: "操作日志",

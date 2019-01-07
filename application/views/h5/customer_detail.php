@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td height="50" align="center" style="font-size: 28px;">
-                            贾真人
+                            <?php echo $data->name ?>
                         </td>
                     </tr>
                     </tbody></table>
@@ -45,13 +45,29 @@
                 个人资料
             </h2>
             <ul class="user_list">
-                <li><font>未知</font>性别</li>
-                <li><font>15057725702</font>联系方式</li>
-                <li><font>直接到店</font>客户来源</li>
-                <li><font>未填</font>服务顾问</li>
-                <li><font>未填</font>生日</li>
-                <li><font>未填</font>地址</li>
-                <li><font>2018-12-27</font>建档时间</li>
+                <li><font><?php if($data->sex == '1'):?>男<?php else : ?>女<?php endif;?></font>性别</li>
+                <li><font><?php echo $data->mobile ?></font>联系方式</li>
+                <li><font>
+                        <?php if ($data->resource == '1') {?>
+                            直接到店
+                        <?php  }?>
+                        <?php if ($data->resource == '2') {?>
+                            网络平台
+                        <?php  }?>
+                        <?php if ($data->resource == '3') {?>
+                            客户介绍
+                        <?php  }?>
+                        <?php if ($data->resource == '4') {?>
+                            商家联盟
+                        <?php  }?>
+                        <?php if ($data->resource == '5') {?>
+                            其他
+                        <?php  }?>
+                    </font>客户来源</li>
+                <li><font><?php echo $data->service;?></font>服务顾问</li>
+                <li><font><?php echo $data->birthday ?></font>生日</li>
+                <li><font><?php echo $data->address ?></font>地址</li>
+                <li><font><?php echo $data->time ?></font>建档时间</li>
             </ul>
         </div>
         <div class="khview report" style="margin-top: 16px;">
@@ -60,31 +76,29 @@
                 开票信息
             </h2>
             <ul class="user_list">
-                <li><font>未填</font>开票抬头</li>
-                <li><font>未填</font>公司地址</li>
-                <li><font>未填</font>公司电话</li>
-                <li><font>未填</font>纳税人识别号</li>
-                <li><font>未填</font>开户行</li>
-                <li><font>未填</font>银行账号</li>
+                <li><font><?php echo $data->rise ?></font>开票抬头</li>
+                <li><font><?php echo $data->location ?></font>公司地址</li>
+                <li><font><?php echo $data->mobilephone ?></font>公司电话</li>
+                <li><font><?php echo $data->distinguish ?></font>纳税人识别号</li>
+                <li><font><?php echo $data->bank ?></font>开户行</li>
+                <li><font><?php echo $data->number ?></font>银行账号</li>
             </ul>
         </div>
-        <div class="khview report" style="margin-top: 16px;">
-            <h2>资料照片</h2>
-            <div class="zhaopian" id="customerinfo">
-                <ul>
-                    <li style="height: 184px;"><a href="javascript:" class="photoadd"><font></font>添加照片</a></li>
-                </ul>
-            </div>
-        </div>
+<!--        <div class="khview report" style="margin-top: 16px;">-->
+<!--            <h2>资料照片</h2>-->
+<!--            <div class="zhaopian" id="customerinfo">-->
+<!--                <ul>-->
+<!--                    <li style="height: 184px;"><a href="javascript:" class="photoadd"><font></font>添加照片</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="khview report" style="margin-top: 16px;">
             <h2><a href="customer_edit_car" class="c_add">编辑</a>车辆信息</h2>
             <div class="kh_car" id="mycar_2735735">
                 <dl>
-                    <a href="javascript:;" class="sdss">
+                    <a href="javascript:void(0);" class="sdss">
                         <img src="<?php echo base_url()?>statics/h5/images/null.jpg" width="100" height="100">
-
-
                     </a>
                     <dd><font>购买时间：</font>粤A12342<span>(公里)</span></dd>
                     <dd class="cxpp">   </dd>

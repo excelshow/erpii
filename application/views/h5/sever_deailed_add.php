@@ -237,9 +237,8 @@
             </dl>
         </div>
         <div class="fwadd_info" name="customerinfodiv">
-
             <ul>
-                <li itemid="1"><a href="javascript:void(0);" mobile="" customerid="0"><font class="iswx" title="微信未注册">请填写</font>手机号码</a></li>
+                <li itemid="1"><a href="javascript:void(0);" mobile="" customerid="0"><font title="微信未注册">请填写</font>手机号码</a></li>
                 <li>
                     <font><input name="" type="text" id="txtcustomername" class="infoinput" value=""></font>顾客姓名
                 </li>
@@ -282,12 +281,6 @@
                         <p class="mid"><em>税费<font name="taxtxtfont">0.00</font></em><a name="edittax" href="javascript:void(0);"><img src="<?php echo base_url()?>statics/h5/images/edit_all.png" width="24" height="24"></a></p>
                     </li>
                 </ul>
-
-
-
-
-
-
             </div>
         </div>
         <div class="three" id="threeproject">
@@ -382,15 +375,15 @@
         <ul style="height: 450px;">
             <li><a href="javascript:void(0);" chargetype="1" class="maskxz">自费</a></li>
             <li><a href="javascript:void(0);" chargetype="2">保险</a></li>
-            <li><a href="javascript:void(0);;" chargetype="3">返工</a></li>
-            <li><a href="javascript:void(0);;" chargetype="4">索赔</a></li>
-            <li><a href="javascript:void(0);;" chargetype="5">免单</a></li>
-            <li><a href="javascript:void(0);;" chargetype="6">公务车</a></li>
+            <li><a href="javascript:void(0);" chargetype="3">返工</a></li>
+            <li><a href="javascript:void(0);" chargetype="4">索赔</a></li>
+            <li><a href="javascript:void(0);" chargetype="5">免单</a></li>
+            <li><a href="javascript:void(0);" chargetype="6">公务车</a></li>
         </ul>
-        <div class="mask_btn"><a href="javascript:void(0);;" id="btnchargetypecancell">取消</a><a href="javascript:void(0);;" id="btnchargetypeconfirm" class="queding">确定</a></div>
+        <div class="mask_btn"><a href="javascript:void(0);" id="btnchargetypecancell">取消</a><a href="javascript:void(0);;" id="btnchargetypeconfirm" class="queding">确定</a></div>
     </div>
-    <script src="<?php echo base_url()?>statics/h5/js/chargetype.js?v=20181206173640"></script>
-    <script src="<?php echo base_url()?>statics/h5/js/manageedit.js?v=20180901091748"></script>
+    <script src="<?php echo base_url()?>statics/h5/js/chargetype.js"></script>
+    <script src="<?php echo base_url()?>statics/h5/js/manageedit.js"></script>
     <script type="text/javascript">
         var partweight = 1, labourweight = 1;
         var openlevel='0';
