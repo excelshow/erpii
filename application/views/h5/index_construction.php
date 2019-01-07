@@ -49,15 +49,18 @@
         </div>
     <!--底部-->
         <div class="fw_menu">
-                    <ul>
-                        <li class="fw4"><a href="task_list" indepth="true"><font></font>施工任务</a></li>
-                        <li class="fw5"><a href="qclist.html" indepth="true"><font></font>质检任务</a></li>
-                        <li class="fw15"><a href="checkercarchecklist.html" indepth="true"><font></font>车况检查</a></li>
-    <!--                        <li class="fw19"><a href="bonusdetail_001.html" indepth="true"><font></font>我的提成</a></li>-->
-    <!--                        <li class="fw20"><a href="stockpartslist.html" indepth="true"><font></font>库存查询</a></li>-->
-    <!--                        <li class="fw22"><a href="workshopnodispatch.html" indepth="true"><font></font>车间管理</a></li>-->
-                    </ul>
-                </div>
+            <ul>
+                <li class="fw4"><a href="task_list" indepth="true"><font></font>施工任务</a></li>
+                <li class="fw5"><a href="qclist.html" indepth="true"><font></font>质检任务</a></li>
+                <li class="fw15"><a href="checkercarchecklist.html" indepth="true"><font></font>车况检查</a></li>
+<!--                        <li class="fw19"><a href="bonusdetail_001.html" indepth="true"><font></font>我的提成</a></li>-->
+<!--                        <li class="fw20"><a href="stockpartslist.html" indepth="true"><font></font>库存查询</a></li>-->
+<!--                        <li class="fw22"><a href="workshopnodispatch.html" indepth="true"><font></font>车间管理</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div style="width: 100%;height: 50px;position: absolute;bottom: 10px;text-align: center">
+        <input type="button" value="退出" id="loginout" style="width: 90%;height: 100%;line-height: 50px;background-color: #f05050;font-size: 24px;color: #fff;border: 1px solid transparent;outline: none;border-radius: 10px">
     </div>
     <div style="padding-top: 120px;"></div>
     <script type="text/javascript">
@@ -87,6 +90,11 @@
                 $.ajax({
 
                 })
+            });
+
+            //退出登录
+            $('#loginout').on('click',function () {
+                window.location.href = 'loginout';
             });
         })
     </script>

@@ -80,6 +80,10 @@
             </ul>
         </div>
     </div>
+
+    <div style="width: 100%;height: 50px;position: absolute;bottom: 10px;text-align: center">
+        <input type="button" value="退出" id="loginout" style="width: 90%;height: 100%;line-height: 50px;background-color: #f05050;font-size: 24px;color: #fff;border: 1px solid transparent;outline: none;border-radius: 10px">
+    </div>
     <div style="padding-top: 120px;"></div>
     <script type="text/javascript">
         $(function () {
@@ -128,7 +132,12 @@
             $('.date_time').on('click',function () {
                 $('.xztime').removeClass('xztime');
                 $(this).addClass('xztime');
-            })
+            });
+
+            //退出登录
+            $('#loginout').on('click',function () {
+               window.location.href = 'loginout';
+            });
         });
         // 搜索结果
         function datekeyword(key, input) {

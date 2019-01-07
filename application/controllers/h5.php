@@ -61,6 +61,14 @@ class h5 extends CI_Controller {
         }
     }
 
+    /**
+     * 退出登录
+     */
+    public function loginout(){
+        $this->session->sess_destroy();
+        redirect(site_url('h5/login'));
+    }
+
     public function index(){
         $this->checkpurview();
         redirect('h5/index_pick_up_car');

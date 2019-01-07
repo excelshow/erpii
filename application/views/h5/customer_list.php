@@ -21,7 +21,7 @@
     <div class="system">
 <!--        头部-->
         <div class="title">
-            <a href="javascript:history.back(-1);" class="back">返回</a>
+            <a href="index" class="back">返回</a>
             <a href="javascript:void(0);" class="topsearch">搜索</a>
             <ul class="sytime">客户</ul>
         </div>

@@ -380,7 +380,7 @@
             <li><a href="javascript:void(0);" chargetype="5">免单</a></li>
             <li><a href="javascript:void(0);" chargetype="6">公务车</a></li>
         </ul>
-        <div class="mask_btn"><a href="javascript:void(0);" id="btnchargetypecancell">取消</a><a href="javascript:void(0);;" id="btnchargetypeconfirm" class="queding">确定</a></div>
+        <div class="mask_btn"><a href="javascript:void(0);" id="btnchargetypecancell">取消</a><a href="javascript:void(0);" id="btnchargetypeconfirm" class="queding">确定</a></div>
     </div>
     <script src="<?php echo base_url()?>statics/h5/js/chargetype.js"></script>
     <script src="<?php echo base_url()?>statics/h5/js/manageedit.js"></script>

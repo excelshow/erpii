@@ -14,7 +14,8 @@
     <script type="text/javascript" src="<?php echo base_url()?>statics/h5/js/placeholder.js"></script>
     <script type="text/javascript">
         adaptUILayout.adapt(720);
-    </script><meta name="viewport" content="target-densitydpi=device-dpi, width=720px, user-scalable=no">
+    </script>
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720px, user-scalable=no">
 </head>
 <style>
     .gmviptopbg {
@@ -239,6 +240,7 @@
             选择顾客
         </ul>
     </div>
+<!--    搜索-->
     <div class="search" style="margin-top:80px; position:relative;">
         <div class="xzkh" style="top:78px; z-index:99; display: none">
             <div id="loading2" class="loading2">
@@ -246,31 +248,23 @@
             </div>
         </div>
         <input type="text" id="search_input" class="phoneinput" value="" />
-<!--        <a href="javascript:void(0);" class="xinjian" id="addcustomernew" unclick="0" style="">新建</a>-->
     </div>
+<!--    用户信息-->
     <div class="fwadd_info" style="display:none;">
         <input type="hidden" id="txtdiscount" labourdiscount="100" stockdiscount="100">
         <ul>
             <li itemid="1" style="position:relative;"><a style="display:inline-block;">手机号码</a> <input type="text" id="search_mobile" class="infoinput" style="float:right; text-align:right; width:70%;" />
                 <div class="xzkh1" style="top: 60px; z-index: 2; right:20px; width:65%;  display:none;">
-                    <a id="nomobilediv" style="font-size: 26px;text-align:center;" href="javascript:void(0)">无手机号</a>
+                    <a id="nomobilediv" style="font-size: 26px;text-align:center;" href="javascript:void(0);">无手机号</a>
                 </div>
             </li>
             <li itemid="2"><a style="display:inline-block;">顾客姓名</a> <input type="text" id="search_name" class="infoinput" style="float:right; text-align:right; width:70%;" /> </li>
             <li itemid="3"><a style="display:inline-block;">车牌号</a> <input type="text" readonly="readonly" id="search_carno" onfocus="this.blur()" value="" class="infoinput" style="float:right; text-align:right; width:70%;" /> </li>
         </ul>
     </div>
-    <div class="mask_div1" id="newphoneconfig" style="height: 240px; margin-top: -120px; display: none">
-        <h2 style="font-size: 36px;">提示</h2>
-        <ul style="height: 84px;">
-            <li class="quit">该手机号为新手机号,请选择!</li>
-        </ul>
-        <div class="mask_btn1"><a href="javascript:void(0);" id="newmobile">新建新客户</a><a href="javascript:void(0);" id="replacephone" class="queding">替换原手机</a></div>
-    </div>
-    <div class="" id="" style="height: 650px; overflow: auto; margin-top: -325px; display: none;">
-    </div>
+    <div class="" id="" style="height: 650px; overflow: auto; margin-top: -325px; display: none;"></div>
 
-
+<!--    输入-->
     <div class="srcar" style="display: none">
 
         <dl class="car_input">
@@ -371,7 +365,6 @@
     <script type="text/javascript">
         var next = 0;
         $(function () {
-
             $(".srcar").find("ul").eq(0).find("li span").text("").removeClass("ppHas").removeClass("hasPro");
             for (var i = 0; i < customeData.carno.length; i++)
             {
@@ -479,63 +472,7 @@
             });
             $("#search_carno").val(pai);
         }
-
-
     </script>
 
-    <script type="text/javascript">
-
-        function fillplate(carno) {
-            for (var i = 0; i < carno.length; i++) {
-                var s = carno.substr(i, 1);
-                $(".srcar").find("ul").eq(0).find("li").eq(i).addClass("ppHas").find("span").text(s);
-            }
-            next = carno.length-1;
-        }
-
-        $("a[name=hidsrcar]").click(function(){
-            $(".srcar").hide();
-
-        })
-
-        var iscar = '1';
-        var carnofuzzysearch = '/Service/CarNoFuzzySearch';
-
-        var getcustomerbymobile = '/Service/GetCustomerByMobile';
-
-        $(function () {
-            if (customeData.customerid != 0) {
-                $(".fwadd_info").show();
-                if (customeData.mobile.length == 18)
-                {
-                    $("#search_mobile").val("无手机号").attr("selectid", customeData.customerid).attr("mobile", customeData.mobile);
-
-                } else
-                {
-                    $("#search_mobile").val(customeData.mobile).attr("selectid", customeData.customerid).attr("mobile", customeData.mobile);
-                }
-
-                $("#search_name").val(customeData.name);
-                $("#search_carno").val(customeData.carno).attr("valueid", customeData.carid);
-                console.log("开始执行");
-                next = customeData.carno.length;
-            } else {
-                var v1 = "";
-                for (var i = 0; i < 18; i++) {
-                    v1 += (Math.round(Math.random() * 9) + "");
-                }
-                $("#search_mobile").val("无手机号").attr("selectid", -1).attr("mobile", v1);
-            }
-
-
-            $(document).on("click", function () {
-                $(".srcar").hide();
-            })
-
-            $(".srcar").children().click(function (e) {
-                e.stopPropagation();
-            })
-        })
-    </script>
 </body>
 </html>

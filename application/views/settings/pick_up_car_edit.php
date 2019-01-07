@@ -863,8 +863,7 @@
         font-size: 14px;
         color: #96aab4;
     }
-    .begin:first-child,
-    .begin:nth-child(3){
+    .begin:first-child{
         background-color: #78c800;
         border-color: #78c800;
         color: #fff;
@@ -874,9 +873,6 @@
         width: 20px;
         height: 15px;
         background: url(<?php echo base_url()?>statics/css/img/fwjdjt.png) no-repeat;
-    }
-    .begin:nth-child(2){
-        background-position-y: -30px;
     }
     .itemStatus_div:nth-child(3) span{
         display: inline-block;
@@ -907,36 +903,36 @@
     }
 
     /*服务进度,状态3*/
-    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(4){
+    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(2){
         background-position-y: -30px;
     }
-    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(5){
+    .changeStatus3 .itemStatus_div:nth-child(2) .begin:nth-child(3){
         background-color: #78c800;
         border-color: #78c800;
         color: #fff;
     }
 
     /*服务进度,状态4*/
-    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(4),
-    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(6){
+    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(2),
+    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(4){
         background-position-y: -30px;
     }
-    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(5),
-    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(7){
+    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(3),
+    .changeStatus4 .itemStatus_div:nth-child(2) .begin:nth-child(5){
         background-color: #78c800;
         border-color: #78c800;
         color: #fff;
     }
 
     /*服务进度,状态5*/
+    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(2),
     .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(4),
-    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(6),
-    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(8){
+    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(6){
         background-position-y: -30px;
     }
+    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(3),
     .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(5),
-    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(7),
-    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(9){
+    .changeStatus5 .itemStatus_div:nth-child(2) .begin:nth-child(7){
         background-color: #78c800;
         border-color: #78c800;
         color: #fff;
@@ -2098,15 +2094,13 @@
     </div>
 
     <!--进度-->
-    <input type="hidden" id="itemStatus" value="1"><!--当前状态-->
+    <input type="hidden" id="itemStatus" value="6"><!--当前状态-->
     <input type="hidden" id="read" value="0"><!--报价是否接受-->
     <input type="hidden" id="orderID" value="0"><!--订单ID-->
     <div class="itemStatus clearfix">
         <div class="itemStatus_div" style="float:left">服务进度：</div>
         <div class="itemStatus_div" style="float:left">
             <span class="begin begin_text">报价中</span>
-            <span class="begin begin_icon"></span>
-            <span class="begin begin_text">报价</span>
             <span class="begin begin_icon"></span>
             <span class="begin begin_text">施工</span>
             <span class="begin begin_icon"></span>
@@ -2870,22 +2864,19 @@
     var itemStatus = $('#itemStatus').val();
     var read = $('#read').val();
     var url = '';
-    if (itemStatus == '2'){
-        if (read == '0'){
-            $('#finish').html('再次通知');
-            $('#noticeCustomer').css('display','none');
-        }
+    if (itemStatus == '6'){
+        $('#finish').html('再次通知');
+        $('#noticeCustomer').css('display','none');
     } else if (itemStatus == '3') {
         $('.itemStatus').addClass('changeStatus3');
         $('#finish').html('完工');
     } else if (itemStatus == '4') {
         $('.itemStatus').addClass('changeStatus4');
         $('#finish').html('结算');
-        $('#rework').css('display','');
     } else if (itemStatus == '5') {
         $('.itemStatus').addClass('changeStatus5');
-        $('#finish').css('display','none');
-        $('#noticeCustomer').css('display','none');
+        $('#finish').html('已完成');
+        $('#rework').css('display','');
     };
 
     //改变状态
