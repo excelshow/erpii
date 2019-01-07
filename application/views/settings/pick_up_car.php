@@ -1391,7 +1391,7 @@
             <li class="row-item" style="width: 100%;margin-top: 10px">
                 <a class="ui-btn ui-btn-sp choose_type">标准工时</a>
                 <a class="ui-btn choose_type">VIP套餐</a>
-                <input type="text" value="" id="vipId">
+                <input type="hidden" value="" id="vipId">
             </li>
             <li class="row-item type_standard" style="width: 100%;border: 1px solid #ddd;">
                 <div class="table">
@@ -1441,10 +1441,10 @@
                     </div>
                 </div>
             </li>
-<!--            <li class="row-item type_meal" style="display: none; width: 50%;">-->
-<!--                <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>-->
-<!--                <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="VIPNumber" id="VIPNumber"></div>-->
-<!--            </li>-->
+            <li class="row-item type_meal" style="display: none; width: 50%;">
+                <div class="label-wrap"><label for="VIPNumber">VIP卡号:</label></div>
+                <div class="ctn-wrap"><input type="text" value="无VIP卡" class="ui-input" name="VIPNumber" id="VIPNumber" readonly></div>
+            </li>
             <li class="row-item type_meal" style="display: none; width: 100%;text-align: left">
                 <a href="javascript:void(0);" class="ui-btn mrb addMeal" style="margin: 0;">添加套餐</a>
             </li>
@@ -1969,17 +1969,8 @@
             $('#serve_level2').html('');
             $('.add_content_l_hover').removeClass('add_content_l_hover');
             $('#serve_position').append(str);
-            var service_price = 0.00;
-            if($("#vipId").val()){
-                $('.serviceItem').each(function () {
-                    service_price = service_price + parseFloat($(this).find('td:nth-child(4)').text());
-                });
-            }else{
-                $('.serviceItem').each(function () {
-                    service_price = service_price + parseFloat($(this).find('.single_price').text());
-                });
-            }
-            $("#service_total").text(service_price);
+
+            price();
 
         });
 
@@ -2035,7 +2026,7 @@
             var str1 = '<tr class="partsItem partsItem_';
             var str2 = ' parentID_';
             var str3 = '"><td class="name"><span>';
-            var str4 = '</span></td><td><span class="parts_num"><input type="number" class="parts_num_int" value="1" step="1" min="1" max="';
+            var str4 = '</span></td><td><span class="parts_num"><input type="number" oninput="price()" class="parts_num_int" value="1" step="1" min="1" max="';
             var str5 = '"><span>';
             var str6 = '</sapn></span></td><td><span>';
             var str7 = '</span></td><td><span>';
@@ -2057,6 +2048,8 @@
             $('.serviceItem_' + local_parts_id).after(str);
 
             $('.parts_li').remove();
+
+            price();
         });
 
         //添加套餐
@@ -2220,12 +2213,14 @@
     //删除已选中配件
     function delItemParts(id) {
         $('.partsItem_' + id).remove();
+        price();
     }
 
     //删除以显示服务项目
     function delItem(id) {
         $('.serviceItem_' + id).remove();
         $('.parentID_' + id).remove();
+        price();
     }
 
     //删除已选套餐服务
@@ -2280,12 +2275,14 @@
                     $("#userName").val(data.text.name);
                     $("#userId").val(data.text.id);
                     $("#wechat").val(data.text.wechat);
-                    $("#vipId").val(data.vipId);
+                    $("#vipId").val(data.vipId.id);
+                    $("#VIPNumber").val(data.vipId.number);
                 }else{
                     $("#userName").val("无此账号");
                     $("#wechat").val("无此账号");
                     $("#userId").val('');
                     $("#vipId").val('');
+                    $("#VIPNumber").val("无VIP卡");
                 }
 
             },
@@ -2353,7 +2350,10 @@
         var  transmission = $("#transmission").val();  //变速箱型号
         var  displacement = $("#displacement").val();  //排量
         var  oilVolume = $("#oilVolume").val();  //油量
-
+        var  VIPNumber = $("#VIPNumber").val();  //VIP卡号
+        var  actual_total = $("#actual_total").val();  //服务单订单总额
+        var  service_total = $("#service_total").val();  //服务单工时总额
+        var  good_total = $("#good_total").val();  //服务单配件总额
         var image = new FormData();
 
         //实录照片
@@ -2446,12 +2446,23 @@
         image.append('oilVolume',oilVolume);
         image.append('service_item',service_items);
         image.append('vip_item',vip_items);
+        image.append('VIPNumber',VIPNumber);
+        image.append('actual_total',actual_total);
+        image.append('service_total',service_total);
+        image.append('good_total',good_total);
         var checks = new Array();
 
         $(".checks").each(function($key,$val){
             checks.push($val.value);
         });
         image.append('checks',checks);
+
+        if($('#shifou').html() == '是'){
+            image.append('invoice',1);
+        }else{
+            image.append('invoice',0);
+        }
+
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('billing/start');?>",
@@ -2519,7 +2530,41 @@
         });
     }
 
+    function price() {
+        var service_price_vip = 0.00;
+        var service_price_pu = 0.00;
+        var good_price_vip = 0.00;
+        var good_price_pu = 0.00;
 
+            $('.serviceItem').each(function () {
+                service_price_vip = service_price_vip + parseFloat($(this).find('td:nth-child(4)').text());
+            });
+            $('.partsItem').each(function () {
+                good_price_vip = good_price_vip + (parseFloat($(this).find('.parts_num_int').val()) * parseFloat($(this).find('td:nth-child(4)').text()));
+            });
+
+            $('.serviceItem').each(function () {
+                service_price_pu = service_price_pu + parseFloat($(this).find('.single_price').text());
+            });
+            $('.partsItem').each(function () {
+                good_price_pu = good_price_pu + (parseFloat($(this).find('.parts_num_int').val()) * parseFloat($(this).find('td:nth-child(3)').text()));
+
+            });
+        if($("#vipId").val()){
+            $("#service_total").text(service_price_vip);
+            $("#good_total").text(good_price_vip);
+            $("#old_total").text(service_price_pu+good_price_pu);
+            $("#vip_total").text(service_price_vip+good_price_vip);
+            $("#actual_total").text(service_price_vip+good_price_vip);
+        }else{
+            $("#service_total").text(service_price_pu);
+            $("#good_total").text(good_price_pu);
+            $("#old_total").text(service_price_pu+good_price_pu);
+            $("#vip_total").text(service_price_vip+good_price_vip);
+            $("#actual_total").text(service_price_pu+good_price_pu);
+        }
+
+    }
 </script>
 </body>
 </html>

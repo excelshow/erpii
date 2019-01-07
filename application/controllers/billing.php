@@ -61,7 +61,7 @@ class Billing extends CI_Controller {
             if($edit){
                 $res['vipId'] = 0;
             }else{
-                $res['vipId'] = $data_vip->id;
+                $res['vipId'] = $data_vip;
             }
             die(json_encode($res));
         }else{
@@ -173,6 +173,11 @@ class Billing extends CI_Controller {
             'displacement'=>$this->input->post('displacement'),
             'oilVolume'=>$this->input->post('oilVolume'),
             'wechat'=>$this->input->post('wechat'),
+            'invoice'=>$this->input->post('invoice'),
+            'VIPNumber'=>$this->input->post('VIPNumber'),
+            'actual_total'=>$this->input->post('actual_total'),
+            'service_total'=>$this->input->post('service_total'),
+            'good_total'=>$this->input->post('good_total'),
             'schedule'=>1,
             'topId'=>$user['topId'],
             'midId'=>$user['midId'],
