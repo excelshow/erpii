@@ -85,8 +85,7 @@ class Billing extends CI_Controller {
 
     //生成订单
     public function start(){
-        $wechat = $this->wechat('o--2i0kiic65WGT4KYDs55jjRsVQ','I107657812274396','4000',time());
-        die(json_encode($wechat));
+
         $user = $this->session->userdata('jxcsys');
         $res =[];
         if ($user['orgWhere'] != 'lowId='.$user['lowId']){
