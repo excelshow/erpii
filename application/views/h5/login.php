@@ -47,7 +47,7 @@
             });
         });
 
-        校验数据
+        // 校验数据
         function getFormVals() {
             var username = $.trim($("#username").val()).replace("用户名", "");
             var password = $.trim($("#password").val()).replace("*请输入密码", "");
@@ -59,7 +59,7 @@
                 Ewewo.Tips('*请输入密码!');
                 return;
             }
-            return { username: username, password: password };
+            return { username: username, userpwd: password, token: "<?php echo token()?>" };
         }
 
         $('#btn_login').click(function () {
@@ -69,14 +69,22 @@
             }
             $.ajax({
                 type: "POST",
-                url: "",
+                url: "login",
                 data: temp,
                 dataType: "json",
                 success: function (data) {
+                    if (data.code == 4){
+                        Ewewo.Tips_Success(data.msg);
+                        setTimeout(function () {
+                            window.location.href = 'index';
+                        },1100);
+                    } else{
+                        Ewewo.Tips(data.msg);
+                        setTimeout(function () {
+                            location.reload();
+                        },1100)
+                    }
 
-                },
-                error: function () {
-                    Ewewo.Tips('网络错误，登录不成功!');
                 }
             });
         });
