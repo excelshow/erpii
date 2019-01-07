@@ -2102,7 +2102,9 @@
     </div>
 
     <!--进度-->
-    <input type="hidden" id="itemStatus" value="2"><!--当前状态-->
+
+    <input type="hidden" id="itemStatus" value="<?php echo $data->schedule ?>"><!--当前状态-->
+    <input type="hidden" id="read" value="0"><!--报价是否接受-->
     <input type="hidden" id="orderID" value="0"><!--订单ID-->
     <div class="itemStatus clearfix">
         <div class="itemStatus_div" style="float:left">服务进度：</div>

@@ -2351,9 +2351,9 @@
         var  displacement = $("#displacement").val();  //排量
         var  oilVolume = $("#oilVolume").val();  //油量
         var  VIPNumber = $("#VIPNumber").val();  //VIP卡号
-        var  actual_total = $("#actual_total").val();  //服务单订单总额
-        var  service_total = $("#service_total").val();  //服务单工时总额
-        var  good_total = $("#good_total").val();  //服务单配件总额
+        var  actual_total = $("#actual_total").text();  //服务单订单总额
+        var  service_total = $("#service_total").text();  //服务单工时总额
+        var  good_total = $("#good_total").text();  //服务单配件总额
         var image = new FormData();
 
         //实录照片
@@ -2475,6 +2475,7 @@
             data:image,
 
             success: function (data) {
+                // console.log(data);
                 if(data.code == 1){
                     parent.Public.tips({
                         type:1,
