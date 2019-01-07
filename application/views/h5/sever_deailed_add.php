@@ -404,7 +404,7 @@
         var service_recordlist = '/Service/RecordList';
         var service_levelcarddiscount = '/Service/GetLevelCardDiscount';
         var getcarlevelweight_url='/Service/GetCarLevelWeight';
-        var carcustomersearch = '/Service/CustomerMobileFuzzySearch';
+        var carcustomersearch = 'customer_select';
         var customeData = { customerid: '0', name: '', carno: '', carid: '0', mobile: '' };
         var CarDefaultStr = '';
         //税费管理费对象

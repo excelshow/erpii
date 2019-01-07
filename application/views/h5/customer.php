@@ -181,7 +181,7 @@
                     <a href="javascript:void(0);" value="31">X</a>
                     <a href="javascript:void(0);" value="32">Y</a>
                     <a href="javascript:void(0);" value="33">Z</a>
-                    <a href="javascript:void(0);" name="delete" style="background: #adb4be url(/Content/Images/delete2.png) center center no-repeat;">&nbsp;</a>
+                    <a href="javascript:void(0);" name="delete" style="background: #adb4be url(<?php echo base_url()?>statics/h5/images/delete2.png) center center no-repeat;">&nbsp;</a>
                     <a href="javascript:void(0);" value="34">港</a>
                     <a href="javascript:void(0);" value="35">澳</a>
                     <a href="javascript:void(0);" value="36">警</a>

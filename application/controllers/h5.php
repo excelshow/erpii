@@ -187,6 +187,39 @@ class h5 extends CI_Controller {
      */
     public function customer_select(){
         $this->checkpurview();
+        $keyword = '';
+        $data['result'] = array();
+        if ($this->input->post('keyword')){
+            $keyword = $this->input->post('keyword');
+            $user = $this->jxcsys;
+            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+            $items = $this->db->where($where)->like('mobile',$keyword)->get('ci_customer')->result();
+            foreach ($items as $k=>$v){
+                $carItems = array();
+                $carItem = array();
+
+                $where = array('user_id'=>$v->id);
+                $carItems = $this->db->where($where)->get('ci_car')->result();
+                if ($carItems){
+                    foreach ($carItems as $key=>$val){
+                        $carItem['customerId'] = $v->id;
+                        $carItem['carNo'] = $val->plateNo;
+                        $carItem['name'] = $v->name;
+                        $carItem['mobile'] = $v->mobile;
+                        $carItem['carId'] = $val->id;
+                        array_push($data['result'],$carItem);
+                    }
+                }else{
+                    $carItem['customerId'] = $v->id;
+                    $carItem['carNo'] = '暂无';
+                    $carItem['name'] = $v->name;
+                    $carItem['mobile'] = $v->mobile;
+                    $carItem['carId'] = 0;
+                    array_push($data['result'],$carItem);
+                }
+            }
+            die(json_encode($data));
+        }
         $this->load->view('/h5/customer_select');
     }
 

@@ -332,40 +332,47 @@ $(function () {
             Ewewo.Tips("请输入车牌号!");
             return;
         }
+        customeData.customerid = d.customerid;
+        customeData.name = d.name;
+        customeData.carno = d.plate;
+        customeData.carid = d.carid;
+        customeData.mobile = d.mobile;
+        console.log(customeData);
+        maskshow(1);
 
-        $.ajax({
-            type: "POST",
-            data: { mobile: d.mobile },
-            url: "/Service/MobileIsNew",
-            dataType: "json",
-            success: function (data) {
-                if (data.result == "T" && d.customerid > 0) {
-                    $("#newphoneconfig").show();
-                    // mask_box("#newphoneconfig");
-
-                    /*返回ID处理信息绑定*/
-                    //closewindow(d.plate, data.id, d.mobile);
-
-                    customeData.customerid = data.id;
-                    customeData.name = d.name;
-                    customeData.carno = d.plate;
-                    customeData.carid = data.carid;
-                    customeData.mobile = d.mobile;
-                    //maskshow(1);
-                } else {
-                    saveeditcustomer(d);
-
-                    //Ewewo.Tips_Error(data.message);
-                }
-            },
-            error: function (data) {
-                if (data.status == 401) {
-                    Ewewo.Tips_Error(data.responseText);
-                } else {
-                    Ewewo.Tips_Error("网络错误,保存失败!");
-                }
-            }
-        });
+        // $.ajax({
+        //     type: "POST",
+        //     data: { mobile: d.mobile },
+        //     url: "/Service/MobileIsNew",
+        //     dataType: "json",
+        //     success: function (data) {
+        //         if (data.result == "T" && d.customerid > 0) {
+        //             $("#newphoneconfig").show();
+        //             // mask_box("#newphoneconfig");
+        //
+        //             /*返回ID处理信息绑定*/
+        //             //closewindow(d.plate, data.id, d.mobile);
+        //
+        //             customeData.customerid = data.id;
+        //             customeData.name = d.name;
+        //             customeData.carno = d.plate;
+        //             customeData.carid = data.carid;
+        //             customeData.mobile = d.mobile;
+        //             //maskshow(1);
+        //         } else {
+        //             saveeditcustomer(d);
+        //
+        //             //Ewewo.Tips_Error(data.message);
+        //         }
+        //     },
+        //     error: function (data) {
+        //         if (data.status == 401) {
+        //             Ewewo.Tips_Error(data.responseText);
+        //         } else {
+        //             Ewewo.Tips_Error("网络错误,保存失败!");
+        //         }
+        //     }
+        // });
     });
 
     //创建新客户
@@ -1088,7 +1095,7 @@ function carcustomersearchbykeyword(key, input) {
                         $(".xzkh ul").empty().hide();
                         $(".xzkh").hide();
                         $("#addcustomernew").attr("unclick", "1").attr("style", "background: #999;");
-                        fillplate(carno);
+                        // fillplate(carno);
                     });
                 } else {
                     $(".xzkh").hide();
