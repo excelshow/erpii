@@ -2098,13 +2098,13 @@
     </div>
 
     <!--进度-->
-    <input type="hidden" id="itemStatus" value="4"><!--当前状态-->
+    <input type="hidden" id="itemStatus" value="1"><!--当前状态-->
     <input type="hidden" id="read" value="0"><!--报价是否接受-->
     <input type="hidden" id="orderID" value="0"><!--订单ID-->
     <div class="itemStatus clearfix">
         <div class="itemStatus_div" style="float:left">服务进度：</div>
         <div class="itemStatus_div" style="float:left">
-            <span class="begin begin_text">等待报价</span>
+            <span class="begin begin_text">报价中</span>
             <span class="begin begin_icon"></span>
             <span class="begin begin_text">报价</span>
             <span class="begin begin_icon"></span>
