@@ -232,7 +232,22 @@ class h5 extends CI_Controller {
     }
 
     /**
-     * 接车开单获取信息信息
+     * 接车开单选择工时
+     */
+    public function sever_working(){
+        $this->checkpurview();
+        $where = array(substr($this->jxcsys['orgWhere'],0,strrpos($this->jxcsys['orgWhere'],'=')) => substr($this->jxcsys['orgWhere'],-1,strrpos($this->jxcsys['orgWhere'],'=')));
+        $data = $this->db->where($where)->get('ci_serve')->result();
+//        die(json_encode($data));
+        $this->load->view('h5/sever_working',['data'=>$data]);
+    }
+
+    /**
+     * 接车开单获取信息
+     * customerid:获取客户基本信息及VIP卡信息
+     * severList:获取服务类目列表
+     * searchService:根据关键词搜索服务
+     * serviceList:根据服务类目ID获取服务
      */
     public function customer_info(){
         $this->checkpurview();
@@ -240,6 +255,22 @@ class h5 extends CI_Controller {
         if ($type == 'customer'){
             $customerid = $this->input->post('customerid');
             $data = $this->db->where('id',$customerid)->get('ci_customer')->row();
+            $data->vipcard = $this->db->where(['id'=>$data->vipId,'status'=>'0'])->get('ci_vipcard')->row();
+            $data->vipcard->time = date('Y-m-d',$data->vipcard->time);
+            die(json_encode($data));
+        }elseif ($type == 'serveList'){
+            $keyword = $this->input->post('keyword');
+            $where = array(substr($this->jxcsys['orgWhere'],0,strrpos($this->jxcsys['orgWhere'],'=')) => substr($this->jxcsys['orgWhere'],-1,strrpos($this->jxcsys['orgWhere'],'=')),);
+            $data = $this->db->where($where)->get('ci_serve')->result();
+            die(json_encode($data));
+        }elseif ($type == 'searchService'){
+            $keyword = $this->input->post('keyword');
+            $where = array(substr($this->jxcsys['orgWhere'],0,strrpos($this->jxcsys['orgWhere'],'=')) => substr($this->jxcsys['orgWhere'],-1,strrpos($this->jxcsys['orgWhere'],'=')),);
+            $data = $this->db->where($where)->like('name',$keyword)->get('ci_service')->result();
+            die(json_encode($data));
+        }elseif ($type == 'serviceList'){
+            $serveId = $this->input->post('serveId');
+            $data = $this->db->where('category_id',$serveId)->get('ci_service')->result();
             die(json_encode($data));
         }
 

@@ -86,7 +86,7 @@ $(function () {
         var json = JSON.stringify(servicerecord);
         masklayer(0, "加载中...");
         maskshow(2);
-        $(".mask").load("/Service/ShowHtml?viewName=_WorkingView", {
+        $(".mask").load("sever_working", {
             thisobj: json
         }, function () {
             returnview();
