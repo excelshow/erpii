@@ -61,11 +61,53 @@
             服务报价
         </ul>
     </div>
-    <div class="price"><span>￥100</span></div>
+    <div class="price"><span>￥<?php echo $actual_total ?></span></div>
     <div class="button">
-        <input type="button" value="确认">
-        <input type="button" value="拒绝">
+        <input type="hidden" id="id" value="<?php echo $id ?>">
+        <input type="hidden" id="uid" value="<?php echo $uid ?>">
+
+        <input type="button" class = "check" value="同意">
+        <input type="button" class = "check" value="拒绝">
     </div>
 
 </body>
+<script>
+    $(".check").click(function () {
+        var id = $("#id").val();
+        var uid = $("#uid").val();
+        if($(this).val() == "同意"){
+            var code = 1;
+        }else{
+            var code = 2;
+        }
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('login/sure');?>",
+            traditional: false,
+            dataType: "json",
+
+            data:{
+                code:code,
+                id:id,
+                uid:uid,
+            },
+
+            success: function (data) {
+                if(data.code == 2){
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text,
+                    });
+                }else if(data.code == 1){
+                    parent.Public.tips({
+                        content:data.text,
+
+                    });
+                }
+
+            },
+        });
+    });
+
+</script>
 </html>

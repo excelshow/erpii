@@ -608,6 +608,8 @@ class Billing extends CI_Controller {
 
 
     }
+
+
     public function wechat($openid,$uid,$actual_total,$time,$id){
 
         $appid = "wx753a3c4c7a501de8";
