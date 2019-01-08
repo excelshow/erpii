@@ -110,28 +110,29 @@ $(document).keydown(function(event) {
                 <form id="manage-form" action="">
                     <ul style="font-size: 20px;font-weight: bold;">账户信息</ul>
                     <ul class="mod-form-rows base-form clearfix" id="base-form" style="border-bottom: 1px solid #ddd;margin-bottom: 10px;margin-top: 20px">
+                        <input type="hidden" name="orderID" id="orderID" value="<?php echo $data->id ?>"><!--放服务单id-->
                         <li class="row-item" style="width: 33.33%;">
                             <div class="ctn-wrap">
                                 <div class="label-wrap"><label for="car">车辆:</label></div>
-                                <input type="text" value="" class="ui-input new-input" name="car" id="car" readonly>
+                                <input type="text" value="<?php echo $data->number ?>" class="ui-input new-input" name="car" id="car" readonly>
                             </div>
-                            <input type="hidden" name="carId" id="carId"><!--放id-->
+
                         </li>
                         <li class="row-item" style="width: 33.333%;">
                             <div class="ctn-wrap">
                                 <div class="label-wrap"><label for="customer">客户:</label></div>
-                                <input type="text" value="" class="ui-input new-input" name="customer" id="customer" readonly>
+                                <input type="text" value="<?php echo $data->name ?>" class="ui-input new-input" name="customer" id="customer" readonly>
                             </div>
                         </li>
                         <li class="row-item" style="width: 33.333%;">
                             <div class="ctn-wrap">
                                 <div class="label-wrap"><label for="balance">账户余额:</label></div>
-                                <input type="text" value="" class="ui-input new-input" name="balance" id="balance" readonly>
+                                <input type="text" value="<?php echo $user_data->balance ?>" class="ui-input new-input" name="balance" id="balance" readonly>
                             </div>
                         </li>
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap" style="width: 80px;"><label for="amountToBeCollected">待收金额:</label></div>
-                            <div class="ctn-wrap"><span style="color: red;font-size: 20px" id="amountToBeCollected">1000.00</span><span style="margin-left: 5px">元</span></div>
+                            <div class="ctn-wrap"><span style="color: red;font-size: 20px" id="amountToBeCollected"><?php echo $data->actual_total ?></span><span style="margin-left: 5px">元</span></div>
                         </li>
                     </ul>
                     <ul style="font-size: 20px;font-weight: bold">收款方式</ul>
@@ -139,54 +140,54 @@ $(document).keydown(function(event) {
                         <li class="row-item">
                             <div class="label-wrap"><label for="cash">现金:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="cash" id="cash">
+                                <input type="number" value="" oninput="change()" class="input" name="cash" id="cash" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="payByCard">刷卡:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="payByCard" id="payByCard">
+                                <input type="number" value="" oninput="change()" class="input" name="payByCard" id="payByCard" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="check">支票:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="check" id="check">
+                                <input type="number" value="" oninput="change()" class="input" name="check" id="check" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="bankTransform">银行转账:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="bankTransform" id="bankTransform">
+                                <input type="number" value="" oninput="change()" class="input" name="bankTransform" id="bankTransform" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="alyPay">支付宝:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="alyPay" id="alyPay">
+                                <input type="number" value="" oninput="change()" class="input" name="alyPay" id="alyPay" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="weChat">微信:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="weChat" id="weChat">
+                                <input type="number" value="" oninput="change()" class="input" name="weChat" id="weChat" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="balancePay">余额:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="balancePay" id="balancePay">
+                                <input type="number" value="" oninput="change()" class="input" name="balancePay" id="balancePay" min="0">
                             </div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="other">其他:</label></div>
                             <div class="ctn-wrap">
-                                <input type="number" value="" class="input" name="other" id="other">
+                                <input type="number" value="" oninput="change()" class="input" name="other" id="other" min="0">
                             </div>
                         </li>
                         <li class="row-item" style="width: 100%;">
                             <div class="label-wrap" style="width: 80px;"><label for="surplus">剩余应收:</label></div>
-                            <div class="ctn-wrap"><span style="color: red;font-size: 20px" id="surplusPay">0.00</span><span style="margin-left: 5px">元</span></div>
+                            <div class="ctn-wrap"><span style="color: red;font-size: 20px" id="surplusPay"><?php echo $data->actual_total ?></span><span style="margin-left: 5px">元</span></div>
                         </li>
                     </ul>
                 </form>
@@ -202,63 +203,124 @@ $(document).keydown(function(event) {
 
 <script>
 
-    $(function () {
+
+    function change(){
+
        var all = $('#amountToBeCollected').html();
        var surplusPay = $('#surplusPay');
        var surplus = all;
        var has = 0;
-       $('.input').on('change',function () {
+
             var val = $('.input');
-            has = 0;
-            surplus = all;
-            $.each(val,function () {
-                if ($(this).val() == ''){
-                    has += 0;
-                } else{
-                    has += parseInt($(this).val());
+
+            if($(this).parent().parent().find('.label-wrap').text() == "余额:"){
+                var balance = $("#balance").val();
+                var balancePay = $("#balancePay").val();
+
+                if (parseFloat(balance) < parseFloat(balancePay) ){
+                    parent.Public.tips({
+                        type:1,
+                        content:"账户余额不足！",
+                    });
+                }else{
+                    has = 0;
+                    surplus = all;
+                    $.each(val,function () {
+                        if ($(this).val() == ''){
+                            has += 0;
+                        } else{
+                            has += parseInt($(this).val());
+                        }
+                    });
+                    surplus -= has;
+                    surplusPay.html(surplus);
                 }
-            });
-           surplus -= has;
-           surplusPay.html(surplus);
-       });
-    });
+            }else{
+                has = 0;
+                surplus = all;
+                $.each(val,function () {
+                    if ($(this).val() == ''){
+                        has += 0;
+                    } else{
+                        has += parseInt($(this).val());
+                    }
+                });
+                surplus -= has;
+                if(surplus<0){
+                    parent.Public.tips({
+                        type:1,
+                        content:"已超出账单金额！",
+                    });
+                }else{
+                    surplusPay.html(surplus);
+                }
+
+            }
+
+    }
+
 
     $("#submit").click(function () {
+        var surplusPay = $('#surplusPay').text();
 
-        var carId = $('#carId').val();
-        var cash = $('#cash').val();
-        var payByCard = $('#payByCard').val();
-        var check = $('#check').val();
-        var bankTransform = $('#bankTransform').val();
-        var alyPay = $('#alyPay').val();
-        var weChat = $('#weChat').val();
-        var balancePay = $('#balancePay').val();
-        var other = $('#other').val();
+        if(surplusPay !== '0'){
+            parent.Public.tips({
+                type:1,
+                content:"金额未全部结算！",
+            });
+        }else{
+            var orderID = $('#orderID').val();
+            var cash = $('#cash').val();
+            var payByCard = $('#payByCard').val();
+            var check = $('#check').val();
+            var bankTransform = $('#bankTransform').val();
+            var alyPay = $('#alyPay').val();
+            var weChat = $('#weChat').val();
+            var balancePay = $('#balancePay').val();
+            var other = $('#other').val();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('card/recharge');?>",
-            data: {
-                total_num:total_num,
-                userId:userId,
-                cardId:cardId,
-                username:username,
-            },
-            dataType: "json",
 
-            success: function (data) {
-                console.log(data);
-                //if(data.code == 0){
-                //    alert(data.text);
-                //    location.href = "<?php //echo site_url('card')?>//";
-                //}else if (data.code == 1){
-                //    alert(data.text);
-                //} else{
-                //    alert("未知错误");
-                //}
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('billing/dobalance');?>",
+                data: {
+                    orderID:orderID,
+                    cash:cash,
+                    payByCard:payByCard,
+                    check:check,
+                    bankTransform:bankTransform,
+                    alyPay:alyPay,
+                    weChat:weChat,
+                    balancePay:balancePay,
+                    other:other,
+                },
+                dataType: "json",
 
-            },
-        });
+                success: function (data) {
+                    console.log(data);
+                    if(data.code == 1){
+                        parent.Public.tips({
+                            content:data.text,
+                        });
+                        location.href = "<?php echo site_url('billing/billinglist')?>";
+                    }else if (data.code == 2){
+                        parent.Public.tips({
+                            type:1,
+                            content:data.text,
+                        });
+                    } else{
+                        parent.Public.tips({
+                            type:1,
+                            content:"未知错误！",
+                        });
+                    }
+
+                },
+            });
+        }
+
+
+
 
     });
 </script>
