@@ -59,6 +59,39 @@ class Login extends CI_Controller {
 		$this->lib_code->image();
 	}
 
+    //确认订单转跳页面
+    public function quotation(){
+        $id = $this->input->get('id');   // 用户ID
+        $uid = $this->input->get('uid');  //订单号
+        $actual_total = $this->input->get('actual_total');  //订单金额
+        $this->load->view('/h5/confirm_quotation',['id'=>$id,'uid'=>$uid,'actual_total'=>$actual_total]);
+
+    }
+
+    //确认订单
+    public function sure(){
+        $id = $this->input->get('id');   // 用户ID
+        $uid = $this->input->get('uid');  //订单号
+       $code =  $this->input->get('code');
+       if($code == 1){
+           $edit_1 = $this->db->update('ci_billing',array('schedule'=>2),array('userId'=>$id,'uid'=>$uid));
+       }else{
+           $edit_2 = $this->db->update('ci_billing',array('schedule'=>6),array('userId'=>$id,'uid'=>$uid));
+       }
+        if($edit_1){
+            $res['code'] = 1;
+            $res['text'] = "您已同意！";
+            die(json_encode($res));
+        }elseif ($edit_2){
+            $res['code'] = 1;
+            $res['text'] = "您已拒绝！";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 2;
+            $res['text'] = "操作失败！";
+            die(json_encode($res));
+        }
+    }
 }
 
 /* End of file welcome.php */

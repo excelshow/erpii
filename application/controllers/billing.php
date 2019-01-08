@@ -438,11 +438,31 @@ class Billing extends CI_Controller {
         }
     }
 
-    // 结算
+    // 结算页面
     public function balance(){
+        $orderID =$this->input->get('orderID');
+        $data = $this->db->where(['id'=>$orderID])->get('ci_billing')->row();
+        $user_data = $this->db->where(['id'=>$data->userId])->get('ci_customer')->row();
+
+        $this->load->view('/settings/settlement',['data'=>$data,'user_data'=>$user_data]);
 
     }
 
+    //执行结算
+    public function dobalance(){
+        $orderID = $this->input->post('orderID');
+        $edit = $this->db->update('ci_billing',array('cash'=>$this->input->post('cash'),'payByCard'=>$this->input->post('payByCard'),'check'=>$this->input->post('check'),'bankTransform'=>$this->input->post('bankTransform'),'alyPay'=>$this->input->post('alyPay'),'weChatPay'=>$this->input->post('weChat'),'balancePay'=>$this->input->post('balancePay'),'other'=>$this->input->post('other'),'schedule'=>5,'balance_time'=>time()),array('id'=>$orderID));
+        $res = [];
+        if($edit){
+            $res['code'] = 1;
+            $res['text'] = "结算成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 2;
+            $res['text'] = "结算失败";
+            die(json_encode($res));
+        }
+    }
     //更改服务单内容
     public function edit(){
         $user = $this->session->userdata('jxcsys');
@@ -608,6 +628,8 @@ class Billing extends CI_Controller {
 
 
     }
+
+
     public function wechat($openid,$uid,$actual_total,$time,$id){
 
         $appid = "wx753a3c4c7a501de8";

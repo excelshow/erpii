@@ -2962,30 +2962,34 @@
         } else if (itemStatus == '4'){
             //结算
             var orderID = $("#orderID").val();
-            $.ajax({
-                type: "POST",
-                url: "<?php echo site_url('billing/balance');?>",
-                traditional: false,
-                dataType: "json",
-                data:{
-                    orderID:orderID,
-                },
+            window.location.href="<?php echo site_url('billing/balance?orderID=');?>"+orderID;
 
-                success: function (data) {
-                    console.log(data);
-                    // if(data.code == 1){
-                    //     parent.Public.tips({
-                    //         type:1,
-                    //         content:data.text,
-                    //     });
-                    //
-                    // }else if(data.code == 0){
-                    //     parent.Public.tips({
-                    //         content:data.text,
-                    //     });
-                    // }
-                },
-            });
+            //var orderID = $("#orderID").val();
+            //$.ajax({
+            //    type: "POST",
+            //    url: "<?php //echo site_url('billing/balance');?>//",
+            //    traditional: false,
+            //    dataType: "json",
+            //    data:{
+            //        orderID:orderID,
+            //    },
+            //
+            //    success: function (data) {
+            //
+            //        console.log(data);
+            //        // if(data.code == 1){
+            //        //     parent.Public.tips({
+            //        //         type:1,
+            //        //         content:data.text,
+            //        //     });
+            //        //
+            //        // }else if(data.code == 0){
+            //        //     parent.Public.tips({
+            //        //         content:data.text,
+            //        //     });
+            //        // }
+            //    },
+            //});
 
         } else if (itemStatus == '1' || itemStatus == '6'){
             // 再次通知客户确认账单

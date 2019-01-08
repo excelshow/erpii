@@ -204,7 +204,7 @@ $(document).keydown(function(event) {
                             <td><span><?php echo $v->name ?></span></td>
                             <td><span><?php echo $v->wechat ?></span></td>
                             <td><span><?php echo $v->phone ?></span></td>
-                            <td><span><?php echo $v->startTime ?></span></td>
+                            <td><span><?php echo date('Y-m-d H:i',$v->startTime) ?></span></td>
                             <?php if($v->service == 1) :?>
                                 <td><span>正常服务</span></td>
                             <?php elseif($v->service == 2) :?>
@@ -217,7 +217,7 @@ $(document).keydown(function(event) {
                             <td><span><?php echo $v->songCarRen ?></span></td>
                             <td><span><?php echo $v->songCarRenPhone ?></span></td>
                             <td><span>接待人员</span></td>
-                            <td><span>账单总金额</span></td>
+                            <td><span><?php echo $v->actual_total ?></span></td>
                             <?php if($v->schedule == 1) :?>
                                 <td><span>客户确认报价中</span></td>
                             <?php elseif($v->schedule == 2) :?>
@@ -231,7 +231,7 @@ $(document).keydown(function(event) {
                             <?php elseif($v->schedule == 6) :?>
                                 <td><span>客户拒绝报价</span></td>
                             <?php endif;?>
-                            <td><span>结算时间</span></td>
+                            <td><span><?php echo date('Y-m-d H:i',$v->balance_time) ?></span></td>
                             <td><span><a tabTxt="服务记录详情" parentOpen="true" rel="pageTab" href="<?php echo site_url("billing/billingdetail?id=$v->id")?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
                         </tr>
                         <?php endforeach;?>
