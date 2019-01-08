@@ -373,6 +373,241 @@ class Billing extends CI_Controller {
     }
 
 
+    //施工
+    public function construction(){
+        $orderID = $this->input->post('orderID');
+        $res = [];
+        $edit = $this->db->update('ci_billing',array('schedule'=>3),array('id'=>$orderID));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "正在施工中";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
+    }
+
+//    完工
+    public function finish(){
+        $orderID = $this->input->post('orderID');
+        $res = [];
+        $edit = $this->db->update('ci_billing',array('schedule'=>4),array('id'=>$orderID));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "已完工";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
+    }
+    //    返工
+    public function rework(){
+        $orderID = $this->input->post('orderID');
+        $res = [];
+        $edit = $this->db->update('ci_billing',array('schedule'=>3),array('id'=>$orderID));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "正在返工中";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
+    }
+
+    //再次通知
+    public function notice(){
+        $orderID = $this->input->post('orderID');
+        $res = [];
+        $billing = $this->db->where(['id'=>$orderID])->get('ci_billing')->row();
+        $user =  $this->db->where(['id'=>$billing->userId])->get('ci_customer')->row();
+        $wechat = $this->wechat($user->openid,$billing->uid,$billing->actual_total,$billing->addtime,$orderID);
+        if($wechat->errcode == 0){
+            $res['code'] = 0;
+            $res['text'] = "服务单已提交客户确认，请确认后开始施工。";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = $wechat->errmsg;
+            die(json_encode($res));
+        }
+    }
+
+    // 结算
+    public function balance(){
+
+    }
+
+    //更改服务单内容
+    public function edit(){
+        $user = $this->session->userdata('jxcsys');
+        $image = $_FILES;
+
+        $number = $this->input->post('number');
+        $li0_img_edit = $this->input->post('li0_img_edit');
+        $li1_img_edit = $this->input->post('li1_img_edit');
+        $li2_img_edit = $this->input->post('li2_img_edit');
+        $li3_img_edit = $this->input->post('li3_img_edit');
+        $li4_img_edit = $this->input->post('li4_img_edit');
+        $li5_img_edit = $this->input->post('li5_img_edit');
+        $li6_img_edit = $this->input->post('li6_img_edit');
+        $li7_img_edit = $this->input->post('li7_img_edit');
+        $li8_img_edit = $this->input->post('li8_img_edit');
+        $t0 = 0;$t1 = 0;$t2 = 0;$t3 = 0;$t4 = 0;$t5 = 0;$t6 = 0;$t7 = 0;$t8 = 0;
+        $img = [];
+        foreach (json_decode($li0_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li0_img'][$t0] = substr($val->src,strpos($val->src,'image'));
+                $t0 ++;
+            }
+        }
+        foreach (json_decode($li1_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li1_img'][$t1] = substr($val->src,strpos($val->src,'image'));
+                $t1 ++;
+            }
+        }
+        foreach (json_decode($li2_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li2_img'][$t2] = substr($val->src,strpos($val->src,'image'));
+                $t2 ++;
+            }
+        }
+        foreach (json_decode($li3_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li3_img'][$t3] = substr($val->src,strpos($val->src,'image'));
+                $t3 ++;
+            }
+        }
+        foreach (json_decode($li4_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li4_img'][$t4] = substr($val->src,strpos($val->src,'image'));
+                $t4 ++;
+            }
+        }
+        foreach (json_decode($li5_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li5_img'][$t5] = substr($val->src,strpos($val->src,'image'));
+                $t5 ++;
+            }
+        }
+        foreach (json_decode($li6_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li6_img'][$t6] = substr($val->src,strpos($val->src,'image'));
+                $t6 ++;
+            }
+        }
+        foreach (json_decode($li7_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li7_img'][$t7] = substr($val->src,strpos($val->src,'image'));
+                $t7 ++;
+            }
+        }
+        foreach (json_decode($li8_img_edit) as $key=>$val){
+            if(substr($val->src,0,4) == 'http'){
+                $img['li8_img'][$t8] = substr($val->src,strpos($val->src,'image'));
+                $t8 ++;
+            }
+        }
+        if($image){
+            foreach ($image as $k=>$v){
+
+                $dir = iconv("UTF-8", "GBK", "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7));
+                if (!file_exists($dir)){
+                    mkdir ($dir,0777,true);
+                }
+                $strs="QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
+                $name = substr(str_shuffle($strs),mt_rand(0,strlen($strs)-33),32);
+                move_uploaded_file($v['tmp_name'],iconv("utf-8","gb2312","image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg'));
+//
+                if(substr($k,0,7) == 'li0_img'){
+                    $img['li0_img'][$t0] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t0 ++;
+                }elseif (substr($k,0,7) == 'li1_img'){
+                    $img['li1_img'][$t1] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t1 ++;
+                }elseif (substr($k,0,7) == 'li2_img'){
+                    $img['li2_img'][$t2] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t2 ++;
+                }elseif (substr($k,0,7) == 'li3_img'){
+                    $img['li3_img'][$t3] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t3 ++;
+                }elseif (substr($k,0,7) == 'li4_img'){
+                    $img['li4_img'][$t4] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t4 ++;
+                }elseif (substr($k,0,7) == 'li5_img'){
+                    $img['li5_img'][$t5] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t5 ++;
+                }elseif (substr($k,0,7) == 'li6_img'){
+                    $img['li6_img'][$t6] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t6 ++;
+                }elseif (substr($k,0,7) == 'li7_img'){
+                    $img['li7_img'][$t7] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t7 ++;
+                }elseif (substr($k,0,7) == 'li8_img'){
+                    $img['li8_img'][$t8] = "image/".$user['lowId'].'/'.substr($number,3).'/'.substr($k,0,7).'/'.$name.'.jpg';
+                    $t8 ++;
+                }
+            }
+
+        }
+
+        $edit = array(
+            'describe'=>$this->input->post('describe'),
+            'advice'=>$this->input->post('advice'),
+            'report'=>$this->input->post('report'),
+            'request'=>$this->input->post('request'),
+            'remarks'=>$this->input->post('remarks'),
+            'songCarRen'=>$this->input->post('songCarRen'),
+            'songCarRenPhone'=>$this->input->post('songCarRenPhone'),
+            'service'=>$this->input->post('service'),
+            'startTime'=>$this->input->post('startTime'),
+            'estimateTime'=>$this->input->post('estimateTime'),
+            'endTime'=>$this->input->post('endTime'),
+            'brand'=>$this->input->post('brand'),
+            'insureCompany'=>$this->input->post('insureCompany'),
+            'system'=>$this->input->post('system'),
+            'insuranceEndTime'=>$this->input->post('insuranceEndTime'),
+            'shape'=>$this->input->post('shape'),
+            'carShape'=>$this->input->post('carShape'),
+            'engineNumber'=>$this->input->post('engineNumber'),
+            'suggestedMaintenance'=>$this->input->post('suggestedMaintenance'),
+            'carColor'=>$this->input->post('carColor'),
+            'natureUsage'=>$this->input->post('natureUsage'),
+            'frontWheelType'=>$this->input->post('frontWheelType'),
+            'backWheelType'=>$this->input->post('backWheelType'),
+            'carType'=>$this->input->post('carType'),
+            'transmission'=>$this->input->post('transmission'),
+            'displacement'=>$this->input->post('displacement'),
+            'oilVolume'=>$this->input->post('oilVolume'),
+            'invoice'=>$this->input->post('invoice'),
+            'actual_total'=>$this->input->post('actual_total'),
+            'service_total'=>$this->input->post('service_total'),
+            'good_total'=>$this->input->post('good_total'),
+            'checks'=>$this->input->post('checks'),
+            'image'=>json_encode($img),
+            'service_item'=>$this->input->post('service_item'),
+            'vip_item'=>$this->input->post('vip_item'),
+        );
+        $edit_data = $this->db->update('ci_billing',$edit,array('id'=>$this->input->post('orderID')));
+        $res = [];
+        if($edit_data){
+            $res['code'] = 0;
+            $res['text'] = "保存成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "保存失败";
+            die(json_encode($res));
+        }
+
+
+    }
     public function wechat($openid,$uid,$actual_total,$time,$id){
 
         $appid = "wx753a3c4c7a501de8";
@@ -477,4 +712,5 @@ class Billing extends CI_Controller {
         curl_close($ch);
         return ($data);
     }
+
 }

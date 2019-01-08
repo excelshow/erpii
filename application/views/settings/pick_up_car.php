@@ -2349,7 +2349,7 @@
         var  carType = $("#carType").val();  //车辆类型
         var  transmission = $("#transmission").val();  //变速箱型号
         var  displacement = $("#displacement").val();  //排量
-        var  oilVolume = $("#oilVolume").val();  //油量
+        var  oilVolume = $("input[name='oilVolume']:checked").val();   //油量
         var  VIPNumber = $("#VIPNumber").val();  //VIP卡号
         var  actual_total = $("#actual_total").text();  //服务单订单总额
         var  service_total = $("#service_total").text();  //服务单工时总额

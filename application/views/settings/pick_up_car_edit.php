@@ -958,7 +958,7 @@
             <a class="ui-btn choose">服务项目</a>
         </div>
         <div class="fr">
-            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: none">报价</a>
+            <a id="save_all" class="ui-btn ui-btn-sp mrb" style="display: block">保存</a>
         </div>
     </div>
     <!--信息-->
@@ -2026,11 +2026,11 @@
                     <div class="table_total_r">
                         <table class="table_new">
                             <tr>
-                                <td>工时费：  <span id="service_total">0.00</span></td>
-                                <td>配件费：  <span id="good_total">0.00</span></td>
-                                <td>原价：    <span id="old_total">0.00</span></td>
-                                <td>VIP价：   <span id="vip_total">0.00</span></td>
-                                <td>实际总费用： <span id="actual_total">0.00</span></td>
+                                <td>工时费：  <span id="service_total"><?php echo $data->service_total ?></span></td>
+                                <td>配件费：  <span id="good_total"><?php echo $data->good_total ?></span></td>
+                                <td>原价：    <span id="old_total"></span></td>
+                                <td>VIP价：   <span id="vip_total"></span></td>
+                                <td>实际总费用： <span id="actual_total"><?php echo $data->actual_total ?></span></td>
                             </tr>
                         </table>
                     </div>
@@ -2105,7 +2105,7 @@
 
     <input type="hidden" id="itemStatus" value="<?php echo $data->schedule ?>"><!--当前状态-->
     <input type="hidden" id="read" value="0"><!--报价是否接受-->
-    <input type="hidden" id="orderID" value="0"><!--订单ID-->
+    <input type="hidden" id="orderID" value="<?php echo $data->id ?>"><!--订单ID-->
     <div class="itemStatus clearfix">
         <div class="itemStatus_div" style="float:left">服务进度：</div>
         <div class="itemStatus_div" style="float:left">
@@ -2121,12 +2121,12 @@
             <span id="rework" style="display: none;">返工</span>
             <span id="finish">施工</span>
         </div>
-        <div class="itemStatus_div" id="noticeCustomer" style="float:right">
-            <span>
-                <input type="checkbox" name="notice">
-            </span>
-            <span>通知车主</a></span>
-        </div>
+<!--        <div class="itemStatus_div" id="noticeCustomer" style="float:right">-->
+<!--            <span>-->
+<!--                <input type="checkbox" name="notice">-->
+<!--            </span>-->
+<!--            <span>通知车主</a></span>-->
+<!--        </div>-->
     </div>
 
     <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
@@ -2394,35 +2394,35 @@
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
-                $('#save_all').css('display','none');
+                // $('#save_all').css('display','none');
             }else if ($(this).html() == '车辆信息') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
-                $('#save_all').css('display','none');
+                // $('#save_all').css('display','none');
             }else if ($(this).html() == '实录照片'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','none');
-                $('#save_all').css('display','none');
+                // $('#save_all').css('display','none');
             }else if ($(this).html() == '车检报告'){
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','');
                 $('.car_service').css('display','none');
-                $('#save_all').css('display','none');
+                // $('#save_all').css('display','none');
             }else if ($(this).html() == '服务项目') {
                 $('.customer_information').css('display','none');
                 $('.car_information').css('display','none');
                 $('.car_photo').css('display','none');
                 $('.car_report').css('display','none');
                 $('.car_service').css('display','');
-                $('#save_all').css('display','');
+                // $('#save_all').css('display','');
             }
         });
         $('.choose_inspect').on('click',function () {
@@ -2896,20 +2896,161 @@
     //改变状态
     $('#finish').on('click',function () {
         if (itemStatus == '2'){
-            itemStatus = 3;
-        } else if (itemStatus == '3'){
-            itemStatus = 4;
-        } else if (itemStatus == '4'){
-            itemStatus = 5;
-        } else if (itemStatus == '1' || itemStatus == '6'){
+            // 施工
+            var orderID = $("#orderID").val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('billing/construction');?>",
+                traditional: false,
+                dataType: "json",
+                data:{
+                    orderID:orderID,
+                },
 
+                success: function (data) {
+
+                    if(data.code == 1){
+                        parent.Public.tips({
+                            type:1,
+                            content:data.text,
+                        });
+
+                    }else if(data.code == 0){
+                        parent.Public.tips({
+                            content:data.text,
+
+                        });
+                        itemStatus = 3;
+                        window.location.reload();
+                    }
+
+
+                },
+            });
+
+        } else if (itemStatus == '3'){
+            // 完工
+            var orderID = $("#orderID").val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('billing/finish');?>",
+                traditional: false,
+                dataType: "json",
+                data:{
+                    orderID:orderID,
+                },
+
+                success: function (data) {
+                    console.log(data);
+                    if(data.code == 1){
+                        parent.Public.tips({
+                            type:1,
+                            content:data.text,
+                        });
+
+                    }else if(data.code == 0){
+                        parent.Public.tips({
+                            content:data.text,
+
+                        });
+                        itemStatus = 4;
+                        window.location.reload();
+                    }
+                },
+            });
+
+        } else if (itemStatus == '4'){
+            //结算
+            var orderID = $("#orderID").val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('billing/balance');?>",
+                traditional: false,
+                dataType: "json",
+                data:{
+                    orderID:orderID,
+                },
+
+                success: function (data) {
+                    console.log(data);
+                    // if(data.code == 1){
+                    //     parent.Public.tips({
+                    //         type:1,
+                    //         content:data.text,
+                    //     });
+                    //
+                    // }else if(data.code == 0){
+                    //     parent.Public.tips({
+                    //         content:data.text,
+                    //     });
+                    // }
+                },
+            });
+
+        } else if (itemStatus == '1' || itemStatus == '6'){
+            // 再次通知客户确认账单
+            var orderID = $("#orderID").val();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('billing/notice');?>",
+                traditional: false,
+                dataType: "json",
+                data:{
+                    orderID:orderID,
+                },
+
+                success: function (data) {
+                    console.log(data);
+                    if(data.code == 1){
+                        parent.Public.tips({
+                            type:1,
+                            content:data.text,
+                        });
+
+                    }else if(data.code == 0){
+                        parent.Public.tips({
+                            content:data.text,
+                        });
+                    }
+                },
+            });
         }
         changeStatus(itemStatus)
     });
     $('#rework').on('click',function () {
-        itemStatus = 3;
-        changeStatus(itemStatus);
-        $('.itemStatus').removeClass('changeStatus4');
+        var orderID = $("#orderID").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('billing/rework');?>",
+            traditional: false,
+            dataType: "json",
+            data:{
+                orderID:orderID,
+            },
+
+            success: function (data) {
+
+                if(data.code == 1){
+                    parent.Public.tips({
+                        type:1,
+                        content:data.text,
+                    });
+
+                }else if(data.code == 0){
+                    parent.Public.tips({
+                        content:data.text,
+
+                    });
+                    itemStatus = 3;
+                    // changeStatus(itemStatus);
+                    // $('.itemStatus').removeClass('changeStatus4');
+                    window.location.reload();
+                }
+
+
+            },
+        });
+
     });
 
     function changeStatus(status) {
@@ -3032,11 +3173,14 @@
         var  carType = $("#carType").val();  //车辆类型
         var  transmission = $("#transmission").val();  //变速箱型号
         var  displacement = $("#displacement").val();  //排量
-        var  oilVolume = $("#oilVolume").val();  //油量
+        var  oilVolume = $("input[name='oilVolume']:checked").val();  //油量
         var  VIPNumber = $("#VIPNumber").val();  //VIP卡号
-        var  actual_total = $("#actual_total").val();  //服务单订单总额
-        var  service_total = $("#service_total").val();  //服务单工时总额
-        var  good_total = $("#good_total").val();  //服务单配件总额
+        var  actual_total = $("#actual_total").text();  //服务单订单总额
+        var  service_total = $("#service_total").text();  //服务单工时总额
+        var  good_total = $("#good_total").text();  //服务单配件总额
+        var orderID = $("#orderID").val();  //订单ID
+
+
         var image = new FormData();
 
         //实录照片
@@ -3097,6 +3241,53 @@
         });
         var vip_items = JSON.stringify(vip_item);
         var service_items = JSON.stringify(service_item);
+
+        //修改后的照片
+        var li0_img_edit = new Array();
+        $('.show_image_span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li0_img_edit.push({src});
+        });
+        var li1_img_edit = new Array();
+        $('.upload_img>input[name="li1_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li1_img_edit.push({src});
+        });
+        var li2_img_edit = new Array();
+        $('.upload_img>input[name="li2_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li2_img_edit.push({src});
+        });
+        var li3_img_edit = new Array();
+        $('.upload_img>input[name="li3_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li3_img_edit.push({src});
+        });
+        var li4_img_edit = new Array();
+        $('.upload_img>input[name="li4_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li4_img_edit.push({src});
+        });
+        var li5_img_edit = new Array();
+        $('.upload_img>input[name="li5_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li5_img_edit.push({src});
+        });
+        var li6_img_edit = new Array();
+        $('.upload_img>input[name="li6_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li6_img_edit.push({src});
+        });
+        var li7_img_edit = new Array();
+        $('.upload_img>input[name="li7_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li7_img_edit.push({src});
+        });
+        var li8_img_edit = new Array();
+        $('.upload_img>input[name="li8_img"]').siblings('span').each(function () {
+            var src = $(this).find("img").attr('src');
+            li8_img_edit.push({src});
+        });
         image.append('userId',userId);
         image.append('describe',describe);
         image.append('advice',advice);
@@ -3135,6 +3326,17 @@
         image.append('actual_total',actual_total);
         image.append('service_total',service_total);
         image.append('good_total',good_total);
+        image.append('orderID',orderID);
+        image.append('li0_img_edit',JSON.stringify(li0_img_edit));
+        image.append('li1_img_edit',JSON.stringify(li1_img_edit));
+        image.append('li2_img_edit',JSON.stringify(li2_img_edit));
+        image.append('li3_img_edit',JSON.stringify(li3_img_edit));
+        image.append('li4_img_edit',JSON.stringify(li4_img_edit));
+        image.append('li5_img_edit',JSON.stringify(li5_img_edit));
+        image.append('li6_img_edit',JSON.stringify(li6_img_edit));
+        image.append('li7_img_edit',JSON.stringify(li7_img_edit));
+        image.append('li8_img_edit',JSON.stringify(li8_img_edit));
+
         var checks = new Array();
 
         $(".checks").each(function($key,$val){
@@ -3148,9 +3350,11 @@
             image.append('invoice',0);
         }
 
+
+
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('billing/start');?>",
+            url: "<?php echo site_url('billing/edit');?>",
             traditional: false,
             dataType: "json",
             processData :false,
@@ -3168,9 +3372,8 @@
                         content:data.text,
 
                     });
-                    location.href = "<?php echo site_url('billing/billinglist')?>";
+                    window.location.reload();
                 }
-                console.log(data);
 
             },
         });
@@ -3263,11 +3466,16 @@
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+
                 $('img[src="'+data.text+'"]').parent().remove();
             },
         });
     })
+
+    $("#finish").click(function () {
+
+
+    });
 
 </script>
 </body>
