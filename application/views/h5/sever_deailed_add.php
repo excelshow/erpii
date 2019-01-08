@@ -82,7 +82,7 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
-                <th align="left">VIP卡号</th>
+                <th align="200">VIP卡号</th>
                 <th width="120">使用范围</th>
                 <th width="120">状态</th>
                 <th width="200">到期时间</th>
@@ -93,7 +93,6 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody id="textpackagelist">
                 <tr>
-                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无VIP卡</td>
 
                 </tr>
                 </tbody>
@@ -192,13 +191,13 @@
 <!--        </ul>-->
 <!--        <div class="mask_btn"><a href="javascript:;">取消</a><a href="javascript:void(0);" class="queding" id="confirm">确定</a></div>-->
 <!--    </div>-->
-    <div class="mask_div" id="pending" style="height: 240px; margin-top: -120px; display: none">
-        <h2 style="font-size: 36px;">提示</h2>
-        <ul style="height: 84px;">
-            <li class="quit">该客户有未结算的服务</li>
-        </ul>
-        <div class="mask_btn" id="newphone"><a>查看</a><a href="javascript:void(0);" class="queding">继续开单</a></div>
-    </div>
+<!--    <div class="mask_div" id="pending" style="height: 240px; margin-top: -120px; display: none">-->
+<!--        <h2 style="font-size: 36px;">提示</h2>-->
+<!--        <ul style="height: 84px;">-->
+<!--            <li class="quit">该客户有未结算的服务</li>-->
+<!--        </ul>-->
+<!--        <div class="mask_btn" id="newphone"><a>查看</a><a href="javascript:void(0);" class="queding">继续开单</a></div>-->
+<!--    </div>-->
 
     <div class="mask_div" id="wtjgsbcts" style="height: 240px; margin-top: -120px; display: none">
         <h2 style="font-size: 36px;">提示</h2>
@@ -449,6 +448,7 @@
     <script src="<?php echo base_url()?>statics/h5/js/addservicerecord.js"></script>
     <script type="text/javascript">
         $(function () {
+            //点击添加用户信息
             $(document).on("click", "#search_save", function () {
                 d = getdata();
                 if (typeof d.customerid == "undefined") {
@@ -477,6 +477,7 @@
                 $("#customerMobile").html(d.mobile).parent().attr('mobile',d.mobile).attr('customerid',d.customerid);
                 $("#txtcarno").attr('carid',d.carid).attr('carname',d.plate).find('font').html(d.plate);
                 $("#txtcustomername").val(d.name);
+                $('#phonecomment').css('display','');
 
                 $.ajax({
                     type:'post',
@@ -490,7 +491,21 @@
                         console.log(data);
                         $('#creditmoney').html(data.balance);
                         if (data.vipId){
-                            $('#timespackagecount').html('(1)')
+                            var str = '';
+                            var status = '';
+                            if (data.vipId.id == '0'){
+                                status = '正常';
+                            } else if (data.vipId.id == '1'){
+                                status = '停用';
+                            }else{
+                                status = '过期';
+                            }
+                            str = '<td  width="200" align="center">' + data.vipcard.id + '</td><td  width="120" align="center">' + data.vipcard.orgname + '</td><td  width="120" align="center">' + status + '</td><td  width="200" align="center">' + data.vipcard.time + '</td>';
+                            console.log(str);
+                            $('#timespackagecount').html('(1)');
+                            $('#textpackagelist tr').html(str);
+                        }else{
+                            $('#textpackagelist tr').html('<td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无VIP卡</td>');
                         }
                     },
                     error:function () {
@@ -508,6 +523,30 @@
             $("#textpackagebox,.mask_box").show();
             mask_box("#textpackagebox");
         });
+
+        //点击确定添加服务
+        $('.mask').on('click','#addservice',function () {
+            var serviceItems = $('.mask #hasAdd font');
+            console.log(serviceItems);
+            var name = '';
+            var price = '';
+            var vipPrice = '';
+            var serviceId = '';
+            var str = '';
+            var str1 = '<div class="workhour"><dl f="working"><dt><font>';//price
+            var str2 = '</font>';//name
+            var str3 = '</dt><dd><font f="workhourtotal">¥';//vipPrice
+            var str4 = '</font></dd></dl><ul><li class="wh1"><a href="javascript:void(0);"><font>修改</font></a></li> <li class="wh2"><a href="javascript:;"><font>删除</font></a></li><li class="wh3"><a href="javascript:void(0);"><font>添加配件</font></a></li></ul><div class="accost"></div></div>';
+            $.each(serviceItems,function () {
+                str += str1 + $(this).attr('price') + str2 + $(this).html() + str3 + $(this).attr('vipprice') + str4;
+            });
+            $('#workhour').append(str);
+            $('#Workshilist').css('display','');
+            $(".mask").hide();
+            $("#indexshow").show();
+        });
+
+        //删除服务的时候，如果服务内容为空$('#Workshilist').css('display','none');
 
         var mobile = "";
         var carno = "";

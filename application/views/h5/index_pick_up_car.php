@@ -68,7 +68,8 @@
 <!--        底部-->
         <div class="fw_menu">
             <ul>
-                <li class="fw1" id="addrecord"><a href="javascript:"><font></font>新建记录</a></li>
+<!--                <li class="fw1" id="addrecord"><a href="javascript:"><font></font>新建记录</a></li>-->
+                <li class="fw1"><a href="sever_deailed_add"><font></font>新建记录</a></li>
                 <li class="fw2"><a href="sever_history" indepth="true"><font></font>服务记录</a></li>
 <!--                <li class="fw3"><a href="datelist.html" indepth="true"><font></font>预约记录</a></li>-->
                 <li class="fw6"><a href="customer_list" indepth="true"><font></font>客户列表</a></li>
