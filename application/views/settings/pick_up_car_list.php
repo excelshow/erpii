@@ -40,13 +40,13 @@ $(document).keydown(function(event) {
     .grid-wrap{
         background-color: #fff;
         border: 1px solid #ddd;
-        height: 800px;
-        width: 100%;
+        height: 720px;
+        width: 98.5%;
         overflow: auto;
         position: relative;
     }
     .table{
-        width: 100%;
+        width: 100.5%;
     }
     table{
         border-collapse:collapse;
@@ -148,124 +148,177 @@ $(document).keydown(function(event) {
         color: #fff;
         font-weight: bold;
     }
+
+    #sel{
+        width: 200px;
+        height: 30px;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 <body>
 <div class="wrapper">
-	<div class="mod-search cf">
-	    <div class="fl">
-	      <ul class="ul-inline">
-	      	<li>
-	        	<span id="catorage"></span>
-	        </li>
-	        <li>
-	          <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
-	        </li>
-	        <li><a class="ui-btn mrb" id="search">查询</a></li>
-	      </ul>
-	    </div>
-	    <div class="fr">
-            <a href="javascript:void(0);" class="ui-btn ui-btn-sp mrb" id="btn-batchDel">取消</a>
-        </div>
-	  </div>
-    <div class="grid-wrap">
-        <div class="table">
-            <table style="width: 100%;">
-                <thead style="width: 100%;">
-                    <tr style="width: 100%;">
-                        <th style="width: 3%;">
-                            <input type="checkbox" id="all">
-                        </th>
-                        <th style="width: 7%;">服务单号</th>
-                        <th style="width: 7%;">车牌号</th>
-                        <th style="width: 5%;">客户名称</th>
-                        <th style="width: 5%;">客户微信</th>
-                        <th style="width: 7%;">电话</th>
-                        <th style="width: 7%;">开始时间</th>
-                        <th style="width: 5%;">项目类型</th>
-                        <th style="width: 5%;">送修人</th>
-                        <th style="width: 7%;">送修电话</th>
-                        <th style="width: 5%;">接待人员</th>
-                        <th style="width: 5%;">总金额</th>
-                        <th style="width: 5%;">目前进度</th>
-                        <th style="width: 7%;">结算时间</th>
-                        <th style="width: 5%;">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($data) :?>
-                        <?php foreach ($data as $k=>$v) :?>
-                        <tr>
-                            <td class="check">
-                                <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
-                            </td>
-                            <td><span><?php echo $v->uid ?></span></td>
-                            <td><span><?php echo $v->number ?></span></td>
-                            <td><span><?php echo $v->name ?></span></td>
-                            <td><span><?php echo $v->wechat ?></span></td>
-                            <td><span><?php echo $v->phone ?></span></td>
-                            <td><span><?php echo date('Y-m-d H:i',$v->startTime) ?></span></td>
-                            <?php if($v->service == 1) :?>
-                                <td><span>正常服务</span></td>
-                            <?php elseif($v->service == 2) :?>
-                                <td><span>保险</span></td>
-                            <?php elseif($v->service == 3) :?>
-                                <td><span>返工</span></td>
-                            <?php elseif($v->service == 4) :?>
-                                <td><span>索赔</span></td>
-                            <?php endif;?>
-                            <td><span><?php echo $v->songCarRen ?></span></td>
-                            <td><span><?php echo $v->songCarRenPhone ?></span></td>
-                            <td><span>接待人员</span></td>
-                            <td><span><?php echo $v->actual_total ?></span></td>
-                            <?php if($v->schedule == 1) :?>
-                                <td><span>客户确认报价中</span></td>
-                            <?php elseif($v->schedule == 2) :?>
-                                <td><span>准备施工</span></td>
-                            <?php elseif($v->schedule == 3) :?>
-                                <td><span>施工中</span></td>
-                            <?php elseif($v->schedule == 4) :?>
-                                <td><span>已完成，待结算</span></td>
-                            <?php elseif($v->schedule == 5) :?>
-                                <td><span>已结算</span></td>
-                            <?php elseif($v->schedule == 6) :?>
-                                <td><span>客户拒绝报价</span></td>
-                            <?php endif;?>
-                            <td><span><?php echo date('Y-m-d H:i',$v->balance_time) ?></span></td>
-                            <td><span><a tabTxt="服务记录详情" parentOpen="true" rel="pageTab" href="<?php echo site_url("billing/billingdetail?id=$v->id")?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
-                        </tr>
-                        <?php endforeach;?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="10">暂无记录</td>
-                        </tr>
-                    <?php endif ;?>
+    <form action="<?php echo site_url('billing/billinglist');?>" method="post" id="form">
+        <div class="mod-search cf">
+            <div class="fl">
+              <ul class="ul-inline">
+                <li>
+                    <span id="catorage"></span>
+                </li>
+                <li>
+                    <?php if ($like) :?>
+                        <input type="text" name="matchCon" id="matchCon" class="ui-input ui-input-ph matchCon" value ="<?php echo $like ?>" style="width: 280px;">
+                    <?php else:?>
+                        <input type="text" name="matchCon" id="matchCon" class="ui-input ui-input-ph matchCon" placeholder="输入服务单号/ 车牌/ 手机号/ 查询" style="width: 280px;">
+                    <?php endif; ?>
 
-                </tbody>
-            </table>
-        </div>
-	    <div id="page">
-            <div class="page_left">&nbsp;</div>
-            <div class="page_center">
-                <div></div>
-                <div></div>
-                <div>
-                    <input type="text" value="1">
-                </div>
-                <div>共 1 页</div>
-                <div></div>
-                <div></div>
-                <div>
-                    <select name="pages" id="pages">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
+                </li>
+                <li><a class="ui-btn mrb" id="search">查询</a></li>
+                <li>
+                    <select name="sel" id="sel" onchange="changes()">
+                        <?php if($sel == 0) :?>
+                            <option value="0" selected>请选择</option>
+                        <?php else :?>
+                            <option value="0" >请选择</option>
+                        <?php endif ;?>
+                        <?php if($sel == 1) :?>
+                            <option value="1" selected>未确认</option>
+                        <?php else :?>
+                            <option value="1">未确认</option>
+                        <?php endif ;?>
+                        <?php if($sel == 2) :?>
+                            <option value="2" selected>确认未施工</option>
+                        <?php else :?>
+                            <option value="2">确认未施工</option>
+                        <?php endif ;?>
+                        <?php if($sel == 3) :?>
+                            <option value="3" selected>施工中</option>
+                        <?php else :?>
+                            <option value="3">施工中</option>
+                        <?php endif ;?>
+                        <?php if($sel == 4) :?>
+                            <option value="4" selected>完工未结算</option>
+                        <?php else :?>
+                            <option value="4">完工未结算</option>
+                        <?php endif ;?>
+                        <?php if($sel == 5) :?>
+                            <option value="5" selected>已结算</option>
+                        <?php else :?>
+                            <option value="5">已结算</option>
+                        <?php endif ;?>
+                        <?php if($sel == 6) :?>
+                            <option value="6" selected>拒绝报价</option>
+                        <?php else :?>
+                            <option value="6">拒绝报价</option>
+                        <?php endif ;?>
+
                     </select>
-                </div>
+                </li>
+              </ul>
             </div>
-            <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+            <div class="fr">
+                <a href="javascript:void(0);" class="ui-btn ui-btn-sp mrb" id="btn-batchDel">取消</a>
+            </div>
+          </div>
+        <div class="grid-wrap">
+            <div class="table">
+                <table style="width: 100%;">
+                    <thead style="width: 100%;">
+                        <tr style="width: 100%;">
+                            <th style="width: 3%;">
+                                <input type="checkbox" id="all">
+                            </th>
+                            <th style="width: 7%;">服务单号</th>
+                            <th style="width: 7%;">车牌号</th>
+                            <th style="width: 5%;">客户名称</th>
+                            <th style="width: 5%;">客户微信</th>
+                            <th style="width: 7%;">电话</th>
+                            <th style="width: 7%;">开始时间</th>
+                            <th style="width: 5%;">项目类型</th>
+                            <th style="width: 5%;">送修人</th>
+                            <th style="width: 7%;">送修电话</th>
+                            <th style="width: 5%;">接待人员</th>
+                            <th style="width: 5%;">总金额</th>
+                            <th style="width: 5%;">目前进度</th>
+                            <th style="width: 7%;">结算时间</th>
+                            <th style="width: 5%;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($data) :?>
+                            <?php foreach ($data as $k=>$v) :?>
+                            <tr>
+                                <td class="check">
+                                    <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+                                </td>
+                                <td><span><?php echo $v->uid ?></span></td>
+                                <td><span><?php echo $v->number ?></span></td>
+                                <td><span><?php echo $v->name ?></span></td>
+                                <td><span><?php echo $v->wechat ?></span></td>
+                                <td><span><?php echo $v->phone ?></span></td>
+                                <td><span><?php echo date('Y-m-d H:i',$v->startTime) ?></span></td>
+                                <?php if($v->service == 1) :?>
+                                    <td><span>正常服务</span></td>
+                                <?php elseif($v->service == 2) :?>
+                                    <td><span>保险</span></td>
+                                <?php elseif($v->service == 3) :?>
+                                    <td><span>返工</span></td>
+                                <?php elseif($v->service == 4) :?>
+                                    <td><span>索赔</span></td>
+                                <?php endif;?>
+                                <td><span><?php echo $v->songCarRen ?></span></td>
+                                <td><span><?php echo $v->songCarRenPhone ?></span></td>
+                                <td><span>接待人员</span></td>
+                                <td><span><?php echo $v->actual_total ?></span></td>
+                                <?php if($v->schedule == 1) :?>
+                                    <td><span>客户确认报价中</span></td>
+                                <?php elseif($v->schedule == 2) :?>
+                                    <td><span>准备施工</span></td>
+                                <?php elseif($v->schedule == 3) :?>
+                                    <td><span>施工中</span></td>
+                                <?php elseif($v->schedule == 4) :?>
+                                    <td><span>已完成，待结算</span></td>
+                                <?php elseif($v->schedule == 5) :?>
+                                    <td><span>已结算</span></td>
+                                <?php elseif($v->schedule == 6) :?>
+                                    <td><span>客户拒绝报价</span></td>
+                                <?php endif;?>
+                                <td><span><?php echo date('Y-m-d H:i',$v->balance_time) ?></span></td>
+                                <td><span><a tabTxt="服务记录详情" parentOpen="true" rel="pageTab" href="<?php echo site_url("billing/billingdetail?id=$v->id")?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                            </tr>
+                            <?php endforeach;?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="15">暂无记录</td>
+                            </tr>
+                        <?php endif ;?>
+
+                    </tbody>
+                </table>
+            </div>
+            <div id="page">
+                <div class="page_left">&nbsp;</div>
+                <div class="page_center">
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <input type="text" value="1">
+                    </div>
+                    <div>共 1 页</div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <select name="pages" id="pages">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
 <script>
@@ -321,7 +374,14 @@ $(document).keydown(function(event) {
                 });
             }
         });
+
+        $("#search").click(function () {
+            $("#form").submit();
+        });
     });
+    function changes() {
+        document.getElementById("search").click();
+    }
 </script>
 <script>
     Public.pageTab();

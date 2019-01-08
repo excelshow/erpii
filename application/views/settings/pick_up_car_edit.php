@@ -2871,6 +2871,9 @@
 
     //读取状态
     window.itemStatus = $('#itemStatus').val();
+    if(itemStatus == '5'){
+        $("#save_all").css('display','none');
+    }
     var url = '';
     changeCss();
     function changeCss() {

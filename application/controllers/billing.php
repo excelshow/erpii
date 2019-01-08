@@ -302,11 +302,21 @@ class Billing extends CI_Controller {
 //    服务单列表
     public function billinglist(){
         $user = $this->session->userdata('jxcsys');
+        $like = $this->input->post('matchCon');
+        $sel = $this->input->post('sel');
 
-            $where = array(substr($user['orgWhere'],0,strrpos($user['orgWhere'],'=')) => substr($user['orgWhere'],-1,strrpos($user['orgWhere'],'=')));
+
+        if($user['orgWhere'] == 'lowId='.$user['lowId']){
+            if($sel){
+                $where = "(lowId =".$user['lowId']." OR (schedule =5 AND midId =".$user['midId'].")) AND (name LIKE '%".$like."%' OR uid LIKE'%".$like."%' OR phone LIKE'%".$like."%') AND (schedule =".$sel.")";
+            }else{
+                $where = "(lowId =".$user['lowId']." OR (schedule =5 AND midId =".$user['midId'].")) AND (name LIKE '%".$like."%' OR uid LIKE'%".$like."%' OR phone LIKE'%".$like."%')";
+            }
+
             $data = $this->db->where($where)->get('ci_billing')->result();
+        }
 
-        $this->load->view('/settings/pick_up_car_list',['data'=>$data]);
+        $this->load->view('/settings/pick_up_car_list',['data'=>$data,'like'=>$like,'sel'=>$sel]);
     }
 
     //    服务单详情
