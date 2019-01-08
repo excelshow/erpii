@@ -23,7 +23,7 @@
         var carmodel_url = '/Service/CarModelList';
     </script>
 
-    <script type="text/javascript" src="/Service/brandscripts"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>statics/h5/js/brandscripts"></script>
     <script type="text/javascript" src="<?php echo base_url()?>statics/h5/js/addcar.js"></script>
 
     <div id="addcarinfo">
@@ -41,17 +41,17 @@
                 <li id="select_car_line"><a href="javascript:;" class="carmore" lang="show" itemid="0"><font>车系</font><span>请选择</span></a></li>
                 <li id="select_car_year"><a href="javascript:;" class="carmore" lang="show" itemid="0"><font>车型年款</font><span>请选择</span></a></li>
                 <li id="select_car_kuan"><a href="javascript:;" class="carmore" lang="show" itemid="0"><font>车型</font><span vehicleName="">请选择</span></a></li>
-                <li>
-                    <font>VIN码</font><span>
-                        <input type="text" class="carinput" id="vin_one" style="color: rgb(51, 51, 51);">
-                        <a href="javascript:;" id="VINAI_one" style="position: absolute;right: 10px;margin-top: 12px;">
-                            <img src="/Content/Images/sys.png" />
-                        </a>
-                    </span>
-                </li>
-                <li>
-                    <a href="javascript:;" class="nofind" id="btn_sync">同步车型</a>
-                </li>
+<!--                <li>-->
+<!--                    <font>VIN码</font><span>-->
+<!--                        <input type="text" class="carinput" id="vin_one" style="color: rgb(51, 51, 51);">-->
+<!--                        <a href="javascript:;" id="VINAI_one" style="position: absolute;right: 10px;margin-top: 12px;">-->
+<!--                            <img src="--><?php //echo base_url()?><!--statics/h5/images/index/sys.png" />-->
+<!--                        </a>-->
+<!--                    </span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="javascript:;" class="nofind" id="btn_sync">同步车型</a>-->
+<!--                </li>-->
             </ul>
             <ul style="display:none" id="type-car-info">
                 <li>
@@ -79,7 +79,7 @@
                     <span>
                         <input type="text" class="carinput" id="vin_two" name="vin" />
                         <a href="javascript:;" id="VINAI_two" style="position: absolute;right: 10px;margin-top: 12px;">
-                            <img src="/Content/Images/sys.png" />
+                            <img src="<?php echo base_url()?>statics/h5/images/index/sys.png" />
                         </a>
                     </span>
                 </li>
@@ -181,7 +181,7 @@
                 var yearname = $('#select_car_year a[lang=show]').find("span").text().replace("请选择", "");
                 var kuanid = $('#select_car_kuan a[lang=show]').attr('itemid');
                 var kuanname = $('#select_car_kuan a[lang=show]').find("span").attr("vehicleName").replace("请选择", "");
-                var vin = $("#vin_one").val().replace("请填写", "");
+                // var vin = $("#vin_one").val().replace("请填写", "");
                 var modelsourceid = 0;
                 if (parseInt(brandid) > 0) {
                     modelsourceid = 1;
@@ -191,7 +191,8 @@
                         .attr("brand", brandid).attr("line", lineid)
                         .attr("modelyear", yearid).attr("model", kuanid)
                         .attr("brandname", brandname).attr("linename", linename)
-                        .attr("modelyearname", yearname).attr("modelname", kuanname).attr("vin", vin).attr("modelsourceid", modelsourceid).attr("vin", $("#vin_one").val())
+                        .attr("modelyearname", yearname).attr("modelname", kuanname).attr("modelsourceid", modelsourceid)
+                        // .attr("modelyearname", yearname).attr("modelname", kuanname).attr("vin", vin).attr("modelsourceid", modelsourceid).attr("vin", $("#vin_one").val())
                         .attr("price", textcarprice)
                         .html(brandname + "  " + linename + "  " + yearname + "  " + kuanname);
                 }
@@ -218,7 +219,8 @@
                         .attr("brand", brandid).attr("line", lineid)
                         .attr("modelyear", yearid).attr("model", kuanid)
                         .attr("brandname", brandname).attr("linename", linename)
-                        .attr("modelyearname", yearname).attr("modelname", kuanname).attr("modelsourceid", modelsourceid).attr("vin", $("#vin_two").val())
+                        .attr("modelyearname", yearname).attr("modelname", kuanname).attr("modelsourceid", modelsourceid)
+                        // .attr("modelyearname", yearname).attr("modelname", kuanname).attr("modelsourceid", modelsourceid).attr("vin", $("#vin_two").val())
                         .attr("price", textcarprice)
                         .html(brandname + "  " + linename + "  " + yearname + "  " + kuanname);
                 }
@@ -228,25 +230,25 @@
                 maskshow(1);
             }
         });
-        $("#vin_one,#vin_two").bind("input", function () {
-            if ($("#select-car-info").is(':visible')) {
-                $("#txtvin").val($("#vin_one").val());
-                $("[name=vin]").val($("#vin_one").val())
-            }
-            else {
-                $("#txtvin").val($("[name=vin]").val());
-                $("#vin_one").val($("[name=vin]").val())
-            }
-            $("#txtvin").val($(this).val());
-            $("#vin_one").val($(this).val())
-            $("#vin_two").val($(this).val())
-        });
+        // $("#vin_one,#vin_two").bind("input", function () {
+        //     if ($("#select-car-info").is(':visible')) {
+        //         $("#txtvin").val($("#vin_one").val());
+        //         $("[name=vin]").val($("#vin_one").val())
+        //     }
+        //     else {
+        //         $("#txtvin").val($("[name=vin]").val());
+        //         $("#vin_one").val($("[name=vin]").val())
+        //     }
+        //     $("#txtvin").val($(this).val());
+        //     $("#vin_one").val($(this).val())
+        //     $("#vin_two").val($(this).val())
+        // });
     </script>
-    <script type="text/javascript">
-        $(function () {
-            $("#VINAI_one,#VINAI_two,#VINAI_three").hide();
-        });
-    </script>
+<!--    <script type="text/javascript">-->
+<!--        $(function () {-->
+<!--            $("#VINAI_one,#VINAI_two,#VINAI_three").hide();-->
+<!--        });-->
+<!--    </script>-->
 
 </body>
 </html>

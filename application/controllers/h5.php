@@ -223,4 +223,23 @@ class h5 extends CI_Controller {
         $this->load->view('/h5/customer_select');
     }
 
+    /**
+     * 接车开单选择车型
+     */
+    public function customer_car_select(){
+        $this->load->view('h5/customer_car_select');
+    }
+
+    /**
+     * 借车开单获取信息信息
+     */
+    public function customer_info(){
+        $type = $this->input->post('type');
+        if ($type == 'customer'){
+            $customerid = $this->input->post('customerid');
+
+        }
+
+    }
+
 }

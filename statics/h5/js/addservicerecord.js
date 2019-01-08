@@ -39,7 +39,7 @@ $(function () {
         servicerecord.vin = cardd.attr("vin");
         var json = JSON.stringify(servicerecord);
         maskshow(2);
-        $(".mask").load("/Service/ShowHtml?viewName=_SelectCarModel", {
+        $(".mask").load("customer_car_select", {
             thisobj: json
         }, function () {
             masklayer(1, "加载中...");
@@ -312,68 +312,70 @@ $(function () {
 
 
     //点击保存按钮
-    $(document).on("click", "#search_save", function () {
-        d = getdata();
-        if (typeof d.customerid == "undefined") {
-            Ewewo.Tips("请选择/添加用户!");
-            return;
-        }
-
-        if (d.mobile.length < 8 && d.mobile.length != 18) {
-            Ewewo.Tips("请输入11位手机号!");
-            return;
-        }
-        if (d.name.length == 0) {
-            Ewewo.Tips("请输入姓名!");
-            return;
-        }
-
-        if (d.plate.length == 0) {
-            Ewewo.Tips("请输入车牌号!");
-            return;
-        }
-        customeData.customerid = d.customerid;
-        customeData.name = d.name;
-        customeData.carno = d.plate;
-        customeData.carid = d.carid;
-        customeData.mobile = d.mobile;
-        console.log(customeData);
-        maskshow(1);
-
-        // $.ajax({
-        //     type: "POST",
-        //     data: { mobile: d.mobile },
-        //     url: "/Service/MobileIsNew",
-        //     dataType: "json",
-        //     success: function (data) {
-        //         if (data.result == "T" && d.customerid > 0) {
-        //             $("#newphoneconfig").show();
-        //             // mask_box("#newphoneconfig");
-        //
-        //             /*返回ID处理信息绑定*/
-        //             //closewindow(d.plate, data.id, d.mobile);
-        //
-        //             customeData.customerid = data.id;
-        //             customeData.name = d.name;
-        //             customeData.carno = d.plate;
-        //             customeData.carid = data.carid;
-        //             customeData.mobile = d.mobile;
-        //             //maskshow(1);
-        //         } else {
-        //             saveeditcustomer(d);
-        //
-        //             //Ewewo.Tips_Error(data.message);
-        //         }
-        //     },
-        //     error: function (data) {
-        //         if (data.status == 401) {
-        //             Ewewo.Tips_Error(data.responseText);
-        //         } else {
-        //             Ewewo.Tips_Error("网络错误,保存失败!");
-        //         }
-        //     }
-        // });
-    });
+    // $(document).on("click", "#search_save", function () {
+    //     d = getdata();
+    //     if (typeof d.customerid == "undefined") {
+    //         Ewewo.Tips("请选择/添加用户!");
+    //         return;
+    //     }
+    //
+    //     if (d.mobile.length < 8 && d.mobile.length != 18) {
+    //         Ewewo.Tips("请输入11位手机号!");
+    //         return;
+    //     }
+    //     if (d.name.length == 0) {
+    //         Ewewo.Tips("请输入姓名!");
+    //         return;
+    //     }
+    //
+    //     if (d.plate.length == 0) {
+    //         Ewewo.Tips("请输入车牌号!");
+    //         return;
+    //     }
+    //     customeData.customerid = d.customerid;
+    //     customeData.name = d.name;
+    //     customeData.carno = d.plate;
+    //     customeData.carid = d.carid;
+    //     customeData.mobile = d.mobile;
+    //
+    //     $(".mask").hide();
+    //     $("#indexshow").show();
+    //     systemshow(0);
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         data: { mobile: d.mobile },
+    //         url: "/Service/MobileIsNew",
+    //         dataType: "json",
+    //         success: function (data) {
+    //             if (data.result == "T" && d.customerid > 0) {
+    //                 $("#newphoneconfig").show();
+    //                 // mask_box("#newphoneconfig");
+    //
+    //                 /*返回ID处理信息绑定*/
+    //                 //closewindow(d.plate, data.id, d.mobile);
+    //
+    //                 customeData.customerid = data.id;
+    //                 customeData.name = d.name;
+    //                 customeData.carno = d.plate;
+    //                 customeData.carid = data.carid;
+    //                 customeData.mobile = d.mobile;
+    //                 //maskshow(1);
+    //             } else {
+    //                 saveeditcustomer(d);
+    //
+    //                 //Ewewo.Tips_Error(data.message);
+    //             }
+    //         },
+    //         error: function (data) {
+    //             if (data.status == 401) {
+    //                 Ewewo.Tips_Error(data.responseText);
+    //             } else {
+    //                 Ewewo.Tips_Error("网络错误,保存失败!");
+    //             }
+    //         }
+    //     });
+    // });
 
     //创建新客户
     $(document).on("click", "#newmobile", function () {

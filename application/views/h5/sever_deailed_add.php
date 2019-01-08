@@ -23,35 +23,57 @@
     <div class="saveing" style="display:none">加载中...</div>
 
     <input type="hidden" id="txtdiscount" labourdiscount="100" stockdiscount="100">
-    <div class="mask" style="background: #f5f5f5; display: none;">
-    </div>
-    <div class="ktc_box" style="display: none" id="timespackagebox">
-        <a href="javascript:;" class="ktcclose">
-            <img src="<?php echo base_url()?>statics/h5/images/shanchu.png" width="40" height="40">
-        </a>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <thead>
-            <tr>
-                <th align="left">次卡套餐-项目名称</th>
-                <th width="80">类型</th>
-                <th width="80">消费</th>
-                <th width="100">剩余</th>
-                <th width="70">操作</th>
-            </tr>
-            </thead>
-        </table>
-        <div style="width: 100%; height: 500px; position: relative; overflow: auto;">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody id="timespackage">
-                <tr>
-                    <td colspan="5" align="center" style="height: 360px; border: 0; color: #999; font-size: 32px;">暂无次卡套餐项目</td>
-
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <div class="mask" style="background: #f5f5f5; display: none;"></div>
+<!--    <div class="ktc_box" style="display: none" id="timespackagebox">-->
+<!--        <a href="javascript:void(0);" class="ktcclose">-->
+<!--            <img src="--><?php //echo base_url()?><!--statics/h5/images/shanchu.png" width="40" height="40">-->
+<!--        </a>-->
+<!--        <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th align="left">次卡套餐-项目名称</th>-->
+<!--                <th width="80">类型</th>-->
+<!--                <th width="80">消费</th>-->
+<!--                <th width="100">剩余</th>-->
+<!--                <th width="70">操作</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--        <div style="width: 100%; height: 500px; position: relative; overflow: auto;">-->
+<!--            <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--                <tbody id="timespackage">-->
+<!--                <tr>-->
+<!--                    <td colspan="5" align="center" style="height: 360px; border: 0; color: #999; font-size: 32px;">暂无次卡套餐项目</td>-->
+<!---->
+<!--                </tr>-->
+<!---->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+<!---->
+<!--    <div class="ktc_box" style="display: none" id="textpackagebox">-->
+<!--        <a href="javascript:void(0);" class="ktcclose">-->
+<!--            <img src="--><?php //echo base_url()?><!--statics/h5/images/shanchu.png" width="40" height="40">-->
+<!--        </a>-->
+<!--        <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th align="left">文本套餐</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--        <div style="width: 100%; height: 400px; position: relative; overflow: auto;" class="wbtc">-->
+<!--            <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--                <tbody id="textpackagelist">-->
+<!--                <tr>-->
+<!--                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无文本套餐项目</td>-->
+<!---->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="ktc_box" style="display: none" id="textpackagebox">
         <a href="javascript:void(0);" class="ktcclose">
@@ -60,7 +82,7 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
-                <th align="left">文本套餐</th>
+                <th align="left">VIP卡</th>
             </tr>
             </thead>
         </table>
@@ -68,7 +90,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody id="textpackagelist">
                 <tr>
-                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无文本套餐项目</td>
+                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无VIP卡</td>
 
                 </tr>
                 </tbody>
@@ -76,55 +98,55 @@
         </div>
     </div>
 
-    <div class="ktc_box" style="display: none" id="cardbox">
-        <a href="javascript:void(0);" class="ktcclose">
-            <img src="<?php echo base_url()?>statics/h5/images/shanchu.png" width="40" height="40">
-        </a>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <thead>
-            <tr>
-                <th align="left">卡号</th>
-                <th width="150">开卡时间</th>
-                <th width="130">到期时间</th>
-                <th width="120">余额</th>
-            </tr>
-            </thead>
-        </table>
-        <div style="width: 100%; height: 400px; position: relative; overflow: auto;" class="hyks">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody id="vipcardlist">
-                <tr>
-                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无储值卡</td>
+<!--    <div class="ktc_box" style="display: none" id="cardbox">-->
+<!--        <a href="javascript:void(0);" class="ktcclose">-->
+<!--            <img src="--><?php //echo base_url()?><!--statics/h5/images/shanchu.png" width="40" height="40">-->
+<!--        </a>-->
+<!--        <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th align="left">卡号</th>-->
+<!--                <th width="150">开卡时间</th>-->
+<!--                <th width="130">到期时间</th>-->
+<!--                <th width="120">余额</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--        <div style="width: 100%; height: 400px; position: relative; overflow: auto;" class="hyks">-->
+<!--            <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--                <tbody id="vipcardlist">-->
+<!--                <tr>-->
+<!--                    <td colspan="4" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无储值卡</td>-->
+<!---->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
 
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="ktc_box" style="display: none" id="fastwork">
-        <a href="javascript:void(0);" class="ktcclose">
-            <img src="<?php echo base_url()?>statics/h5/images/shanchu.png" width="40" height="40">
-        </a>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <thead>
-            <tr>
-                <th align="left">常用项目</th>
-                <th width="120">单价</th>
-                <th width="100">操作</th>
-            </tr>
-            </thead>
-        </table>
-        <div style="width: 100%; height: 400px; position: relative; overflow: auto;">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody id="fastworklist">
-                <tr>
-                    <td colspan="3" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无常用项目</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<!--    <div class="ktc_box" style="display: none" id="fastwork">-->
+<!--        <a href="javascript:void(0);" class="ktcclose">-->
+<!--            <img src="--><?php //echo base_url()?><!--statics/h5/images/shanchu.png" width="40" height="40">-->
+<!--        </a>-->
+<!--        <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th align="left">常用项目</th>-->
+<!--                <th width="120">单价</th>-->
+<!--                <th width="100">操作</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--        <div style="width: 100%; height: 400px; position: relative; overflow: auto;">-->
+<!--            <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--                <tbody id="fastworklist">-->
+<!--                <tr>-->
+<!--                    <td colspan="3" align="center" style="height: 320px; border: 0; color: #999; font-size: 32px;">暂无常用项目</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
 
 
     <div class="mask_div" style="width: 560px; margin-left: -280px; display: none;">
@@ -155,18 +177,18 @@
         <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" class="queding">确定</a></div>
     </div>
 
-    <div class="mask_div" style="height: 240px; display: none; margin-top: -120px;" id="divstatus">
-        <h2>确定报价吗？</h2>
-        <ul class="fswxtz" id="ulstatus" style="height: 84px;">
-            <font id="sendwenotchat" style="line-height: 42px; font-size: 26px; float: left; margin-left: 30px; color: #ff3232; display: none;">车主未关注微信</font>
-
-            <a href="javascript:void(0)" id="SendWeChat" class="" itemid="0">微信通知车主</a>
-            <font id="senddxchat" style="line-height: 42px; font-size: 26px; float: left; margin-left: 30px; color: #ff3232; display: none;">无效手机号码</font>
-            <a href="javascript:void(0)" style="float: left;" class="" id="SendDx" itemid="0">短信通知车主</a>
-
-        </ul>
-        <div class="mask_btn"><a href="javascript:;">取消</a><a href="javascript:void(0);" class="queding" id="confirm">确定</a></div>
-    </div>
+<!--    <div class="mask_div" style="height: 240px; display: none; margin-top: -120px;" id="divstatus">-->
+<!--        <h2>确定报价吗？</h2>-->
+<!--        <ul class="fswxtz" id="ulstatus" style="height: 84px;">-->
+<!--            <font id="sendwenotchat" style="line-height: 42px; font-size: 26px; float: left; margin-left: 30px; color: #ff3232; display: none;">车主未关注微信</font>-->
+<!---->
+<!--            <a href="javascript:void(0)" id="SendWeChat" class="" itemid="0">微信通知车主</a>-->
+<!--            <font id="senddxchat" style="line-height: 42px; font-size: 26px; float: left; margin-left: 30px; color: #ff3232; display: none;">无效手机号码</font>-->
+<!--            <a href="javascript:void(0)" style="float: left;" class="" id="SendDx" itemid="0">短信通知车主</a>-->
+<!---->
+<!--        </ul>-->
+<!--        <div class="mask_btn"><a href="javascript:;">取消</a><a href="javascript:void(0);" class="queding" id="confirm">确定</a></div>-->
+<!--    </div>-->
     <div class="mask_div" id="pending" style="height: 240px; margin-top: -120px; display: none">
         <h2 style="font-size: 36px;">提示</h2>
         <ul style="height: 84px;">
@@ -183,50 +205,51 @@
         <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" class="queding">确定</a></div>
     </div>
 
-    <div class="car_box" id="carchecker" style="height: 650px; overflow: auto; margin-top: -325px; display: none;">
-    </div>
-    <div class="ktc_box" id="box_sync" style="display: none">
-        <a href="javascript:void(0);" class="ktcclose" id="btn_close_box_sync">
-            <img src="<?php echo base_url()?>statics/h5/images/shanchu.png" width="40" height="40">
-        </a>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <thead>
-            <tr>
-                <th align="left">同步车型</th>
-                <th align="right"><a href="javascript:void(0);" class="xinjian" style="float: right; margin: 5px" id="btn_Sync_Sure">同步</a></th>
-            </tr>
-            </thead>
-        </table>
-        <div style="overflow: auto; height: 495px" id="itemList">
-        </div>
-    </div>
+<!--    <div class="car_box" id="carchecker" style="height: 650px; overflow: auto; margin-top: -325px; display: none;"></div>-->
+<!--    <div class="ktc_box" id="box_sync" style="display: none">-->
+<!--        <a href="javascript:void(0);" class="ktcclose" id="btn_close_box_sync">-->
+<!--            <img src="--><?php //echo base_url()?><!--statics/h5/images/shanchu.png" width="40" height="40">-->
+<!--        </a>-->
+<!--        <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th align="left">同步车型</th>-->
+<!--                <th align="right"><a href="javascript:void(0);" class="xinjian" style="float: right; margin: 5px" id="btn_Sync_Sure">同步</a></th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--        <div style="overflow: auto; height: 495px" id="itemList">-->
+<!--        </div>-->
+<!--    </div>-->
 
 
-
+<!--    底部目录-->
     <div class="fw_addmenu">
-        <div class="fw_addmenu_left">
-            <ul>
-                <li><a href="javascript:void(0);">选择工时项目</a></li>
-                <li><a href="javascript:void(0);">自定义工时项目</a></li>
-            </ul>
+        <div class="fw_addmenu_left" style="width: 260px;">
+<!--            <ul>-->
+<!--                <li><a href="javascript:void(0);">选择工时项目</a></li>-->
+<!--                <li><a href="javascript:void(0);">自定义工时项目</a></li>-->
+<!--            </ul>-->
             <dl>
                 <dd class="add1"><a href="javascript:void(0);">工时</a></dd>
                 <dd class="add2"><a href="javascript:void(0);">套餐</a></dd>
-                <dd class="add3"><a href="javascript:void(0);">储值卡</a></dd>
+<!--                <dd class="add3"><a href="javascript:void(0);">储值卡</a></dd>-->
             </dl>
         </div>
-        <div class="fw_addmenu_right">
+        <div class="fw_addmenu_right" style="width: 460px;">
             <a href="javascript:void(0);" itemname="报价" itemid="4" class="hui" isout="0">报价</a>
 
         </div>
     </div>
 
     <div class="system" id="indexshow">
+<!--        头部-->
         <div class="title">
             <a href="javascript:history.back(-1)" class="back">返回</a>
             <a href="javascript:void(0);" class="sure" id="servicesave">保存</a>
             <ul class="sytime">新建服务记录</ul>
         </div>
+<!--        车信息-->
         <div class="fwadd_car" date="2019-01-06 15:23:07" itemid="0">
             <dl>
                 <a href="javascript:void(0);" class="sdss">
@@ -236,23 +259,25 @@
                 <dd style="border: none; padding-top: 10px; height: auto;"><a href="javascript:void(0);">车辆型号<font brand="0" line="0" modelyear="0" model="0" style="width: 400px; overflow: hidden; height: 35px; text-align: right;"></font></a></dd>
             </dl>
         </div>
+<!--        顾客信息-->
         <div class="fwadd_info" name="customerinfodiv">
             <ul>
-                <li itemid="1"><a href="javascript:void(0);" mobile="" customerid="0"><font title="微信未注册">请填写</font>手机号码</a></li>
+                <li itemid="1"><a href="javascript:void(0);" mobile="" customerid="0"><font id="customerMobile">请填写</font>手机号码</a></li>
                 <li>
-                    <font><input name="" type="text" id="txtcustomername" class="infoinput" value=""></font>顾客姓名
+                    <font><input name="" type="text" id="txtcustomername" class="infoinput" value="" readonly></font>顾客姓名
                 </li>
                 <li>
                     <font>
-                        <a href="javascript:void(0);" class="ktc" id="cktcitem">次卡套餐<span style="font-size:18px;" id="timespackagecount">(0)</span></a>
-                        <a href="javascript:void(0);" class="ktc" id="wbtcitem">文本套餐<span style="font-size:18px;" id="textpackagecount">(0)</span></a>
-                        <a href="javascript:void(0);" class="ktc" id="hykitem">储值卡<span style="font-size:18px;" id="cardcount">(0)</span></a>
-                    </font>卡/套餐
+                        <a href="javascript:void(0);" class="ktc" id="cktcitem">VIP卡<span style="font-size:18px;" id="timespackagecount">(0)</span></a>
+<!--                        <a href="javascript:void(0);" class="ktc" id="cktcitem">次卡套餐<span style="font-size:18px;" id="timespackagecount">(0)</span></a>-->
+<!--                        <a href="javascript:void(0);" class="ktc" id="wbtcitem">文本套餐<span style="font-size:18px;" id="textpackagecount">(0)</span></a>-->
+<!--                        <a href="javascript:void(0);" class="ktc" id="hykitem">储值卡<span style="font-size:18px;" id="cardcount">(0)</span></a>-->
+                    </font>卡
                 </li>
                 <li>
                     <font>
                         <a href="javascript:void(0);" class="ktc">¥<span style="font-size:18px;" id="creditmoney">0.00</span></a>
-                    </font>挂账金额
+                    </font>账户余额
                 </li>
             </ul>
         </div>
@@ -260,55 +285,59 @@
         <div class="fwxmxx" id="Workshilist" style="display: none">
             <h2><font>服务项目信息</font></h2>
             <div style="padding-top: 40px;"></div>
-            <div class="qc_staff"><a href="javascript:void(0);" name="aserviceadvisor" checkerid="0"><font>请选择</font>接待人员</a></div>
-            <div class="qc_staff"><a href="javascript:void(0);" name="achecker" checkerid=""><font>请选择</font>质检员</a></div>
+<!--            <div class="qc_staff"><a href="javascript:void(0);" name="aserviceadvisor" checkerid="0"><font>请选择</font>接待人员</a></div>-->
+<!--            <div class="qc_staff"><a href="javascript:void(0);" name="achecker" checkerid=""><font>请选择</font>质检员</a></div>-->
 
-            <div id="workhour">
-            </div>
-            <div id="additionalprojectlist">
-                <div style="height: 70px; line-height: 70px; font-size: 30px; padding-left: 20px; background: #ebf2f5;">附加项目</div>
-            </div>
+<!--            服务项目-->
+            <div id="workhour"></div>
+<!--            <div id="additionalprojectlist">-->
+<!--                <div style="height: 70px; line-height: 70px; font-size: 30px; padding-left: 20px; background: #ebf2f5;">附加项目</div>-->
+<!--            </div>-->
+<!--            费用-->
             <div class="shishou">
                 <ul>
                     <li>
-                        <p class="fl">工时<font name="fontsumlabour" itemid="0"></font></p>
-                        <p class="fr">附加<font name="tdadditional">0</font></p>
-                        <p class="mid">配件<font name="fontsumpart" itemid="0"></font></p>
+<!--                        <p class="fl">工时<font name="fontsumlabour" itemid="0"></font></p>-->
+<!--                        <p class="fr">附加<font name="tdadditional">0</font></p>-->
+<!--                        <p class="mid">配件<font name="fontsumpart" itemid="0"></font></p>-->
+                        <p class="fl"><font>工时费</font></p>
+                        <p class="fr"><font>配件费</font></p>
                     </li>
                     <li>
-                        <p class="fl"><em>管理费<font name="managetxtfont">0.00</font></em><a name="editmanage" href="javascript:void(0);"><img src="<?php echo base_url()?>statics/h5/images/edit_all.png" width="24" height="24"></a></p>
-                        <p class="fr" name="divsum" itemid="0">合计<font style="color: #ff6600; font-weight: bold; font-size: 24px;">0.00</font></p>
-                        <p class="mid"><em>税费<font name="taxtxtfont">0.00</font></em><a name="edittax" href="javascript:void(0);"><img src="<?php echo base_url()?>statics/h5/images/edit_all.png" width="24" height="24"></a></p>
+<!--                        <p class="fl"><em>管理费<font name="managetxtfont">0.00</font></em><a name="editmanage" href="javascript:void(0);"><img src="--><?php //echo base_url()?><!--statics/h5/images/edit_all.png" width="24" height="24"></a></p>-->
+<!--                        <p class="fr" name="divsum" itemid="0">合计<font style="color: #ff6600; font-weight: bold; font-size: 24px;">0.00</font></p>-->
+<!--                        <p class="mid"><em>税费<font name="taxtxtfont">0.00</font></em><a name="edittax" href="javascript:void(0);"><img src="--><?php //echo base_url()?><!--statics/h5/images/edit_all.png" width="24" height="24"></a></p>-->
+                        <p class="fl"><font>原价</font></p>
+                        <p class="fr"><font>实际总费用</font></p>
+                        <p class="mid"><font>VIP价</font></p>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="three" id="threeproject">
-            <ul>
-                <li><a href="javascript:void(0);" class="three2"><font></font>常用项目</a></li>
-                <li><a href="javascript:void(0);"><font></font>附加项目</a></li>
-
-
-            </ul>
-        </div>
-        <div class="fwxmxx" id="packagetemplist" style="display: none">
-            <h2><font style="margin-left: -100px;">套餐申请</font></h2>
-            <div style="padding-top: 40px;"></div>
-            <div id="packagetemp" isneedcardno="0">
-            </div>
-        </div>
-        <div class="fwxmxx" id="membershipcardlist" style="display: none">
-            <h2><font style="margin-left: -100px;">充值申请</font></h2>
-            <div style="padding-top: 40px;"></div>
-            <div id="membershipcard">
-            </div>
-        </div>
-        <div class="fwxmxx" id="chongzhilist" style="display: none">
-            <h2><font style="margin-left: -100px;">储值卡申请</font></h2>
-            <div style="padding-top: 40px;"></div>
-            <div id="chongzhi">
-            </div>
-        </div>
+<!--        <div class="three" id="threeproject">-->
+<!--            <ul>-->
+<!--                <li><a href="javascript:void(0);" class="three2"><font></font>常用项目</a></li>-->
+<!--                <li><a href="javascript:void(0);"><font></font>附加项目</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="fwxmxx" id="packagetemplist" style="display: none">-->
+<!--            <h2><font style="margin-left: -100px;">套餐申请</font></h2>-->
+<!--            <div style="padding-top: 40px;"></div>-->
+<!--            <div id="packagetemp" isneedcardno="0">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="fwxmxx" id="membershipcardlist" style="display: none">-->
+<!--            <h2><font style="margin-left: -100px;">充值申请</font></h2>-->
+<!--            <div style="padding-top: 40px;"></div>-->
+<!--            <div id="membershipcard">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="fwxmxx" id="chongzhilist" style="display: none">-->
+<!--            <h2><font style="margin-left: -100px;">储值卡申请</font></h2>-->
+<!--            <div style="padding-top: 40px;"></div>-->
+<!--            <div id="chongzhi">-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="fwxmxx" id="phonecomment" style="display: none">
             <h2><font style="margin-left: -70px;">备注</font></h2>
             <div style="padding-top: 40px;"></div>
@@ -317,71 +346,70 @@
             </div>
         </div>
 
-
         <div style="padding-top: 120px;"></div>
     </div>
 
 
 
-    <div class="mask_div" id="managewind" style="height: 600px; width: 600px; margin: -300px 0 0 -300px; display: none;">
-        <h2 style="font-size: 36px;">管理费用</h2>
-        <ul style="height: 444px;">
-            <li class="glfy" id="managecleardiv">
-                <p style="padding: 12px 15px; border: 1px #e6e6e6 solid; background: #f8f8f8; border-radius: 5px; font-size: 24px; color: #888;">
-                    现管理费用为
-                    <lable id="allmme">0.00</lable>
-                    元
-                    <a href="javascript:void(0);" name="clearmme" class="qinglin">清零</a>
-                </p>
-            </li>
-            <li class="glfy">工时金额：<lable id="managefontlabour">0.00</lable>元</li>
-            <li class="glfy">配件金额：<label id="managefontpart">0.00</label>
-                元</li>
-            <li class="glfy color999"><span style="color: #555;">工时管理费：</span><lable id="txtlabourrate">未设置</lable>
-                ×
-                <input type="text" class="ss_time" id="txtlabourdiscount" placeholder="折扣比例" value="100" style="width: 60px;">
-                % =
-                <input id="txtprojectmanagementcost" type="text" class="ss_time" value="0.00" style="width: 100px;">
-                元</li>
-            <li class="glfy color999"><span style="color: #555;">配件管理费：</span><lable id="txtpartsrate">未设置</lable>
-                ×
-                <input type="text" class="ss_time" id="txtpartsdiscount" value="100" style="width: 60px;">
-                % =
-                <input type="text" id="txtstockpartmanagementcost" class="ss_time" value="0.00" style="width: 100px;">
-                元</li>
-            <li class="glfy color999" style="border-top: 1px #e6e6e6 solid; margin-top: 10px; padding-top: 20px;">1. 管理费=金额*管理费比例*折扣比例</li>
-            <li class="glfy color999">2.管理费比例未设置，请到客户详情页设置</li>
-        </ul>
-        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" name="savemanage" class="queding">确定</a></div>
-    </div>
+<!--    <div class="mask_div" id="managewind" style="height: 600px; width: 600px; margin: -300px 0 0 -300px; display: none;">-->
+<!--        <h2 style="font-size: 36px;">管理费用</h2>-->
+<!--        <ul style="height: 444px;">-->
+<!--            <li class="glfy" id="managecleardiv">-->
+<!--                <p style="padding: 12px 15px; border: 1px #e6e6e6 solid; background: #f8f8f8; border-radius: 5px; font-size: 24px; color: #888;">-->
+<!--                    现管理费用为-->
+<!--                    <lable id="allmme">0.00</lable>-->
+<!--                    元-->
+<!--                    <a href="javascript:void(0);" name="clearmme" class="qinglin">清零</a>-->
+<!--                </p>-->
+<!--            </li>-->
+<!--            <li class="glfy">工时金额：<lable id="managefontlabour">0.00</lable>元</li>-->
+<!--            <li class="glfy">配件金额：<label id="managefontpart">0.00</label>-->
+<!--                元</li>-->
+<!--            <li class="glfy color999"><span style="color: #555;">工时管理费：</span><lable id="txtlabourrate">未设置</lable>-->
+<!--                ×-->
+<!--                <input type="text" class="ss_time" id="txtlabourdiscount" placeholder="折扣比例" value="100" style="width: 60px;">-->
+<!--                % =-->
+<!--                <input id="txtprojectmanagementcost" type="text" class="ss_time" value="0.00" style="width: 100px;">-->
+<!--                元</li>-->
+<!--            <li class="glfy color999"><span style="color: #555;">配件管理费：</span><lable id="txtpartsrate">未设置</lable>-->
+<!--                ×-->
+<!--                <input type="text" class="ss_time" id="txtpartsdiscount" value="100" style="width: 60px;">-->
+<!--                % =-->
+<!--                <input type="text" id="txtstockpartmanagementcost" class="ss_time" value="0.00" style="width: 100px;">-->
+<!--                元</li>-->
+<!--            <li class="glfy color999" style="border-top: 1px #e6e6e6 solid; margin-top: 10px; padding-top: 20px;">1. 管理费=金额*管理费比例*折扣比例</li>-->
+<!--            <li class="glfy color999">2.管理费比例未设置，请到客户详情页设置</li>-->
+<!--        </ul>-->
+<!--        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" name="savemanage" class="queding">确定</a></div>-->
+<!--    </div>-->
 
 
 
-    <div class="mask_div" id="taxwind" style="height: 340px; width: 600px; margin: -170px 0 0 -300px; display: none">
-        <h2 style="font-size: 36px;">税费</h2>
-        <ul style="height: 184px;">
-            <li class="glfy color999">&nbsp;</li>
-            <li class="glfy color999" style="text-align: center;"><span style="color: #555;">税率：</span><input type="text" id="txttaxrate" class="ss_time" value="15" style="width: 70px; margin-left: 10px;">
-                % =
-                <input type="text" id="txttax" class="ss_time" value="0.00" style="width: 120px;">
-                元</li>
-        </ul>
-        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" name="savetax" class="queding">确定</a></div>
-    </div>
+<!--    <div class="mask_div" id="taxwind" style="height: 340px; width: 600px; margin: -170px 0 0 -300px; display: none">-->
+<!--        <h2 style="font-size: 36px;">税费</h2>-->
+<!--        <ul style="height: 184px;">-->
+<!--            <li class="glfy color999">&nbsp;</li>-->
+<!--            <li class="glfy color999" style="text-align: center;"><span style="color: #555;">税率：</span><input type="text" id="txttaxrate" class="ss_time" value="15" style="width: 70px; margin-left: 10px;">-->
+<!--                % =-->
+<!--                <input type="text" id="txttax" class="ss_time" value="0.00" style="width: 120px;">-->
+<!--                元</li>-->
+<!--        </ul>-->
+<!--        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" name="savetax" class="queding">确定</a></div>-->
+<!--    </div>-->
 
 
-    <div id="chargetypebox" class="mask_div" style="height: 606px; margin-top: -303px; display: none;">
-        <h2>收费类型</h2>
-        <ul style="height: 450px;">
-            <li><a href="javascript:void(0);" chargetype="1" class="maskxz">自费</a></li>
-            <li><a href="javascript:void(0);" chargetype="2">保险</a></li>
-            <li><a href="javascript:void(0);" chargetype="3">返工</a></li>
-            <li><a href="javascript:void(0);" chargetype="4">索赔</a></li>
-            <li><a href="javascript:void(0);" chargetype="5">免单</a></li>
-            <li><a href="javascript:void(0);" chargetype="6">公务车</a></li>
-        </ul>
-        <div class="mask_btn"><a href="javascript:void(0);" id="btnchargetypecancell">取消</a><a href="javascript:void(0);" id="btnchargetypeconfirm" class="queding">确定</a></div>
-    </div>
+<!--    <div id="chargetypebox" class="mask_div" style="height: 606px; margin-top: -303px; display: none;">-->
+<!--        <h2>收费类型</h2>-->
+<!--        <ul style="height: 450px;">-->
+<!--            <li><a href="javascript:void(0);" chargetype="1" class="maskxz">自费</a></li>-->
+<!--            <li><a href="javascript:void(0);" chargetype="2">保险</a></li>-->
+<!--            <li><a href="javascript:void(0);" chargetype="3">返工</a></li>-->
+<!--            <li><a href="javascript:void(0);" chargetype="4">索赔</a></li>-->
+<!--            <li><a href="javascript:void(0);" chargetype="5">免单</a></li>-->
+<!--            <li><a href="javascript:void(0);" chargetype="6">公务车</a></li>-->
+<!--        </ul>-->
+<!--        <div class="mask_btn"><a href="javascript:void(0);" id="btnchargetypecancell">取消</a><a href="javascript:void(0);" id="btnchargetypeconfirm" class="queding">确定</a></div>-->
+<!--    </div>-->
     <script src="<?php echo base_url()?>statics/h5/js/chargetype.js"></script>
     <script src="<?php echo base_url()?>statics/h5/js/manageedit.js"></script>
     <script type="text/javascript">
@@ -417,6 +445,48 @@
     </script>
     <script src="<?php echo base_url()?>statics/h5/js/addservicerecord.js"></script>
     <script type="text/javascript">
+        $(function () {
+            $(document).on("click", "#search_save", function () {
+                d = getdata();
+                if (typeof d.customerid == "undefined") {
+                    Ewewo.Tips("请选择/添加用户!");
+                    return;
+                }
+
+                if (d.mobile.length < 8 && d.mobile.length != 18) {
+                    Ewewo.Tips("请输入11位手机号!");
+                    return;
+                }
+                if (d.name.length == 0) {
+                    Ewewo.Tips("请输入姓名!");
+                    return;
+                }
+
+                if (d.plate.length == 0) {
+                    Ewewo.Tips("请输入车牌号!");
+                    return;
+                }
+                customeData.customerid = d.customerid;
+                customeData.name = d.name;
+                customeData.carno = d.plate;
+                customeData.carid = d.carid;
+                customeData.mobile = d.mobile;
+                $("#customerMobile").html(d.mobile).parent().attr('mobile',d.mobile).attr('customerid',d.customerid);
+                $("#txtcarno").attr('carid',d.carid).attr('carname',d.plate).find('font').html(d.plate);
+                $("#txtcustomername").val(d.name);
+
+                $.ajax({
+                   url:"customer_info",
+                    data:{customerid:d.customerid,type:'customer'},
+                    dataType:"json",
+                    method:"post",
+                });
+
+                $(".mask").hide();
+                $("#indexshow").show();
+
+            });
+        })
         var mobile = "";
         var carno = "";
         if (mobile != "") {
