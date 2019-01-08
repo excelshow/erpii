@@ -82,7 +82,10 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
-                <th align="left">VIP卡</th>
+                <th align="left">VIP卡号</th>
+                <th width="120">使用范围</th>
+                <th width="120">状态</th>
+                <th width="200">到期时间</th>
             </tr>
             </thead>
         </table>
@@ -149,33 +152,33 @@
 <!--    </div>-->
 
 
-    <div class="mask_div" style="width: 560px; margin-left: -280px; display: none;">
-        <h2>实收金额</h2>
-        <ul>
-            <table width="470" border="0" align="center" cellpadding="0" cellspacing="0" class="shmoney">
-                <tbody><tr name="trsumlabour">
-                    <td width="120" height="64">总工时费</td>
-                    <td align="center"><s></s></td>
-                    <td width="120">
-                        <input type="text" value="">
-                    </td>
-                </tr>
-                <tr name="trsumpart">
-                    <td height="64">总配件费</td>
-                    <td align="center"><s></s></td>
-                    <td>
-                        <input type="text" value="">
-                    </td>
-                </tr>
-                <tr name="trsum">
-                    <td height="64">总费用</td>
-                    <td align="center"><s></s></td>
-                    <td style="color: #f05050;"></td>
-                </tr>
-                </tbody></table>
-        </ul>
-        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" class="queding">确定</a></div>
-    </div>
+<!--    <div class="mask_div" style="width: 560px; margin-left: -280px; display: none;">-->
+<!--        <h2>实收金额</h2>-->
+<!--        <ul>-->
+<!--            <table width="470" border="0" align="center" cellpadding="0" cellspacing="0" class="shmoney">-->
+<!--                <tbody><tr name="trsumlabour">-->
+<!--                    <td width="120" height="64">总工时费</td>-->
+<!--                    <td align="center"><s></s></td>-->
+<!--                    <td width="120">-->
+<!--                        <input type="text" value="">-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr name="trsumpart">-->
+<!--                    <td height="64">总配件费</td>-->
+<!--                    <td align="center"><s></s></td>-->
+<!--                    <td>-->
+<!--                        <input type="text" value="">-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr name="trsum">-->
+<!--                    <td height="64">总费用</td>-->
+<!--                    <td align="center"><s></s></td>-->
+<!--                    <td style="color: #f05050;"></td>-->
+<!--                </tr>-->
+<!--                </tbody></table>-->
+<!--        </ul>-->
+<!--        <div class="mask_btn"><a href="javascript:void(0);">取消</a><a href="javascript:void(0);" class="queding">确定</a></div>-->
+<!--    </div>-->
 
 <!--    <div class="mask_div" style="height: 240px; display: none; margin-top: -120px;" id="divstatus">-->
 <!--        <h2>确定报价吗？</h2>-->
@@ -272,7 +275,7 @@
 <!--                        <a href="javascript:void(0);" class="ktc" id="cktcitem">次卡套餐<span style="font-size:18px;" id="timespackagecount">(0)</span></a>-->
 <!--                        <a href="javascript:void(0);" class="ktc" id="wbtcitem">文本套餐<span style="font-size:18px;" id="textpackagecount">(0)</span></a>-->
 <!--                        <a href="javascript:void(0);" class="ktc" id="hykitem">储值卡<span style="font-size:18px;" id="cardcount">(0)</span></a>-->
-                    </font>卡
+                    </font>卡包
                 </li>
                 <li>
                     <font>
@@ -476,17 +479,36 @@
                 $("#txtcustomername").val(d.name);
 
                 $.ajax({
-                   url:"customer_info",
-                    data:{customerid:d.customerid,type:'customer'},
-                    dataType:"json",
-                    method:"post",
+                    type:'post',
+                    url:'customer_info',
+                    data:{
+                        customerid:d.customerid,
+                        type:'customer'
+                    },
+                    dataType:'json',
+                    success:function (data) {
+                        console.log(data);
+                        $('#creditmoney').html(data.balance);
+                        if (data.vipId){
+                            $('#timespackagecount').html('(1)')
+                        }
+                    },
+                    error:function () {
+                        console.log('失败了')
+                    }
                 });
 
                 $(".mask").hide();
                 $("#indexshow").show();
 
             });
-        })
+        });
+
+        $("#cktcitem").click(function () {
+            $("#textpackagebox,.mask_box").show();
+            mask_box("#textpackagebox");
+        });
+
         var mobile = "";
         var carno = "";
         if (mobile != "") {

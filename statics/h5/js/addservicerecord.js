@@ -241,18 +241,18 @@ $(function () {
         }
     });
 
-    $("#cktcitem").click(function () {
-        $("#timespackagebox,.mask_box").show();
-        mask_box("#timespackagebox");
-    });
-    $("#wbtcitem").click(function () {
-        $("#textpackagebox,.mask_box").show();
-        mask_box("#textpackagebox");
-    });
-    $("#hykitem").click(function () {
-        $("#cardbox,.mask_box").show();
-        mask_box("#cardbox");
-    });
+    // $("#cktcitem").click(function () {
+    //     $("#timespackagebox,.mask_box").show();
+    //     mask_box("#timespackagebox");
+    // });
+    // $("#wbtcitem").click(function () {
+    //     $("#textpackagebox,.mask_box").show();
+    //     mask_box("#textpackagebox");
+    // });
+    // $("#hykitem").click(function () {
+    //     $("#cardbox,.mask_box").show();
+    //     mask_box("#cardbox");
+    // });
     $(".ktcclose").click(function () {
         $("#cardbox,#textpackagebox,#timespackagebox,#fastwork").hide();
         $(".mask_box").hide();

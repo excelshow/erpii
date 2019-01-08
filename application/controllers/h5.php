@@ -227,19 +227,26 @@ class h5 extends CI_Controller {
      * 接车开单选择车型
      */
     public function customer_car_select(){
+        $this->checkpurview();
         $this->load->view('h5/customer_car_select');
     }
 
     /**
-     * 借车开单获取信息信息
+     * 接车开单获取信息信息
      */
     public function customer_info(){
+        $this->checkpurview();
         $type = $this->input->post('type');
         if ($type == 'customer'){
             $customerid = $this->input->post('customerid');
-
+            $data = $this->db->where('id',$customerid)->get('ci_customer')->row();
+            die(json_encode($data));
         }
 
+    }
+
+    public function confirm_quotation(){
+        $this->load->view('h5/confirm_quotation');
     }
 
 }
